@@ -5,7 +5,9 @@
 // 🅱️ = Expect request body
 // 🅿️ = Expect Params (eg. Id)
 // --------------------------------------------------------
+// IMPORTS
 // const UserModel = require('../models/modelName1')
+const bcrypt = require('bcrypt');
 // --------------------------------------------------------
 // 🚀🚀🚀 LOGIN CONTROLLERS 🚀🚀🚀
 
