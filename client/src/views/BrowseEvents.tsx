@@ -1,6 +1,7 @@
 import React from 'react';
 import * as eventsData from '../mock-data/events.json';
 import * as userData from '../mock-data/users.json';
+import Map from '../components/Map';
 
 function BrowseEvents() {
   const events = eventsData;
@@ -9,7 +10,11 @@ function BrowseEvents() {
   console.log(events[0].address);
 
   return (
-    <div>BrowseEvents</div>
+    <div>
+      <h1>This is the BrowseEvents View</h1>
+      BrowseEvents
+      <Map />
+    </div>
   );
 }
 
