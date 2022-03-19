@@ -6,54 +6,57 @@
 // 🅿️ = Expect Params (eg. Id)
 // --------------------------------------------------------
 // const EventModel = require('../models/eventModelName.ts')
+import { Request, Response } from 'express';
 // --------------------------------------------------------
 
 // 🚀🚀🚀 CONTROLLER FUNCTIONS 🚀🚀🚀
 
 // Get all events ✅
-async function getAllEvents(req, res) {
+const getAllEvents = async (req: Request, res: Response) => {
   try {
-
+    console.log('get all events firing!');
+    res.send('get all events firing!');
   } catch (err) {
-
+    console.log(err);
+    res.send(err);
   }
-}
+};
 
 // Get 1 event by ID 🅿️ ✅
-async function getEventById(req, res) {
+const getEventById = async (req: Request, res: Response) => {
   try {
 
   } catch (err) {
 
   }
-}
+};
 
 // Create 1 event 🅱️ ✅
-async function createEvent(req, res) {
+const createEvent = async (req: Request, res: Response) => {
   try {
 
   } catch (err) {
 
   }
-}
+};
 
 // Join 1 event 🅿️ ✅
-async function joinEvent(req, res) {
+const joinEvent = async (req: Request, res: Response) => {
   try {
 
   } catch (err) {
 
   }
-}
+};
 
 // Leave 1 event 🅿️ ✅
-async function leaveEvent(req, res) {
+const leaveEvent = async (req: Request, res: Response) => {
   try {
 
   } catch (err) {
 
   }
-}
+};
 
 // Edit 1 event 🅿️ 🅱️
 // async function to be added !
@@ -62,7 +65,7 @@ async function leaveEvent(req, res) {
 // async function to be added !
 // --------------------------------------------------------
 // 🚀🚀🚀 EXPORTS 🚀🚀🚀
-// module.exports = {
-//   getAllEvents, getEventById, createEvent, joinEvent, leaveEvent,
-// };
+export default {
+  getAllEvents, getEventById, createEvent, joinEvent, leaveEvent,
+};
 // --------------------------------------------------------

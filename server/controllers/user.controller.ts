@@ -7,32 +7,36 @@
 // --------------------------------------------------------
 // IMPORTS
 // const UserModel = require('../models/modelName1')
+import { Request, Response } from 'express';
+
 const bcrypt = require('bcrypt');
 // --------------------------------------------------------
 // 🚀🚀🚀 LOGIN CONTROLLERS 🚀🚀🚀
+// --------------------------------------------------------
 
 // Login 🅱️ ✅
-async function login(req, res) {
+const login = async (req: Request, res: Response) => {
   try {
 
   } catch (err) {
 
   }
-}
+};
 
 // Logout ✅
-function logout(req, res) {
+const logout = (req: Request, res: Response) => {
   try {
 
   } catch (err) {
 
   }
-}
+};
+
 // --------------------------------------------------------
 // 🚀🚀🚀 USER CONTROLLERS 🚀🚀🚀
 
 // Create 1 user 🅱️ ✅
-async function createUser(req, res) {
+const createUser = async (req: Request, res: Response) => {
   try {
     // destructure req.body
     // check if user exists
@@ -44,43 +48,43 @@ async function createUser(req, res) {
   } catch (err) {
 
   }
-}
+};
 
 // Get 1 user by ID 🅿️ ✅
-async function getUserById(req, res) {
+const getUserById = async (req: Request, res: Response) => {
   try {
 
   } catch (err) {
 
   }
-}
+};
 
 // Get all users
-async function getAllUsers(req, res) {
+const getAllUsers = async (req: Request, res: Response) => {
   try {
 
   } catch (err) {
 
   }
-}
+};
 
 // Edit 1 user by ID 🅱️ 🅿️
-async function editUser(req, res) {
+const editUser = async (req: Request, res: Response) => {
   try {
 
   } catch (err) {
 
   }
-}
+};
 
 // Delete 1 user by ID 🅿️
-async function deleteUser(req, res) {
+const deleteUser = async (req: Request, res: Response) => {
   try {
 
   } catch (err) {
 
   }
-}
+};
 
 // Add friend 🅿️
 // async function to be added !
@@ -90,7 +94,7 @@ async function deleteUser(req, res) {
 
 // --------------------------------------------------------
 // 🚀🚀🚀 EXPORTS 🚀🚀🚀
-// module.exports = {
-//   createUser, getUserById, getAllUsers, editUser, deleteUser,
-// };
+export default {
+  createUser, getUserById, getAllUsers, editUser, login, logout, deleteUser,
+};
 // --------------------------------------------------------
