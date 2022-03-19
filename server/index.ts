@@ -1,3 +1,4 @@
+// Imports
 import express from 'express';
 import morgan from 'morgan'; // eslint-disable-line import/no-extraneous-dependencies
 import cors from 'cors';
@@ -11,6 +12,7 @@ app.use(morgan('short'));
 app.use(express.json());
 // app.use(router)
 
+// Temp Route. Will remove today.
 app.get('/', (req, res) => {
   res.send('hi hi😇😇😇😇😇');
 });
