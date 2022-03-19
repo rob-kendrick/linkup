@@ -7,11 +7,37 @@
 // --------------------------------------------------------
 // const UserModel = require('../models/modelName1')
 // --------------------------------------------------------
+// 🚀🚀🚀 LOGIN CONTROLLERS 🚀🚀🚀
+
+// Login 🅱️ ✅
+async function login(req, res) {
+  try {
+
+  } catch (err) {
+
+  }
+}
+
+// Logout ✅
+function logout(req, res) {
+  try {
+
+  } catch (err) {
+
+  }
+}
+// --------------------------------------------------------
 // 🚀🚀🚀 USER CONTROLLERS 🚀🚀🚀
 
 // Create 1 user 🅱️ ✅
 async function createUser(req, res) {
   try {
+    // destructure req.body
+    // check if user exists
+    // if user exists, send status 409
+    // hash password
+    // store user in DB
+    // send JWToken / session cookie
 
   } catch (err) {
 
