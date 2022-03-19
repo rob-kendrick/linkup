@@ -1,6 +1,6 @@
 [
   {
-    "id":"11",
+    "user_id":"11",
     "first_name":"Rafael",
     "last_name":"Falk", 
     "email":"i_was_cool_in_1999@hotmail.com",
@@ -15,7 +15,7 @@
   },
 
   {
-    "id":"12",
+    "user_id":"12",
     "first_name":"Danii",
     "last_name":"Boi", 
     "email":"the_pipes_are_calling@hmmm.com",
@@ -30,7 +30,7 @@
   },
 
   {
-    "id":"13",
+    "user_id":"13",
     "first_name":"Peter",
     "last_name":"Parker", 
     "email":"spidy@man.com",
@@ -45,7 +45,7 @@
   },
 
   {
-    "id":"14",
+    "user_id":"14",
     "first_name":"Roberto",
     "last_name":"Kendrick", 
     "email":"brtisherdeutschmann@livin.io",
@@ -60,7 +60,7 @@
   },
 
   {
-    "id":"15",
+    "user_id":"15",
     "first_name":"Antonio",
     "last_name":"The-Great", 
     "email":"i-left-my-friends@4tacos.com",
@@ -75,7 +75,7 @@
   },
 
   {
-    "id":"16",
+    "user_id":"16",
     "first_name":"Kostas",
     "last_name":"TheTeacher", 
     "email":"ceo-codeworks@berlin.com",
@@ -90,7 +90,7 @@
   },
 
   {
-    "id":"17",
+    "user_id":"17",
     "first_name":"Man",
     "last_name":"Startup Guy", 
     "email":"startup-lyf@gmail.com",
@@ -105,7 +105,7 @@
   },
 
   {
-    "id":"18",
+    "user_id":"18",
     "first_name":"Lukasz",
     "last_name":"Polkski", 
     "email":"lukaszrox91@sexyman.com",
@@ -119,7 +119,7 @@
     "ratings": []
   },
   {
-    "id":"19",
+    "user_id":"19",
     "first_name":"Kendrikinho",
     "last_name":"Roberto", 
     "email":"kennyrob@codeworks.com",
