@@ -12,7 +12,31 @@ import { Request, Response } from 'express';
 import prisma from '../db';
 
 const bcrypt = require('bcrypt');
-// --------------------------------------------------------
+
+interface User {
+  email: string;
+  password: string;
+  first_name: string;
+  last_name: string;
+  profile_picture: string;
+  bio: string;
+}
+
+const validateUserInfo = (user: User) => {
+  if (
+    !user.email
+    || !user.password
+    || !user.first_name
+    || !user.last_name
+    || !user.profile_picture
+    || !user.bio
+  ) {
+    return false;
+  }
+  return true;
+};
+
+//------------------------------------------------
 // 🚀🚀🚀 LOGIN CONTROLLERS 🚀🚀🚀
 // --------------------------------------------------------
 
@@ -46,10 +70,34 @@ const createUser = async (req: Request, res: Response) => {
   // store user in DB
   // send JWToken / session cookie
   try {
-    const user = await prisma.user.create({ data: req.body });
-    res.send(user);
+    //  check if input is valid
+    if (!validateUserInfo(req.body)) {
+      return res.status(400).send({ error: 'data did not pass validation' });
+    }
+
+    const emailExists = await prisma.user.findUnique({
+      where: {
+        email: req.body.email,
+      },
+    });
+    if (emailExists) {
+      return res.status(409).send({ error: 'email already exists' });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+    const body = {
+      password: hashedPassword,
+      ...req.body,
+    };
+
+    const newUser = await prisma.user.create({ data: { ...body } });
+    // console.log(newUser);
+    res.status(201).send(newUser);
   } catch (err) {
-    res.send(err);
+    console.log('ERROR ====== ', err, '============ END');
+    res.status(500).send(err);
   }
 };
 
