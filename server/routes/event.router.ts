@@ -16,25 +16,27 @@ const eventRouter = Router();
 // --------------------------------------------------------
 //  🚀🚀🚀 EVENT ROUTES 🚀🚀🚀
 // --------------------------------------------------------
-// Get all events ✅
+// Get all events
 eventRouter.get('/', eventController.getAllEvents);
 
-// // Get 1 event by ID 🅿️ ✅
-// eventRouter.get('/:eventid', eventController.getEventById);
+// Get 1 event by ID
+eventRouter.get('/:eventid', eventController.getEventById);
 
-// // Create 1 event 🅱️ ✅
-// eventRouter.post('/', eventController.createEvent);
+// Create 1 event
+eventRouter.post('/', eventController.createEvent);
 
-// // Join 1 event 🅿️ ✅
-// eventRouter.patch('/join/:eventid/:userid', eventController.joinEvent);
+// Join 1 event
+eventRouter.patch('/join/:eventid/:userid', eventController.joinEvent);
 
-// // Leave 1 event 🅿️ ✅
-// eventRouter.patch('/leave/:eventid/:userid', eventController.leaveEvent);
+// Leave 1 event
+eventRouter.patch('/leave/:eventid/:userid', eventController.leaveEvent);
 
-// // Edit 1 event by ID 🅿️ 🅱️
-// eventRouter.patch('/:eventid', eventController.editEvent);
+// Edit 1 event by ID
+eventRouter.patch('/:eventid', eventController.editEvent);
 
-// // Delete 1 event 🅿️
-// eventRouter.delete('/:eventid', eventController.deleteEventById);
+// Delete 1 event
+eventRouter.delete('/:eventid', eventController.deleteEventById);
 
+// Delete all events
+eventRouter.delete('/:eventid', eventController._deleteAllEvents);
 export default eventRouter;

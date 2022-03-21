@@ -92,10 +92,10 @@ const createUser = async (req: Request, res: Response) => {
     // Creating the user in database
     const newUser = await prisma.user.create({ data: { ...body } });
     // console.log(newUser);
-    res.status(201).send(newUser);
+    return res.status(201).send(newUser);
   } catch (err) {
     console.log(' : : : ERROR STORING USER IN DATBASE : : : ', err);
-    res.status(500).send(err);
+    return res.status(500).send(err);
   }
 };
 

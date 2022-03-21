@@ -26,7 +26,7 @@
 >https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/install-prisma-client-typescript-postgres
 
 # UPDATING SCHEMA / MODELS
-- To change exising schma fields / type, (e.g. adding "@unqiue" contraint), first run `npx prisma migrate dev --create-only` then make desired your changes. To finalise changes, run `npx prisma migrate dev`
+- To change exising schma fields / type, (e.g. adding "@unique" contraint), first run `npx prisma migrate dev --create-only` then make desired your changes. To finalise changes, run `npx prisma migrate dev`
   - DOCS below 👇👇👇:
  > https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/customizing-migrations
 
