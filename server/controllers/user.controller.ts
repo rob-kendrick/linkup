@@ -6,13 +6,13 @@
 // 🅿️ = Expect Params (eg. Id)
 // --------------------------------------------------------
 // IMPORTS
-// const UserModel = require('../models/modelName1')
 import { Request, Response } from 'express';
-
 import prisma from '../db';
 
 const bcrypt = require('bcrypt');
+// --------------------------------------------------------
 
+// Defining user Type for TS
 interface User {
   email: string;
   password: string;
@@ -22,6 +22,7 @@ interface User {
   bio: string;
 }
 
+// Validating user info before passing to DB
 const validateUserInfo = (user: User) => {
   if (
     !user.email
@@ -34,7 +35,7 @@ const validateUserInfo = (user: User) => {
   return true;
 };
 
-//------------------------------------------------
+//---------------------------------------------------------
 // 🚀🚀🚀 LOGIN CONTROLLERS 🚀🚀🚀
 // --------------------------------------------------------
 
@@ -58,21 +59,18 @@ const logout = (req: Request, res: Response) => {
 
 // --------------------------------------------------------
 // 🚀🚀🚀 USER CONTROLLERS 🚀🚀🚀
+// --------------------------------------------------------
 
 // Create 1 user 🅱️ ✅
 const createUser = async (req: Request, res: Response) => {
-  // destructure req.body
-  // check if user exists
-  // if user exists, send status 409
-  // hash password
-  // store user in DB
-  // send JWToken / session cookie
+  // need to send JWToken / session cookie ?
   try {
     //  check if input is valid
     if (!validateUserInfo(req.body)) {
-      return res.status(400).send({ error: 'data did not pass validation' });
+      return res.status(400).send({ error: 'Invalid user data' });
     }
 
+    // Check if user already exists in DB
     const emailExists = await prisma.user.findUnique({
       where: {
         email: req.body.email,
@@ -82,19 +80,21 @@ const createUser = async (req: Request, res: Response) => {
       return res.status(409).send({ error: 'email already exists' });
     }
 
+    // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
+    // Adding hashed password to our user object
     const body = {
       password: hashedPassword,
       ...req.body,
     };
 
+    // Creating the user in database
     const newUser = await prisma.user.create({ data: { ...body } });
     // console.log(newUser);
     res.status(201).send(newUser);
   } catch (err) {
-    console.log('ERROR ====== ', err, '============ END');
+    console.log(' : : : ERROR STORING USER IN DATBASE : : : ', err);
     res.status(500).send(err);
   }
 };
