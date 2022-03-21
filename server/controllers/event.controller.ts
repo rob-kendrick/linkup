@@ -41,8 +41,7 @@ const getAllEvents = async (req: Request, res: Response) => {
     const events = await prisma.event.findMany();
     res.status(200).send({ data: events });
   } catch (err) {
-    console.log(' : : : ERROR RETRIEVING EVENTS IN DATBASE : : : ', err);
-    return res.status(500).send({ error: err });
+    res.status(500).send({ error: err });
   }
 };
 
@@ -57,8 +56,7 @@ const getEventById = async (req: Request, res: Response) => {
 
     res.status(200).send({ data: event });
   } catch (err) {
-    console.log(' : : : ERROR RETRIEVING EVENT IN DATBASE : : : ', err);
-    return res.status(500).send({ error: err });
+    res.status(500).send({ error: err });
   }
 };
 
@@ -77,16 +75,14 @@ const createEvent = async (req: Request, res: Response) => {
       creator_id,
     };
 
-    if (!validateEventInfo(eventInput)) {
-      return res.status(400).send({ error: 'Invalid event data' });
-    }
+    if (!validateEventInfo(eventInput)) res.status(400).send({ error: 'Invalid event data' });
 
-    // Creating event in database
-    const newEvent = await prisma.event.create({ data: eventInput });
-    return res.status(201).send({ data: newEvent });
+    else {
+      const newEvent = await prisma.event.create({ data: eventInput });
+      res.status(201).send({ data: newEvent });
+    }
   } catch (err) {
-    console.log(' : : : ERROR STORING EVENT IN DATBASE : : : ', err);
-    return res.status(500).send({ error: err });
+    res.status(500).send({ error: err });
   }
 };
 
@@ -108,9 +104,9 @@ const joinEvent = async (req: Request, res: Response) => {
         participants: true, // Include all posts in the returned object
       },
     });
-    return res.status(200).send({ data: addParticipant });
+    res.status(200).send({ data: addParticipant });
   } catch (err) {
-    return res.status(500).send({ error: err });
+    res.status(500).send({ error: err });
   }
 };
 
@@ -137,9 +133,9 @@ const leaveEvent = async (req: Request, res: Response) => {
       },
     });
 
-    return res.status(200).send({ data: removeParticipant });
+    res.status(200).send({ data: removeParticipant });
   } catch (err) {
-    return res.status(500).send({ error: err });
+    res.status(500).send({ error: err });
   }
 };
 
@@ -156,9 +152,9 @@ const editEvent = async (req: Request, res: Response) => {
       },
 
     });
-    return res.status(200).send({ data: updateEvent });
+    res.status(200).send({ data: updateEvent });
   } catch (err) {
-    return res.status(500).send({ error: err });
+    res.status(500).send({ error: err });
   }
 };
 
@@ -170,18 +166,18 @@ const deleteEventById = async (req: Request, res: Response) => {
         id_event: eventId,
       },
     });
-    return res.status(200).send({ data: deleteEvent });
+    res.status(200).send({ data: deleteEvent });
   } catch (err) {
-    return res.status(500).send({ error: err });
+    res.status(500).send({ error: err });
   }
 };
 
 const _deleteAllEvents = async (req: Request, res: Response) => {
   try {
     const deleteEvents = await prisma.event.deleteMany();
-    return res.status(200).send({ data: deleteEvents });
+    res.status(200).send({ data: deleteEvents });
   } catch (err) {
-    return res.status(500).send({ error: err });
+    res.status(500).send({ error: err });
   }
 };
 
