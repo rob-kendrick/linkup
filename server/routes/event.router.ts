@@ -38,5 +38,5 @@ eventRouter.patch('/:eventid', eventController.editEvent);
 eventRouter.delete('/:eventid', eventController.deleteEventById);
 
 // Delete all events
-eventRouter.delete('/', eventController._deleteAllEvents);
+eventRouter.delete('/_all', eventController._deleteAllEvents);
 export default eventRouter;

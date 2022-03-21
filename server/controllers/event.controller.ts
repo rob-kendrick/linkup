@@ -1,17 +1,8 @@
 /* eslint-disable camelcase */
-// Below is some boilerplate data which will be changed once DB and models are there
-// LEGEND :
-// 🚀🚀🚀 = New section
-// ✅ = To be included in MVP
-// 🅱️ = Expect request body
-// 🅿️ = Expect Params (eg. Id)
-// --------------------------------------------------------
-// const EventModel = require('../models/eventModelName.ts')
 import { Request, Response } from 'express';
 import prisma from '../db';
 
-// --------------------------------------------------------
-
+// Validating event info before passing to DB
 interface Event {
   title: string
   description: string
@@ -28,7 +19,6 @@ interface Event {
   country : string
 }
 
-// Validating user info before passing to DB
 const validateEventInfo = (event: Event) => {
   if (
     !event.title
@@ -46,9 +36,6 @@ const validateEventInfo = (event: Event) => {
   return true;
 };
 
-// 🚀🚀🚀 CONTROLLER FUNCTIONS 🚀🚀🚀
-
-// Get all events ✅
 const getAllEvents = async (req: Request, res: Response) => {
   try {
     const events = await prisma.event.findMany();
@@ -59,7 +46,6 @@ const getAllEvents = async (req: Request, res: Response) => {
   }
 };
 
-// Get 1 event by ID 🅿️ ✅
 const getEventById = async (req: Request, res: Response) => {
   try {
     const eventId: number = Number(req.params.eventid);
@@ -76,7 +62,6 @@ const getEventById = async (req: Request, res: Response) => {
   }
 };
 
-// Create 1 event 🅱️ ✅
 const createEvent = async (req: Request, res: Response) => {
   try {
     const date: Date = new Date(req.body.date);
@@ -105,7 +90,6 @@ const createEvent = async (req: Request, res: Response) => {
   }
 };
 
-// Join 1 event 🅿️ ✅
 const joinEvent = async (req: Request, res: Response) => {
   try {
 
@@ -114,7 +98,6 @@ const joinEvent = async (req: Request, res: Response) => {
   }
 };
 
-// Leave 1 event 🅿️ ✅
 const leaveEvent = async (req: Request, res: Response) => {
   try {
 
@@ -123,16 +106,25 @@ const leaveEvent = async (req: Request, res: Response) => {
   }
 };
 
-// Edit 1 event 🅿️ 🅱️
 const editEvent = async (req: Request, res: Response) => {
   try {
+    const eventId: number = Number(req.params.eventid);
 
+    const updateEvent = await prisma.event.update({
+      where: {
+        id_event: eventId,
+      },
+      data: {
+        title: req.body.title,
+        description: req.body.description,
+      },
+    });
+    return res.status(200).send(updateEvent);
   } catch (err) {
-
+    return res.status(500).send(err);
   }
 };
 
-// Delete 1 event 🅿️
 const deleteEventById = async (req: Request, res: Response) => {
   try {
     const eventId: number = Number(req.params.eventid);
@@ -147,7 +139,6 @@ const deleteEventById = async (req: Request, res: Response) => {
   }
 };
 
-// Delete all events 🅿️
 const _deleteAllEvents = async (req: Request, res: Response) => {
   try {
     const deleteEvents = await prisma.event.deleteMany();
@@ -157,8 +148,6 @@ const _deleteAllEvents = async (req: Request, res: Response) => {
   }
 };
 
-// --------------------------------------------------------
-// 🚀🚀🚀 EXPORTS 🚀🚀🚀
 export default {
   getAllEvents,
   getEventById,
@@ -169,4 +158,3 @@ export default {
   deleteEventById,
   _deleteAllEvents,
 };
-// --------------------------------------------------------
