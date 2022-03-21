@@ -83,33 +83,69 @@ const createEvent = async (req: Request, res: Response) => {
 
     // Creating event in database
     const newEvent = await prisma.event.create({ data: eventInput });
-    return res.status(201).send(newEvent);
+    return res.status(201).send({ data: newEvent });
   } catch (err) {
     console.log(' : : : ERROR STORING EVENT IN DATBASE : : : ', err);
-    return res.status(500).send(err);
+    return res.status(500).send({ error: err });
   }
 };
 
 const joinEvent = async (req: Request, res: Response) => {
   try {
+    const eventId: number = Number(req.params.eventid);
+    const userId: number = Number(req.params.userid);
 
+    const addParticipant = await prisma.event.update({
+      where: {
+        id_event: eventId,
+      },
+      data: {
+        participants: {
+          connect: [{ id_user: userId }],
+        },
+      },
+      include: {
+        participants: true, // Include all posts in the returned object
+      },
+    });
+    return res.status(200).send({ data: addParticipant });
   } catch (err) {
-
+    return res.status(500).send({ error: err });
   }
 };
 
 const leaveEvent = async (req: Request, res: Response) => {
   try {
+    const eventId: number = Number(req.params.eventid);
+    const userId: number = Number(req.params.userid);
 
+    const removeParticipant = await prisma.event.update({
+      where: {
+        id_event: eventId,
+      },
+      data: {
+        participants: {
+          disconnect: [{ id_user: userId }],
+        },
+      },
+      include: {
+        participants: {
+          select: {
+            first_name: true,
+          },
+        },
+      },
+    });
+
+    return res.status(200).send({ data: removeParticipant });
   } catch (err) {
-
+    return res.status(500).send({ error: err });
   }
 };
 
 const editEvent = async (req: Request, res: Response) => {
   try {
     const eventId: number = Number(req.params.eventid);
-
     const updateEvent = await prisma.event.update({
       where: {
         id_event: eventId,
@@ -118,10 +154,11 @@ const editEvent = async (req: Request, res: Response) => {
         title: req.body.title,
         description: req.body.description,
       },
+
     });
-    return res.status(200).send(updateEvent);
+    return res.status(200).send({ data: updateEvent });
   } catch (err) {
-    return res.status(500).send(err);
+    return res.status(500).send({ error: err });
   }
 };
 
