@@ -5,9 +5,7 @@ import cors from 'cors';
 // eslint-disable-next-line
 import router from './routes/index';
 //import prisma from './db';
-import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
 
 const PORT = 4000;
 

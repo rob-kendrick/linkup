@@ -9,6 +9,8 @@
 // const UserModel = require('../models/modelName1')
 import { Request, Response } from 'express';
 
+import prisma from '../db';
+
 const bcrypt = require('bcrypt');
 // --------------------------------------------------------
 // 🚀🚀🚀 LOGIN CONTROLLERS 🚀🚀🚀
@@ -37,31 +39,17 @@ const logout = (req: Request, res: Response) => {
 
 // Create 1 user 🅱️ ✅
 const createUser = async (req: Request, res: Response) => {
+  // destructure req.body
+  // check if user exists
+  // if user exists, send status 409
+  // hash password
+  // store user in DB
+  // send JWToken / session cookie
   try {
-    // destructure req.body
-    // check if user exists
-    // if user exists, send status 409
-    // hash password
-    // store user in DB
-    // send JWToken / session cookie
-    try {
-      const createdDate: Date = new Date(req.body.date_created);
-      const body: object = {
-        date_created: createdDate,
-        ...req.body,
-      };
-
-      const user = await prisma.user.create({
-        data: body,
-      });
-      console.log(user);
-      res.send(user);
-    } catch (err) {
-      console.log(err);
-      res.send(err);
-    }
+    const user = await prisma.user.create({ data: req.body });
+    res.send(user);
   } catch (err) {
-
+    res.send(err);
   }
 };
 

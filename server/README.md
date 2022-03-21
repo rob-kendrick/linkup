@@ -21,13 +21,17 @@
 -     - {password} = Postgres password. If not sure, check / reset in PG Admin
 # RUNNING THE DATABASE
 - On first run, run `npx prisma generate` to establish link between schema.prisa and .env file
-- Whenever you make changes to your Prisma schema in the future, you manually need to invoke `prisma generate` in order to accommodate the changes in your Prisma Client API.
+- Whenever you make changes to your Prisma schema in the future, you manually need to invoke `npx prisma generate` in order to accommodate the changes in your Prisma Client API.
 - DOCS below 👇👇👇:
->>https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/install-prisma-client-typescript-postgres
+>https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/install-prisma-client-typescript-postgres
 
 -----------------------------------------------------------------------------------------------------------------------
 # VIEWING THE DATABASE DATA AND TABLES
 - Run `npx prisma studio` to visualise our database
+
+# UPDATEING SCHEMA
+- To change exising schma fields/ type, e.g. adding unqiue contraint, first run `npx prisma migrate dev --create-only` then make desired changed, then run `npx prisma migrate dev`
+ > https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/customizing-migrations
 
 -----------------------------------------------------------------------------------------------------------------------
 # POTENTIAL ERRORS
