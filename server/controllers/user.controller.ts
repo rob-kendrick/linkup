@@ -44,7 +44,22 @@ const createUser = async (req: Request, res: Response) => {
     // hash password
     // store user in DB
     // send JWToken / session cookie
+    try {
+      const createdDate: Date = new Date(req.body.date_created);
+      const body: object = {
+        date_created: createdDate,
+        ...req.body,
+      };
 
+      const user = await prisma.user.create({
+        data: body,
+      });
+      console.log(user);
+      res.send(user);
+    } catch (err) {
+      console.log(err);
+      res.send(err);
+    }
   } catch (err) {
 
   }
