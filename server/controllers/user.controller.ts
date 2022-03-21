@@ -30,9 +30,7 @@ const validateUserInfo = (user: User) => {
     || !user.last_name
     || !user.profile_picture
     || !user.bio
-  ) {
-    return false;
-  }
+  ) return false;
   return true;
 };
 
