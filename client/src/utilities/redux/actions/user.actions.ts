@@ -9,6 +9,9 @@ const userActions = {
   getUserByIdAction: (payload: User) => (dispatch: Dispatch<SingleUserAction>) => {
     dispatch({ type: 'GET_USER_BY_ID', payload });
   },
+  postUserByIdAction: (payload: User) => (dispatch: Dispatch<SingleUserAction>) => {
+    dispatch({ type: 'POST_USER', payload });
+  },
 };
 
 export default userActions;

@@ -5,17 +5,18 @@ import {
   Store,
   combineReducers,
 } from 'redux';
+import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import userReducer from './reducers/user.reducer';
 import eventReducer from './reducers/event.reducer';
 
-const rootReducer = combineReducers({ users: userReducer, events: eventReducer });
+const rootReducer = combineReducers({ userReducer, eventReducer });
 
-type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>
 
 const store: Store<RootState> = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk)),
+  composeWithDevTools(applyMiddleware(thunk, logger)),
 );
 
 export default store;

@@ -1,0 +1,14 @@
+ {
+    "id":"112342",
+    "first_name":"",
+    "last_name":"", 
+    "email":"zyz",
+    "password":"1234",
+    "bio":"zhx", 
+    "profile_picture_url":"wdadawdada", 
+    "events_created":["1", "6", "10"], 
+    "events_participating":["3", "4", "5", "7", "9"], 
+    "friend":[], 
+    "rating_score":"5",
+    "ratings": []
+  }

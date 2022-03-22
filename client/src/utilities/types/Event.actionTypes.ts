@@ -1,11 +1,12 @@
 import { Event } from './Event';
 
 export type CurrentEventState = {
-  user: Event;
+  event: Event;
 };
 
 export type EventsState = {
-  users: Event[];
+    currentEvent: Event | null,
+    allEvents: Event[];
 };
 
 export type SingleEventAction = {
@@ -17,3 +18,5 @@ export type MultipleEventsAction = {
   type: string;
   payload: Event[];
 };
+
+export type EventActions = SingleEventAction | MultipleEventsAction;

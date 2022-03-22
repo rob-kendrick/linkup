@@ -5,41 +5,59 @@ import userApi from '../utilities/api/user.api';
 import userActions from '../utilities/redux/actions/user.actions';
 import eventApi from '../utilities/api/event.api';
 import eventActions from '../utilities/redux/actions/event.actions';
+import userReducer from '../utilities/redux/reducers/user.reducer';
+import { RootState } from '../utilities/redux/store';
+
+const data = require('../mock-data/new.user.json');
 
 function Test() {
-  const stateRedux = useSelector((state) => state);
-  console.log('STATE REDUX', stateRedux);
+  // const stateRedux = useSelector((state: RootState) => state);
+  // console.log('STATE REDUX', stateRedux);
+
+  const allUsers = useSelector((state: RootState) => state.userReducer.allUsers);
 
   const dispatch: Dispatch<any> = useDispatch();
 
   useEffect(() => {
-    console.log('useEffect users');
-
     userApi.getAllUsers().then((response) => {
+      console.log('get all users');
       dispatch(userActions.getUsersAction(response));
     }).catch();
+    // userApi.postUser(data).then((response) => {
+    //   dispatch(userActions.postUserByIdAction(response));
+    // }).catch();
 
-    userApi.getUserById(11).then((response) => {
-      dispatch(userActions.getUserByIdAction(response));
-    }).catch();
+    // userApi.getUserById(11).then((response) => {
+    //   dispatch(userActions.getUserByIdAction(response));
+    // }).catch();
   }, []);
 
-  useEffect(() => {
-    eventApi.getAllEvents().then((response) => {
-      dispatch(eventActions.getEventsAction(response));
-    }).catch();
+  // useEffect(() => {
+  //   eventApi.getAllEvents().then((response) => {
+  //     dispatch(eventActions.getEventsAction(response));
+  //   }).catch();
 
-    eventApi.getEventById(10).then((response) => {
-      dispatch(eventActions.getEventByIdAction(response));
+  // eventApi.getEventById(10).then((response) => {
+  //   dispatch(eventActions.getEventByIdAction(response));
+  // }).catch();
+  // }, []);
+
+  const postUserHandler = () => {
+    console.log('post user');
+    userApi.postUser(data).then((response) => {
+      dispatch(userActions.postUserByIdAction(response));
     }).catch();
-  }, []);
+  };
 
   return (
     <div>
       Users:
       stateRedux
+      {allUsers.map((user) => <p>{user.firstName}</p>)}
+      <button onClick={postUserHandler}>Add user</button>
     </div>
   );
 }
 
 export default Test;
+

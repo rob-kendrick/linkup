@@ -5,7 +5,8 @@ export type CurrentUsersState = {
 };
 
 export type UsersState = {
-  users: User[];
+    allUsers: User[],
+    currentUser:User | null
 };
 
 export type SingleUserAction = {
@@ -17,3 +18,5 @@ export type MultipleUsersAction = {
   type: string;
   payload: User[];
 };
+
+export type UserActions = SingleUserAction | MultipleUsersAction;
