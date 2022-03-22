@@ -22,12 +22,6 @@ eventRouter.get('/', eventController.getAllEvents);
 // Get 1 event by event ID
 eventRouter.get('/:eventid', eventController.getEventById);
 
-// Get all events by creator ID
-eventRouter.get('/:userid/events/created/', eventController.getEventsByCreatorId);
-
-// Get all events by creator ID
-eventRouter.get('/:userid/events/participating/', eventController.getEventsByParticipantId);
-
 // Create 1 event
 eventRouter.post('/', eventController.createEvent);
 

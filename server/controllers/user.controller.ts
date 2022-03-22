@@ -258,6 +258,81 @@ const editUserInfo = async (req: Request, res: Response) => {
 // --------------------------------------------------------
 // --------------------------------------------------------
 
+// get all events created by a user
+const getUserCreatedEvents = async (req: Request, res: Response) => {
+  try {
+    const userId: number = Number(req.params.userid);
+    const event = await prisma.user.findUnique({
+      where: {
+        id_user: userId,
+      },
+      select: {
+        events_created: {
+          select: {
+            id_event: true,
+            title: true,
+            max_participants: true,
+            date: true,
+            description: true,
+            participants: {
+              select: {
+                id_user: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    res.status(200).send({ data: event });
+  } catch (err) {
+    res.status(500).send({ error: err });
+  }
+};
+
+// get all events a user is participating in
+const getUserParticipatingEvents = async (req: Request, res: Response) => {
+  try {
+    const userId: number = Number(req.params.userid);
+    const event = await prisma.user.findUnique({
+      where: {
+        id_user: userId,
+      },
+      select: {
+        events_participating: {
+          select: {
+            id_event: true,
+            title: true,
+            max_participants: true,
+            date: true,
+            description: true,
+            participants: {
+              select: {
+                id_user: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    res.status(200).send({ data: event });
+  } catch (err) {
+    res.status(500).send({ error: err });
+  }
+};
+
+// Private function for deleting all users (dev purposes)
+const _deleteAllUsers = async (req: Request, res: Response) => {
+  try {
+    const deletedUserCount = await prisma.user.deleteMany();
+    res.status(200).send(deletedUserCount);
+  } catch (err) {
+    console.log(' : : : ERROR DELETING ALL USERS : : : ', err);
+    res.status(500).send(err);
+  }
+};
+
 // Delete 1 user by ID 🅿️
 const deleteUser = async (req: Request, res: Response) => {
   try {
@@ -276,17 +351,6 @@ const deleteUser = async (req: Request, res: Response) => {
 // --------------------------------------------------------
 // --------------------------------------------------------
 
-// Private function for deleting all users (dev purposes)
-const _deleteAllUsers = async (req: Request, res: Response) => {
-  try {
-    const deletedUserCount = await prisma.user.deleteMany();
-    res.status(200).send(deletedUserCount);
-  } catch (err) {
-    console.log(' : : : ERROR DELETING ALL USERS : : : ', err);
-    res.status(500).send(err);
-  }
-};
-
 // Add friend 🅿️
 // async function to be added !
 
@@ -296,6 +360,15 @@ const _deleteAllUsers = async (req: Request, res: Response) => {
 // --------------------------------------------------------
 // 🚀🚀🚀 EXPORTS 🚀🚀🚀
 export default {
-  createUser, getUserById, getAllUsers, editUserInfo, login, logout, deleteUser, _deleteAllUsers,
+  createUser,
+  getUserById,
+  getAllUsers,
+  editUserInfo,
+  login,
+  logout,
+  getUserCreatedEvents,
+  getUserParticipatingEvents,
+  deleteUser,
+  _deleteAllUsers,
 };
 // --------------------------------------------------------

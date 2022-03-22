@@ -36,6 +36,12 @@ userRouter.get('/', userController.getAllUsers);
 // Edit 1 user by ID 🅿️ 🅱️
 userRouter.patch('/:userid', userController.editUserInfo);
 
+// Get all events by creator ID
+userRouter.get('/:userid/events/created/', userController.getUserCreatedEvents);
+
+// Get all events by creator ID
+userRouter.get('/:userid/events/participating/', userController.getUserParticipatingEvents);
+
 // Delete 1 user by ID 🅿️
 userRouter.delete('/:userid', userController.deleteUser);
 

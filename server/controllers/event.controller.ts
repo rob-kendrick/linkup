@@ -74,69 +74,7 @@ const getEventById = async (req: Request, res: Response) => {
   }
 };
 
-// get events by creator id
-const getEventsByCreatorId = async (req: Request, res: Response) => {
-  try {
-    const userId: number = Number(req.params.userid);
-    const event = await prisma.user.findUnique({
-      where: {
-        id_user: userId,
-      },
-      select: {
-        events_created: {
-          select: {
-            id_event: true,
-            title: true,
-            max_participants: true,
-            date: true,
-            description: true,
-            participants: {
-              select: {
-                id_user: true,
-              },
-            },
-          },
-        },
-      },
-    });
 
-    res.status(200).send({ data: event });
-  } catch (err) {
-    res.status(500).send({ error: err });
-  }
-};
-
-// get events by participant id
-const getEventsByParticipantId = async (req: Request, res: Response) => {
-  try {
-    const userId: number = Number(req.params.userid);
-    const event = await prisma.user.findUnique({
-      where: {
-        id_user: userId,
-      },
-      select: {
-        events_participating: {
-          select: {
-            id_event: true,
-            title: true,
-            max_participants: true,
-            date: true,
-            description: true,
-            participants: {
-              select: {
-                id_user: true,
-              },
-            },
-          },
-        },
-      },
-    });
-
-    res.status(200).send({ data: event });
-  } catch (err) {
-    res.status(500).send({ error: err });
-  }
-};
 
 // crate new event
 const createEvent = async (req: Request, res: Response) => {
@@ -275,8 +213,6 @@ const _deleteAllEvents = async (req: Request, res: Response) => {
 export default {
   getAllEvents,
   getEventById,
-  getEventsByCreatorId,
-  getEventsByParticipantId,
   createEvent,
   joinEvent,
   leaveEvent,
