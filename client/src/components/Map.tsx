@@ -9,10 +9,6 @@ events : LU_Event[];
 }
 
 function Map({ events } : eventProps) {
-  
-  const addPin = (lat:number, lng:number) => {
-
-  };
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((location) => {

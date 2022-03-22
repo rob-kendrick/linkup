@@ -4,6 +4,7 @@ import * as userData from '../mock-data/users.json';
 import Map from '../components/Map';
 import FilterMenu from '../components/FilterMenu';
 import NavBar from '../components/NavBar';
+import EventList from '../components/EventList';
 
 function BrowseEvents() {
   const events = mockEventsData;
@@ -18,6 +19,7 @@ function BrowseEvents() {
 
       <div className="browse-events-map">
         <Map events={events} />
+        <EventList events={events} />
       </div>
 
       <div className="navbar">
