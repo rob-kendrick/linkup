@@ -60,7 +60,7 @@ const logout = (req: Request, res: Response) => {
 // --------------------------------------------------------
 // 🚀🚀🚀 USER CONTROLLERS 🚀🚀🚀
 // --------------------------------------------------------
-
+// --------------------------------------------------------
 // Create 1 user 🅱️ ✅
 const createUser = async (req: Request, res: Response) => {
   // need to send JWToken / session cookie ?
@@ -98,6 +98,8 @@ const createUser = async (req: Request, res: Response) => {
     res.status(500).send(err);
   }
 };
+// --------------------------------------------------------
+// --------------------------------------------------------
 
 // Get 1 user by ID 🅿️ ✅
 const getUserById = async (req: Request, res: Response) => {
@@ -117,6 +119,8 @@ const getUserById = async (req: Request, res: Response) => {
     res.status(404).send(err);
   }
 };
+// --------------------------------------------------------
+// --------------------------------------------------------
 
 // Get all users
 const getAllUsers = async (req: Request, res: Response) => {
@@ -128,6 +132,9 @@ const getAllUsers = async (req: Request, res: Response) => {
     res.status(404).send({ error: err });
   }
 };
+// --------------------------------------------------------
+// --------------------------------------------------------
+// EDIT USER BIO WITH VALIDATION
 
 // Helper function for validating user bio
 const validateUserBio = (body: any) => {
@@ -173,6 +180,8 @@ const editUserBio = async (req: Request, res: Response) => {
     res.status(500).send({ error: err });
   }
 };
+// --------------------------------------------------------
+// --------------------------------------------------------
 
 // Delete 1 user by ID 🅿️
 const deleteUser = async (req: Request, res: Response) => {
@@ -189,6 +198,8 @@ const deleteUser = async (req: Request, res: Response) => {
     res.status(500).send(err);
   }
 };
+// --------------------------------------------------------
+// --------------------------------------------------------
 
 // Private function for deleting all users (dev purposes)
 const _deleteAllUsers = async (req: Request, res: Response) => {
