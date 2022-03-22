@@ -129,6 +129,7 @@ const getAllUsers = async (req: Request, res: Response) => {
   }
 };
 
+// Helper function for validating user bio
 const validateUserBio = (body: any) => {
   const output: any = { error: false, errorMessages: [] };
   if (!body.bio) {
@@ -142,7 +143,7 @@ const validateUserBio = (body: any) => {
   return output;
 };
 
-// Edit 1 user by ID 🅱️ 🅿️
+// Edit 1 user Bio by ID 🅱️ 🅿️
 const editUserBio = async (req: Request, res: Response) => {
   try {
     // Handler for invalid request body. This controller will only update bio

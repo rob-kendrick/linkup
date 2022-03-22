@@ -34,7 +34,7 @@ userRouter.get('/:userid', userController.getUserById);
 userRouter.get('/', userController.getAllUsers);
 
 // Edit 1 user by ID 🅿️ 🅱️
-userRouter.patch('/:userid', userController.editUser);
+userRouter.patch('/:userid', userController.editUserBio);
 
 // Delete 1 user by ID 🅿️
 userRouter.delete('/:userid', userController.deleteUser);
