@@ -2,7 +2,7 @@
 import { Request, Response } from 'express';
 import prisma from '../db';
 
-// Validating event info before passing to DB
+// creating Event type
 interface Event {
   title: string
   description: string
@@ -19,9 +19,10 @@ interface Event {
   country : string
 }
 
+// Validating event info before passing to DB
 const validateEventInfo = (event: Event) => {
-  if (
-    !event.title
+  const output: any = { error: false, errorMessages: [] };
+  if (!event.title
     || !event.description
     || !event.creator_id
     || !event.date
@@ -31,11 +32,14 @@ const validateEventInfo = (event: Event) => {
     || !event.street_name
     || !event.postcode
     || !event.city
-    || !event.country
-  ) return false;
-  return true;
+    || !event.country) {
+    output.error = true;
+    output.errorMessages.push('Invalid event data');
+  }
+  return output;
 };
 
+// get all events
 const getAllEvents = async (req: Request, res: Response) => {
   try {
     const events = await prisma.event.findMany();
@@ -45,12 +49,22 @@ const getAllEvents = async (req: Request, res: Response) => {
   }
 };
 
+// get single event by id
 const getEventById = async (req: Request, res: Response) => {
   try {
     const eventId: number = Number(req.params.eventid);
     const event = await prisma.event.findUnique({
       where: {
         id_event: eventId,
+      },
+      include: {
+        participants: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
     });
 
@@ -60,34 +74,35 @@ const getEventById = async (req: Request, res: Response) => {
   }
 };
 
+// crate new event
 const createEvent = async (req: Request, res: Response) => {
   try {
+    // convert date and id into correct data types
     const date: Date = new Date(req.body.date);
-    const lat: number = parseFloat(req.body.lat);
-    const lng: number = parseFloat(req.body.lng);
     const creator_id: number = Number(req.body.creator_id);
 
     const eventInput: Event = {
       ...req.body,
       date,
-      lat,
-      lng,
       creator_id,
     };
 
-    if (!validateEventInfo(eventInput)) res.status(400).send({ error: 'Invalid event data' });
-
-    else {
-      const newEvent = await prisma.event.create({ data: eventInput });
-      res.status(201).send({ data: newEvent });
+    const eventValidation: any = validateEventInfo(req.body);
+    if (eventValidation.error) {
+      return res.status(401).send({ error: eventValidation.errorMessages });
     }
+
+    const newEvent = await prisma.event.create({ data: eventInput });
+    res.status(201).send({ data: newEvent });
   } catch (err) {
     res.status(500).send({ error: err });
   }
 };
 
+// join event by adding user to participants
 const joinEvent = async (req: Request, res: Response) => {
   try {
+    // convert ids form params into integers
     const eventId: number = Number(req.params.eventid);
     const userId: number = Number(req.params.userid);
 
@@ -101,7 +116,13 @@ const joinEvent = async (req: Request, res: Response) => {
         },
       },
       include: {
-        participants: true, // Include all posts in the returned object
+        participants: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
     });
     res.status(200).send({ data: addParticipant });
@@ -110,6 +131,7 @@ const joinEvent = async (req: Request, res: Response) => {
   }
 };
 
+// leave event by removing user from participants
 const leaveEvent = async (req: Request, res: Response) => {
   try {
     const eventId: number = Number(req.params.eventid);
@@ -139,6 +161,7 @@ const leaveEvent = async (req: Request, res: Response) => {
   }
 };
 
+// edit event information: title, desc, max participans & min participants
 const editEvent = async (req: Request, res: Response) => {
   try {
     const eventId: number = Number(req.params.eventid);
@@ -149,6 +172,8 @@ const editEvent = async (req: Request, res: Response) => {
       data: {
         title: req.body.title,
         description: req.body.description,
+        min_participants: req.body.min_participants,
+        max_participants: req.body.max_participants,
       },
 
     });
@@ -158,6 +183,7 @@ const editEvent = async (req: Request, res: Response) => {
   }
 };
 
+// delete single event by event id
 const deleteEventById = async (req: Request, res: Response) => {
   try {
     const eventId: number = Number(req.params.eventid);
@@ -172,6 +198,7 @@ const deleteEventById = async (req: Request, res: Response) => {
   }
 };
 
+// delete all events. Not to be used in front-end
 const _deleteAllEvents = async (req: Request, res: Response) => {
   try {
     const deleteEvents = await prisma.event.deleteMany();

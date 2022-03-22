@@ -26,10 +26,10 @@ eventRouter.get('/:eventid', eventController.getEventById);
 eventRouter.post('/', eventController.createEvent);
 
 // Join 1 event
-eventRouter.patch('/join/:eventid/:userid', eventController.joinEvent);
+eventRouter.patch('events/join/:eventid/users/:userid', eventController.joinEvent);
 
 // Leave 1 event
-eventRouter.patch('/leave/:eventid/:userid', eventController.leaveEvent);
+eventRouter.patch('/leave/:eventid/users/:userid', eventController.leaveEvent);
 
 // Edit 1 event by ID
 eventRouter.patch('/:eventid', eventController.editEvent);
