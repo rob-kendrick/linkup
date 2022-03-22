@@ -9,8 +9,8 @@ export interface User {
   password: string;
   bio: string;
   profile_picture: string;
-  events_created: [LU_Event];
-  events_participating: [LU_Event];
-  friends: [User];
-  rating: [Rating];
+  events_created: string[];
+  events_participating: string[];
+  friends: string[];
+  rating: string[];
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import mockEventsData from '../mock-data/events';
-import * as userData from '../mock-data/users.json';
+import * as userData from '../mock-data/users';
 import Map from '../components/Map';
 import FilterMenu from '../components/FilterMenu';
 import NavBar from '../components/NavBar';
