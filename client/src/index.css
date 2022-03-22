@@ -27,7 +27,7 @@ button {
   margin-right: 10px; 
 }
 
-.browse-events {
+.browse-events {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -35,9 +35,13 @@ button {
 }
 
 /* MAP COMPONENT*/
+.map-container{
+  height: 462px;
+  width: 375px;
+}
 
 .leaflet-container{
-  height: 60vh;
+  height: 462px;
   width: 375px; 
 }
 
@@ -49,14 +53,17 @@ button {
 
 .event-list-container{
   background-color: #F2F2F2;
-  padding:10px; 
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 375px;
 }
 
 .activity-card{
   background-color:white;
   margin:20px; 
   margin-bottom: 20px;
-  border-radius: 10px; 
+  border-radius: 10px;
+  margin: 20px; 
 }
 
 .activity-card-picture{
