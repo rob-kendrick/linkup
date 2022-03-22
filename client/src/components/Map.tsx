@@ -1,33 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import L from 'leaflet';
-import './Map.css';
+import 'leaflet/dist/leaflet.css';
+import type { LU_Event } from '../utilities/types/LU_Event';
+import vector from '../Vector.png';
 
-function Map() {
-  useEffect(() => {
-    const map = L.map('map').setView([51.505, -0.09], 13);
-    const api = '67582dfbec614217abadfb9fb11090c7';
-    L.tileLayer(`https://{s}.tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png?apikey=${api}`).addTo(map);
+interface eventProps {
+events : LU_Event[];
+}
+
+function Map({ events } : eventProps) {
+  
+  const addPin = (lat:number, lng:number) => {
+
+  };
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((location) => {
+      const lat : number = location.coords.latitude;
+      const lng : number = location.coords.longitude;
+      console.log(lat, lng);
+
+      const map = L.map('map').setView([lat, lng], 13);
+      L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png').addTo(map);
+
+      const myIcon = L.divIcon({
+        className: 'my-div-icon',
+        html: `<div> <img src=${vector} alt="marker" /></div>`,
+      });
+
+      events.map((event) => {
+        const eventLat = typeof event.lat === 'string' ? parseFloat(event.lat) : event.lat;
+        const eventLng = typeof event.lng === 'string' ? parseFloat(event.lng) : event.lng;
+        return L.marker([eventLat, eventLng], { icon: myIcon }).addTo(map).bindPopup(`${event.title} <br> ${event.date_time}`).openPopup();
+      });
+
+      const myLocationIcon = L.divIcon({
+        className: 'my-div-icon',
+        html: '<div><h1>🤡</h1></div>',
+      });
+
+      L.marker([lat, lng], { icon: myLocationIcon }).addTo(map)
+        .bindPopup('Current location')
+        .openPopup();
+    });
   }, []);
 
   return (
 
     <div>
-      {/* <!-- LEAFLET CSS --> */}
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossOrigin=""
-      />
-      {/* <!-- LEAFLET JS --> */}
-      <script
-        src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossOrigin=""
-      />
-      <h1>Map</h1>
-
       <div id="map" />
+
     </div>
   );
 }

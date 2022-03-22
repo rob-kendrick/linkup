@@ -1,4 +1,4 @@
-import type { Event } from './Event';
+import type { LU_Event } from './LU_Event';
 import type { Rating } from './Rating';
 
 export interface User {
@@ -9,8 +9,8 @@ export interface User {
   password: string;
   bio: string;
   profile_picture: string;
-  events_created: [Event];
-  events_participating: [Event];
+  events_created: [LU_Event];
+  events_participating: [LU_Event];
   friends: [User];
   rating: [Rating];
 }

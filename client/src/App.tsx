@@ -5,7 +5,9 @@ import BrowseEvents from './views/BrowseEvents';
 function App() {
   return (
     <div>
-      <BrowseEvents />
+      <div>
+        <BrowseEvents />
+      </div>
     </div>
   );
 }

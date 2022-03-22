@@ -1,19 +1,28 @@
 import React from 'react';
-import * as eventsData from '../mock-data/events.json';
+import mockEventsData from '../mock-data/events';
 import * as userData from '../mock-data/users.json';
 import Map from '../components/Map';
+import FilterMenu from '../components/FilterMenu';
+import NavBar from '../components/NavBar';
 
 function BrowseEvents() {
-  const events = eventsData;
+  const events = mockEventsData;
   const users = userData;
 
-  console.log(events[0].address);
-
   return (
-    <div>
-      <h1>This is the BrowseEvents View</h1>
-      BrowseEvents
-      <Map />
+    <div className="browse-events-container">
+      {/* Temporary CSS on the global CSS file */}
+      <div className="browse-events-filter-menu">
+        <FilterMenu />
+      </div>
+
+      <div className="browse-events-map">
+        <Map events={events} />
+      </div>
+
+      <div className="navbar">
+        <NavBar />
+      </div>
     </div>
   );
 }
