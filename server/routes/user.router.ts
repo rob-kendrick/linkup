@@ -9,6 +9,7 @@
 import { Router } from 'express';
 // eslint-disable-next-line import/no-unresolved
 import userController from '../controllers/user.controller';
+import authMiddleware from '../middleware/auth';
 
 const userRouter = Router();
 // --------------------------------------------------------
@@ -34,7 +35,7 @@ userRouter.get('/:userid', userController.getUserById);
 userRouter.get('/', userController.getAllUsers);
 
 // Edit 1 user by ID 🅿️ 🅱️
-userRouter.patch('/:userid', userController.editUserInfo);
+userRouter.patch('/:userid', authMiddleware, userController.editUserInfo);
 
 // Get all events by creator ID
 userRouter.get('/:userid/events/created/', userController.getUserCreatedEvents);

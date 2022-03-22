@@ -7,11 +7,13 @@
 // --------------------------------------------------------
 // IMPORTS
 import { Request, Response } from 'express'; // Types for Typescript
-import prisma from '../db'; // ORM handling
+// ORM handling
+import jwt from 'jsonwebtoken';
+import prisma from '../db';
 
 const bcrypt = require('bcrypt');
 // --------------------------------------------------------
-
+const SECRET_KEY = process.env.SECRET_KEY || 'open sesame';
 //---------------------------------------------------------
 // 🚀🚀🚀 AUTH CONTROLLERS 🚀🚀🚀
 // --------------------------------------------------------
@@ -88,7 +90,7 @@ const createUser = async (req: Request, res: Response) => {
     if (emailExists) {
       return res.status(409).send({ error: 'email already exists' });
     }
-
+    if (req.body.password === '') throw new Error('Password cannot be empty string');
     // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -100,8 +102,10 @@ const createUser = async (req: Request, res: Response) => {
 
     // Creating the user in database
     const newUser = await prisma.user.create({ data: { ...body } });
+    const { id_user } = newUser;
+    const accessToken = jwt.sign({ id_user }, SECRET_KEY);
     // console.log(newUser);
-    res.status(201).send(newUser);
+    res.status(201).send({ data: { accessToken, newUser } });
   } catch (err) {
     console.log(' : : : ERROR STORING USER IN DATBASE : : : ', err);
     res.status(500).send(err);
