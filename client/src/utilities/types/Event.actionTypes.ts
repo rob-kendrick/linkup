@@ -1,22 +1,22 @@
-import { Event } from './Event';
+import type { LuEvent } from './Event';
 
 export type CurrentEventState = {
-  event: Event;
+  event: LuEvent;
 };
 
 export type EventsState = {
-    currentEvent: Event | null,
-    allEvents: Event[];
+    currentEvent: LuEvent | null,
+    allEvents: LuEvent[];
 };
 
 export type SingleEventAction = {
   type: string;
-  payload: Event;
+  payload: LuEvent;
 };
 
 export type MultipleEventsAction = {
   type: string;
-  payload: Event[];
+  payload: LuEvent[];
 };
 
 export type EventActions = SingleEventAction | MultipleEventsAction;

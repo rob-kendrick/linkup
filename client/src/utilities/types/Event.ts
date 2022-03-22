@@ -1,7 +1,7 @@
 import type { User } from './User';
 import type { Tag } from './Tag';
 
-export interface Event {
+export interface LuEvent {
   eventId: number;
   date: string;
   title: string;

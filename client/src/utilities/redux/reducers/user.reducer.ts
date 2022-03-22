@@ -1,28 +1,13 @@
-// import {
-// Reducer,
-// ReducerState
-// } from 'react';
-// import { PayloadAction } from '@reduxjs/toolkit';
 import {
-  // MultipleUsersAction,
   UsersState,
   UserActions,
 } from '../../types/User.actionTypes';
-// import { User } from '../../types/User';
-// import {RootReducer}
 
 const initialState: UsersState = {
   currentUser: null,
   allUsers: [],
 };
 
-// type ReturnTypeTry = {
-
-// }
-
-// eslint-disable-next-line default-param-last
-// const userReducer:Reducer<UsersState, UserActions> = (
-// eslint-disable-next-line default-param-last
 const userReducer = (
   // eslint-disable-next-line default-param-last
   state = initialState,

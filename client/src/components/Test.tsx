@@ -5,7 +5,6 @@ import userApi from '../utilities/api/user.api';
 import userActions from '../utilities/redux/actions/user.actions';
 import eventApi from '../utilities/api/event.api';
 import eventActions from '../utilities/redux/actions/event.actions';
-import userReducer from '../utilities/redux/reducers/user.reducer';
 import { RootState } from '../utilities/redux/store';
 
 const data = require('../mock-data/new.user.json');
@@ -32,20 +31,26 @@ function Test() {
     // }).catch();
   }, []);
 
-  // useEffect(() => {
-  //   eventApi.getAllEvents().then((response) => {
-  //     dispatch(eventActions.getEventsAction(response));
-  //   }).catch();
+  useEffect(() => {
+    eventApi.getAllEvents().then((response) => {
+      dispatch(eventActions.getEventsAction(response));
+    }).catch();
 
-  // eventApi.getEventById(10).then((response) => {
-  //   dispatch(eventActions.getEventByIdAction(response));
-  // }).catch();
-  // }, []);
+    // eventApi.deleteEvent(10).then((response) => {
+    //   dispatch(eventActions.getEventByIdAction(response));
+    // }).catch();
+    // }, []);
 
-  const postUserHandler = () => {
-    console.log('post user');
-    userApi.postUser(data).then((response) => {
-      dispatch(userActions.postUserByIdAction(response));
+    // const postUserHandler = () => {
+    //   console.log('post user');
+    //   userApi.postUser(data).then((response) => {
+    //     dispatch(userActions.postUserByIdAction(response));
+    //   }).catch();
+  }, []);
+
+  const deleteUserHandler = () => {
+    eventApi.deleteEvent(10).then((response) => {
+      dispatch(eventActions.deleteEventAction(response));
     }).catch();
   };
 
@@ -54,10 +59,9 @@ function Test() {
       Users:
       stateRedux
       {allUsers.map((user) => <p>{user.firstName}</p>)}
-      <button onClick={postUserHandler}>Add user</button>
+      <button onClick={deleteUserHandler}>Add user</button>
     </div>
   );
 }
 
 export default Test;
-
