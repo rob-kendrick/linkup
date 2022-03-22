@@ -74,8 +74,6 @@ const getEventById = async (req: Request, res: Response) => {
   }
 };
 
-
-
 // crate new event
 const createEvent = async (req: Request, res: Response) => {
   try {

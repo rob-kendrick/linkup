@@ -17,8 +17,8 @@ model user {
   bio                   String    @db.VarChar(255)
   email                 String    @db.VarChar(255) @unique
   profile_picture       String
-  events_created        event[]   @relation(name: "events_created")
-  events_participating  event[]   @relation(name: "events_participating", references: [id_event])
+  events_created        event[]   @relation(name: "created_events")
+  events_participating  event[]   @relation(name: "participating_events", references: [id_event])
   password              String
   date_created          DateTime  @default(now())
 }
@@ -27,11 +27,11 @@ model event {
   id_event              Int         @id @default(autoincrement())
   title                 String      @db.VarChar(30)
   description           String      @db.VarChar(255)
-  creator               user        @relation(name: "events_created", fields: [creator_id], references: [id_user])
+  creator               user        @relation(name: "created_events", fields: [creator_id], references: [id_user])
   creator_id            Int
   min_participants      Int?
   max_participants      Int?
-  participants          user[]      @relation(name: "events_participating", references: [id_user])
+  participants          user[]      @relation(name: "participating_events", references: [id_user])
   date                  DateTime
   date_created          DateTime    @default(now())
   date_updated          DateTime?   @updatedAt

@@ -7,6 +7,7 @@
 - to run the server with nodemon, do `npx nodemon ./index.ts`
 
 ## Setting up and running the database
+- Make sure you have postgresql installed locally
 - Run `psql postgres` to start psql CLI and create database by running `create database linkup_db;` and exit cli with `quit`
 - Run `npx prisma generate` from the server folder to establish link between schema.prisma and .env file
 - Run `npx prisma migrate dev` to create create a new migrate (to sync database schema to prisma schema)
@@ -16,7 +17,7 @@
 
 ## Updating schema / models
 - Before you make changes, run `npx prisma migrate dev --create-only`.
-- To apply the edited migration, run `prisma migrate dev`.
+- To apply the edited migration, run `npx prisma migrate dev`.
 
 ## Common errors with prisma studio
 1. Database 'linkup_db' does not exist:
