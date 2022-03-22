@@ -13,36 +13,152 @@ h3 {
 }
 
 button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   width: 99px;
   height: 44px;
   left: 31px;
   top: 184px;
 }
 
+.button-icon{
+  margin-right: 10px; 
+}
+
 .browse-events {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100vh;
+  height: 100%;
+  width: 375px;
 }
+
+/* MAP COMPONENT*/
 
 .leaflet-container{
   height: 60vh;
-  width: 100vh; 
+  width: 375px; 
+}
+
+.my-div-icon{
+  width: 20px; 
+}
+
+/* EVENT LIST COMPONENT */
+
+.event-list-container{
+  background-color: #F2F2F2;
+  padding:10px; 
+}
+
+.activity-card{
+  background-color:white;
+  margin:20px; 
+  margin-bottom: 20px;
+  border-radius: 10px; 
+}
+
+.activity-card-picture{
+  border-radius: 50%;
+  width: 52px; 
 }
 
 .browse-events-filter-menu{
   background-color:rgb(249, 249, 249); 
   height: 25vh;
-  width: 100vh;
+  width: 375px;
   padding: 0px;
   margin: 0px; 
 }
 
-.navbar {
-  background-color:rgb(208, 208, 208);
-  height: 15vh; 
-  width: 100vh;
+/* Profile and event Title */
+
+.activity-card-profile{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin:0px;
+  padding: 10px; 
 }
 
+.activity-card-header-info{
+  margin-left: 10px;
+}
+
+#activity-card-title{
+  margin: 0px; 
+}
+
+#activity-card-user{
+  margin: 0px;
+}
+
+.activity-card-details{
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+}
+
+.activity-card-details-icon{
+  display: flex;
+  flex-direction: row;
+  border-radius: 50%;
+  background-color: #F2F2F2;
+  width: 24px;
+  height: 24px;
+  padding: 3px; 
+}
+
+
+
+/* Navbar */
+.navbar {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color:#263056;
+  height: 15vh; 
+  width: 375px;
+  display: flex;
+}
+
+.navbar-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color:white;
+  width: 5rem; 
+}
+
+.navbar-icon{
+  color:white;
+  width: 2rem;
+  margin-bottom: 5px;
+}
+
+
+
+
 /* Event list component */
+
+/* Filter menu layout */
+
+.filter-menu-button-container{
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+  padding-right: 20px;
+  justify-content: center;
+  align-items: center; 
+
+}
+
+.filter-menu-button-left-section{
+  display: flex;
+  flex-direction: row;
+  flex:2; 
+}
+
+

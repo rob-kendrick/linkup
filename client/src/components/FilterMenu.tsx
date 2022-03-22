@@ -1,4 +1,7 @@
 import React from 'react';
+import list from '../assets/MdFormatListBulleted.svg';
+import map from '../assets/FaRegMap.svg';
+import filter from '../assets/BiFilter.svg';
 
 function FilterMenu() {
   return (
@@ -12,13 +15,19 @@ function FilterMenu() {
 
       <div className="filter-menu-button-container">
 
-        <div>
-          <button>List</button>
-          <button>Map</button>
+        <div className="filter-menu-button-left-section">
+          <div>
+            <button><img src={list} alt="list icon" className="button-icon" /> List</button>
+          </div>
+
+          <div>
+            <button><img src={map} alt="list icon" className="button-icon"/>Map</button>
+          </div>
+
         </div>
 
         <div>
-          <button>Filters</button>
+          <button><img src={filter} alt="list icon" className="button-icon"/>Filters</button>
         </div>
 
       </div>
