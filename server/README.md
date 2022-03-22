@@ -1,33 +1,31 @@
 ## First steps
-- make sure to have ESLint installed and set as default formatter
-- run `npm i` inside the server folder before starting the server.
+- Make sure to have ESLint installed and set as default formatter
+- Run `npm i` inside the server folder before starting the server.
 - create .env file. See example below.
 
 ## Running the server
 - to run the server with nodemon, do `npx nodemon ./index.ts`
 
-## Manually compiling ts into js
-- To manually compile the TS files into JS, do `npm run build`. This will transpile the server into JS. This should not be done during development, but at the end, when we are ready to deploy.
-
 ## Setting up and running the database
-- run `psql postgres` to start psql CLI and create database by running `create database linkup_db;`
-- `npx prisma generate` from the server folder to establish link between schema.prisma and .env file
+- Run `psql postgres` to start psql CLI and create database by running `create database linkup_db;` and exit cli with `quit`
+- Run `npx prisma generate` from the server folder to establish link between schema.prisma and .env file
+- Run `npx prisma migrate dev` to create create a new migrate (to sync database schema to prisma schema)
+
+## Viewing the database data and tables
+- Run `npx prisma studio` to visualise the database and open localhost:5555 in the browswer
 
 ## Updating schema / models
 - Before you make changes, run `npx prisma migrate dev --create-only`.
-- To finalise changes, run `npx prisma migrate dev`
-
-## Viewing the database data and tables
-- Run `npx prisma studio` to visualise the database
+- To apply the edited migration, run `prisma migrate dev`.
 
 ## Common errors with prisma studio
 1. Database 'linkup_db' does not exist:
 - Create database with `create database linkup_db;` in PSQL CLI
-- Re-run `npx prisma studio` from server folder.
+- Run `npx prisma studio` from server folder.
 
 2. Table "user" or Table "event" does not exist in DB
-- Run `npx prisma migrate reset` from the server root folder
-
+- Run `npx prisma generate`
+- Run `npx prisma migrate dev`
 
 ## Example .env file
 ```
