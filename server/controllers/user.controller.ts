@@ -85,53 +85,106 @@ const createUser = async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     // Adding hashed password to our user object
     const body = {
-      password: hashedPassword,
       ...req.body,
+      password: hashedPassword,
     };
 
     // Creating the user in database
     const newUser = await prisma.user.create({ data: { ...body } });
     // console.log(newUser);
-    return res.status(201).send(newUser);
+    res.status(201).send(newUser);
   } catch (err) {
     console.log(' : : : ERROR STORING USER IN DATBASE : : : ', err);
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };
 
 // Get 1 user by ID 🅿️ ✅
 const getUserById = async (req: Request, res: Response) => {
   try {
-
+    // Parsing userid param into number. If not parsed, will error
+    const uid: number = Number(req.params.userid);
+    // Finding the user in DB
+    const foundUser = await prisma.user.findUnique({
+      where: {
+        id_user: uid,
+      },
+    });
+    // Returning the found user
+    return res.status(200).send(foundUser);
   } catch (err) {
-
+    console.log(': : : ERROR FINDING USER BY ID : : : ', err);
+    res.status(404).send(err);
   }
 };
 
 // Get all users
 const getAllUsers = async (req: Request, res: Response) => {
   try {
-
+    const allUsers = await prisma.user.findMany();
+    res.status(200).send({ data: allUsers });
   } catch (err) {
-
+    console.log(' : : : ERROR RETRIEVING ALL USERS : : :', err);
+    res.status(404).send({ error: err });
   }
 };
 
+const validateUserBio = (body: any) => {
+  const output: any = { error: false, errorMessages: [] };
+  if (!body.bio) {
+    output.error = true;
+    output.errorMessages.push('Bio missing!');
+  }
+  if (body.bio.length > 255) {
+    output.error = true;
+    output.errorMessages.push('Bio too long!');
+  }
+  return output;
+};
+
 // Edit 1 user by ID 🅱️ 🅿️
-const editUser = async (req: Request, res: Response) => {
+const editUserBio = async (req: Request, res: Response) => {
   try {
+    // Handler for invalid request body. This controller will only update bio
+    const bioValidation: any = validateUserBio(req.body);
+    if (bioValidation.error) {
+      return res.status(401).send({ error: bioValidation.errorMessages });
+    }
 
+    // Grabbing new user bio
+    const newUserBio: string = req.body.bio;
+    // Grabbing userID
+    const userId : number = Number(req.params.userid);
+    // Updating user bio
+    const updatedUser = await prisma.user.update({
+      where: {
+        id_user: userId,
+      },
+      data: {
+        bio: newUserBio,
+
+      },
+    });
+
+    return res.status(200).send({ data: updatedUser });
   } catch (err) {
-
+    console.log(' : : : ERROR UPDATING USER : : :', err);
+    res.status(500).send({ error: err });
   }
 };
 
 // Delete 1 user by ID 🅿️
 const deleteUser = async (req: Request, res: Response) => {
   try {
-
+    const uid: number = Number(req.params.userid);
+    const deletedUser = await prisma.user.delete({
+      where: {
+        id_user: uid,
+      },
+    });
+    res.status(200).send(deletedUser);
   } catch (err) {
-
+    console.log(' : : : ERROR DELETING USER FROM DB : : : ', err);
   }
 };
 
@@ -144,6 +197,6 @@ const deleteUser = async (req: Request, res: Response) => {
 // --------------------------------------------------------
 // 🚀🚀🚀 EXPORTS 🚀🚀🚀
 export default {
-  createUser, getUserById, getAllUsers, editUser, login, logout, deleteUser,
+  createUser, getUserById, getAllUsers, editUserBio, login, logout, deleteUser,
 };
 // --------------------------------------------------------
