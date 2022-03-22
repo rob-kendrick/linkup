@@ -1,66 +1,38 @@
-# BEFORE WE DO ANYTHING
-
+# First steps
 - make sure to have ESLint installed and set as default formatter
 - run `npm i` inside the server folder before starting the server.
+- create .env file. See example below.
 
------------------------------------------------------------------------------------------------------------------------
-# RUNNING THE SERVER
+# Running the server
 - to run the server with nodemon, do `npx nodemon ./index.ts`
 
------------------------------------------------------------------------------------------------------------------------
-# MANUALLY COMPILING TS INTO JS
+# Manually compiling ts into js
 - To manually compile the TS files into JS, do `npm run build`. This will transpile the server into JS. This should not be done during development, but at the end, when we are ready to deploy.
------------------------------------------------------------------------------------------------------------------------
-# SETTING UP AND RUNNING THE DATABASE WITH  || PostgresQL + Prisma ||
-- run `psql posgres`
-- Before we do anything, we need to create our database in the PSQL command line
--     We can do this by running  `create database linkup_db;`
-# 🆘🆘🆘 >>> IMPORTANT !
-- in .env, add `'DATABASE_URL="postgresql://{username}:{password}@localhost:5432/linkup_db'`
--     - {username} = Postgres username. If not sure what username is, run `\du` from PSQL CLI
--     - {password} = Postgres password. If not sure, check / reset in PG Admin
-# RUNNING THE DATABASE
-- On first run, run `npx prisma generate` to establish link between schema.prisa and .env file
-- Whenever you make changes to your Prisma schema in the future, you manually need to invoke `npx prisma generate` in order to accommodate the changes in your Prisma Client API.
-  - DOCS below 👇👇👇:
->https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/install-prisma-client-typescript-postgres
 
-# UPDATING SCHEMA / MODELS
-- To change exising schma fields / type, (e.g. adding "@unique" contraint), first run `npx prisma migrate dev --create-only` then make desired your changes. To finalise changes, run `npx prisma migrate dev`
-  - DOCS below 👇👇👇:
- > https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/customizing-migrations
+# Setting up and running the database
+- run `psql postgres` to start psql CLI and create database by running `create database linkup_db;`
+- `npx prisma generate` from the server folder to establish link between schema.prisma and .env file
 
------------------------------------------------------------------------------------------------------------------------
-# VIEWING THE DATABASE DATA AND TABLES
-- Run `npx prisma studio` to visualise our database
+# Updating schema / models
+- Before you make changes, run `npx prisma migrate dev --create-only`.
+- To finalise changes, run `npx prisma migrate dev`
 
------------------------------------------------------------------------------------------------------------------------
-# POTENTIAL ERRORS
+# Viewing the database data and tables
+- Run `npx prisma studio` to visualise the database
 
-- if running `npx prisma studio` generates errors, such as:
+# Common errors with prisma studio
+1. Database 'linkup_db' does not exist:
+- Create database with `create database linkup_db;` in PSQL CLI
+- Re-run `npx prisma studio` from server folder.
 
-- 1:
--    "Database 'linkup_db' does not exist
--     SOLUTION: run `create database linkup_db;` in PSQL CLI
--     now, re-run `npx prisma studio` from server folder. This will open the prisma data viewer in browser.
-
-- 2:
--    "Table "user" || "event" does not exist in DB
--     SOLUTION: run `npx prisma migrate reset` from the server root folder
--     Now re-run `npx prisma studio` from server folder. This will open prisma data viewer in browser.
+2. Table "user" or Table "event" does not exist in DB
+- Run `npx prisma migrate reset` from the server root folder
 
 
------------------------------------------------------------------------------------------------------------------------
-# 👇👇👇 MOCK .env FILE BELOW 👇👇👇
+# Example .env file
+```
+DATABASE_URL="DATABASE_URL="postgresql://{username}:{password}@localhost:5432/linkup_db"
+```
 
-=== START ===
-
-# Environment variables declared in this file are automatically made available to Prisma.
-# See the documentation for more detail: https://pris.ly/d/prisma-schema#accessing-environment-variables-from-the-schema
-
-# Prisma supports the native connection string format for PostgreSQL, MySQL, SQLite, SQL Server, MongoDB (Preview) and CockroachDB (Preview).
-# See the documentation for all the connection string options: https://pris.ly/d/connection-strings
-
-DATABASE_URL="postgresql://{username}:{password}@localhost:5432/linkup_db"
-
-=== END ===
+- {username} = Postgres username. To check username run `\du` from PSQL CLI
+- {password} = Postgres password. If forgotten reset the password in PG Admin
