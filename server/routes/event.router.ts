@@ -19,8 +19,11 @@ const eventRouter = Router();
 // Get all events
 eventRouter.get('/', eventController.getAllEvents);
 
-// Get 1 event by ID
+// Get 1 event by event ID
 eventRouter.get('/:eventid', eventController.getEventById);
+
+// Get all events by creator ID
+eventRouter.get('/created/:userid', eventController.getEventById);
 
 // Create 1 event
 eventRouter.post('/', eventController.createEvent);
