@@ -12,6 +12,11 @@ const eventReducer = (state = initialState, action: MultipleEventsAction) => {
         ...state,
         events: action.payload,
       };
+    case 'GET_EVENT_BY_ID':
+      return {
+        state,
+        currentEvent: action.payload,
+      };
     default:
       return state;
   }

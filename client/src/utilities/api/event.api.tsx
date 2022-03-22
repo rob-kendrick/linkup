@@ -19,7 +19,19 @@ const eventApi = {
       alert(e); // destructure to sth, or add some behaviour to the UI element
     }), // error msg is sent from the BE
 
-  // getEventById: (id: number) => { },
+  getEventById: (id: number) => fetch(`${mockServer}/${id}`)
+    .then((response) => {
+      if (response.status < 300) {
+        const result = response.json();
+        console.log('api', result);
+        return result;
+      }
+      throw Error('Server error');
+    })
+    .catch((e) => {
+      console.log(e);
+      alert(e); // destructure to sth, or add some behaviour to the UI element
+    }), // error msg is sent from the BE,
   // postEvent: (event: Event) => { },
   // editEvent: (event: Event) => { },
   // deleteEvent: (id: number) => { },

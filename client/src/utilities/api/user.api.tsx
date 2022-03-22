@@ -2,6 +2,7 @@ import { User } from '../types/User';
 
 // const baseUrl = process.env.BASE_URL;
 const mockServer = 'https://ebea2f79-284c-4f96-b987-399a7c7cef2a.mock.pstmn.io/linkupUsers';
+
 const userApi = {
   postUser: (user: User) => {
     fetch(mockServer, {
@@ -27,13 +28,24 @@ const userApi = {
 
   // deleteUser: (id: number) => {},
 
-  // getUserById: (id: number) => {},
+  getUserById: (id: number) => fetch(`${mockServer}/${id}`)
+    .then((response) => {
+      if (response.status < 300) {
+        const result = response.json();
+        console.log('api GET USER', result);
+        return result;
+      }
+      throw Error('Server error');
+    })
+    .catch((e) => {
+      console.log(e);
+      alert(e); // destructure to sth, or add some behaviour to the UI element
+    }), // error msg is sent from the BE
 
   getAllUsers: () => fetch(mockServer)
     .then((response) => {
       if (response.status < 300) {
         const result = response.json();
-        console.log('api', result);
         return result;
       }
       throw Error('Server error');

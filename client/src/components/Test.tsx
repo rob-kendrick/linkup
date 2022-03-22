@@ -18,16 +18,27 @@ function Test() {
     userApi.getAllUsers().then((response) => {
       dispatch(userActions.getUsersAction(response));
     }).catch();
+
+    userApi.getUserById(11).then((response) => {
+      dispatch(userActions.getUserByIdAction(response));
+    }).catch();
   }, []);
 
   useEffect(() => {
     eventApi.getAllEvents().then((response) => {
       dispatch(eventActions.getEventsAction(response));
     }).catch();
+
+    eventApi.getEventById(10).then((response) => {
+      dispatch(eventActions.getEventByIdAction(response));
+    }).catch();
   }, []);
 
   return (
-    <div>Test</div>
+    <div>
+      Users:
+      stateRedux
+    </div>
   );
 }
 
