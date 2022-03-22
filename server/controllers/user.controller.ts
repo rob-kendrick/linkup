@@ -186,6 +186,18 @@ const deleteUser = async (req: Request, res: Response) => {
     res.status(200).send(deletedUser);
   } catch (err) {
     console.log(' : : : ERROR DELETING USER FROM DB : : : ', err);
+    res.status(500).send(err);
+  }
+};
+
+// Private function for deleting all users (dev purposes)
+const _deleteAllUsers = async (req: Request, res: Response) => {
+  try {
+    const deletedUsers = await prisma.user.deleteMany();
+    res.status(200).send(deletedUsers);
+  } catch (err) {
+    console.log(' : : : ERROR DELETING ALL USERS');
+    res.status(500).send(err);
   }
 };
 
@@ -198,6 +210,6 @@ const deleteUser = async (req: Request, res: Response) => {
 // --------------------------------------------------------
 // 🚀🚀🚀 EXPORTS 🚀🚀🚀
 export default {
-  createUser, getUserById, getAllUsers, editUserBio, login, logout, deleteUser,
+  createUser, getUserById, getAllUsers, editUserBio, login, logout, deleteUser, _deleteAllUsers,
 };
 // --------------------------------------------------------

@@ -39,6 +39,9 @@ userRouter.patch('/:userid', userController.editUserBio);
 // Delete 1 user by ID 🅿️
 userRouter.delete('/:userid', userController.deleteUser);
 
+// Delete all users (DEV PURPOSES)
+userRouter.delete('/', userController._deleteAllUsers);
+
 // Add friend 🅿️
 // route and controller Func to be added !
 
