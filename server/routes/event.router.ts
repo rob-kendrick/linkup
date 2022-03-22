@@ -23,13 +23,16 @@ eventRouter.get('/', eventController.getAllEvents);
 eventRouter.get('/:eventid', eventController.getEventById);
 
 // Get all events by creator ID
-eventRouter.get('/created/:userid', eventController.getEventById);
+eventRouter.get('/:userid/events/created/', eventController.getEventsByCreatorId);
+
+// Get all events by creator ID
+eventRouter.get('/:userid/events/participating/', eventController.getEventsByCreatorId);
 
 // Create 1 event
 eventRouter.post('/', eventController.createEvent);
 
 // Join 1 event
-eventRouter.patch('events/join/:eventid/users/:userid', eventController.joinEvent);
+eventRouter.patch('/join/:eventid/users/:userid', eventController.joinEvent);
 
 // Leave 1 event
 eventRouter.patch('/leave/:eventid/users/:userid', eventController.leaveEvent);

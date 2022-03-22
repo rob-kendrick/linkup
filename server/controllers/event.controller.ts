@@ -78,27 +78,31 @@ const getEventById = async (req: Request, res: Response) => {
 const getEventsByCreatorId = async (req: Request, res: Response) => {
   try {
     const userId: number = Number(req.params.userid);
-    const event = await prisma.user.findMany({
+    const event = await prisma.user.findUnique({
       where: {
         id_user: userId,
       },
-      include: {
-        events_created: {
-          select: {
-            id_event: true,
-            title: true,
-            max_participants: true,
-            date: true,
-            description: true,
-            participants: {
-              select: {
-                id_user: true,
-              },
-            },
-          },
-        },
+      select: {
+        events_created: true,
       },
+      // include: {
+      //   events_created: {
+      //     select: {
+      //       id_event: true,
+      //       title: true,
+      //       max_participants: true,
+      //       date: true,
+      //       description: true,
+      //       participants: {
+      //         select: {
+      //           id_user: true,
+      //         },
+      //       },
+      //     },
+      //   },
+      // },
     });
+    //
 
     res.status(200).send({ data: event });
   } catch (err) {
@@ -107,7 +111,7 @@ const getEventsByCreatorId = async (req: Request, res: Response) => {
 };
 
 // get events by participant id
-const getEventByParticipantId = async (req: Request, res: Response) => {
+const getEventsByParticipantId = async (req: Request, res: Response) => {
   try {
     const userId: number = Number(req.params.userid);
     const event = await prisma.event.findMany({
