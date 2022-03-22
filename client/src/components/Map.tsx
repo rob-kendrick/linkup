@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { LU_Event } from '../utilities/types/LU_Event';
-import vector from '../Vector.png';
+import eventMarker from '../assets/IoLocationSharp.svg';
+import userMarker from '../assets/BiCurrentLocation.svg'
+
 
 interface eventProps {
 events : LU_Event[];
@@ -21,7 +23,7 @@ function Map({ events } : eventProps) {
 
       const myIcon = L.divIcon({
         className: 'my-div-icon',
-        html: `<div> <img src=${vector} alt="marker" /></div>`,
+        html: `<div> <img src=${eventMarker} alt="marker" /></div>`,
       });
 
       events.map((event) => {
@@ -32,7 +34,7 @@ function Map({ events } : eventProps) {
 
       const myLocationIcon = L.divIcon({
         className: 'my-div-icon',
-        html: '<div><h1>🤡</h1></div>',
+        html: `<div><img src=${userMarker} alt="marker" /></div>`,
       });
 
       L.marker([lat, lng], { icon: myLocationIcon }).addTo(map)

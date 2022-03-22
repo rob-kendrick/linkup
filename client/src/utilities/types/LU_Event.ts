@@ -1,5 +1,5 @@
-import type { User } from './User';
-import type { Tag } from './Tag';
+// import type { User } from './User';
+// import type { Tag } from './Tag';
 
 export interface LU_Event {
   event_id: string | number;
