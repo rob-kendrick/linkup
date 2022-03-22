@@ -6,34 +6,11 @@
 // 🅿️ = Expect Params (eg. Id)
 // --------------------------------------------------------
 // IMPORTS
-import { Request, Response } from 'express';
-import prisma from '../db';
+import { Request, Response } from 'express'; // Types for Typescript
+import prisma from '../db'; // ORM handling
 
 const bcrypt = require('bcrypt');
 // --------------------------------------------------------
-
-// Defining user Type for TS
-interface User {
-  email: string;
-  password: string;
-  first_name: string;
-  last_name: string;
-  profile_picture: string;
-  bio: string;
-}
-
-// Validating user info before passing to DB
-const validateUserInfo = (user: User) => {
-  if (
-    !user.email
-    || !user.password
-    || !user.first_name
-    || !user.last_name
-    || !user.profile_picture
-    || !user.bio
-  ) return false;
-  return true;
-};
 
 //---------------------------------------------------------
 // 🚀🚀🚀 LOGIN CONTROLLERS 🚀🚀🚀
@@ -60,7 +37,30 @@ const logout = (req: Request, res: Response) => {
 // --------------------------------------------------------
 // 🚀🚀🚀 USER CONTROLLERS 🚀🚀🚀
 // --------------------------------------------------------
-// --------------------------------------------------------
+// # CREATE USER
+
+// Defining user Type for Typescript
+interface User {
+  email: string;
+  password: string;
+  first_name: string;
+  last_name: string;
+  profile_picture: string;
+  bio: string;
+}
+// Validating user info before passing to DB
+const validateUserInfo = (user: User) => {
+  if (
+    !user.email
+    || !user.password
+    || !user.first_name
+    || !user.last_name
+    || !user.profile_picture
+    || !user.bio
+  ) return false;
+  return true;
+};
+
 // Create 1 user 🅱️ ✅
 const createUser = async (req: Request, res: Response) => {
   // need to send JWToken / session cookie ?
@@ -134,35 +134,97 @@ const getAllUsers = async (req: Request, res: Response) => {
 };
 // --------------------------------------------------------
 // --------------------------------------------------------
-// EDIT USER BIO WITH VALIDATION
+// EDIT USER INFO WITH VALIDATION
+
+// Interface for validation output object
+interface ErrorOutput {
+  error: boolean
+  errorMsg: String[],
+}
 
 // Helper function for validating user bio
 const validateUserBio = (body: any) => {
-  const output: any = { error: false, errorMessages: [] };
-  if (!body.bio) {
+  const output: ErrorOutput = { error: false, errorMsg: [] };
+  // Users can have empty bio / might not update bio
+  if (!body.bio || body.bio === '') return output;
+  // Checking correct input
+  if (typeof body.bio !== 'string') {
     output.error = true;
-    output.errorMessages.push('Bio missing!');
+    output.errorMsg.push('Bio is not in string format!');
   }
+  // Checking correct length
   if (body.bio.length > 255) {
     output.error = true;
-    output.errorMessages.push('Bio too long!');
+    output.errorMsg.push('Bio too long! (max. 255 characters) ');
+  }
+  return output;
+};
+
+// Helper function for validating user first name
+const validateFirstName = (body: any) => {
+  const output: ErrorOutput = { error: false, errorMsg: [] };
+  // Users may not be updating their name
+  if (!body.first_name || body.first_name === '') return output;
+  // Input must be correct type
+  if (typeof body.first_name !== 'string') {
+    output.error = true;
+    output.errorMsg.push('first name is not in string format!');
+  }
+  if (body.first_name.length > 15) {
+    output.error = true;
+    output.errorMsg.push('First name too long (Max 15 characters!)');
+  }
+  // Regex for testing if first name has whitespaces
+  if (/\s/.test(body.first_name)) {
+    output.error = true;
+    output.errorMsg.push('First name contains white spaces');
+  }
+  return output;
+};
+
+// Helper function for validating user last name
+const validateLastName = (body: any) => {
+  const output: ErrorOutput = { error: false, errorMsg: [] };
+  // Users may not be updating their name
+  if (!body.last_name || body.last_name === '') return output;
+  // Input must be correct type
+  if (typeof body.last_name !== 'string') {
+    output.error = true;
+    output.errorMsg.push('last name is not in string format!');
+  }
+  // Input must be correct length
+  if (body.last_name.length > 25) {
+    output.error = true;
+    output.errorMsg.push('Last name too long (Max 25 characters!)');
   }
   return output;
 };
 
 // Edit 1 user Bio by ID 🅱️ 🅿️
-const editUserBio = async (req: Request, res: Response) => {
+const editUserInfo = async (req: Request, res: Response) => {
   try {
-    // Handler for invalid request body. This controller will only update bio
-    const bioValidation: any = validateUserBio(req.body);
-    if (bioValidation.error) {
-      return res.status(401).send({ error: bioValidation.errorMessages });
+    // Grabbing userID
+    const userId : number = Number(req.params.userid);
+    // Handler for request errors if all fields are present
+    if (req.body.bio || req.body.first_name || req.body.last_name) {
+      const bioValidation: ErrorOutput = validateUserBio(req.body);
+      if (bioValidation.error) {
+        return res.status(401).send({ error: bioValidation.errorMsg });
+      }
+      const firstNameValidation: ErrorOutput = validateFirstName(req.body);
+      if (firstNameValidation.error) {
+        return res.status(401).send({ error: firstNameValidation.errorMsg });
+      }
+      const lastNameValidation: ErrorOutput = validateLastName(req.body);
+      if (lastNameValidation.error) {
+        return res.status(401).send({ error: lastNameValidation.errorMsg });
+      }
     }
 
     // Grabbing new user bio
     const newUserBio: string = req.body.bio;
-    // Grabbing userID
-    const userId : number = Number(req.params.userid);
+    const newFirstName: string = req.body.first_name;
+    const newLastName: string = req.body.last_name;
     // Updating user bio
     const updatedUser = await prisma.user.update({
       where: {
@@ -170,7 +232,8 @@ const editUserBio = async (req: Request, res: Response) => {
       },
       data: {
         bio: newUserBio,
-
+        first_name: newFirstName,
+        last_name: newLastName,
       },
     });
 
@@ -204,10 +267,10 @@ const deleteUser = async (req: Request, res: Response) => {
 // Private function for deleting all users (dev purposes)
 const _deleteAllUsers = async (req: Request, res: Response) => {
   try {
-    const deletedUsers = await prisma.user.deleteMany();
-    res.status(200).send(deletedUsers);
+    const deletedUserCount = await prisma.user.deleteMany();
+    res.status(200).send(deletedUserCount);
   } catch (err) {
-    console.log(' : : : ERROR DELETING ALL USERS');
+    console.log(' : : : ERROR DELETING ALL USERS : : : ', err);
     res.status(500).send(err);
   }
 };
@@ -221,6 +284,6 @@ const _deleteAllUsers = async (req: Request, res: Response) => {
 // --------------------------------------------------------
 // 🚀🚀🚀 EXPORTS 🚀🚀🚀
 export default {
-  createUser, getUserById, getAllUsers, editUserBio, login, logout, deleteUser, _deleteAllUsers,
+  createUser, getUserById, getAllUsers, editUserInfo, login, logout, deleteUser, _deleteAllUsers,
 };
 // --------------------------------------------------------
