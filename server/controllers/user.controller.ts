@@ -13,7 +13,7 @@ const bcrypt = require('bcrypt');
 // --------------------------------------------------------
 
 //---------------------------------------------------------
-// 🚀🚀🚀 LOGIN CONTROLLERS 🚀🚀🚀
+// 🚀🚀🚀 AUTH CONTROLLERS 🚀🚀🚀
 // --------------------------------------------------------
 
 // Login 🅱️ ✅
@@ -27,6 +27,15 @@ const login = async (req: Request, res: Response) => {
 
 // Logout ✅
 const logout = (req: Request, res: Response) => {
+  try {
+
+  } catch (err) {
+
+  }
+};
+
+// Reset password 🅱️
+const resetPassword = (req: Request, res: Response) => {
   try {
 
   } catch (err) {
@@ -48,7 +57,7 @@ interface User {
   profile_picture: string;
   bio: string;
 }
-// Validating user info before passing to DB
+// Helper function for validating user info before submitting to DB
 const validateUserInfo = (user: User) => {
   if (
     !user.email
@@ -98,10 +107,11 @@ const createUser = async (req: Request, res: Response) => {
     res.status(500).send(err);
   }
 };
+
 // --------------------------------------------------------
 // --------------------------------------------------------
 
-// Get 1 user by ID 🅿️ ✅
+// # Get 1 user by ID 🅿️ ✅
 const getUserById = async (req: Request, res: Response) => {
   try {
     // Parsing userid param into number. If not parsed, will error
@@ -113,12 +123,13 @@ const getUserById = async (req: Request, res: Response) => {
       },
     });
     // Returning the found user
-    return res.status(200).send(foundUser);
+    res.status(200).send(foundUser);
   } catch (err) {
     console.log(': : : ERROR FINDING USER BY ID : : : ', err);
     res.status(404).send(err);
   }
 };
+
 // --------------------------------------------------------
 // --------------------------------------------------------
 
@@ -132,9 +143,10 @@ const getAllUsers = async (req: Request, res: Response) => {
     res.status(404).send({ error: err });
   }
 };
+
 // --------------------------------------------------------
 // --------------------------------------------------------
-// EDIT USER INFO WITH VALIDATION
+// # EDIT USER INFO WITH VALIDATION
 
 // Interface for validation output object
 interface ErrorOutput {
