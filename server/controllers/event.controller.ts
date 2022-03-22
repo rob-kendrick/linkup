@@ -83,26 +83,22 @@ const getEventsByCreatorId = async (req: Request, res: Response) => {
         id_user: userId,
       },
       select: {
-        events_created: true,
+        events_created: {
+          select: {
+            id_event: true,
+            title: true,
+            max_participants: true,
+            date: true,
+            description: true,
+            participants: {
+              select: {
+                id_user: true,
+              },
+            },
+          },
+        },
       },
-      // include: {
-      //   events_created: {
-      //     select: {
-      //       id_event: true,
-      //       title: true,
-      //       max_participants: true,
-      //       date: true,
-      //       description: true,
-      //       participants: {
-      //         select: {
-      //           id_user: true,
-      //         },
-      //       },
-      //     },
-      //   },
-      // },
     });
-    //
 
     res.status(200).send({ data: event });
   } catch (err) {
@@ -114,18 +110,23 @@ const getEventsByCreatorId = async (req: Request, res: Response) => {
 const getEventsByParticipantId = async (req: Request, res: Response) => {
   try {
     const userId: number = Number(req.params.userid);
-    const event = await prisma.event.findMany({
+    const event = await prisma.user.findUnique({
       where: {
-        participants: {
-
-        },
+        id_user: userId,
       },
-      include: {
-        participants: {
+      select: {
+        events_participating: {
           select: {
-            id_user: true,
-            first_name: true,
-            profile_picture: true,
+            id_event: true,
+            title: true,
+            max_participants: true,
+            date: true,
+            description: true,
+            participants: {
+              select: {
+                id_user: true,
+              },
+            },
           },
         },
       },
@@ -275,6 +276,7 @@ export default {
   getAllEvents,
   getEventById,
   getEventsByCreatorId,
+  getEventsByParticipantId,
   createEvent,
   joinEvent,
   leaveEvent,
