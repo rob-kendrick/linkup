@@ -2,7 +2,7 @@
 import { Request, Response } from 'express';
 import prisma from '../db';
 
-// creating Event type
+// Event interface
 interface Event {
   title: string
   description: string
@@ -74,7 +74,7 @@ const getEventById = async (req: Request, res: Response) => {
   }
 };
 
-// crate new event
+// create new event
 const createEvent = async (req: Request, res: Response) => {
   try {
     // convert date and id into correct data types
