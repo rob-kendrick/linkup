@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { LU_Event } from '../utilities/types/LU_Event';
@@ -10,9 +10,6 @@ events : LU_Event[];
 }
 
 function Map({ events } : eventProps) {
-  
-  
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((location) => {
       const lat : number = location.coords.latitude;
@@ -29,8 +26,6 @@ function Map({ events } : eventProps) {
         html: `<div><img src=${userMarker} alt="marker" style="width:30px;" /></div>`,
       });
 
-      
-
       setTimeout(() => {
         L.marker([lat, lng], { icon: myLocationIcon }).addTo(map)
           .bindPopup('Current location')
@@ -38,13 +33,12 @@ function Map({ events } : eventProps) {
 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
 
-        setTimeout(() => {
-          events.map((event) => {
-            const eventLat = typeof event.lat === 'string' ? parseFloat(event.lat) : event.lat;
-            const eventLng = typeof event.lng === 'string' ? parseFloat(event.lng) : event.lng;
-            return L.marker([eventLat, eventLng], { icon: myIcon }).addTo(map).bindPopup(`${event.title} <br> ${event.date_time}`).openPopup();
-          });
-        }, 50);
+        events.map((event) => {
+          console.log(event);
+          const eventLat = typeof event.lat === 'string' ? parseFloat(event.lat) : event.lat;
+          const eventLng = typeof event.lng === 'string' ? parseFloat(event.lng) : event.lng;
+          return L.marker([eventLat, eventLng], { icon: myIcon }).addTo(map).bindPopup(`${event.title} <br> ${event.date_time}`).openPopup();
+        });
       }, 100);
     });
   }, []);
@@ -52,6 +46,19 @@ function Map({ events } : eventProps) {
   return (
 
     <div className="map-container">
+
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossOrigin=""
+      />
+
+      <script
+        src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossOrigin=""
+      />
       <div id="map" />
     </div>
   );

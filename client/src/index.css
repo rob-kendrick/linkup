@@ -38,11 +38,13 @@ button {
 .map-container{
   height: 462px;
   width: 375px;
+  background-color:pink; 
 }
 
 .leaflet-container{
   height: 462px;
   width: 375px; 
+  background-color:rgb(249, 249, 249); 
 }
 
 .my-div-icon{
