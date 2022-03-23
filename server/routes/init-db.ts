@@ -1,3 +1,5 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 // Dev only REST api endpoint
 // 1. Drops all tables re-migrates prisma schema to postgres
 // 2. Re-populates it with mock data
@@ -23,7 +25,7 @@ const resetDb = async (req:Request, res:Response) => {
     await exec('npx prisma generate');
     await exec('npx prisma migrate dev');
 
-    const arr = [
+    const joinEventsList = [
       [1, 2],
       [1, 4],
       [1, 6],
@@ -51,6 +53,26 @@ const resetDb = async (req:Request, res:Response) => {
       [7, 2],
     ];
 
+    const addFriendsList = [
+      [1, 2],
+      [1, 4],
+      [2, 6],
+      [2, 7],
+      [2, 8],
+      [3, 5],
+      [4, 1],
+      [4, 2],
+      [4, 4],
+      [6, 1],
+      [6, 2],
+      [7, 2],
+      [7, 4],
+      [7, 5],
+      [7, 7],
+      [7, 9],
+      [8, 2],
+    ];
+
     const results:any = {};
 
     const createAllUsers = await prisma.user.createMany({ data: mockUsers });
@@ -63,10 +85,7 @@ const resetDb = async (req:Request, res:Response) => {
     results.createEvents = createAllEvents;
 
     results.joinEvents = { count: 0 };
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const el of arr) {
-      // eslint-disable-next-line no-await-in-loop
+    for (const el of joinEventsList) {
       await prisma.event.update({
         where: {
           id_event: el[0],
@@ -76,24 +95,25 @@ const resetDb = async (req:Request, res:Response) => {
             connect: [{ id_user: el[1] }],
           },
         },
-        include: {
-          participants: {
-            select: {
-              id_user: true,
-              first_name: true,
-              profile_picture: true,
-            },
-          },
-          creator: {
-            select: {
-              id_user: true,
-              first_name: true,
-              profile_picture: true,
-            },
-          },
-        },
+
       });
       results.joinEvents.count += 1;
+    }
+
+    results.addFriends = { count: 0 };
+    for (const el of addFriendsList) {
+      await prisma.user.update({
+        where: {
+          id_user: el[0],
+        },
+        data: {
+          friends: {
+            connect: [{ id_user: el[1] }],
+          },
+        },
+
+      });
+      results.addFriends.count += 1;
     }
 
     res.status(200).send({

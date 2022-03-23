@@ -213,6 +213,18 @@ const addFriend = async (req: Request, res: Response) => {
         },
       },
       include: {
+        events_created: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
+        events_participating: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
         friends: {
           select: {
             id_user: true,
@@ -220,7 +232,6 @@ const addFriend = async (req: Request, res: Response) => {
             profile_picture: true,
           },
         },
-
       },
     });
     res.status(200).send({ data: addedFriend });
@@ -245,6 +256,18 @@ const removeFriend = async (req: Request, res: Response) => {
         },
       },
       include: {
+        events_created: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
+        events_participating: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
         friends: {
           select: {
             id_user: true,
@@ -252,7 +275,6 @@ const removeFriend = async (req: Request, res: Response) => {
             profile_picture: true,
           },
         },
-
       },
     });
     res.status(200).send({ data: removedFriend });
@@ -272,7 +294,6 @@ const deleteUser = async (req: Request, res: Response) => {
     });
     res.status(200).send({ data: deletedUser });
   } catch (err) {
-    console.log(' : : : ERROR DELETING USER FROM DB : : : ', err);
     res.status(500).send(err);
   }
 };
@@ -283,7 +304,6 @@ const deleteAllUsers = async (req: Request, res: Response) => {
     const deletedUserCount = await prisma.user.deleteMany({});
     res.status(200).send({ data: deletedUserCount });
   } catch (err) {
-    console.log(' : : : ERROR DELETING ALL USERS : : : ', err);
     res.status(500).send({ error: err });
   }
 };
