@@ -1,11 +1,13 @@
 import type { LuEvent } from '../types/Event';
 // export default {};
 
-// const baseUrl = process.env.BASE_URL;
+const baseUrl = process.env.REACT_APP_BASE_URL;
+console.log(baseUrl);
 
-const mockServer = 'https://ebea2f79-284c-4f96-b987-399a7c7cef2a.mock.pstmn.io/linkupEvents';
+// const mockServer = 'https://ebea2f79-284c-4f96-b987-399a7c7cef2a.mock.pstmn.io/linkupEvents';
+
 const eventApi = {
-  getAllEvents: () => fetch(`${mockServer}/events`)
+  getAllEvents: () => fetch(`${baseUrl}/events`)
     .then((response) => {
       if (response.status < 300) {
         const result = response.json();
@@ -18,7 +20,7 @@ const eventApi = {
       alert(e);
     }),
 
-  getEventById: (id: number) => fetch(`${mockServer}/events/${id}`)
+  getEventById: (id: number) => fetch(`${baseUrl}/events/${id}`)
     .then((response) => {
       if (response.status < 300) {
         const result = response.json();
@@ -31,7 +33,7 @@ const eventApi = {
       alert(e);
     }),
 
-  postEvent: (event: LuEvent) => fetch(`${mockServer}/events`, {
+  postEvent: (event: LuEvent) => fetch(`${baseUrl}/events`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -49,7 +51,7 @@ const eventApi = {
       alert(e);
     }),
 
-  editEvent: (event: LuEvent) => fetch(`${mockServer}/events/${event.eventId}`, {
+  editEvent: (event: LuEvent) => fetch(`${baseUrl}/events/${event.id_event}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -67,7 +69,7 @@ const eventApi = {
       alert(e);
     }),
 
-  deleteEvent: (id: number) => fetch(`${mockServer}/events/${id}`, {
+  deleteEvent: (id: number) => fetch(`${baseUrl}/events/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -84,7 +86,7 @@ const eventApi = {
       alert(e);
     }),
 
-  joinEvent: (eventId: number, userId: number) => fetch(`mockServer/events/leave/${eventId}/${userId}`, {
+  joinEvent: (eventId: number, userId: number) => fetch(`${baseUrl}/events/leave/${eventId}/${userId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -102,7 +104,7 @@ const eventApi = {
       alert(e);
     }),
 
-  leaveEvent: (eventId: number, userId: number) => fetch(`mockServer/${eventId}/${userId}`, {
+  leaveEvent: (eventId: number, userId: number) => fetch(`${baseUrl}}/${eventId}/${userId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

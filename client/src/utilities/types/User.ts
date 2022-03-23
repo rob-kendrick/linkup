@@ -1,16 +1,14 @@
-import type { LuEvent } from './Event';
-import type { Rating } from './Rating';
+import type { EventBasicData } from './EventBasicData';
 
 export interface User {
-  userId: number;
-  firstName: string;
-  lastName: string;
-  email: string;
+  id_user: number;
+  first_name: string;
+  last_name: string;
   bio: string;
-  profilePicture: string;
-  eventsCreated: [LuEvent];
-  eventsParticipating: [LuEvent];
-  friends: [User];
-  rating: [Rating];
+  email: string;
+  profile_picture: string;
+  events_created: EventBasicData;
+  events_participating: EventBasicData[]
   password: string;
+  date_created: Date;
 }

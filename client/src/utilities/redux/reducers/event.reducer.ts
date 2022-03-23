@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable default-param-last */
+/* eslint-disable no-case-declarations */
 import { LuEvent } from '../../types/Event';
 
 import type {
@@ -10,7 +13,6 @@ const initialState: EventsState = {
 };
 
 const eventReducer = (
-  // eslint-disable-next-line default-param-last
   state = initialState,
   action: EventActions,
 ):EventsState => {
@@ -31,16 +33,20 @@ const eventReducer = (
         allEvents: [...state.allEvents, action.payload],
       } as EventsState;
     case 'EDIT_EVENT':
+      const newEvent = action.payload as LuEvent;
       return {
         ...state,
-        allEvents: [...state.allEvents],
+        allEvents: [...state.allEvents].map((event) => {
+          if (event.id_event === newEvent.id_event) {
+            event = newEvent;
+          }
+          return event;
+        }),
       } as EventsState;
     case 'DELETE_EVENT':
-      // eslint-disable-next-line no-case-declarations
-      const newEvent = action.payload as LuEvent;
-      // eslint-disable-next-line no-case-declarations
+      // let newEvent = action.payload as LuEvent;
       const filterdEvents = [...state.allEvents]
-        .filter((event) => event.eventId !== newEvent.eventId);
+        .filter((event) => event.id_event !== newEvent.id_event);
       return {
         ...state,
         allEvents: filterdEvents,

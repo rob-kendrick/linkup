@@ -58,7 +58,7 @@ function Test() {
     <div>
       Users:
       stateRedux
-      {allUsers.map((user) => <p>{user.firstName}</p>)}
+      {allUsers.map((user) => <p>{user.first_name}</p>)}
       <button onClick={deleteUserHandler}>Add user</button>
     </div>
   );

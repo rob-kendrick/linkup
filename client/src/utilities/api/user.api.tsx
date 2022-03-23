@@ -23,18 +23,18 @@ const userApi = {
     }), // error msg is sent from the BE
 
   getUserById: (id: number) => fetch(`${mockServer}/${id}`)
+    .catch()
     .then((response) => {
       if (response.status < 300) {
         const result = response.json();
-        console.log('api GET USER', result);
         return result;
       }
       throw Error('Server error');
     })
     .catch((e) => {
       console.log(e);
-      alert(e); // destructure to sth, or add some behaviour to the UI element
-    }), // error msg is sent from the BE
+      return { error: true, message: e.message, code: e.code };
+    }),
 
   getAllUsers: () => fetch(mockServer)
     .then((response) => {

@@ -12,6 +12,7 @@
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
     "@types/redux-logger": "^3.0.9",
+    "env-cmd": "^10.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
@@ -24,9 +25,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
+    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start env-cmd -f .env",
     "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
-    "test": "DISABLE_ESLINT_PLUGIN=true react-scripts test",
+    "test": "env-cmd -f .env.test DISABLE_ESLINT_PLUGIN=true react-scripts test env-cmd -f .env.test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
