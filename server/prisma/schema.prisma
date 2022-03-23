@@ -37,7 +37,7 @@ model event {
   date_updated          DateTime?   @updatedAt
   lat                   Float
   lng                   Float
-  street_number         String
+  street_number         String?
   street_name           String
   postcode              String
   city                  String
