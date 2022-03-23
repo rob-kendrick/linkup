@@ -45,7 +45,22 @@ const getUserById = async (req: Request, res: Response) => {
 // Get all users
 const getAllUsers = async (req: Request, res: Response) => {
   try {
-    const allUsers = await prisma.user.findMany();
+    const allUsers = await prisma.user.findMany({
+      include: {
+        events_created: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
+        events_participating: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
+      },
+    });
     res.status(200).send({ data: allUsers });
   } catch (err) {
     res.status(404).send({ error: err });
