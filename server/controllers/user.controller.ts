@@ -186,7 +186,7 @@ const editUserInfo = async (req: Request, res: Response) => {
 const getUserCreatedEvents = async (req: Request, res: Response) => {
   try {
     const userId: number = Number(req.params.userid);
-    const event = await prisma.user.findUnique({
+    const newEvent = await prisma.user.findUnique({
       where: {
         id_user: userId,
       },
@@ -210,7 +210,7 @@ const getUserCreatedEvents = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).send({ data: event });
+    res.status(200).send({ data: newEvent?.events_created });
   } catch (err) {
     res.status(500).send({ error: err });
   }
@@ -244,7 +244,7 @@ const getUserParticipatingEvents = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).send({ data: event });
+    res.status(200).send({ data: event?.events_participating });
   } catch (err) {
     res.status(500).send({ error: err });
   }
