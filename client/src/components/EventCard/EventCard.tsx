@@ -10,7 +10,7 @@ function EventCard({ event }: {event:any}) {
       to={`/events/${event.id}`}
       key={event.id}
     >
-      <div className="event-card-delete">
+      <div className="list-item-delete">
         <TagList />
         <h3>Event Card</h3>
         {event.title}

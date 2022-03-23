@@ -1,6 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import ButtonLarge from '../Form/ButtonLarge/ButtonLarge';
+import { useParams, useNavigate } from 'react-router-dom';
 import HeaderReturn from '../HeaderReturn/HeaderReturn';
 import MapSmall from '../MapSmall/MapSmall';
 import ProfilePicture from '../ProfilePicture/ProfilePicture';
@@ -9,6 +8,7 @@ import ParticipantList from './ParticipantList/ParticipantList';
 
 function EventDetails() {
   const params = useParams();
+  const navigate = useNavigate();
   return (
     <div>
       <HeaderReturn />
@@ -22,7 +22,12 @@ function EventDetails() {
       <ProfilePicture />
       <MapSmall />
       <ParticipantList />
-      <ButtonLarge />
+
+      {/* All buttons should be 'ButtonLarge' components */}
+      {/* All buttons (but 'Chat' button) should trigger /src/components/Popup */}
+      <button type="button" onClick={() => navigate(`/events/${params.eventid}/chat`)}>Chat</button>
+      <br />
+      <button type="button">Cancel / Leave Activity</button>
     </div>
   );
 }

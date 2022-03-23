@@ -6,7 +6,7 @@ const eventData: any[] = eventMockData;
 
 function EventList() {
   return (
-    <div className="event-list-delete">
+    <div className="list-container-delete">
       <h3>EventList</h3>
       {eventData.map((event) => (
         <EventCard

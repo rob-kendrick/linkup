@@ -1,12 +1,12 @@
 import React from 'react';
-import eventMockData from '../../../Mock/event.mock.json';
 import ChatListItem from './ChatListItem.tsx/ChatListItem';
+import eventMockData from '../../../Mock/event.mock.json';
 
 const eventData: any[] = eventMockData;
 
 function ChatList() {
   return (
-    <div>
+    <div className="event-list-delete">
       <h3>ChatList</h3>
       {eventData.map((event) => (
         <ChatListItem

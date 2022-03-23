@@ -8,7 +8,7 @@ function ChatListItem({ event }: {event:any}) {
       to={`/events/${event.id}/chat`}
       key={event.id}
     >
-      <div className="event-card-delete">
+      <div className="list-item-delete">
         <h3>ChatListItem</h3>
         {event.title}
         <ProfilePicture />

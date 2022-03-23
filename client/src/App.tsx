@@ -12,12 +12,13 @@ import ChangePassword from './views/Profile/ChangePassword/ChangePassword';
 import EventDetails from './components/EventDetails/EventDetails';
 import BrowseEventsFilters from './views/BrowseEvents/EventsFilters/EventsFilters';
 import FilterTitle from './views/BrowseEvents/EventsFilters/Filters/FilterTitle';
-import FilterTags from './views/BrowseEvents/EventsFilters/Filters/FilterTags';
+import FilterTags from './views/BrowseEvents/EventsFilters/Filters/FilterTags/FilterTags';
 import FilterHosts from './views/BrowseEvents/EventsFilters/Filters/FilterHosts';
 import FilterParticipants from './views/BrowseEvents/EventsFilters/Filters/FilterParticipants';
 import CreateEvent from './views/MyEvents/CreateEvent/CreateEvent';
 import AddParticipants from './views/MyEvents/CreateEvent/AddParticipants/AddParticipants';
 import ChatGroup from './views/Chat/ChatGroup/ChatGroup';
+import UserDetails from './views/Profile/Friends/UserDetails/UserDetails';
 
 function App() {
   const { pathname } = useLocation();
@@ -39,14 +40,10 @@ function App() {
         <Route path="chatlist" element={<ChatList />} />
         <Route path="profile" element={<Profile />} />
         <Route path="profile/friends" element={<Friends />} />
+        <Route path="users/:userid" element={<UserDetails />} />
         <Route path="profile/profileedit" element={<ProfileEdit />} />
         <Route path="profile/changepassword" element={<ChangePassword />} />
       </Routes>
-      {/* TODO: delete path name */}
-      <div>
-        path name:
-        {pathname}
-      </div>
       {(pathname === '/'
       || pathname === '/events'
       || pathname === '/myevents'

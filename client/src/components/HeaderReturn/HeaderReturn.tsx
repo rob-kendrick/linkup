@@ -6,7 +6,10 @@ function HeaderReturn() {
   return (
     <div>
       <h3>HeaderReturn</h3>
-      <button type="button" onClick={() => navigate(-1)}>Go Back</button>
+      <div className="space-around-delete">
+        <button type="button" onClick={() => navigate(-1)}>Go Back</button>
+        <div>Reset/Edit Button</div>
+      </div>
     </div>
   );
 }

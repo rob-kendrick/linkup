@@ -12,17 +12,24 @@
   top: 712px;
 }
 
-.event-list-delete {
-  max-height: 550px;
+.list-container-delete {
+  max-height: 600px;
   overflow: auto
 }
 
-.event-card-delete {
+.list-item-delete {
   width: 80%;
-  margin: 10px;
+  margin: 20px;
   background-color: white;
 }
 
 .flex-row-delete {
+  background-color: grey;
   display: flex;
+}
+
+.space-around-delete {
+  display: flex;
+  justify-content: space-around;
+  right: 0px;
 }

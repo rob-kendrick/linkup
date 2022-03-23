@@ -1,13 +1,13 @@
 import React from 'react';
-import SearchField from '../../../../components/Form/SearchField/SearchField';
 import HeaderReturn from '../../../../components/HeaderReturn/HeaderReturn';
+import SelectUsers from '../../../../components/SelectUsers/SelectUsers';
 
 function AddParticipants() {
   return (
     <div>
       <HeaderReturn />
       <h3>AddParticipants</h3>
-      <SearchField />
+      <SelectUsers />
     </div>
   );
 }
