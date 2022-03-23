@@ -98,7 +98,6 @@ const createEvent = async (req: Request, res: Response) => {
     // convert date and id into correct data types
     const date: Date = new Date(req.body.date);
     const creator_id: number = Number(req.body.creator_id);
-
     const eventInput: Event = {
       ...req.body,
       date,
@@ -173,7 +172,9 @@ const leaveEvent = async (req: Request, res: Response) => {
       include: {
         participants: {
           select: {
+            id_user: true,
             first_name: true,
+            profile_picture: true,
           },
         },
       },
