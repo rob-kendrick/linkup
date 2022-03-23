@@ -19,6 +19,13 @@ interface Event {
   country : string
 }
 
+// Basic user interface
+interface UserBasic {
+  id_user: number
+  first_name: string
+  profile_picture: string
+}
+
 // Validating event info before passing to DB
 const validateEventInfo = (event: Event) => {
   const output: any = { error: false, errorMessages: [] };
@@ -28,7 +35,6 @@ const validateEventInfo = (event: Event) => {
     || !event.date
     || !event.lat
     || !event.lng
-    || !event.street_number
     || !event.street_name
     || !event.postcode
     || !event.city
@@ -42,7 +48,17 @@ const validateEventInfo = (event: Event) => {
 // get all events
 const getAllEvents = async (req: Request, res: Response) => {
   try {
-    const events = await prisma.event.findMany();
+    const events = await prisma.event.findMany({
+      include: {
+        participants: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+      },
+    });
     res.status(200).send({ data: events });
   } catch (err) {
     res.status(500).send({ error: err });
