@@ -59,6 +59,13 @@ const getAllEvents = async (req: Request, res: Response) => {
             profile_picture: true,
           },
         },
+        creator: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
     });
     res.status(200).send({ data: events });
@@ -77,6 +84,13 @@ const getEventById = async (req: Request, res: Response) => {
       },
       include: {
         participants: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+        creator: {
           select: {
             id_user: true,
             first_name: true,
@@ -146,6 +160,13 @@ const joinEvent = async (req: Request, res: Response) => {
             profile_picture: true,
           },
         },
+        creator: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
     });
     res.status(200).send({ data: addParticipant });
@@ -177,6 +198,13 @@ const leaveEvent = async (req: Request, res: Response) => {
             profile_picture: true,
           },
         },
+        creator: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
     });
 
@@ -199,6 +227,22 @@ const editEvent = async (req: Request, res: Response) => {
         description: req.body.description,
         min_participants: req.body.min_participants,
         max_participants: req.body.max_participants,
+      },
+      include: {
+        participants: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+        creator: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
 
     });
