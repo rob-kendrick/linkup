@@ -1,0 +1,18 @@
+.app-container-delete {
+  height: 812px;
+  width: 375px;
+  background-color: lightgrey;
+}
+
+.navbar-delete {
+  position: absolute;
+  width: 375px;
+  background-color: grey;
+  height: 100px;
+  bottom: 0px;
+}
+
+.chatlist-container-delete {
+  flex-grow: 1;
+}
+
