@@ -1,6 +1,6 @@
 import React from 'react';
 import BrowseEventsMenu from './BrowseEventsMenu/BrowseEventsMenu';
-import EventList from '../../components/EventList/EventList';
+import EventList from '../../components/EventsList/EventsList';
 
 function BrowseEvents() {
   return (

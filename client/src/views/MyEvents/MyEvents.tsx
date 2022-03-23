@@ -1,5 +1,5 @@
 import React from 'react';
-import EventList from '../../components/EventList/EventList';
+import EventsList from '../../components/EventsList/EventsList';
 import MyEventsMenu from './MyEventsMenu/MyEventsMenu';
 
 function MyEvents() {
@@ -7,7 +7,7 @@ function MyEvents() {
     <div>
       <h3>MyEvents</h3>
       <MyEventsMenu />
-      <EventList />
+      <EventsList />
     </div>
   );
 }

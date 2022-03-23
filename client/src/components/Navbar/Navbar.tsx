@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <div className="navbar-delete">
       <div><h3>Navbar</h3></div>
-      <Link to="/browseevents">Browse Activities</Link>
+      <Link to="/events">Browse Activities</Link>
       {' '}
       |
       {' '}

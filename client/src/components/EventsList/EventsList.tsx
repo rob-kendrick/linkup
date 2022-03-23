@@ -1,6 +1,6 @@
 import React from 'react';
-import eventMockData from '../../Mock/event.mock.json';
 import EventCard from '../EventCard/EventCard';
+import eventMockData from '../../Mock/event.mock.json';
 
 const eventData: any[] = eventMockData;
 

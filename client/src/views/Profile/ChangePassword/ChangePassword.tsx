@@ -1,8 +1,12 @@
 import React from 'react';
+import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 
 function ChangePassword() {
   return (
-    <div>ChangePassword</div>
+    <div>
+      <HeaderReturn />
+      <h3>ChangePassword</h3>
+    </div>
   );
 }
 

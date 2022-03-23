@@ -5,11 +5,11 @@ function Profile() {
   return (
     <div>
       <h3>Profile</h3>
-      <Link to="/friends">Friends</Link>
+      <Link to="/profile/friends">Friends</Link>
       <br />
-      <Link to="/editprofile">Edit Profile</Link>
+      <Link to="/profile/profileedit">Edit Profile</Link>
       <br />
-      <Link to="/changepassword">Change Password</Link>
+      <Link to="/profile/changepassword">Change Password</Link>
       <Outlet />
     </div>
   );

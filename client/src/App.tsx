@@ -10,6 +10,14 @@ import ProfileEdit from './views/Profile/ProfileEdit/ProfileEdit';
 import Friends from './views/Profile/Friends/Friends';
 import ChangePassword from './views/Profile/ChangePassword/ChangePassword';
 import EventDetails from './components/EventDetails/EventDetails';
+import BrowseEventsFilters from './views/BrowseEvents/EventsFilters/EventsFilters';
+import FilterTitle from './views/BrowseEvents/EventsFilters/Filters/FilterTitle';
+import FilterTags from './views/BrowseEvents/EventsFilters/Filters/FilterTags';
+import FilterHosts from './views/BrowseEvents/EventsFilters/Filters/FilterHosts';
+import FilterParticipants from './views/BrowseEvents/EventsFilters/Filters/FilterParticipants';
+import CreateEvent from './views/MyEvents/CreateEvent/CreateEvent';
+import AddParticipants from './views/MyEvents/CreateEvent/AddParticipants/AddParticipants';
+import ChatGroup from './views/Chat/ChatGroup/ChatGroup';
 
 function App() {
   const { pathname } = useLocation();
@@ -18,14 +26,21 @@ function App() {
       <Routes>
         <Route path="/" element={<BrowseEvents />} />
         <Route path="events/:eventid" element={<EventDetails />} />
-        <Route path="browseevents" element={<BrowseEvents />} />
+        <Route path="events/:eventid/chat" element={<ChatGroup />} />
+        <Route path="events" element={<BrowseEvents />} />
+        <Route path="events/filters" element={<BrowseEventsFilters />} />
+        <Route path="events/filters/title" element={<FilterTitle />} />
+        <Route path="events/filters/tags" element={<FilterTags />} />
+        <Route path="events/filters/hosts" element={<FilterHosts />} />
+        <Route path="events/filters/participants" element={<FilterParticipants />} />
         <Route path="myevents" element={<MyEvents />} />
+        <Route path="myevents/create" element={<CreateEvent />} />
+        <Route path="myevents/create/participants" element={<AddParticipants />} />
         <Route path="chatlist" element={<ChatList />} />
-        <Route path="profile" element={<Profile />}>
-          <Route path="friends" element={<Friends />} />
-          <Route path="profileedit" element={<ProfileEdit />} />
-          <Route path="changepassword" element={<ChangePassword />} />
-        </Route>
+        <Route path="profile" element={<Profile />} />
+        <Route path="profile/friends" element={<Friends />} />
+        <Route path="profile/profileedit" element={<ProfileEdit />} />
+        <Route path="profile/changepassword" element={<ChangePassword />} />
       </Routes>
       {/* TODO: delete path name */}
       <div>
@@ -33,7 +48,7 @@ function App() {
         {pathname}
       </div>
       {(pathname === '/'
-      || pathname === '/browseevents'
+      || pathname === '/events'
       || pathname === '/myevents'
       || pathname === '/chatlist'
       || pathname === '/profile')

@@ -2,7 +2,9 @@ import React from 'react';
 
 function ButtonLarge() {
   return (
-    <div>ButtonLarge</div>
+    <div>
+      <button type="button">ButtonLarge</button>
+    </div>
   );
 }
 
