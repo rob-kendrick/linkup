@@ -1,10 +1,6 @@
 import type { LuEvent } from '../types/Event';
-// export default {};
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
-console.log(baseUrl);
-
-// const mockServer = 'https://ebea2f79-284c-4f96-b987-399a7c7cef2a.mock.pstmn.io/linkupEvents';
 
 const eventApi = {
   getAllEvents: () => fetch(`${baseUrl}/events`)
