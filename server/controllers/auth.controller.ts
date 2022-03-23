@@ -67,7 +67,7 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
-const login = async (req: Request, res: Response) => {};
+// const login = async (req: Request, res: Response) => {};
 //   try {
 //     const validUser = await prisma.user.findUnique({
 //       where: {
@@ -114,6 +114,6 @@ const login = async (req: Request, res: Response) => {};
 
 export default {
   createUser,
-  login,
+  // login,
   // logout,
 };
