@@ -7,13 +7,16 @@ import util from 'util';
 import prisma from '../db';
 import mockUsers from '../mock-data/user-mock-data.json';
 import mockEvents from '../mock-data/event-mock-data.json';
+import tags from '../mock-data/tags.json';
 
 const resetDb = async (req:Request, res:Response) => {
   try {
     await prisma.$queryRawUnsafe('DROP TABLE IF EXISTS "event" CASCADE');
     await prisma.$queryRawUnsafe('DROP TABLE IF EXISTS "user" CASCADE');
+    await prisma.$queryRawUnsafe('DROP TABLE IF EXISTS "tag" CASCADE');
     await prisma.$queryRawUnsafe('DROP TABLE IF EXISTS "_participating_events" CASCADE');
     await prisma.$queryRawUnsafe('DROP TABLE IF EXISTS "_prisma_migrations" CASCADE');
+    await prisma.$queryRawUnsafe('DROP TABLE IF EXISTS "_friends" CASCADE');
 
     // eslint-disable-next-line global-require
     const exec = util.promisify(require('child_process').exec);
@@ -52,6 +55,9 @@ const resetDb = async (req:Request, res:Response) => {
 
     const createAllUsers = await prisma.user.createMany({ data: mockUsers });
     results.createUsers = createAllUsers;
+
+    const createAllTags = await prisma.tag.createMany({ data: tags });
+    results.createTags = createAllTags;
 
     const createAllEvents = await prisma.event.createMany({ data: mockEvents });
     results.createEvents = createAllEvents;
