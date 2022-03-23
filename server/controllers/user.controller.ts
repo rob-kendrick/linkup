@@ -1,11 +1,16 @@
 import { Request, Response } from 'express';
 
-
 import prisma from '../db';
 
 interface ErrorOutput {
   error: boolean
   errorMsg: String[],
+}
+
+// Event interface
+interface EventBasic {
+  id_event: int
+  title: string
 }
 
 // Get user by ID
@@ -16,10 +21,24 @@ const getUserById = async (req: Request, res: Response) => {
       where: {
         id_user: userId,
       },
+      include: {
+        events_created: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
+        events_participating: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
+      },
     });
-    res.status(200).send(foundUser);
+    res.status(200).send({ data: foundUser });
   } catch (err) {
-    res.status(404).send(err);
+    res.status(404).send({ error: err });
   }
 };
 
@@ -131,16 +150,12 @@ const editUserInfo = async (req: Request, res: Response) => {
           select: {
             id_event: true,
             title: true,
-            participants: true,
-            max_participants: true,
           },
         },
         events_participating: {
           select: {
             id_event: true,
             title: true,
-            participants: true,
-            max_participants: true,
           },
         },
       },
@@ -171,6 +186,8 @@ const getUserCreatedEvents = async (req: Request, res: Response) => {
             participants: {
               select: {
                 id_user: true,
+                first_name: true,
+                profile_picture: true,
               },
             },
           },
@@ -203,6 +220,8 @@ const getUserParticipatingEvents = async (req: Request, res: Response) => {
             participants: {
               select: {
                 id_user: true,
+                first_name: true,
+                profile_picture: true,
               },
             },
           },
