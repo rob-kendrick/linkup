@@ -9,6 +9,10 @@ userRouter.get('/:userid', userController.getUserById);
 
 userRouter.patch('/:userid', userController.editUserInfo);
 
+userRouter.post('/:userid/friends/add/:friendid', userController.addFriend);
+
+userRouter.delete('/:userid/friends/remove/:friendid', userController.removeFriend);
+
 userRouter.delete('/:userid', userController.deleteUser);
 
 // dev only

@@ -27,6 +27,13 @@ const getUserById = async (req: Request, res: Response) => {
             title: true,
           },
         },
+        friends: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
     });
     res.status(200).send({ data: foundUser });
@@ -50,6 +57,13 @@ const getAllUsers = async (req: Request, res: Response) => {
           select: {
             id_event: true,
             title: true,
+          },
+        },
+        friends: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
           },
         },
       },
@@ -166,12 +180,84 @@ const editUserInfo = async (req: Request, res: Response) => {
             title: true,
           },
         },
+        friends: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
+
     });
 
     return res.status(200).send({ data: updatedUser });
   } catch (err) {
     return res.status(500).send({ error: err });
+  }
+};
+
+const addFriend = async (req: Request, res: Response) => {
+  try {
+    // convert ids form params into integers
+    const userId: number = Number(req.params.userid);
+    const friendId: number = Number(req.params.friendid);
+
+    const addedFriend = await prisma.user.update({
+      where: {
+        id_user: userId,
+      },
+      data: {
+        friends: {
+          connect: [{ id_user: friendId }],
+        },
+      },
+      include: {
+        friends: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+
+      },
+    });
+    res.status(200).send({ data: addedFriend });
+  } catch (err) {
+    res.status(500).send({ error: err });
+  }
+};
+
+const removeFriend = async (req: Request, res: Response) => {
+  try {
+    // convert ids form params into integers
+    const userId: number = Number(req.params.userid);
+    const friendId: number = Number(req.params.friendid);
+
+    const removedFriend = await prisma.user.update({
+      where: {
+        id_user: userId,
+      },
+      data: {
+        friends: {
+          disconnect: [{ id_user: friendId }],
+        },
+      },
+      include: {
+        friends: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+
+      },
+    });
+    res.status(200).send({ data: removedFriend });
+  } catch (err) {
+    res.status(500).send({ error: err });
   }
 };
 
@@ -206,6 +292,8 @@ export default {
   getUserById,
   getAllUsers,
   editUserInfo,
+  addFriend,
+  removeFriend,
   deleteUser,
   deleteAllUsers,
 };
