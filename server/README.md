@@ -9,6 +9,9 @@
 ## Setting up and running the database
 - Make sure you have postgresql installed locally
 - Run `psql postgres` to start psql CLI and create database by running `create database linkup_db;` and exit cli with `quit`
+- Run `Runs seed scripts
+Runs seed scripts
+- Run `npx prisma migrate reset`
 - Run `npx prisma generate` from the server folder to establish link between schema.prisma and .env file
 - Run `npx prisma migrate dev` to create create a new migrate (to sync database schema to prisma schema)
 

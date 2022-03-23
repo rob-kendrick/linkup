@@ -8,11 +8,14 @@ import authRoutes from './auth.router';
 // eslint-disable-next-line import/no-unresolved
 // eslint-disable-next-line import/extensions
 import authMiddleware from '../middlewares/auth';
+import initdb from './init-db';
 
 const router = Router();
 
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
 router.use('/events', eventRoutes);
+
+router.purge('/resetdb', initdb.resetDb);
 
 export default router;
