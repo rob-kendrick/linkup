@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id_user               Int       @id @default(autoincrement())
+  first_name            String    @db.VarChar(50)
+  last_name             String    @db.VarChar(50)
+  bio                   String    @db.VarChar(255)
+  email                 String    @db.VarChar(255) @unique
+  profile_picture       String
+  events_created        event[]   @relation(name: "created_events")
+  events_participating  event[]   @relation(name: "participating_events", references: [id_event])
+  password              String
+  date_created          DateTime  @default(now())
+}
+
+model event {
+  id_event              Int         @id @default(autoincrement())
+  title                 String      @db.VarChar(30)
+  description           String      @db.VarChar(255)
+  creator               user        @relation(name: "created_events", fields: [creator_id], references: [id_user])
+  creator_id            Int
+  first_name            String
+  profile_picture       String
+  min_participants      Int?
+  max_participants      Int?
+  participants          user[]      @relation(name: "participating_events", references: [id_user])
+  date                  DateTime
+  date_created          DateTime    @default(now())
+  date_updated          DateTime?   @updatedAt
+  lat                   Float
+  lng                   Float
+  street_number         String?
+  street_name           String
+  postcode              String
+  city                  String
+  country               String
+}
