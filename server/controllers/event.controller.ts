@@ -59,6 +59,13 @@ const getAllEvents = async (req: Request, res: Response) => {
             profile_picture: true,
           },
         },
+        creator: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
     });
     res.status(200).send({ data: events });
@@ -77,6 +84,13 @@ const getEventById = async (req: Request, res: Response) => {
       },
       include: {
         participants: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+        creator: {
           select: {
             id_user: true,
             first_name: true,
@@ -109,14 +123,21 @@ const createEvent = async (req: Request, res: Response) => {
       return res.status(401).send({ error: eventValidation.errorMessages });
     }
 
-    const newEvent = await prisma.event.create({ data: eventInput });
-
-    res.status(201).send({
-      data: {
-        ...newEvent,
-        participants: [],
+    const newEvent = await prisma.event.create({
+      data: eventInput,
+      include: {
+        participants: true,
+        creator: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
     });
+
+    res.status(201).send({ data: newEvent });
   } catch (err) {
     res.status(500).send({ error: err });
   }
@@ -140,6 +161,13 @@ const joinEvent = async (req: Request, res: Response) => {
       },
       include: {
         participants: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+        creator: {
           select: {
             id_user: true,
             first_name: true,
@@ -177,6 +205,13 @@ const leaveEvent = async (req: Request, res: Response) => {
             profile_picture: true,
           },
         },
+        creator: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
     });
 
@@ -199,6 +234,22 @@ const editEvent = async (req: Request, res: Response) => {
         description: req.body.description,
         min_participants: req.body.min_participants,
         max_participants: req.body.max_participants,
+      },
+      include: {
+        participants: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+        creator: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
 
     });
@@ -226,7 +277,7 @@ const deleteEventById = async (req: Request, res: Response) => {
 // delete all events. Not to be used in front-end
 const _deleteAllEvents = async (req: Request, res: Response) => {
   try {
-    const deleteEvents = await prisma.event.deleteMany();
+    const deleteEvents = await prisma.event.deleteMany({});
     res.status(200).send({ data: deleteEvents });
   } catch (err) {
     res.status(500).send({ error: err });

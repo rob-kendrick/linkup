@@ -29,8 +29,6 @@ model event {
   description           String      @db.VarChar(255)
   creator               user        @relation(name: "created_events", fields: [creator_id], references: [id_user])
   creator_id            Int
-  first_name            String
-  profile_picture       String
   min_participants      Int?
   max_participants      Int?
   participants          user[]      @relation(name: "participating_events", references: [id_user])
