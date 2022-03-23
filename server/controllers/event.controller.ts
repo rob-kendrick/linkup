@@ -17,6 +17,8 @@ interface Event {
   postcode: string
   city: string
   country : string
+  creator?: any
+  participants?: any
 }
 
 // Basic user interface
@@ -109,7 +111,13 @@ const createEvent = async (req: Request, res: Response) => {
     }
 
     const newEvent = await prisma.event.create({ data: eventInput });
-    res.status(201).send({ data: newEvent });
+
+    res.status(201).send({
+      data: {
+        ...newEvent,
+        participants: [],
+      },
+    });
   } catch (err) {
     res.status(500).send({ error: err });
   }
