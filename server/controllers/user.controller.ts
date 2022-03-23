@@ -9,7 +9,7 @@ interface ErrorOutput {
 
 // Event interface
 interface EventBasic {
-  id_event: int
+  id_event: number
   title: string
 }
 
