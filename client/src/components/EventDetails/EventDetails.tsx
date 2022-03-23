@@ -1,8 +1,12 @@
 import React from 'react';
+import HeaderReturn from '../HeaderReturn/HeaderReturn';
 
 function EventDetails() {
   return (
-    <div>EventDetails</div>
+    <div>
+      <HeaderReturn />
+      <h3>EventDetails</h3>
+    </div>
   );
 }
 

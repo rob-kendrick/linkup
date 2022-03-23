@@ -9,10 +9,14 @@
   width: 375px;
   background-color: grey;
   height: 100px;
-  bottom: 0px;
+  top: 712px;
 }
 
-.chatlist-container-delete {
-  flex-grow: 1;
+.event-list-delete {
+  overflow: auto;
 }
 
+.event-card-delete {
+  width: 80%;
+  background-color: white;
+}

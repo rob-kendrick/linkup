@@ -9,6 +9,7 @@ import Navbar from './components/Navbar/Navbar';
 import ProfileEdit from './views/Profile/ProfileEdit/ProfileEdit';
 import Friends from './views/Profile/Friends/Friends';
 import ChangePassword from './views/Profile/ChangePassword/ChangePassword';
+import EventDetails from './components/EventDetails/EventDetails';
 
 function App() {
   const { pathname } = useLocation();
@@ -16,6 +17,7 @@ function App() {
     <div className="app-container-delete">
       <Routes>
         <Route path="/" element={<BrowseEvents />} />
+        <Route path="events/:eventid" element={<EventDetails />} />
         <Route path="browseevents" element={<BrowseEvents />} />
         <Route path="myevents" element={<MyEvents />} />
         <Route path="chatlist" element={<ChatList />} />
