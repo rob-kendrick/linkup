@@ -1,16 +1,11 @@
-/* eslint-disable camelcase */
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-
-// eslint-disable-next-line import/no-unresolved
-// eslint-disable-next-line import/extensions
 import prisma from '../db';
 
 const bcrypt = require('bcrypt');
 
 const SECRET_KEY = process.env.SECRET_KEY || 'open sesame';
 
-//
 interface User {
   email: string;
   password: string;
@@ -19,6 +14,7 @@ interface User {
   profile_picture: string;
   bio: string;
 }
+
 // Helper function for validating user info before submitting to DB
 const validateUserInfo = (user: User) => {
   if (
@@ -49,9 +45,11 @@ const createUser = async (req: Request, res: Response) => {
       return res.status(409).send({ error: 'email already exists' });
     }
     if (req.body.password === '') throw new Error('Password cannot be empty string');
+
     // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
     // Adding hashed password to our user object
     const body = {
       ...req.body,
@@ -62,11 +60,10 @@ const createUser = async (req: Request, res: Response) => {
     const newUser = await prisma.user.create({ data: { ...body } });
     const { id_user } = newUser;
     const accessToken = jwt.sign({ id_user }, SECRET_KEY);
-    // console.log(newUser);
-    res.status(201).send({ data: { accessToken, newUser } });
+
+    return res.status(201).send({ data: { accessToken, newUser } });
   } catch (err) {
-    console.log(' : : : ERROR STORING USER IN DATBASE : : : ', err);
-    res.status(500).send(err);
+    return res.status(500).send(err);
   }
 };
 

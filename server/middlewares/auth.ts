@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 // @ts-nocheck
 
 import { Request, Response, NextFunction } from 'express';
@@ -26,10 +25,10 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
 
     console.log(foundUser);
     req.user = foundUser;
-    next();
+    return next();
   } catch (err) {
     console.log(' : : : ERROR IN AUTH MIDDLEWARE : : : ', err);
-    res.status(401).send(err);
+    return res.status(401).send(err);
   }
 };
 

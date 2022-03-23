@@ -1,4 +1,7 @@
-/* eslint-disable camelcase */
+// Dev only REST api endpoint
+// 1. Drops all tables re-migrates prisma schema to postgres
+// 2. Re-populates it with mock data
+
 import { Request, Response } from 'express';
 import util from 'util';
 import prisma from '../db';
@@ -58,7 +61,7 @@ const resetDb = async (req:Request, res:Response) => {
     // eslint-disable-next-line no-restricted-syntax
     for (const el of arr) {
       // eslint-disable-next-line no-await-in-loop
-      const joinEvent = await prisma.event.update({
+      await prisma.event.update({
         where: {
           id_event: el[0],
         },
@@ -89,12 +92,11 @@ const resetDb = async (req:Request, res:Response) => {
 
     res.status(200).send({
       data: {
-        message: 'linkup_db succesfully reset - all tables dropped and re-migrated and re-populated with mock data',
+        message: 'linkup_db succesfully reset - all tables dropped, re-migrated and re-populated with mock data',
         results,
       },
     });
   } catch (err) {
-    console.log(err);
     res.status(200).send({ error: err });
   }
 };

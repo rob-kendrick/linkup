@@ -21,6 +21,8 @@ model user {
   events_participating  event[]   @relation(name: "participating_events", references: [id_event])
   password              String
   date_created          DateTime  @default(now())
+  friends               user[]    @relation(name: "friends")
+  friendsRelation       user[]    @relation(name: "friends")
 }
 
 model event {
@@ -42,4 +44,10 @@ model event {
   postcode              String
   city                  String
   country               String
+
+}
+
+model tags {
+  id_tag               Int         @id @default(autoincrement())
+  name                 String
 }

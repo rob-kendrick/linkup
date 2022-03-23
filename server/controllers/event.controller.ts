@@ -1,8 +1,6 @@
-/* eslint-disable camelcase */
 import { Request, Response } from 'express';
 import prisma from '../db';
 
-// Event interface
 interface Event {
   title: string
   description: string
@@ -19,13 +17,6 @@ interface Event {
   country : string
   creator?: any
   participants?: any
-}
-
-// Basic user interface
-interface UserBasic {
-  id_user: number
-  first_name: string
-  profile_picture: string
 }
 
 // Validating event info before passing to DB
@@ -137,9 +128,9 @@ const createEvent = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(201).send({ data: newEvent });
+    return res.status(201).send({ data: newEvent });
   } catch (err) {
-    res.status(500).send({ error: err });
+    return res.status(500).send({ error: err });
   }
 };
 
@@ -274,8 +265,9 @@ const deleteEventById = async (req: Request, res: Response) => {
   }
 };
 
-// delete all events. Not to be used in front-end
-const _deleteAllEvents = async (req: Request, res: Response) => {
+// Dev only
+const deleteAllEvents = async (req: Request, res: Response) => {
+  console.log('ahhahh');
   try {
     const deleteEvents = await prisma.event.deleteMany({});
     res.status(200).send({ data: deleteEvents });
@@ -292,5 +284,5 @@ export default {
   leaveEvent,
   editEvent,
   deleteEventById,
-  _deleteAllEvents,
+  deleteAllEvents,
 };
