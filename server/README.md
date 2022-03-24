@@ -12,7 +12,7 @@
 - Run `Runs seed scripts
 Runs seed scripts
 - Run `npx prisma generate` from the server folder to establish link between schema.prisma and .env file
-- Run `npx prisma migrate deploy` to create create a new migrate (to sync database schema to prisma schema)
+- Run `npx prisma db push` to create create a new migrate (to sync database schema to prisma schema)
 
 ## Viewing the database data and tables
 - Run `npx prisma studio` to visualise the database and open localhost:5555 in the browswer
@@ -28,7 +28,7 @@ Runs seed scripts
 
 2. Table "user" or Table "event" does not exist in DB
 - Run `npx prisma generate`
-- Run `npx prisma migrate dev`
+- Run `npx prisma db push`
 
 ## Import postman collection with all endpoints
 - In postman, click import, import json, paste `https://www.getpostman.com/collections/7684c170fcf79ab13973`
