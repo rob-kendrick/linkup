@@ -291,6 +291,27 @@ const deleteUser = async (req: Request, res: Response) => {
       where: {
         id_user: uid,
       },
+      include: {
+        events_created: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
+        events_participating: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
+        friends: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+      },
     });
     res.status(200).send({ data: deletedUser });
   } catch (err) {

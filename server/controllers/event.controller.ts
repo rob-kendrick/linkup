@@ -258,6 +258,22 @@ const deleteEventById = async (req: Request, res: Response) => {
       where: {
         id_event: eventId,
       },
+      include: {
+        participants: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+        creator: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+      },
     });
     res.status(200).send({ data: deleteEvent });
   } catch (err) {
