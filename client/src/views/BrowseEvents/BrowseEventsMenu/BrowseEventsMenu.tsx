@@ -9,6 +9,7 @@ function BrowseEventsMenu() {
       <h3>BrowseEventsMenu</h3>
       <DateList />
       <div className="flex-row-delete">
+        {/* all buttons below should be /src/components/Form/ButtonEventsMenu components */}
         <button type="button">List</button>
         {/* find large map component in '../../../components/MapLarge/MapLarge' */}
         <button type="button">Map</button>
