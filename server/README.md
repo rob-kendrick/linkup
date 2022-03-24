@@ -19,7 +19,7 @@ Runs seed scripts
 
 ## Updating schema / models
 - Make changes
-- Run  `npx prisma migrate dev`
+- Run  `npx prisma migrate deploy`
 
 ## Common errors with prisma studio
 1. Database 'linkup_db' does not exist:
