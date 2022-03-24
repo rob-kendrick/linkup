@@ -7,7 +7,7 @@ import TagList from '../TagList/TagList';
 function EventCard({ event }: {event:any}) {
   return (
     <Link
-      to={`/events/${event.id}`}
+      to={`/events/${event.id_event}`}
       key={event.id}
     >
       <div className="list-item-delete">

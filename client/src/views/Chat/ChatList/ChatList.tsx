@@ -1,8 +1,8 @@
 import React from 'react';
 import ChatListItem from './ChatListItem.tsx/ChatListItem';
-import eventMockData from '../../../mock-data/event.mock.delete.json';
+import eventMockData from '../../../utilities/mocks/db-data/events-db-data.json';
 
-const eventData: any[] = eventMockData;
+const eventData: any[] = eventMockData.data;
 
 function ChatList() {
   return (
