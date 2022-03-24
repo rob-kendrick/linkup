@@ -11,5 +11,6 @@
   "street_name": "TWY NORTH-EAST",
   "postcode": "10247",
   "city": "Berlin",
-  "country": "Deutschland"
+  "country": "Deutschland",
+  "tags": ["Outdoor", "leisure"]
 }
