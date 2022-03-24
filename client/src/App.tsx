@@ -26,9 +26,9 @@ function App() {
     <div className="app-container-delete">
       <Routes>
         <Route path="/" element={<BrowseEvents />} />
+        <Route path="events" element={<BrowseEvents />} />
         <Route path="events/:eventid" element={<EventDetails />} />
         <Route path="events/:eventid/chat" element={<ChatGroup />} />
-        <Route path="events" element={<BrowseEvents />} />
         <Route path="events/filters" element={<BrowseEventsFilters />} />
         <Route path="events/filters/title" element={<FilterTitle />} />
         <Route path="events/filters/tags" element={<FilterTags />} />
