@@ -48,6 +48,6 @@ model event {
 }
 
 model tag {
-  id_tag        Int    @id @default(autoincrement())
-  name          String
+  id_tag Int    @id @default(autoincrement())
+  name   String
 }
