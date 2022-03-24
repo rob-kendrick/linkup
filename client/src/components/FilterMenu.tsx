@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState, useEffect, MouseEventHandler,
+} from 'react';
+import moment from 'moment';
 import list from '../assets/MdFormatListBulleted.svg';
 import map from '../assets/FaRegMap.svg';
 import filter from '../assets/BiFilter.svg';
 
 interface toogleInt {
-  toggleOnClick: () => void;
+  toggleOnClick: MouseEventHandler;
+  printDate : Function;
 }
 
-function FilterMenu({ toggleOnClick } : toogleInt) {
+function FilterMenu({ toggleOnClick, printDate } : toogleInt) {
   const [dates, setDates] = useState<Date[]>([]);
 
   useEffect(() => {
@@ -21,23 +25,29 @@ function FilterMenu({ toggleOnClick } : toogleInt) {
     setDates(dateArr);
   }, []);
 
-  console.log(dates, '/////------> the dates');
-
   return (
     <div className="filter-menu-container">
       <div className="filter-menu-calendar">
         <h3>Browse Activities</h3>
       </div>
       <div className="filter-menu-calendar">
+        {dates.map((date) => (
+          <button type="button" className="date-picker-selector" key={date.toString()} onClick={() => printDate(date)}>
+            <div>
+              <p className="date-picker-details">{moment(date).format('ddd')}</p>
+              <p className="date-picker-details">{moment(date).format('DD')}</p>
+              {/* <p>{date.toString()}</p> */}
+            </div>
+          </button>
+        ))}
 
-        <h1>Calendar date picker</h1>
       </div>
 
       <div className="filter-menu-button-container">
 
         <div className="filter-menu-button-left-section">
           <div>
-            <button type="button" onClick={toggleOnClick}>
+            <button className="small-button" type="button" onClick={toggleOnClick}>
               <img src={list} alt="list icon" className="button-icon" />
               {' '}
               List
@@ -45,7 +55,7 @@ function FilterMenu({ toggleOnClick } : toogleInt) {
           </div>
 
           <div>
-            <button type="button" onClick={toggleOnClick}>
+            <button className="small-button" type="button" onClick={toggleOnClick}>
               <img src={map} alt="list icon" className="button-icon" />
               Map
             </button>
@@ -54,7 +64,7 @@ function FilterMenu({ toggleOnClick } : toogleInt) {
         </div>
 
         <div>
-          <button type="button">
+          <button className="small-button" type="button">
             <img src={filter} alt="list icon" className="button-icon" />
             Filters
           </button>

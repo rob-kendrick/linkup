@@ -2,7 +2,7 @@ const mockEventsData = [
   {
     event_id: '1',
     title: 'Football at the Park',
-    date_time: '2022-06-23T18:25:43.511Z',
+    date_time: 'Wed Mar 23 2022 18:05:22 GMT+0100',
     description: "Just say anything, George, say what ever's natural, the first thing that comes to your mind. Take that you mutated son-of-a-bitch. My pine, why you. You space bastard, you killed a pine. You do? Yeah, it's 8:00. Hey, McFly, I thought I told you never to come in here. Well it's gonna cost you. How much money you got on you?",
     creator: '11',
     participants: ['13', '14', '17'],
@@ -17,7 +17,7 @@ const mockEventsData = [
   {
     event_id: '2',
     title: 'Ping Pong game at Codeworks',
-    date_time: '2022-06-23T18:25:43.511Z',
+    date_time: 'Fri Mar 25 2022 17:45:23 GMT+0100',
     description: 'Yeah I know, If you put your mind to it you could accomplish anything. Who are you calling spook, pecker-wood. Leave me alone. Take care. Not a word, not a word, not a word now. Quiet, uh, donations, you want me to make a donation to the coast guard youth auxiliary?',
     creator: '13',
     participants: ['14'],
@@ -32,7 +32,7 @@ const mockEventsData = [
   {
     event_id: '3',
     title: 'Volley-Ball Beach match',
-    date_time: '2022-06-23T18:25:43.511Z',
+    date_time: 'Thu Mar 24 2022 18:12:39 GMT+0100',
     description: "Yeah well, you shouldn't drink. Okay, alright, Saturday is good, Saturday's good, I could spend a week in 1955. I could hang out, you could show me around. Thanks a lot, kid. Doc. Wait a minute, wait a minute, Doc, are you telling me that you built a time machine out of a delorean. Pa, what is it? What is it, Pa? I've gotta go. My god, do you know what this means? It means that this damn thing doesn't work at all. Where's Einstein, is he with you? Hey, hey listen guys. Look, I don't wanna mess with no reefer addicts, okay?",
     creator: '14',
     participants: ['16', '11', '15'],
@@ -62,7 +62,7 @@ const mockEventsData = [
   {
     event_id: '5',
     title: 'Coding with mates',
-    date_time: '2022-06-23T18:25:43.511Z',
+    date_time: 'Thu Mar 24 2022 18:12:39 GMT+0100',
     description: "Thanks a lot, kid. Calm down, Marty, I didn't disintegrate anything. The molecular structure of Einstein and the car are completely intact. You got a real attitude problem, McFly. You're a slacker. You remind me of you father when he went her, he was a slacker too. About 30 years, it's a nice round number. What's going on? Where have you been all week?",
     creator: '18',
     participants: ['11', '12', '19', '15', '14'],
@@ -77,7 +77,7 @@ const mockEventsData = [
   {
     event_id: '6',
     title: 'Walking in Kreuzberg / Sight seeing',
-    date_time: '2022-06-23T18:25:43.511Z',
+    date_time: 'Thu Mar 24 2022 18:12:39 GMT+0100',
     description: "Just say anything, George, say what ever's natural, the first thing that comes to your mind. Take that you mutated son-of-a-bitch. My pine, why you. You space bastard, you killed a pine. You do? Yeah, it's 8:00. Hey, McFly, I thought I told you never to come in here. Well it's gonna cost you. How much money you got on you?",
     creator: '11',
     participants: ['13', '14', '17', '19'],
@@ -107,7 +107,7 @@ const mockEventsData = [
   {
     event_id: '8',
     title: 'Kite Surfing with Mathiew at the Spree',
-    date_time: '2022-06-23T18:25:43.511Z',
+    date_time: 'Wed Mar 23 2022 18:05:22 GMT+0100',
     description: "Mr. McFly, Mr. McFly, this just arrived, oh hi Marty. I think it's your new book. Hey not too early I sleep in Sunday's, hey McFly, you're shoe's untied, don't be so gullible, McFly. Uh, stories, science fiction stories, about visitors coming down to Earth from another planet. Then how am I supposed to ever meet anybody. Ah well, sort of.",
     creator: '19',
     participants: ['12', '14', '17'],

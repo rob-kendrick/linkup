@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+//  @ts-nocheck
+import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { LU_Event } from '../utilities/types/LU_Event';
@@ -10,16 +11,16 @@ events : LU_Event[];
 }
 
 function Map({ events } : eventProps) {
+  console.log(events, 'these are the events from the map');
+
+  const mapRef = useRef();
+  const markerRef = useRef();
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((location) => {
       const lat : number = location.coords.latitude;
       const lng : number = location.coords.longitude;
-      const map = L.map('map').setView([lat, lng], 13);
-
-      const myIcon = L.divIcon({
-        className: 'my-div-icon',
-        html: `<div> <img src=${eventMarker} alt="marker" style="width:30px;"/></div>`,
-      });
+      mapRef.current = L.map('map').setView([lat, lng], 13);
 
       const myLocationIcon = L.divIcon({
         className: 'my-div-icon',
@@ -27,21 +28,60 @@ function Map({ events } : eventProps) {
       });
 
       setTimeout(() => {
-        L.marker([lat, lng], { icon: myLocationIcon }).addTo(map)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(mapRef.current);
+
+        L.marker([lat, lng], { icon: myLocationIcon }).addTo(mapRef.current)
           .bindPopup('Current location')
           .openPopup();
-
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
-
-        events.map((event) => {
-          console.log(event);
-          const eventLat = typeof event.lat === 'string' ? parseFloat(event.lat) : event.lat;
-          const eventLng = typeof event.lng === 'string' ? parseFloat(event.lng) : event.lng;
-          return L.marker([eventLat, eventLng], { icon: myIcon }).addTo(map).bindPopup(`${event.title} <br> ${event.date_time}`).openPopup();
-        });
       }, 100);
+
+      const myIcon = L.divIcon({
+        className: 'my-div-icon',
+        html: `<div> <img src=${eventMarker} alt="marker" style="width:30px;"/></div>`,
+      });
+
+      events.forEach((event) => {
+        console.log('Events / map function markers');
+
+        const eventLat = typeof event.lat === 'string' ? parseFloat(event.lat) : event.lat;
+        const eventLng = typeof event.lng === 'string' ? parseFloat(event.lng) : event.lng;
+        const marker = L.marker([eventLat, eventLng], { icon: myIcon }).addTo(mapRef.current).bindPopup(`${event.title} <br> ${event.date_time}`).openPopup();
+      });
     });
   }, []);
+
+  const executedOnce = useRef();
+
+  useEffect(() => {
+    console.log(typeof executedOnce.current, 'executedOnce, useEffect');
+
+    if (typeof executedOnce.current === 'undefined') {
+      executedOnce.current = true;
+      return false;
+    }
+    console.log('Executed twice');
+    // console.log('Second useEffect');
+    // console.log(mapRef, 'Working mapRef');
+
+    mapRef.current.eachLayer((layer) => {
+      console.log(layer, 'These are the layers');
+      mapRef.current.removeLayer(layer);
+      console.log('removed');
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(mapRef.current);
+    
+    events.forEach((event) => {
+      console.log('Events / map function markers');
+      const myIcon = L.divIcon({
+        className: 'my-div-icon',
+        html: `<div data-event-id=${event.event_id}> <img src=${eventMarker} alt="marker" style="width:30px;"/></div>`,
+      });
+      const eventLat = typeof event.lat === 'string' ? parseFloat(event.lat) : event.lat;
+      const eventLng = typeof event.lng === 'string' ? parseFloat(event.lng) : event.lng;
+      L.marker([eventLat, eventLng], { icon: myIcon }).addTo(mapRef.current).bindPopup(`${event.title} <br> ${event.date_time}`).openPopup();
+    });
+  }, [events]);
 
   return (
 
