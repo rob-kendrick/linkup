@@ -283,7 +283,6 @@ const deleteEventById = async (req: Request, res: Response) => {
 
 // Dev only
 const deleteAllEvents = async (req: Request, res: Response) => {
-  console.log('ahhahh');
   try {
     const deleteEvents = await prisma.event.deleteMany({});
     res.status(200).send({ data: deleteEvents });

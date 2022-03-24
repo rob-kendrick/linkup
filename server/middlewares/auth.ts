@@ -22,12 +22,9 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
       },
     });
     if (!foundUser) return res.sendStatus(401);
-
-    console.log(foundUser);
     req.user = foundUser;
     return next();
   } catch (err) {
-    console.log(' : : : ERROR IN AUTH MIDDLEWARE : : : ', err);
     return res.status(401).send(err);
   }
 };
