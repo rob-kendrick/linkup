@@ -1,22 +1,25 @@
 import { Router } from 'express';
-// eslint-disable-next-line import/no-unresolved
 import userController from '../controllers/user.controller';
 
 const userRouter = Router();
 
-userRouter.get('/:userid', userController.getUserById);
-
 userRouter.get('/', userController.getAllUsers);
+
+userRouter.get('/:userid', userController.getUserById);
 
 userRouter.patch('/:userid', userController.editUserInfo);
 
-userRouter.get('/:userid/events/created/', userController.getUserCreatedEvents);
+userRouter.post('/:userid/friends/add/:friendid', userController.addFriend);
 
-userRouter.get('/:userid/events/participating/', userController.getUserParticipatingEvents);
+userRouter.delete('/:userid/friends/remove/:friendid', userController.removeFriend);
 
 userRouter.delete('/:userid', userController.deleteUser);
 
-// Dev only
-userRouter.delete('/', userController._deleteAllUsers);
+// dev only
+userRouter.delete('/', userController.deleteAllUsers);
+
+// not in use
+// userRouter.get('/:userid/events/created/', userController.getUserCreatedEvents);
+// userRouter.get('/:userid/events/participating/', userController.getUserParticipatingEvents);
 
 export default userRouter;
