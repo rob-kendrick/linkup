@@ -1,0 +1,138 @@
+[
+  {
+     "title":"Football at the Park",
+     "description":"Let's get together for some football ! I am a lonely man",
+     "creator_id":1,
+     "min_participants": 8,
+     "max_participants": 22,
+     "date":"2022-03-29T10:00:00.511Z",
+     "lat":52.520609,
+     "lng":13.46016,
+     "street_number":"16",
+     "street_name":"Richard-Ermisch-Straße",
+     "postcode":"10247",
+     "city":"Berlin",
+     "country":"Deutschland",
+     "tags":[
+        "Sport",
+        "Game",
+        "Outdoor"
+     ]
+  },
+  {
+     "title":"Chess at cafe Cinema",
+     "description":"Looking for people on some bobby fisher shit. come at me and get ur king taken if ur brave enough",
+     "creator_id":1,
+     "min_participants": 1,
+     "max_participants": 1,
+     "date":"2022-03-29T11:00:00.511Z",
+     "lat":52.53074552729435,
+     "lng":13.400714891860206,
+     "street_number":"6",
+     "street_name":"Brunnenstrasse",
+     "postcode":"10247",
+     "city":"Berlin",
+     "country":"Deutschland",
+     "tags":[
+        "Game",
+        "Indoor"
+     ]
+  },
+  {
+     "title":"Kite surfing at Tempelhof!",
+     "description":"hey, i got a kite and wanna meet people who are into kitesurfing, hit me up!",
+     "creator_id":2,
+     "min_participants": 1,
+     "max_participants": 5,
+     "date":"2022-03-30T11:00:00.511Z",
+     "lat":52.47887365912366,
+     "lng":13.400728347506563,
+     "street_number":"12",
+     "street_name":"TWY NORTH-EAST",
+     "postcode":"10247",
+     "city":"Berlin",
+     "country":"Deutschland",
+     "tags":[
+        "Excercise",
+        "Outdoor"
+     ]
+  },
+  {
+     "title":"Yoga and meditation",
+     "description":"Just moved here and haven't found a single hippie! help me change that?",
+     "creator_id":3,
+     "min_participants": 1,
+     "max_participants": 8,
+     "date":"2022-03-27T18:25:43.511Z",
+     "lat":52.49147773175493,
+     "lng":13.469701991105474,
+     "street_number":"5",
+     "street_name":"Schwarzer Panther, Puschkinallee",
+     "postcode":"12435",
+     "city":"Berlin",
+     "country":"Deutschland",
+     "tags":[
+        "Relaxing",
+        "Indoor"
+     ]
+  },
+  {
+     "title":"BBQ at the Volkspark",
+     "description":"I bought all the cheap meat at Aldi. Bring some beers and help me finish it off",
+     "creator_id":5,
+     "min_participants": 3,
+     "max_participants": null,
+     "date":"2022-04-30T18:00:00.511Z",
+     "lat":52.5275207675146,
+     "lng":13.431580520776109,
+     "street_number":"14",
+     "street_name":"Am Friedrichshain",
+     "postcode":"10407",
+     "city":"Berlin",
+     "country":"Deutschland",
+     "tags":[
+        "Leisure",
+        "Outdoor"
+     ]
+  },
+  {
+     "title":"Climbing at the gym",
+     "description":"Looking for people to spot me while bouldering",
+     "creator_id":5,
+     "min_participants": 1,
+     "max_participants": 3,
+     "date":"2022-04-01T12:00:00.511Z",
+     "lat":52.5275207675146,
+     "lng":13.431580520776109,
+     "street_number":"46",
+     "street_name":"Gymstrasse",
+     "postcode":"10407",
+     "city":"Berlin",
+     "country":"Deutschland",
+     "tags":[
+        "Sport",
+        "Indoor"
+     ]
+  },
+  {
+     "title":"Trip to german spy museum",
+     "description":"I am looking to culturally enrich myself or something idk",
+     "creator_id":8,
+     "min_participants": 1,
+     "max_participants": null,
+     "date":"2022-04-02T16:30:00.511Z",
+     "lat":52.50816718734877,
+     "lng":13.388460979510342,
+     "street_number":"88",
+     "street_name":"Zimmerstrasse",
+     "postcode":"10117",
+     "city":"Berlin",
+     "country":"Deutschland",
+     "tags":[
+        "Learning",
+        "Indoor",
+        "Leisure",
+        "Culture"
+     ]
+  }
+]
