@@ -1,3 +1,6 @@
+/* eslint-disable import/extensions */
+/* eslint-disable global-require */
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
