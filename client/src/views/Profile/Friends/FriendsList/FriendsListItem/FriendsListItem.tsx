@@ -5,8 +5,8 @@ import ProfilePicture from '../../../../../components/ProfilePicture/ProfilePict
 function FriendsListItem({ user }: {user: any}) {
   return (
     <Link
-      to={`/users/${user.id}`}
-      key={user.id}
+      to={`/users/${user.id_user}`}
+      key={user.id_user}
     >
       <div className="list-item-delete">
         {user.first_name}

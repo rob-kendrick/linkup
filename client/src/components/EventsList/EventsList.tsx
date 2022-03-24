@@ -1,8 +1,8 @@
 import React from 'react';
 import EventCard from '../EventCard/EventCard';
-import eventMockData from '../../mock-data/event.mock.delete.json';
+import eventMockData from '../../utilities/mocks/db-data/events-db-data.json';
 
-const eventData: any[] = eventMockData;
+const eventData: any[] = eventMockData.data;
 
 function EventList() {
   return (
@@ -10,7 +10,7 @@ function EventList() {
       <h3>EventList</h3>
       {eventData.map((event) => (
         <EventCard
-          key={event.id}
+          key={event.id_event}
           event={event}
         />
       ))}

@@ -1,8 +1,8 @@
 import React from 'react';
 import FriendsListItem from './FriendsListItem/FriendsListItem';
-import userMockData from '../../../../mock-data/user.mock.delete.json';
+import userMockData from '../../../../utilities/mocks/db-data/users-db-data.json';
 
-const userData: any[] = userMockData;
+const userData: any[] = userMockData.data;
 
 function FriendsList() {
   return (
@@ -10,7 +10,7 @@ function FriendsList() {
       <h3>FriendsList</h3>
       {userData.map((user) => (
         <FriendsListItem
-          key={user.id}
+          key={user.id_user}
           user={user}
         />
       ))}
