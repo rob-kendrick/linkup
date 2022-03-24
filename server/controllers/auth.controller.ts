@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 import prisma from '../db';
 
 const bcrypt = require('bcrypt');
 
-const SECRET_KEY = process.env.SECRET_KEY || 'open sesame';
+const SALT_NUMBER: number = Number(process.env.SALT_NUMBER) || 10;
+const JWT_SECRET_KEY: Secret = process.env.JWT_SECRET_KEY || 'open sesame';
 
 interface User {
   email: string;
@@ -47,7 +48,7 @@ const createUser = async (req: Request, res: Response) => {
     if (req.body.password === '') throw new Error('Password cannot be empty string');
 
     // Hash password
-    const salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(SALT_NUMBER);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     // Adding hashed password to our user object
@@ -59,49 +60,43 @@ const createUser = async (req: Request, res: Response) => {
     // Creating the user in database
     const newUser = await prisma.user.create({ data: { ...body } });
     const { id_user } = newUser;
-    const accessToken = jwt.sign({ id_user }, SECRET_KEY);
+    const accessToken = jwt.sign({ id_user }, JWT_SECRET_KEY);
 
-    return res.status(201).send({ data: { accessToken, newUser } });
+    return res.status(201).send({ data: { accessToken, user: newUser } });
   } catch (err) {
     return res.status(500).send(err);
   }
 };
 
-// const login = async (req: Request, res: Response) => {};
-//   try {
-//     const validUser = await prisma.user.findUnique({
-//       where: {
-//         email: req.body.email,
-//       },
-//     });
-//     if (!validUser) {
-//       return res.status(400).send({ error: 'Wrong email or password' });
-//     }
-//     if (req.body.password === '') throw new Error('Password cannot be empty string');
+const login = async (req: Request, res: Response) => {
+  try {
+    const validUser = await prisma.user.findUnique({
+      where: {
+        email: req.body.email,
+      },
+    });
+    if (!validUser) {
+      return res.status(400).send({ error: 'Wrong Email or password' });
+    }
+    if (req.body.password === '') throw new Error('Password cannot be empty string');
 
-//     const validPassword = await bcrypt.compare(
-//       req.body.password,
-//       validUser.password,
-//     );
+    const validPassword = await bcrypt.compare(
+      req.body.password,
+      validUser.password,
+    );
 
-//     if (!validPassword) {
-//       return res.status(400).send({ error: 'Wrong email or password' });
-//     }
+    if (!validPassword) {
+      return res.status(400).send({ error: 'Wrong email or Password' });
+    }
 
-//     // Hash password
-//     const salt = await bcrypt.genSalt(10);
-//     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-//     // Adding hashed password to our user object
-//     const body = {
-//       ...req.body,
-//       password: hashedPassword,
-//     };
+    const { id_user } = validUser;
+    const accessToken = jwt.sign({ id_user }, JWT_SECRET_KEY);
 
-//   } catch (err) {
-//     console.log(' : : : ERROR STORING USER IN DATBASE : : : ', err);
-//     res.status(500).send(err);
-//   }
-// }
+    return res.send({ data: { accessToken } });
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
 
 // const logout = async (req: Request, res: Response) => {
 //   try {
@@ -114,6 +109,6 @@ const createUser = async (req: Request, res: Response) => {
 
 export default {
   createUser,
-  // login,
+  login,
   // logout,
 };

@@ -11,6 +11,10 @@ import mockUsers from '../mock-data/user-mock-data.json';
 import mockEvents from '../mock-data/event-mock-data.json';
 import tags from '../mock-data/tags.json';
 
+const bcrypt = require('bcrypt');
+
+const SALT_NUMBER: number = Number(process.env.SALT_NUMBER) || 10;
+
 const resetDb = async (req:Request, res:Response) => {
   try {
     await prisma.$queryRawUnsafe('DROP TABLE IF EXISTS "event" CASCADE');
@@ -75,8 +79,22 @@ const resetDb = async (req:Request, res:Response) => {
 
     const results:any = {};
 
-    const createAllUsers = await prisma.user.createMany({ data: mockUsers });
-    results.createUsers = createAllUsers;
+    // const createAllUsers = await prisma.user.createMany({ data: mockUsers });
+    // results.createUsers = createAllUsers;
+    results.createUsers = { count: 0 };
+    for (const newUser of mockUsers) {
+      const salt = await bcrypt.genSalt(SALT_NUMBER);
+      const hashedPassword = await bcrypt.hash(newUser.password, salt);
+
+      // Adding hashed password to our user object
+      const body = {
+        ...newUser,
+        password: hashedPassword,
+      };
+      await prisma.user.create({ data: { ...body } });
+
+      results.createUsers.count += 1;
+    }
 
     const createAllTags = await prisma.tag.createMany({ data: tags });
     results.createTags = createAllTags;
@@ -116,14 +134,14 @@ const resetDb = async (req:Request, res:Response) => {
       results.addFriends.count += 1;
     }
 
-    res.status(200).send({
+    return res.status(200).send({
       data: {
         message: 'linkup_db succesfully reset - all tables dropped, re-migrated and re-populated with mock data',
         results,
       },
     });
   } catch (err) {
-    res.status(200).send({ error: err });
+    return res.status(200).send({ error: err });
   }
 };
 

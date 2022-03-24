@@ -14,6 +14,7 @@ router.use('/events', eventRoutes);
 router.use('/tags', tagRoutes);
 
 // dev only
+
 router.purge('/resetdb', initdb.resetDb);
 
 export default router;
