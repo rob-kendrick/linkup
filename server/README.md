@@ -35,7 +35,7 @@ Runs seed scripts
 
 ## re-initilise db and re-populate with data
 - In postman, send the PURGE request 'Reset db' in the devtools folder
-- if error, run `prisma migrate reset`
+- if error, run `npx prisma migrate reset` in the CLI and re-run PURGE request
 
 ## Example .env file
 ```
