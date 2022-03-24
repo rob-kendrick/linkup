@@ -1,0 +1,70 @@
+@import '../../index.css';
+
+@mixin .gradientFont {
+  background-image: var(--color2-fg-select);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.headerReturn {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  border: solid 2px black;
+}
+
+.headerReturn__container {
+  display: flex;
+  justify-content: space-between;
+  border: solid 2px black;
+  width: 50%;
+  align-items: center;
+}
+
+.headerReturn__txt{ 
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+}
+
+.headerReturn__option--visible {
+  width: 50%;
+  border: solid 2px black;
+  display: flex;
+  justify-content: end;
+}
+
+.headerReturn__option--visible > p {
+  font-weight: 700;
+  line-height: 0.9;
+  padding-right: 0.8rem;
+  background-image: var(--color2-fg-select);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.headerReturn__option--hidden {
+  width: 40%;
+  border: solid 2px black;
+}
+
+.headerReturn__btn {
+  height: 100%;
+  color: black;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.headerReturn__btn:hover > *  {
+  fill: var(--color2-bg);
+}
