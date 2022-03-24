@@ -29,7 +29,7 @@ model event {
   id_event         Int       @id @default(autoincrement())
   title            String    @db.VarChar(30)
   description      String    @db.VarChar(255)
-  creator          user      @relation(name: "created_events", fields: [creator_id], references: [id_user])
+  creator          user      @relation(name: "created_events", fields: [creator_id], references: [id_user], onDelete: Cascade)
   creator_id       Int
   min_participants Int?
   max_participants Int?
