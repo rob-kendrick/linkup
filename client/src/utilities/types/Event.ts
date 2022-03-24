@@ -4,14 +4,14 @@ export interface LuEvent {
   id_event: number
   title: string
   description: string
-  creator: number
+  creator: UserBasicData
   creator_id: number
-  min_participants?: number
-  max_participants?: number
+  min_participants?: number | null
+  max_participants?: number | null
   participants: UserBasicData[]
-  date: Date
-  date_created?:Date
-  date_updated?:Date
+  date: string
+  date_created?:string
+  date_updated?:string
   lat: number
   lng: number
   street_number: string
