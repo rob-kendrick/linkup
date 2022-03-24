@@ -1,0 +1,35 @@
+.app-container-delete {
+  height: 812px;
+  width: 375px;
+  background-color: lightgrey;
+}
+
+.navbar-delete {
+  position: absolute;
+  width: 375px;
+  background-color: grey;
+  height: 100px;
+  top: 712px;
+}
+
+.list-container-delete {
+  max-height: 600px;
+  overflow: auto
+}
+
+.list-item-delete {
+  width: 80%;
+  margin: 20px;
+  background-color: white;
+}
+
+.flex-row-delete {
+  background-color: grey;
+  display: flex;
+}
+
+.space-around-delete {
+  display: flex;
+  justify-content: space-around;
+  right: 0px;
+}

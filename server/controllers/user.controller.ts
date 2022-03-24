@@ -1,16 +1,9 @@
 import { Request, Response } from 'express';
-
 import prisma from '../db';
 
 interface ErrorOutput {
   error: boolean
   errorMsg: String[],
-}
-
-// Event interface
-interface EventBasic {
-  id_event: number
-  title: string
 }
 
 // Get user by ID
@@ -32,6 +25,13 @@ const getUserById = async (req: Request, res: Response) => {
           select: {
             id_event: true,
             title: true,
+          },
+        },
+        friends: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
           },
         },
       },
@@ -57,6 +57,13 @@ const getAllUsers = async (req: Request, res: Response) => {
           select: {
             id_event: true,
             title: true,
+          },
+        },
+        friends: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
           },
         },
       },
@@ -173,84 +180,110 @@ const editUserInfo = async (req: Request, res: Response) => {
             title: true,
           },
         },
+        friends: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
+
     });
 
     return res.status(200).send({ data: updatedUser });
   } catch (err) {
-    res.status(500).send({ error: err });
+    return res.status(500).send({ error: err });
   }
 };
 
-// get all events created by a user
-const getUserCreatedEvents = async (req: Request, res: Response) => {
+const addFriend = async (req: Request, res: Response) => {
   try {
+    // convert ids form params into integers
     const userId: number = Number(req.params.userid);
-    const newEvent = await prisma.user.findUnique({
+    const friendId: number = Number(req.params.friendid);
+
+    const addedFriend = await prisma.user.update({
       where: {
         id_user: userId,
       },
-      select: {
+      data: {
+        friends: {
+          connect: [{ id_user: friendId }],
+        },
+      },
+      include: {
         events_created: {
           select: {
             id_event: true,
             title: true,
-            max_participants: true,
-            date: true,
-            description: true,
-            participants: {
-              select: {
-                id_user: true,
-                first_name: true,
-                profile_picture: true,
-              },
-            },
           },
         },
-      },
-    });
-
-    res.status(200).send({ data: newEvent?.events_created });
-  } catch (err) {
-    res.status(500).send({ error: err });
-  }
-};
-
-// get all events a user is participating in
-const getUserParticipatingEvents = async (req: Request, res: Response) => {
-  try {
-    const userId: number = Number(req.params.userid);
-    const event = await prisma.user.findUnique({
-      where: {
-        id_user: userId,
-      },
-      select: {
         events_participating: {
           select: {
             id_event: true,
             title: true,
-            max_participants: true,
-            date: true,
-            description: true,
-            participants: {
-              select: {
-                id_user: true,
-                first_name: true,
-                profile_picture: true,
-              },
-            },
+          },
+        },
+        friends: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
           },
         },
       },
     });
-
-    res.status(200).send({ data: event?.events_participating });
+    res.status(200).send({ data: addedFriend });
   } catch (err) {
     res.status(500).send({ error: err });
   }
 };
 
-// Delete 1 user by ID 🅿️
+const removeFriend = async (req: Request, res: Response) => {
+  try {
+    // convert ids form params into integers
+    const userId: number = Number(req.params.userid);
+    const friendId: number = Number(req.params.friendid);
+
+    const removedFriend = await prisma.user.update({
+      where: {
+        id_user: userId,
+      },
+      data: {
+        friends: {
+          disconnect: [{ id_user: friendId }],
+        },
+      },
+      include: {
+        events_created: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
+        events_participating: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
+        friends: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+      },
+    });
+    res.status(200).send({ data: removedFriend });
+  } catch (err) {
+    res.status(500).send({ error: err });
+  }
+};
+
+// Delete user
 const deleteUser = async (req: Request, res: Response) => {
   try {
     const uid: number = Number(req.params.userid);
@@ -258,22 +291,41 @@ const deleteUser = async (req: Request, res: Response) => {
       where: {
         id_user: uid,
       },
+      include: {
+        events_created: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
+        events_participating: {
+          select: {
+            id_event: true,
+            title: true,
+          },
+        },
+        friends: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+      },
     });
-    res.status(200).send(deletedUser);
+    res.status(200).send({ data: deletedUser });
   } catch (err) {
-    console.log(' : : : ERROR DELETING USER FROM DB : : : ', err);
     res.status(500).send(err);
   }
 };
 
-// Private function for deleting all users (dev purposes)
-const _deleteAllUsers = async (req: Request, res: Response) => {
+// dev only
+const deleteAllUsers = async (req: Request, res: Response) => {
   try {
-    const deletedUserCount = await prisma.user.deleteMany();
-    res.status(200).send(deletedUserCount);
+    const deletedUserCount = await prisma.user.deleteMany({});
+    res.status(200).send({ data: deletedUserCount });
   } catch (err) {
-    console.log(' : : : ERROR DELETING ALL USERS : : : ', err);
-    res.status(500).send(err);
+    res.status(500).send({ error: err });
   }
 };
 
@@ -281,8 +333,77 @@ export default {
   getUserById,
   getAllUsers,
   editUserInfo,
-  getUserCreatedEvents,
-  getUserParticipatingEvents,
+  addFriend,
+  removeFriend,
   deleteUser,
-  _deleteAllUsers,
+  deleteAllUsers,
 };
+
+// deactivated
+// // get all events created by a user
+// const getUserCreatedEvents = async (req: Request, res: Response) => {
+//   try {
+//     const userId: number = Number(req.params.userid);
+//     const newEvent = await prisma.user.findUnique({
+//       where: {
+//         id_user: userId,
+//       },
+//       select: {
+//         events_created: {
+//           select: {
+//             id_event: true,
+//             title: true,
+//             max_participants: true,
+//             date: true,
+//             description: true,
+//             participants: {
+//               select: {
+//                 id_user: true,
+//                 first_name: true,
+//                 profile_picture: true,
+//               },
+//             },
+//           },
+//         },
+//       },
+//     });
+
+//     res.status(200).send({ data: newEvent?.events_created });
+//   } catch (err) {
+//     res.status(500).send({ error: err });
+//   }
+// };
+
+// // get all events a user is participating in
+// const getUserParticipatingEvents = async (req: Request, res: Response) => {
+//   try {
+//     const userId: number = Number(req.params.userid);
+//     const event = await prisma.user.findUnique({
+//       where: {
+//         id_user: userId,
+//       },
+//       select: {
+//         events_participating: {
+//           select: {
+//             id_event: true,
+//             title: true,
+//             max_participants: true,
+//             date: true,
+//             description: true,
+//             participants: {
+//               select: {
+//                 id_user: true,
+//                 first_name: true,
+//                 profile_picture: true,
+//               },
+//             },
+//           },
+//         },
+//       },
+//     });
+
+//     res.status(200).send({ data: event?.events_participating });
+//   } catch (err) {
+//     res.status(500).send({ error: err });
+//   }
+// };

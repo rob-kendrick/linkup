@@ -1,8 +1,6 @@
-/* eslint-disable camelcase */
 import { Request, Response } from 'express';
 import prisma from '../db';
 
-// Event interface
 interface Event {
   title: string
   description: string
@@ -19,13 +17,6 @@ interface Event {
   country : string
   creator?: any
   participants?: any
-}
-
-// Basic user interface
-interface UserBasic {
-  id_user: number
-  first_name: string
-  profile_picture: string
 }
 
 // Validating event info before passing to DB
@@ -123,16 +114,23 @@ const createEvent = async (req: Request, res: Response) => {
       return res.status(401).send({ error: eventValidation.errorMessages });
     }
 
-    const newEvent = await prisma.event.create({ data: eventInput });
-
-    res.status(201).send({
-      data: {
-        ...newEvent,
-        participants: [],
+    const newEvent = await prisma.event.create({
+      data: eventInput,
+      include: {
+        participants: true,
+        creator: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
       },
     });
+
+    return res.status(201).send({ data: newEvent });
   } catch (err) {
-    res.status(500).send({ error: err });
+    return res.status(500).send({ error: err });
   }
 };
 
@@ -260,6 +258,22 @@ const deleteEventById = async (req: Request, res: Response) => {
       where: {
         id_event: eventId,
       },
+      include: {
+        participants: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+        creator: {
+          select: {
+            id_user: true,
+            first_name: true,
+            profile_picture: true,
+          },
+        },
+      },
     });
     res.status(200).send({ data: deleteEvent });
   } catch (err) {
@@ -267,10 +281,10 @@ const deleteEventById = async (req: Request, res: Response) => {
   }
 };
 
-// delete all events. Not to be used in front-end
-const _deleteAllEvents = async (req: Request, res: Response) => {
+// Dev only
+const deleteAllEvents = async (req: Request, res: Response) => {
   try {
-    const deleteEvents = await prisma.event.deleteMany();
+    const deleteEvents = await prisma.event.deleteMany({});
     res.status(200).send({ data: deleteEvents });
   } catch (err) {
     res.status(500).send({ error: err });
@@ -285,5 +299,5 @@ export default {
   leaveEvent,
   editEvent,
   deleteEventById,
-  _deleteAllEvents,
+  deleteAllEvents,
 };

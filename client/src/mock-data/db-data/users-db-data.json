@@ -1,0 +1,342 @@
+{
+  "data": [
+      {
+          "id_user": 1,
+          "first_name": "Rafael",
+          "last_name": "Falk",
+          "bio": "Come hike with me, I give you good time",
+          "email": "i_was_cool_in_1999@hotmail.com",
+          "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02NG92FXS7-5b9d1d5fe400-192",
+          "date_created": "2022-03-24T11:37:56.666Z",
+          "events_created": [
+              {
+                  "id_event": 1,
+                  "title": "Football at the Park"
+              },
+              {
+                  "id_event": 2,
+                  "title": "Chess at cafe Cinema"
+              }
+          ],
+          "events_participating": [
+              {
+                  "id_event": 3,
+                  "title": "Kite surfing at Tempelhof!"
+              },
+              {
+                  "id_event": 4,
+                  "title": "Yoga and meditation"
+              },
+              {
+                  "id_event": 6,
+                  "title": "Climbing at the gym"
+              },
+              {
+                  "id_event": 7,
+                  "title": "Trip to german spy museum"
+              }
+          ],
+          "friends": [
+              {
+                  "id_user": 2,
+                  "first_name": "Danii",
+                  "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02GECAQXHP-cd3cfdaee488-512"
+              },
+              {
+                  "id_user": 4,
+                  "first_name": "Roberto",
+                  "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U026M0WTV54-a5ab86a621ce-512"
+              }
+          ]
+      },
+      {
+          "id_user": 2,
+          "first_name": "Danii",
+          "last_name": "Boi",
+          "bio": "Bonjour amigos, wie gehts? All good, a vida é boa. 再见",
+          "email": "the_pipes_are_calling@hmmm.com",
+          "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02GECAQXHP-cd3cfdaee488-512",
+          "date_created": "2022-03-24T11:37:56.890Z",
+          "events_created": [
+              {
+                  "id_event": 3,
+                  "title": "Kite surfing at Tempelhof!"
+              }
+          ],
+          "events_participating": [
+              {
+                  "id_event": 1,
+                  "title": "Football at the Park"
+              },
+              {
+                  "id_event": 2,
+                  "title": "Chess at cafe Cinema"
+              },
+              {
+                  "id_event": 4,
+                  "title": "Yoga and meditation"
+              },
+              {
+                  "id_event": 6,
+                  "title": "Climbing at the gym"
+              },
+              {
+                  "id_event": 7,
+                  "title": "Trip to german spy museum"
+              }
+          ],
+          "friends": [
+              {
+                  "id_user": 6,
+                  "first_name": "Kostas",
+                  "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02B4FJ40UE-dd6442787d2e-192"
+              },
+              {
+                  "id_user": 7,
+                  "first_name": "Man",
+                  "profile_picture": "https://www.abc.net.au/reslib/200803/r235728_948392.jpg"
+              },
+              {
+                  "id_user": 8,
+                  "first_name": "Lukasz",
+                  "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02MMRNNU3G-4bf89f8b79e2-512"
+              }
+          ]
+      },
+      {
+          "id_user": 3,
+          "first_name": "Peter",
+          "last_name": "Parker",
+          "bio": "Bloody amazing at life",
+          "email": "spidy@man.com",
+          "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02E9B12CG1-4ad80234df8b-512",
+          "date_created": "2022-03-24T11:37:57.113Z",
+          "events_created": [
+              {
+                  "id_event": 4,
+                  "title": "Yoga and meditation"
+              }
+          ],
+          "events_participating": [
+              {
+                  "id_event": 3,
+                  "title": "Kite surfing at Tempelhof!"
+              },
+              {
+                  "id_event": 7,
+                  "title": "Trip to german spy museum"
+              }
+          ],
+          "friends": [
+              {
+                  "id_user": 5,
+                  "first_name": "Antonio",
+                  "profile_picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png"
+              }
+          ]
+      },
+      {
+          "id_user": 4,
+          "first_name": "Roberto",
+          "last_name": "Kendrick",
+          "bio": "The real Slim Shady",
+          "email": "brtisherdeutschmann@livin.io",
+          "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U026M0WTV54-a5ab86a621ce-512",
+          "date_created": "2022-03-24T11:37:57.335Z",
+          "events_created": [],
+          "events_participating": [
+              {
+                  "id_event": 1,
+                  "title": "Football at the Park"
+              },
+              {
+                  "id_event": 4,
+                  "title": "Yoga and meditation"
+              },
+              {
+                  "id_event": 7,
+                  "title": "Trip to german spy museum"
+              }
+          ],
+          "friends": [
+              {
+                  "id_user": 1,
+                  "first_name": "Rafael",
+                  "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02NG92FXS7-5b9d1d5fe400-192"
+              },
+              {
+                  "id_user": 2,
+                  "first_name": "Danii",
+                  "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02GECAQXHP-cd3cfdaee488-512"
+              },
+              {
+                  "id_user": 4,
+                  "first_name": "Roberto",
+                  "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U026M0WTV54-a5ab86a621ce-512"
+              }
+          ]
+      },
+      {
+          "id_user": 5,
+          "first_name": "Antonio",
+          "last_name": "The-Great",
+          "bio": "Mexiacana is the life, Berlin is the love, life is love and what not",
+          "email": "i-left-my-friends@4tacos.com",
+          "profile_picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png",
+          "date_created": "2022-03-24T11:37:57.557Z",
+          "events_created": [
+              {
+                  "id_event": 5,
+                  "title": "BBQ at the Volkspark"
+              },
+              {
+                  "id_event": 6,
+                  "title": "Climbing at the gym"
+              }
+          ],
+          "events_participating": [
+              {
+                  "id_event": 3,
+                  "title": "Kite surfing at Tempelhof!"
+              },
+              {
+                  "id_event": 7,
+                  "title": "Trip to german spy museum"
+              }
+          ],
+          "friends": []
+      },
+      {
+          "id_user": 6,
+          "first_name": "Kostas",
+          "last_name": "TheTeacher",
+          "bio": "The top dog at Codeworks, if anyone tells you otherwise they are lying",
+          "email": "ceo-codeworks@berlin.com",
+          "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02B4FJ40UE-dd6442787d2e-192",
+          "date_created": "2022-03-24T11:37:57.780Z",
+          "events_created": [],
+          "events_participating": [
+              {
+                  "id_event": 1,
+                  "title": "Football at the Park"
+              },
+              {
+                  "id_event": 7,
+                  "title": "Trip to german spy museum"
+              }
+          ],
+          "friends": [
+              {
+                  "id_user": 1,
+                  "first_name": "Rafael",
+                  "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02NG92FXS7-5b9d1d5fe400-192"
+              },
+              {
+                  "id_user": 2,
+                  "first_name": "Danii",
+                  "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02GECAQXHP-cd3cfdaee488-512"
+              }
+          ]
+      },
+      {
+          "id_user": 7,
+          "first_name": "Man",
+          "last_name": "Startup Guy",
+          "bio": "I look really sad on Friday evening because I love my job",
+          "email": "startup-lyf@gmail.com",
+          "profile_picture": "https://www.abc.net.au/reslib/200803/r235728_948392.jpg",
+          "date_created": "2022-03-24T11:37:58.002Z",
+          "events_created": [],
+          "events_participating": [
+              {
+                  "id_event": 2,
+                  "title": "Chess at cafe Cinema"
+              },
+              {
+                  "id_event": 7,
+                  "title": "Trip to german spy museum"
+              }
+          ],
+          "friends": [
+              {
+                  "id_user": 2,
+                  "first_name": "Danii",
+                  "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02GECAQXHP-cd3cfdaee488-512"
+              },
+              {
+                  "id_user": 4,
+                  "first_name": "Roberto",
+                  "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U026M0WTV54-a5ab86a621ce-512"
+              },
+              {
+                  "id_user": 5,
+                  "first_name": "Antonio",
+                  "profile_picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png"
+              },
+              {
+                  "id_user": 7,
+                  "first_name": "Man",
+                  "profile_picture": "https://www.abc.net.au/reslib/200803/r235728_948392.jpg"
+              },
+              {
+                  "id_user": 9,
+                  "first_name": "Kendrikinho",
+                  "profile_picture": "https://i.pinimg.com/736x/b8/6b/69/b86b693eb6348359c19af2d970a4e8d9.jpg"
+              }
+          ]
+      },
+      {
+          "id_user": 8,
+          "first_name": "Lukasz",
+          "last_name": "Polkski",
+          "bio": "Polskie słowa są szalone, nikt ich nie rozumie",
+          "email": "lukaszrox91@sexyman.com",
+          "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02MMRNNU3G-4bf89f8b79e2-512",
+          "date_created": "2022-03-24T11:37:58.225Z",
+          "events_created": [
+              {
+                  "id_event": 7,
+                  "title": "Trip to german spy museum"
+              }
+          ],
+          "events_participating": [
+              {
+                  "id_event": 2,
+                  "title": "Chess at cafe Cinema"
+              },
+              {
+                  "id_event": 4,
+                  "title": "Yoga and meditation"
+              }
+          ],
+          "friends": [
+              {
+                  "id_user": 2,
+                  "first_name": "Danii",
+                  "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02GECAQXHP-cd3cfdaee488-512"
+              }
+          ]
+      },
+      {
+          "id_user": 9,
+          "first_name": "Kendrikinho",
+          "last_name": "Roberto",
+          "bio": "Definitely not Rob",
+          "email": "kennyrob@codeworks.com",
+          "profile_picture": "https://i.pinimg.com/736x/b8/6b/69/b86b693eb6348359c19af2d970a4e8d9.jpg",
+          "date_created": "2022-03-24T11:37:58.448Z",
+          "events_created": [],
+          "events_participating": [
+              {
+                  "id_event": 2,
+                  "title": "Chess at cafe Cinema"
+              },
+              {
+                  "id_event": 7,
+                  "title": "Trip to german spy museum"
+              }
+          ],
+          "friends": []
+      }
+  ]
+}

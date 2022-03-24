@@ -1,11 +1,10 @@
-/* eslint-disable camelcase */
 // @ts-nocheck
 
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import prisma from '../db';
 
-const SECRET_KEY = process.env.SECRET_KEY || 'open sesame';
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || 'open sesame';
 
 const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const authHeaders = req.headers.authorization;
@@ -15,7 +14,7 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
   try {
     // verifying and decoding our access token.
     // This verifies if it is the authorised user
-    const { id_user } = jwt.verify(token, SECRET_KEY);
+    const { id_user } = jwt.verify(token, JWT_SECRET_KEY);
 
     const foundUser = await prisma.user.findUnique({
       where: {
@@ -23,13 +22,10 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
       },
     });
     if (!foundUser) return res.sendStatus(401);
-
-    console.log(foundUser);
     req.user = foundUser;
-    next();
+    return next();
   } catch (err) {
-    console.log(' : : : ERROR IN AUTH MIDDLEWARE : : : ', err);
-    res.status(401).send(err);
+    return res.status(401).send(err);
   }
 };
 
