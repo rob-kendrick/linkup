@@ -19,7 +19,6 @@ function Test() {
 
   useEffect(() => {
     userApi.getAllUsers().then((response) => {
-      console.log('USEEFFECT', response.data);
       setUsers(response.data);
       dispatch(userActions.getUsersAction(response.data));
     }).catch();
