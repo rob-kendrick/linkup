@@ -12,11 +12,9 @@ function ChangePassword() {
       <InputFieldSimple />
       <InputFieldSimple />
 
-      {/* Both buttons should be 'ButtonLarge' components */}
-      {/* Both buttons should trigger /src/components/Popup */}
+      {/* button should be 'ButtonLarge' component */}
+      {/* button should trigger /src/components/Popup */}
       <button type="button" onClick={() => navigate(-1)}>Apply</button>
-      <br />
-      <button type="button" onClick={() => navigate(-1)}>Cancel</button>
     </div>
   );
 }

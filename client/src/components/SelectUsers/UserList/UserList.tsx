@@ -1,7 +1,6 @@
 import React from 'react';
 import UserListItem from './UserListItem/UserListItem';
 import userMockData from '../../../Mock/user.mock.json';
-import ButtonLarge from '../../Form/ButtonLarge/ButtonLarge';
 
 const userData: any[] = userMockData;
 
@@ -15,7 +14,6 @@ function UserList() {
           user={user}
         />
       ))}
-      <ButtonLarge />
     </div>
   );
 }

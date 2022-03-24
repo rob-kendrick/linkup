@@ -1,10 +1,11 @@
 import React from 'react';
-import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
+import { useNavigate } from 'react-router-dom';
 import InputFieldTitle from '../../../components/Form/InputFieldTitle/InputFieldTitle';
 import InputPhoto from '../../../components/Form/InputPhoto/InputPhoto';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 
 function ProfileEdit() {
+  const navigate = useNavigate();
   return (
     <div>
       <HeaderReturn />
@@ -13,7 +14,9 @@ function ProfileEdit() {
       <InputFieldTitle />
       <InputFieldTitle />
       <InputFieldTitle />
-      <ButtonLarge />
+      {/* button should be 'ButtonLarge' component */}
+      {/* button should trigger /src/components/Popup */}
+      <button type="button" onClick={() => navigate(-1)}>Apply</button>
     </div>
   );
 }

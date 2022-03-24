@@ -13,6 +13,9 @@ function Profile() {
       <Link to="/profile/profileedit">Edit Profile</Link>
       <br />
       <Link to="/profile/changepassword">Change Password</Link>
+      <br />
+      {/* 'Logout' should trigger /src/components/PopUp component */}
+      <Link to="/profile">Logout</Link>
     </div>
   );
 }
