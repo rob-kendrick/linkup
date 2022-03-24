@@ -19,10 +19,7 @@ Runs seed scripts
 
 ## Updating schema / models
 - Make changes
-- Run  `npx prisma migrate deploy`
-
-## Reset database and repopulate with mock data
-- http request PURGE to http://localhost:{PORT}/initdb
+- Run  `npx prisma migrate dev`
 
 ## Common errors with prisma studio
 1. Database 'linkup_db' does not exist:
