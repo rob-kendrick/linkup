@@ -5,7 +5,7 @@ import {
   render,
   waitFor,
 } from '@testing-library/react';
-import store from '../utilities/redux/store';
+import store from '../../utilities/redux/store';
 import TestComponent from './TestComponent';
 import '@testing-library/jest-dom';
 

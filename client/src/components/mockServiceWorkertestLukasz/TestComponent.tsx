@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
-import userApi from '../utilities/api/user.api';
-import userActions from '../utilities/redux/actions/user.actions';
-import eventApi from '../utilities/api/event.api';
-import eventActions from '../utilities/redux/actions/event.actions';
-import { RootState } from '../utilities/redux/store';
+import userApi from '../../utilities/api/user.api';
+import userActions from '../../utilities/redux/actions/user.actions';
+import { RootState } from '../../utilities/redux/store';
 // eslint-disable-next-line import/no-extraneous-dependencies
 // import '@testing-library/jest-dom';
-import { User } from '../utilities/types/User';
+import { User } from '../../utilities/types/User';
 
 function Test() {
   const [users, setUsers] = useState<User[]>();
