@@ -1,10 +1,36 @@
 import { User } from '../types/User';
 
-// const baseUrl = process.env.BASE_URL;
-const mockServer = 'https://ebea2f79-284c-4f96-b987-399a7c7cef2a.mock.pstmn.io/linkupUsers';
+const baseUrl = process.env.REACT_APP_BASE_URL!;
 
 const userApi = {
-  postUser: (user: User) => fetch(mockServer, {
+
+  getAllUsers: () => fetch(`${baseUrl}/users/`)
+    .then((response) => {
+      if (response.status < 300) {
+        const result = response.json();
+        return result;
+      }
+      throw Error('Server error');
+    })
+    .catch((e) => {
+      console.log(e);
+      return { error: true, message: e.message, code: e.code };
+    }),
+
+  getUserById: (id: number) => fetch(`${baseUrl}/users/${id}`)
+    .then((response) => {
+      if (response.status < 300) {
+        const result = response.json();
+        return result;
+      }
+      throw Error('Server error');
+    })
+    .catch((e) => {
+      console.log(e);
+      return { error: true, message: e.message, code: e.code };
+    }),
+
+  postUser: (user: User) => fetch(`${baseUrl}/users/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -19,39 +45,8 @@ const userApi = {
     })
     .catch((e) => {
       console.log(e);
-      alert(e); // destructure to sth, or add some behaviour to the UI element
-    }), // error msg is sent from the BE
-
-  getUserById: (id: number) => fetch(`${mockServer}/${id}`)
-    .catch()
-    .then((response) => {
-      if (response.status < 300) {
-        const result = response.json();
-        return result;
-      }
-      throw Error('Server error');
-    })
-    .catch((e) => {
-      console.log(e);
       return { error: true, message: e.message, code: e.code };
     }),
-
-  getAllUsers: () => fetch(mockServer)
-    .then((response) => {
-      if (response.status < 300) {
-        const result = response.json();
-        return result;
-      }
-      throw Error('Server error');
-    })
-    .catch((e) => {
-      console.log(e);
-      alert(e); // destructure to sth, or add some behaviour to the UI element
-    }), // error msg is sent from the BE
-
-  // addFriend: (userId: number, friendId: number) => {},
-
-  // removeFriend: (id: number, friendId: number) => {},
 };
 
 export default userApi;

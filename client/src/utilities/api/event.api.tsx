@@ -7,13 +7,14 @@ const eventApi = {
     .then((response) => {
       if (response.status < 300) {
         const result = response.json();
+        console.log('API', result);
         return result;
       }
       throw Error('Server error');
     })
     .catch((e) => {
       console.log(e);
-      alert(e);
+      return { error: true, message: e.message, code: e.code };
     }),
 
   getEventById: (id: number) => fetch(`${baseUrl}/events/${id}`)
@@ -26,7 +27,7 @@ const eventApi = {
     })
     .catch((e) => {
       console.log(e);
-      alert(e);
+      return { error: true, message: e.message, code: e.code };
     }),
 
   postEvent: (event: LuEvent) => fetch(`${baseUrl}/events`, {
@@ -44,7 +45,7 @@ const eventApi = {
     })
     .catch((e) => {
       console.log(e);
-      alert(e);
+      return { error: true, message: e.message, code: e.code };
     }),
 
   editEvent: (event: LuEvent) => fetch(`${baseUrl}/events/${event.id_event}`, {
@@ -62,7 +63,7 @@ const eventApi = {
     })
     .catch((e) => {
       console.log(e);
-      alert(e);
+      return { error: true, message: e.message, code: e.code };
     }),
 
   deleteEvent: (id: number) => fetch(`${baseUrl}/events/${id}`, {
@@ -79,7 +80,7 @@ const eventApi = {
     })
     .catch((e) => {
       console.log(e);
-      alert(e);
+      return { error: true, message: e.message, code: e.code };
     }),
 
   joinEvent: (eventId: number, userId: number) => fetch(`${baseUrl}/events/leave/${eventId}/${userId}`, {
@@ -97,7 +98,7 @@ const eventApi = {
     })
     .catch((e) => {
       console.log(e);
-      alert(e);
+      return { error: true, message: e.message, code: e.code };
     }),
 
   leaveEvent: (eventId: number, userId: number) => fetch(`${baseUrl}}/${eventId}/${userId}`, {
@@ -114,7 +115,7 @@ const eventApi = {
     })
     .catch((e) => {
       console.log(e);
-      alert(e);
+      return { error: true, message: e.message, code: e.code };
     }),
 };
 

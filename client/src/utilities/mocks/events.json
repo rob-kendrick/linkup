@@ -1,0 +1,203 @@
+{
+    "data": [
+        {
+            "id_event": 2,
+            "title": "Football at the Park",
+            "description": "Let's get together for some football ! I am a lonely man",
+            "creator_id": 12,
+            "min_participants": null,
+            "max_participants": null,
+            "date": "2022-06-23T18:25:43.511Z",
+            "date_created": "2022-03-23T10:44:12.663Z",
+            "date_updated": "2022-03-23T10:44:12.663Z",
+            "lat": 52.520609,
+            "lng": 13.46016,
+            "street_number": null,
+            "street_name": "Richard-Ermisch-Straße",
+            "postcode": "10247",
+            "city": "Berlin",
+            "country": "Deutschland",
+            "participants": [
+                {
+                    "id_user": 12,
+                    "first_name": "Peter",
+                    "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02E9B12CG1-4ad80234df8b-512"
+                }
+            ]
+        },
+        {
+            "id_event": 3,
+            "title": "Yoga and meditation",
+            "description": "Just moved here and haven't found a single hippie! help me change that?",
+            "creator_id": 9,
+            "min_participants": null,
+            "max_participants": null,
+            "date": "2022-06-27T18:25:43.511Z",
+            "date_created": "2022-03-23T11:06:30.277Z",
+            "date_updated": "2022-03-23T11:06:30.277Z",
+            "lat": 52.49147773175493,
+            "lng": 13.46970199110547,
+            "street_number": "5",
+            "street_name": "Schwarzer Panther, Puschkinallee",
+            "postcode": "12435",
+            "city": "Berlin",
+            "country": "Deutschland",
+            "participants": [
+                {
+                    "id_user": 12,
+                    "first_name": "Peter",
+                    "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02E9B12CG1-4ad80234df8b-512"
+                },
+                {
+                    "id_user": 14,
+                    "first_name": "Lukasz",
+                    "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02MMRNNU3G-4bf89f8b79e2-512"
+                }
+            ]
+        },
+        {
+            "id_event": 4,
+            "title": "Chess at cafe Cinema",
+            "description": "Looking for people on some bobby fisher shit. come at me and get ur king taken if ur brave enough",
+            "creator_id": 12,
+            "min_participants": null,
+            "max_participants": null,
+            "date": "2022-06-25T18:25:43.511Z",
+            "date_created": "2022-03-23T11:22:30.743Z",
+            "date_updated": "2022-03-23T11:22:30.743Z",
+            "lat": 52.53074552729435,
+            "lng": 13.40071489186021,
+            "street_number": "6",
+            "street_name": "Brunnenstrasse",
+            "postcode": "10247",
+            "city": "Berlin",
+            "country": "Deutschland",
+            "participants": []
+        },
+        {
+            "id_event": 5,
+            "title": "Kite surfing at Tempelhof!",
+            "description": "hey, i got a kite and wanna meet people who are into kitesurfing, hit me up!",
+            "creator_id": 12,
+            "min_participants": null,
+            "max_participants": null,
+            "date": "2022-06-26T18:25:43.511Z",
+            "date_created": "2022-03-23T11:23:06.690Z",
+            "date_updated": "2022-03-23T11:23:06.691Z",
+            "lat": 52.47887365912366,
+            "lng": 13.40072834750656,
+            "street_number": "12",
+            "street_name": "TWY NORTH-EAST",
+            "postcode": "10247",
+            "city": "Berlin",
+            "country": "Deutschland",
+            "participants": [
+                {
+                    "id_user": 11,
+                    "first_name": "Roberto",
+                    "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U026M0WTV54-a5ab86a621ce-512"
+                },
+                {
+                    "id_user": 12,
+                    "first_name": "Peter",
+                    "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02E9B12CG1-4ad80234df8b-512"
+                }
+            ]
+        },
+        {
+            "id_event": 7,
+            "title": "BBQ at the Volkspark",
+            "description": "I bought all the cheap meat at Aldi. Bring some beers and help me finish ti off",
+            "creator_id": 14,
+            "min_participants": null,
+            "max_participants": null,
+            "date": "2022-06-28T18:25:43.511Z",
+            "date_created": "2022-03-23T11:23:33.779Z",
+            "date_updated": "2022-03-23T11:23:33.780Z",
+            "lat": 52.5275207675146,
+            "lng": 13.43158052077611,
+            "street_number": "14",
+            "street_name": "Am Friedrichshain",
+            "postcode": "10407",
+            "city": "Berlin",
+            "country": "Deutschland",
+            "participants": []
+        },
+        {
+            "id_event": 8,
+            "title": "Climbing at the gym",
+            "description": "Looking for people to spot me while bouldering",
+            "creator_id": 14,
+            "min_participants": null,
+            "max_participants": null,
+            "date": "2022-06-28T18:25:43.511Z",
+            "date_created": "2022-03-23T11:23:51.848Z",
+            "date_updated": "2022-03-23T11:23:51.849Z",
+            "lat": 52.5275207675146,
+            "lng": 13.43158052077611,
+            "street_number": "46",
+            "street_name": "Gymstrasse",
+            "postcode": "10407",
+            "city": "Berlin",
+            "country": "Deutschland",
+            "participants": []
+        },
+        {
+            "id_event": 9,
+            "title": "Trip to german spy museum",
+            "description": "I am losoking to culturally enrich myself or something idk",
+            "creator_id": 15,
+            "min_participants": null,
+            "max_participants": null,
+            "date": "2022-06-28T18:25:43.511Z",
+            "date_created": "2022-03-23T11:24:05.370Z",
+            "date_updated": "2022-03-23T11:24:05.370Z",
+            "lat": 52.50816718734877,
+            "lng": 13.38846097951034,
+            "street_number": "88",
+            "street_name": "Zimmerstrasse",
+            "postcode": "10117",
+            "city": "Berlin",
+            "country": "Deutschland",
+            "participants": []
+        },
+        {
+            "id_event": 10,
+            "title": "Trip to german spy museum",
+            "description": "I am losoking to culturally enrich myself or something idk",
+            "creator_id": 15,
+            "min_participants": null,
+            "max_participants": null,
+            "date": "2022-06-28T18:25:43.511Z",
+            "date_created": "2022-03-23T12:35:01.004Z",
+            "date_updated": "2022-03-23T12:35:01.005Z",
+            "lat": 52.50816718734877,
+            "lng": 13.38846097951034,
+            "street_number": "88",
+            "street_name": "Zimmerstrasse",
+            "postcode": "10117",
+            "city": "Berlin",
+            "country": "Deutschland",
+            "participants": []
+        },
+        {
+            "id_event": 12,
+            "title": "Trip to german spy museum 2",
+            "description": "I am losoking to culturally enrich myself or something idk",
+            "creator_id": 12,
+            "min_participants": null,
+            "max_participants": null,
+            "date": "2022-06-28T18:25:43.511Z",
+            "date_created": "2022-03-23T12:40:54.255Z",
+            "date_updated": "2022-03-23T12:40:54.256Z",
+            "lat": 52.50816718734877,
+            "lng": 13.38846097951034,
+            "street_number": "88",
+            "street_name": "Zimmerstrasse",
+            "postcode": "10117",
+            "city": "Berlin",
+            "country": "Deutschland",
+            "participants": []
+        }
+    ]
+}
