@@ -30,6 +30,12 @@ Runs seed scripts
 - Run `npx prisma generate`
 - Run `npx prisma migrate dev`
 
+## Import postman collection with all endpoints
+- In postman, click import, import json, paste `https://www.getpostman.com/collections/7684c170fcf79ab13973`
+
+## re-initilise db and re-populate with data
+- In postman, send the PURGE request 'Reset db' in the devtools folder
+
 ## Example .env file
 ```
 DATABASE_URL="DATABASE_URL="postgresql://{username}:{password}@localhost:5432/linkup_db"
