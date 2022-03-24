@@ -1,6 +1,6 @@
 import React from 'react';
 import UserListItem from './UserListItem/UserListItem';
-import userMockData from '../../../Mock/user.mock.json';
+import userMockData from '../../../mock-data/user.mock.delete.json';
 
 const userData: any[] = userMockData;
 

@@ -1,0 +1,51 @@
+{
+  "data": {
+      "id_event": 2,
+      "title": "Chess at cafe Cinema",
+      "description": "Looking for people on some bobby fisher shit. come at me and get ur king taken if ur brave enough",
+      "creator_id": 1,
+      "min_participants": 1,
+      "max_participants": 1,
+      "date": "2022-03-29T11:00:00.511Z",
+      "date_created": "2022-03-24T11:37:58.452Z",
+      "date_updated": "2022-03-24T11:37:58.453Z",
+      "lat": 52.53074552729435,
+      "lng": 13.40071489186021,
+      "street_number": "6",
+      "street_name": "Brunnenstrasse",
+      "postcode": "10247",
+      "city": "Berlin",
+      "country": "Deutschland",
+      "tags": [
+          "Game",
+          "Indoor"
+      ],
+      "participants": [
+          {
+              "id_user": 2,
+              "first_name": "Danii",
+              "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02GECAQXHP-cd3cfdaee488-512"
+          },
+          {
+              "id_user": 7,
+              "first_name": "Man",
+              "profile_picture": "https://www.abc.net.au/reslib/200803/r235728_948392.jpg"
+          },
+          {
+              "id_user": 8,
+              "first_name": "Lukasz",
+              "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02MMRNNU3G-4bf89f8b79e2-512"
+          },
+          {
+              "id_user": 9,
+              "first_name": "Kendrikinho",
+              "profile_picture": "https://i.pinimg.com/736x/b8/6b/69/b86b693eb6348359c19af2d970a4e8d9.jpg"
+          }
+      ],
+      "creator": {
+          "id_user": 1,
+          "first_name": "Rafael",
+          "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02NG92FXS7-5b9d1d5fe400-192"
+      }
+  }
+}

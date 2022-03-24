@@ -1,0 +1,51 @@
+{
+  "data": {
+      "id_user": 1,
+      "first_name": "Rafael",
+      "last_name": "Falk",
+      "bio": "Come hike with me, I give you good time",
+      "email": "i_was_cool_in_1999@hotmail.com",
+      "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02NG92FXS7-5b9d1d5fe400-192",
+      "date_created": "2022-03-24T11:37:56.666Z",
+      "events_created": [
+          {
+              "id_event": 1,
+              "title": "Football at the Park"
+          },
+          {
+              "id_event": 2,
+              "title": "Chess at cafe Cinema"
+          }
+      ],
+      "events_participating": [
+          {
+              "id_event": 3,
+              "title": "Kite surfing at Tempelhof!"
+          },
+          {
+              "id_event": 4,
+              "title": "Yoga and meditation"
+          },
+          {
+              "id_event": 6,
+              "title": "Climbing at the gym"
+          },
+          {
+              "id_event": 7,
+              "title": "Trip to german spy museum"
+          }
+      ],
+      "friends": [
+          {
+              "id_user": 2,
+              "first_name": "Danii",
+              "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U02GECAQXHP-cd3cfdaee488-512"
+          },
+          {
+              "id_user": 4,
+              "first_name": "Roberto",
+              "profile_picture": "https://ca.slack-edge.com/T0WU5R8NT-U026M0WTV54-a5ab86a621ce-512"
+          }
+      ]
+  }
+}
