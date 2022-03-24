@@ -11,9 +11,9 @@ function ProfileEdit() {
       <HeaderReturn />
       <h3>ProfileEdit</h3>
       <InputPhoto />
+      {/* <InputFieldTitle />
       <InputFieldTitle />
-      <InputFieldTitle />
-      <InputFieldTitle />
+      <InputFieldTitle /> */}
       {/* button should be 'ButtonLarge' component */}
       {/* button should trigger /src/components/Popup */}
       <button type="button" onClick={() => navigate(-1)}>Apply</button>

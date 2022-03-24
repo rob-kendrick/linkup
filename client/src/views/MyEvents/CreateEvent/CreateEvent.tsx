@@ -11,9 +11,9 @@ function CreateEvent() {
     <div>
       <HeaderReturn />
       <h3>CreateEvent</h3>
+      {/* <InputFieldTitle />
       <InputFieldTitle />
-      <InputFieldTitle />
-      <InputFieldTitle />
+      <InputFieldTitle /> */}
       <MapSmall />
       {/* the following line should be a 'ButtonLarge' component */}
       <button type="button" onClick={() => navigate('/myevents/create/participants')}>Add Participants</button>

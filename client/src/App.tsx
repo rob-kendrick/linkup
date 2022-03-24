@@ -22,6 +22,7 @@ import ChatGroup from './views/Chat/ChatGroup/ChatGroup';
 import UserDetails from './views/Profile/Friends/UserDetails/UserDetails';
 import store from './utilities/redux/store';
 import './App.css';
+import SignUp from './views/Authentication/SignUp/SignUp';
 
 function App() {
   const { pathname } = useLocation();
@@ -29,7 +30,7 @@ function App() {
     <Provider store={store}>
       <div className="app-container-delete">
         <Routes>
-          <Route path="/" element={<BrowseEvents />} />
+          <Route path="/" element={<SignUp />} />
           <Route path="events" element={<BrowseEvents />} />
           <Route path="events/:eventid" element={<EventDetails />} />
           <Route path="events/:eventid/chat" element={<ChatGroup />} />
