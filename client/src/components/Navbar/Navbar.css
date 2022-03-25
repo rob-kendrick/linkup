@@ -1,0 +1,26 @@
+/* Navbar */
+
+.navbar {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color:#263056;
+  height: 15vh; 
+  width: 375px;
+  display: flex;
+}
+
+.navbar-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color:white;
+  width: 5rem; 
+}
+
+.navbar-icon{
+  color:white;
+  width: 2rem;
+  margin-bottom: 5px;
+}
