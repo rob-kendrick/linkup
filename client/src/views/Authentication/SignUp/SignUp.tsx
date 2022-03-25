@@ -1,8 +1,7 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { InputTextField, InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
-import InputFieldSimple from '../../../components/Form/InputFieldSimple/InputFieldSimple';
-import InputFieldTitle from '../../../components/Form/InputFieldTitle/InputFieldTitle';
 import InputPhoto from '../../../components/Form/InputPhoto/InputPhoto';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 
@@ -40,14 +39,14 @@ function SignUp() {
       <h3>SignUp</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputPhoto />
-        <InputFieldTitle
+        <InputTextField
           type="text"
           label="First Name"
           errorMessage={errors.first_name?.message}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...register('first_name', { required: 'This field is required' })}
         />
-        <InputFieldTitle
+        <InputTextField
           type="text"
           label="Last Name"
           errorMessage={errors.last_name?.message}
@@ -55,7 +54,22 @@ function SignUp() {
           {...register('last_name', { required: 'This field is required' })}
         />
 
-        <InputFieldTitle
+        <InputTextArea
+          type="text"
+          label="Bio"
+          errorMessage={errors.email?.message}
+          rows={3}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...register('bio', {
+            required: 'This field is required',
+            minLength: {
+              value: 2,
+              message: 'Min length is 1 (pick an Emoji)',
+            },
+          })}
+        />
+
+        <InputTextField
           type="text"
           label="Email"
           errorMessage={errors.email?.message}
@@ -63,7 +77,7 @@ function SignUp() {
           {...register('email', { required: 'This field is required' })}
         />
 
-        <InputFieldTitle
+        <InputTextField
           type="password"
           label="Password"
           errorMessage={errors.password?.message}

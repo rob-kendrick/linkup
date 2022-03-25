@@ -3,44 +3,46 @@
   background-color: white;
 }
 
-.form-wrap {
-  position: relative;
+textarea {
+  resize: none;
+  padding: 10px 15px;
 }
 
-input[type=text], input[type=password]  {
+.form-input  {
   border: 1.5px solid var(--color4-grey1);
   box-sizing: border-box;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 16px;
   padding-left: 20px;
-  min-height: 4em;
+  min-height: 3.5em;
   width: 90%;
   margin-bottom: 10px;
+  line-height:  150%;
 }
 
-input:focus + label,
-/* input:valid + label{ */
-input:not(:focus):valid + label{
+.form-input:valid + .input-label,
+.form-input:focus + .input-label{
   font-size: 10px;
   color: #afbdcf;
   top: -5px;
-  left:10px;
-  background: #ffffff;
+  left: 10px;
+  background: white;
   padding: 0px 5px 0px 5px;
 }
 
-/* .input-wrap {width:auto; height:auto; position:relative;
-} */
+.input-wrap {width:auto; height:auto; position:relative;
+}
 
-.input-wrap label {
+.input-wrap .input-label {
+  background-color: transparent;
   position: absolute;
   font-size: 16px;
   color: #afbdcf;
   padding: 14px;
-  top: 0;
-  left: 0;
-  /* transition:0.2s ease all;
+  top: 5px;
+  left: 5px;
+  transition:0.2s ease all;
   -moz-transition:0.2s ease all;
-  -webkit-transition:0.2s ease all; */
+  -webkit-transition:0.2s ease all;
   pointer-events: none;
 }
