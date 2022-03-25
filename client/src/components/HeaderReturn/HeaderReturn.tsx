@@ -1,29 +1,32 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/require-default-props */
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as SvgArrow } from '../../assets/IoIosArrowBack.svg';
 import './headerReturn.css';
 
-type HeaderReturnProps = {
-  option?: boolean
+type props = {
+  resetAvailability?: boolean;
+  text?: string;
+  passedFunction?: (args: boolean) => boolean;
 };
 
-function HeaderReturn(props: HeaderReturnProps) {
+function HeaderReturn({ resetAvailability, text, passedFunction }: props) {
   const navigate = useNavigate();
-  // const { option, text } = props;
-  const option = true;
-  const text = 'Create activity';
+
   return (
-    <div className="headerReturn">
-      <div className="headerReturn__container">
-        <button className="headerReturn__btn" type="button" onClick={() => navigate(-1)}>
+    <div className="hr">
+      <div className="hr__container">
+        <button className="hr__btn" type="button" onClick={() => navigate(-1)}>
           <SvgArrow />
         </button>
-        <div className="headerReturn__txt">{text}</div>
+        <div className="hr__txt">{text}</div>
       </div>
-      {option ? <div className="headerReturn__option--visible"><p>Reset</p></div>
-        : <div className="headerReturn__option--hidden" />}
+      <div className="hr__option" data-testid="hr__option">
+        {passedFunction && resetAvailability ? <button className="hr__btnReset" type="button" onClick={() => passedFunction && passedFunction(true)}>Reset</button> : null}
+      </div>
     </div>
   );
 }
 
-export default HeaderReturn;
+export default React.memo(HeaderReturn);
