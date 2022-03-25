@@ -8,8 +8,7 @@ function FilterTitle() {
   const navigate = useNavigate();
   return (
     <div>
-      <HeaderReturn />
-      <h3>FilterTitle</h3>
+      <HeaderReturn text="Title" />
       <SearchField />
       {/* <EventList /> */}
       {/* button should be 'ButtonLarge' component */}

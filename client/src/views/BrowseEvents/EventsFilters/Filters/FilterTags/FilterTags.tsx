@@ -7,8 +7,8 @@ function FilterTags() {
   const navigate = useNavigate();
   return (
     <div>
-      <HeaderReturn />
-      <h3>FilterTags</h3>
+      <HeaderReturn text="Tags" />
+
       <FilterTagsList />
       {/* button should be 'ButtonLarge' component */}
       {/* button should trigger /src/components/Popup */}
