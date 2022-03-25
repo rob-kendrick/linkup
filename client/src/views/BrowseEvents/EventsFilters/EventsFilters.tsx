@@ -33,8 +33,7 @@ const filterListData = [
 function EventsFilters() {
   return (
     <div>
-      <HeaderReturn />
-      <h3>Fitlers</h3>
+      <HeaderReturn text="Fitlers" />
       <MenuList data={filterListData} />
     </div>
   );
