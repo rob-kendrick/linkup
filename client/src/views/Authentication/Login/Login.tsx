@@ -1,7 +1,7 @@
 import React from 'react';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import { InputTextField } from '../../../components/Form/InputTextField/InputTextField';
-import './login.css';
+import './Login.css';
 
 function Login() {
   return (
