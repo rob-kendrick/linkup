@@ -1,0 +1,58 @@
+@import '../../index.css';
+
+.hr {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hr__container {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  align-items: center;
+}
+
+.hr__txt{ 
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+}
+
+.hr__option {
+  width: 50%;
+  display: flex;
+  justify-content: end;
+}
+
+.hr__btnReset {
+  border: 0;
+  cursor: pointer;
+  min-width: 30%;
+  font-weight: 700;
+  line-height: 0.9;
+  padding-right: 0.8rem;
+  background-image: var(--color2-fg-select);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.hr__btn {
+  height: 100%;
+  color: black;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+  min-width: 30%;
+  border: 0;
+}
+
+.hr__btn:hover > *  {
+  fill: var(--color2-bg);
+}
