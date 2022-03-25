@@ -1,0 +1,74 @@
+@import '../../index.css';
+
+.hr {
+  background-color: white;
+}
+
+.hr__statusBar {
+  padding-bottom: 1rem;
+}
+@media only screen and (min-width: 430px) {
+  .hr__statusBar {
+    display: none;
+  }
+  .hr {
+    padding-top: 3.25rem;
+  }
+}
+
+.hr__main {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.hr__container {
+  display: flex;
+  justify-content: flex-start;
+  width: 75%;
+  align-items: center;
+}
+
+.hr__txt{ 
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+}
+
+.hr__option {
+  width: 25%;
+  display: flex;
+  justify-content: end;
+}
+
+.hr__btnReset {
+  border: 0;
+  cursor: pointer;
+  min-width: 30%;
+  font-weight: 700;
+  line-height: 0.9;
+  padding-right: 0.8rem;
+  background-image: var(--color2-fg-select);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.hr__btn {
+  height: 100%;
+  color: black;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+  min-width: 20%;
+  border: 0;
+}
+
+.hr__btn:hover > *  {
+  fill: var(--color2-bg);
+}

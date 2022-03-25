@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import InputFieldSimple from '../../../components/Form/InputFieldSimple/InputFieldSimple';
+import { InputTextField } from '../../../components/Form/InputTextField/InputTextField';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 
 function ChangePassword() {
@@ -9,8 +9,8 @@ function ChangePassword() {
     <div>
       <HeaderReturn />
       <h3>ChangePassword</h3>
-      <InputFieldSimple />
-      <InputFieldSimple />
+      <InputTextField />
+      <InputTextField />
 
       {/* button should be 'ButtonLarge' component */}
       {/* button should trigger /src/components/Popup */}

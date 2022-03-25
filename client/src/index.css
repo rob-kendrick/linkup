@@ -5,7 +5,6 @@ body {
   font-family: 'Roboto';
   padding: 0px;
   margin:0px; 
-  
 }
 
 h1, h2, h3, h4, p {
@@ -13,13 +12,6 @@ h1, h2, h3, h4, p {
   margin-block-end: 0px; 
 }
 
-
-
-
-
-
-/* use linear-gradient as 'background-image' */
-/* use them with 'backgroud-color: var(--color1-bg)' */
 :root {
   --color1-bg: linear-gradient(#FF00D6, #FF4D00);
   --color1-fg: #FFFFFF;

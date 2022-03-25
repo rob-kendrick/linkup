@@ -1,0 +1,56 @@
+.itf__wrap {width:auto; height:auto; position:relative;
+}
+
+.itf__input  {
+  border: 1.5px solid var(--color4-grey1);
+  box-sizing: border-box;
+  border-radius: 8px;
+  font-size: 16px;
+  padding-left: 20px;
+  min-height: 3.5em;
+  max-width: 300px;
+  width: 70vw;
+  margin-bottom: 10px;
+  line-height: 150%;
+}
+
+.itf__textarea {
+  resize: none;
+  padding: 10px 15px;
+}
+
+.itf__label {
+  background-color: transparent;
+  position: absolute;
+  font-size: 16px;
+  color: rgb(182, 182, 182);
+  padding: 14px;
+  top: 5px;
+  left: 5px;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+  pointer-events: none;
+}
+
+.itf__input:valid + .itf__label,
+.itf__input:focus + .itf__label{
+  border-radius: 4px;
+  font-size: 11px;
+  color: grey;
+  top: -5px;
+  left: 10px;
+  background: white;
+  padding: 0px 5px 2px 5px;
+}
+
+.itf__error {
+  position: absolute;
+  font-size: 11px;
+  color: #FF4D00;
+  background-clip: text;
+  top: -15px;
+  right: 10px;
+  background: white;
+  padding: 0px 5px 0px 5px;
+}
