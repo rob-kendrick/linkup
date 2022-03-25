@@ -2,14 +2,27 @@
 
 .hr {
   background-color: white;
+}
+
+.hr__statusBar {
+  padding-bottom: 1rem;
+}
+@media only screen and (min-width: 430px) {
+  .hr__statusBar {
+    display: none;
+  }
+}
+
+.hr__main {
   display: flex;
   justify-content: space-between;
+  padding: 0 1rem 1rem 1rem;
 }
 
 .hr__container {
   display: flex;
-  justify-content: space-between;
-  width: 50%;
+  justify-content: flex-start;
+  width: 75%;
   align-items: center;
 }
 
@@ -20,7 +33,7 @@
 }
 
 .hr__option {
-  width: 50%;
+  width: 25%;
   display: flex;
   justify-content: end;
 }
@@ -49,7 +62,7 @@
   align-items: center;
   background-color: white;
   cursor: pointer;
-  min-width: 30%;
+  min-width: 20%;
   border: 0;
 }
 
