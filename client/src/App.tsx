@@ -31,7 +31,8 @@ function App() {
   const { pathname } = useLocation();
   return (
     <Provider store={store}>
-      <div className="app-container-delete">
+      <div className="app-container">
+        <div className="routes-container">
         <Routes>
           <Route path="/" element={<BrowseEvents />} />
           {/* <Route path="/" element={<LandingPage />} /> */}
@@ -56,6 +57,7 @@ function App() {
           <Route path="profile/profileedit" element={<ProfileEdit />} />
           <Route path="profile/changepassword" element={<ChangePassword />} />
         </Routes>
+        </div>
         {(pathname === '/'
           || pathname === '/events'
           || pathname === '/myevents'

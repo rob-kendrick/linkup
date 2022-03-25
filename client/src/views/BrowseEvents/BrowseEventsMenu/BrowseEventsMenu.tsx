@@ -4,7 +4,8 @@ import moment from 'moment';
 import list from '../../../assets/MdFormatListBulleted.svg';
 import map from '../../../assets/FaRegMap.svg';
 import filter from '../../../assets/BiFilter.svg';
-import './BrowseEventsMenu.css'
+import './BrowseEventsMenu.css';
+import HeaderMain from '../../../components/HeaderMain/HeaderMain';
 
 interface toogleInt {
   mapClick: MouseEventHandler;
@@ -30,7 +31,9 @@ function BrowseEventsMenu({ listClick, mapClick, printDate } : toogleInt) {
   return (
     <div className="filter-menu-container">
       <div className="filter-menu-calendar">
-        <h3>Browse Activities</h3>
+        <HeaderMain
+          title="Browse Events"
+        />
       </div>
       <div className="filter-menu-calendar">
         {dates.map((date) => (

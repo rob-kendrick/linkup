@@ -2,14 +2,21 @@
 @import url('https://unpkg.com/leaflet@1.5.1/dist/leaflet.css');
 
 body {
-  font-family: 'Roboto';
-  padding: 0px;
-  margin:0px; 
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--color2-bg);
+  letter-spacing: 0.04em;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 h1, h2, h3, h4, p {
-  margin-block-start: 0px; 
-  margin-block-end: 0px; 
+  margin-block-start: 0px;
+  margin-block-end: 0px;
 }
 
 :root {

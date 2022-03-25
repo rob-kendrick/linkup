@@ -4,9 +4,7 @@ import BrowseEventsMenu from './BrowseEventsMenu/BrowseEventsMenu';
 import EventsList from '../../components/EventsList/EventsList';
 import MapLarge from '../../components/MapLarge/MapLarge';
 import * as mockEventsData from '../../utilities/mocks/db-data/events-db-data.json';
-
-
-
+import './BrowseEvents.css';
 
 function BrowseEvents() {
   const [mapView, setMapView] = useState(true);
@@ -38,13 +36,13 @@ function BrowseEvents() {
   };
 
   return (
-    <div className="browse-events-container">
+    <div>
       {/* Temporary CSS on the global CSS file */}
-      <div className="browse-events-filter-menu">
+      <div className="be__filter-menu">
         <BrowseEventsMenu listClick={listClick} mapClick={mapClick} printDate={printDate} />
       </div>
 
-      <div className="browse-events-map">
+      <div>
         {
           mapView
             ? (<MapLarge eventList={filteredEvents.data} />)
