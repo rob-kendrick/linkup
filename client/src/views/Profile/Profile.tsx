@@ -1,21 +1,38 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import MenuList from '../../components/MenuList/MenuList';
+import FaUsers from '../../assets/FaUsers.svg';
+import FaUser from '../../assets/FaUser.svg';
+import HiLockClosed from '../../assets/HiLockClosed.svg';
+import ImExit from '../../assets/ImExit.svg';
+
+const profileListData = [
+  {
+    link: 'profile/friends',
+    text: 'Friends',
+    svgLogo: FaUsers,
+  },
+  {
+    link: '/profile/profileedit',
+    text: 'Edit Profile',
+    svgLogo: FaUser,
+  },
+  {
+    link: '/profile/changepassword',
+    text: 'Change Password',
+    svgLogo: HiLockClosed,
+  },
+  {
+    link: '/profile',
+    text: 'Logout',
+    svgLogo: ImExit,
+  },
+];
 
 function Profile() {
   return (
     <div>
-      <MenuList />
       <h3>Profile</h3>
-      {/* the following links should all be replaced with the 'MenuList' Component */}
-      <Link to="/profile/friends">Friends</Link>
-      <br />
-      <Link to="/profile/profileedit">Edit Profile</Link>
-      <br />
-      <Link to="/profile/changepassword">Change Password</Link>
-      <br />
-      {/* 'Logout' should trigger /src/components/PopUp component */}
-      <Link to="/profile">Logout</Link>
+      <MenuList data={profileListData} />
     </div>
   );
 }
