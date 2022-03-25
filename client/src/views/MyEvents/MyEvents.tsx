@@ -7,7 +7,7 @@ function MyEvents() {
     <div>
       <h3>MyEvents</h3>
       <MyEventsMenu />
-      <EventsList />
+      {/* <EventsList /> */}
     </div>
   );
 }

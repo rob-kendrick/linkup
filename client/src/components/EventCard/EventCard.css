@@ -1,0 +1,50 @@
+.activity-card-profile{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin:0px;
+  padding: 10px; 
+}
+
+.activity-card-header-info{
+  margin-left: 10px;
+}
+
+#activity-card-title{
+  margin: 0px; 
+}
+
+#activity-card-user{
+  margin: 0px;
+}
+
+.activity-card-details{
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+}
+
+.activity-card-details-icon{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border-radius: 50%;
+  background-color: #F2F2F2;
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+  margin-right: 10px; 
+}
+
+.activity-card-details{
+  display: flex;
+  align-items: center; 
+  width: 90%;
+  margin: 10px; 
+  
+}
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}

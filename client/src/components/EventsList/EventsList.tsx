@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import EventCard from '../EventCard/EventCard';
-import eventMockData from '../../utilities/mocks/db-data/events-db-data.json';
+import type { LuEvent } from '../../utilities/types/Event';
+import './EventsList.css';
 
-const eventData: any[] = eventMockData.data;
+interface eventProps {
+  eventList : LuEvent[];
+}
 
-function EventList() {
+function EventList({ eventList }: eventProps) {
+  const events = eventList;
+
+  console.log(events, 'EventList component events');
+
   return (
-    <div className="list-container-delete">
+    <div className="event-list-container">
       <h3>EventList</h3>
-      {eventData.map((event) => (
+      {events.map((event) => (
         <EventCard
+          eventList={eventList}
           key={event.id_event}
           event={event}
         />

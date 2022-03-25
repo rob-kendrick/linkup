@@ -1,0 +1,31 @@
+.button-small {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 99px;
+  height: 44px;
+  left: 31px;
+  top: 184px;
+  border: solid 1.5px #D9D9D9;
+  border-radius: 3px; 
+  background-color: transparent; 
+}
+
+.button-small:focus{
+  background-color: #263056;
+  color:white;
+  border: none;
+  border-radius: 3px;  
+}
+
+.button-icon{
+  margin-right: 10px; 
+}
+
+.activity-card-button-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 20px; 
+}
