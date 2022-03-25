@@ -11,7 +11,7 @@ function FilterTitle() {
       <HeaderReturn />
       <h3>FilterTitle</h3>
       <SearchField />
-      <EventList />
+      {/* <EventList /> */}
       {/* button should be 'ButtonLarge' component */}
       {/* button should trigger /src/components/Popup */}
       <button type="button" onClick={() => navigate(-1)}>Apply</button>

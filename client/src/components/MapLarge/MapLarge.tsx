@@ -7,7 +7,7 @@ import userMarker from '../../assets/BiCurrentLocation.svg';
 
 interface eventProps {
   events : LuEvent[];
-  }
+}
 
 export default function MapLarge({ events } : eventProps) {
   console.log(events, 'these are the events from the map');

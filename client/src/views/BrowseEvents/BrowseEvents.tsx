@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import BrowseEventsMenu from './BrowseEventsMenu/BrowseEventsMenu';
-import EventList from '../../components/EventsList/EventsList';
+import EventsList from '../../components/EventsList/EventsList';
 import MapLarge from '../../components/MapLarge/MapLarge';
 import mockEventsData from '../../utilities/mocks/db-data/events-db-data.json';
 import type { LuEvent } from '../../utilities/types/Event';
 
 function BrowseEvents() {
-  const [toggle, setToggle] = useState(true);
+  const [mapView, setMapView] = useState(true);
+  const [listView, setListView] = useState(false);
 
   const [events, setEvents] = useState(mockEventsData);
   const [filteredEvents, setFilteredEvents] = useState(events);
 
-  console.log(filteredEvents, 'Filtered events from BrowseEv')
-  const toggleOnClick = () => {
-    if (toggle === true) {
-      setToggle(false);
-    } else setToggle(true);
+  const mapClick = () => {
+    setMapView(true);
+    setListView(false);
+  };
+
+  const listClick = () => {
+    setListView(true);
+    setMapView(false);
   };
 
   const printDate = (date:Date) => {
@@ -33,16 +37,15 @@ function BrowseEvents() {
     <div className="browse-events-container">
       {/* Temporary CSS on the global CSS file */}
       <div className="browse-events-filter-menu">
-        {/* <BrowseEventsMenu toggleOnClick={toggleOnClick} printDate={printDate} /> */}
+        <BrowseEventsMenu listClick={listClick} mapClick={mapClick} printDate={printDate} />
       </div>
 
       <div className="browse-events-map">
-        <MapLarge events={filteredEvents.data} />
-        {/* {
-          toggle
-            ? (<MapLarge events={filteredEvents} />)
-            : (<EventList events={filteredEvents} />)
-        } */}
+        {
+          mapView
+            ? (<MapLarge events={filteredEvents.data} />)
+            : (<EventsList events={filteredEvents.data} />)
+        }
 
       </div>
 
