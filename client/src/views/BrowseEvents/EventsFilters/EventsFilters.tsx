@@ -15,7 +15,7 @@ const filterListData = [
   },
   {
     link: '/events/filters/tags',
-    text: 'Title',
+    text: 'Tags',
     svgLogo: AiFillTag,
   },
   {

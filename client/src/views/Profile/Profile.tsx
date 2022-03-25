@@ -4,6 +4,7 @@ import FaUsers from '../../assets/FaUsers.svg';
 import FaUser from '../../assets/FaUser.svg';
 import HiLockClosed from '../../assets/HiLockClosed.svg';
 import ImExit from '../../assets/ImExit.svg';
+import './Profile.css';
 
 const profileListData = [
   {
@@ -31,7 +32,7 @@ const profileListData = [
 function Profile() {
   return (
     <div>
-      <h3>Profile</h3>
+      <h3 className="p__header">Profile</h3>
       <MenuList data={profileListData} />
     </div>
   );

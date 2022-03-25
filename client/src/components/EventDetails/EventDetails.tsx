@@ -9,6 +9,7 @@ import ParticipantList from './ParticipantList/ParticipantList';
 function EventDetails() {
   const params = useParams();
   const navigate = useNavigate();
+
   return (
     <div>
       <HeaderReturn />

@@ -1,6 +1,7 @@
 import React from 'react';
 import './MenuListItem.css';
 import { Link } from 'react-router-dom';
+import IoIosArrowBackSvg from '../../../assets/IoIosArrowBack.svg';
 
 export interface MenuListItemProps {
     link: string;
@@ -11,12 +12,12 @@ export interface MenuListItemProps {
 function MenuListItem({ link, text, svgLogo }:MenuListItemProps) {
   return (
     <Link to={link}>
-      <div className="MenuListItem">
-        <img className="mli_icon" src={svgLogo} alt={text} />
-        <p className="mli_text">{text}</p>
-        <span className="mli-rightarrow">&#5171;</span>
+      <div className="mli__container">
+        <img className="mli__icon" src={svgLogo} alt={text} />
+        <p className="mli__text">{text}</p>
+        <img alt={text} className="mli__rightarrow" src={IoIosArrowBackSvg} />
       </div>
-      <hr />
+      <hr className="mli__line" />
 
     </Link>
 

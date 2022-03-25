@@ -22,6 +22,10 @@ import ChatGroup from './views/Chat/ChatGroup/ChatGroup';
 import UserDetails from './views/Profile/Friends/UserDetails/UserDetails';
 import store from './utilities/redux/store';
 import './App.css';
+import SignUp from './views/Authentication/SignUp/SignUp';
+import Login from './views/Authentication/Login/Login';
+import StartPage from './views/Authentication/StartPage/StartPage';
+// import LandingPage from './views/Authentication/LandingPage/LandingPage';
 
 function App() {
   const { pathname } = useLocation();
@@ -30,6 +34,10 @@ function App() {
       <div className="app-container-delete">
         <Routes>
           <Route path="/" element={<BrowseEvents />} />
+          {/* <Route path="/" element={<LandingPage />} /> */}
+          <Route path="/start" element={<StartPage />} />
+          <Route path="/register" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
           <Route path="events" element={<BrowseEvents />} />
           <Route path="events/:eventid" element={<EventDetails />} />
           <Route path="events/:eventid/chat" element={<ChatGroup />} />
