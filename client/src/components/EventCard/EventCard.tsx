@@ -5,6 +5,7 @@ import ButtonSmall from '../Form/ButtonSmall/ButtonSmall';
 import ProfilePicture from '../ProfilePicture/ProfilePicture';
 import TagList from '../TagList/TagList';
 import marker from '../../assets/IoLocationSharp.svg';
+import './EventCard.css';
 
 function EventCard({ event }: {event:any}) {
   return (
@@ -12,6 +13,7 @@ function EventCard({ event }: {event:any}) {
       to={`/events/${event.id_event}`}
       key={event.id}
     >
+
       <div key={event.event_id} className="activity-card">
         <div>
           {event.tags}
@@ -44,6 +46,7 @@ function EventCard({ event }: {event:any}) {
         <ButtonSmall />
         <ButtonSmall />
       </div>
+
     </Link>
   );
 }

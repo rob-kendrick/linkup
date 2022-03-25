@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import type { LuEvent } from '../../utilities/types/Event';
 import eventMarker from '../../assets/IoLocationSharp.svg';
 import userMarker from '../../assets/BiCurrentLocation.svg';
+import './MapLarge.css';
 
 interface eventProps {
   eventList : LuEvent[];

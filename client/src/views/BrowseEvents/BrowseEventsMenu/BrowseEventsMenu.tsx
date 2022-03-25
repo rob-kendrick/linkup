@@ -4,6 +4,7 @@ import moment from 'moment';
 import list from '../../../assets/MdFormatListBulleted.svg';
 import map from '../../../assets/FaRegMap.svg';
 import filter from '../../../assets/BiFilter.svg';
+import './BrowseEventsMenu.css'
 
 interface toogleInt {
   mapClick: MouseEventHandler;
