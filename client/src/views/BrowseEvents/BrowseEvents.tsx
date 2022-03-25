@@ -3,8 +3,10 @@ import moment from 'moment';
 import BrowseEventsMenu from './BrowseEventsMenu/BrowseEventsMenu';
 import EventsList from '../../components/EventsList/EventsList';
 import MapLarge from '../../components/MapLarge/MapLarge';
-import mockEventsData from '../../utilities/mocks/db-data/events-db-data.json';
-import type { LuEvent } from '../../utilities/types/Event';
+import * as mockEventsData from '../../utilities/mocks/db-data/events-db-data.json';
+
+
+
 
 function BrowseEvents() {
   const [mapView, setMapView] = useState(true);
@@ -26,13 +28,13 @@ function BrowseEvents() {
   const printDate = (date:Date) => {
     const eventsByDate : any = [];
     events.data.forEach(((event) => {
-      console.log(date);
+      console.log(date, '/////------> date');
       console.log(event.date);
       // if (moment(new Date(event.date)).format('MMMM Do YYYY') === moment(date).format('MMMM Do YYYY')) {
       //   eventsByDate.push(event);
       // }
-      setFilteredEvents(eventsByDate);
     }));
+    setFilteredEvents(eventsByDate);
   };
 
   return (

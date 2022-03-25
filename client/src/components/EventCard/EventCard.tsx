@@ -1,20 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import ButtonSmall from '../Form/ButtonSmall/ButtonSmall';
+import ButtonEventsMenu from '../Form/ButtonEventsMenu/ButtonEventsMenu';
 import ProfilePicture from '../ProfilePicture/ProfilePicture';
 import TagList from '../TagList/TagList';
 import marker from '../../assets/IoLocationSharp.svg';
 import './EventCard.css';
+import { LuEvent } from '../../utilities/types/Event';
 
-function EventCard({ event }: {event:any}) {
+interface Events {
+  event: LuEvent
+  eventList : LuEvent[];
+}
+
+function EventCard({ event, eventList }: Events) {
   return (
     <Link
       to={`/events/${event.id_event}`}
-      key={event.id}
+      key={event.id_event}
     >
 
-      <div key={event.event_id} className="activity-card">
+      <div key={event.id_event} className="activity-card">
         <div>
           {event.tags}
         </div>
@@ -43,8 +49,10 @@ function EventCard({ event }: {event:any}) {
           <div className="activity-card-details-icon"><img src={marker} alt="marker pin" /></div>
           <p>{moment(event.date).format('h:mm')}</p>
         </div>
-        <ButtonSmall />
-        <ButtonSmall />
+        <div className="activity-card-button-container">
+          <ButtonEventsMenu name="LinkUp" />
+          <ButtonEventsMenu name={`${event.participants.length} participants`} />
+        </div>
       </div>
 
     </Link>

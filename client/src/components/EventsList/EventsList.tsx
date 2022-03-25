@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import EventCard from '../EventCard/EventCard';
 import type { LuEvent } from '../../utilities/types/Event';
-import './EventsList.css'
+import './EventsList.css';
 
 interface eventProps {
   eventList : LuEvent[];
 }
 
 function EventList({ eventList }: eventProps) {
-  const [events, setEvents] = useState(eventList);
+  const events = eventList;
 
   console.log(events, 'EventList component events');
 
@@ -17,6 +17,7 @@ function EventList({ eventList }: eventProps) {
       <h3>EventList</h3>
       {events.map((event) => (
         <EventCard
+          eventList={eventList}
           key={event.id_event}
           event={event}
         />

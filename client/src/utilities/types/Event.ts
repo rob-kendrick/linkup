@@ -19,4 +19,5 @@ export interface LuEvent {
   postcode: string
   city: string
   country : string
+  tags: string[]
 }

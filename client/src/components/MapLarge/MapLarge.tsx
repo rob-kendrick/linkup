@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-nocheck
 import React, { useRef, useEffect, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -12,7 +12,9 @@ interface eventProps {
 }
 
 export default function MapLarge({ eventList } : eventProps) {
-  const [events, setEvents] = useState(eventList);
+  // const [events, setEvents] = useState(eventList);
+
+  const events = eventList;
 
   console.log(events, 'these are the events from the map');
 
@@ -56,7 +58,7 @@ export default function MapLarge({ eventList } : eventProps) {
   console.log(events, 'After first useEffect');
 
   useEffect(() => {
-    console.log(events, 'MapLarge, second useEffect');
+    console.log('second useEffect first call');
     if (typeof executedOnce.current === 'undefined') {
       executedOnce.current = true;
       return;
@@ -68,6 +70,7 @@ export default function MapLarge({ eventList } : eventProps) {
     });
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(mapRef.current);
+
     console.log(events, 'Second layer after tile');
 
     events.forEach((event) => {
@@ -80,7 +83,7 @@ export default function MapLarge({ eventList } : eventProps) {
       const eventLng = typeof event.lng === 'string' ? parseFloat(event.lng) : event.lng;
       return L.marker([eventLat, eventLng], { icon: myIcon }).addTo(mapRef.current).bindPopup(`${event.title} <br> ${event.date}`).openPopup();
     });
-  }, [events]);
+  }, [eventList]);
 
   return (
 

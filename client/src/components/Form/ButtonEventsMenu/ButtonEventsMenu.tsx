@@ -1,8 +1,15 @@
 import React from 'react';
+import './ButtonEventsMenu.css'
 
-function ButtonEventsMenu() {
+interface buttonName {
+  name : string;
+}
+
+function ButtonEventsMenu({ name } : buttonName) {
   return (
-    <div>ButtonEventsMenu</div>
+    <div>
+      <button className="button-small" type="button">{name}</button>
+    </div>
   );
 }
 
