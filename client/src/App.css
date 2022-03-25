@@ -1,15 +1,9 @@
-.app-container-delete {
-  height: 812px;
-  width: 375px;
-  background-color: lightgrey;
-}
-
 .navbar-delete {
   position: absolute;
-  width: 375px;
+  width: 100%;
   background-color: grey;
   height: 100px;
-  top: 712px;
+  bottom: 0px;
 }
 
 .list-container-delete {

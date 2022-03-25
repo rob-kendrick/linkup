@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
-import InputFieldTitle from '../../../components/Form/InputFieldTitle/InputFieldTitle';
+import { InputTextField } from '../../../components/Form/InputTextField/InputTextField';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 import MapSmall from '../../../components/MapSmall/MapSmall';
 
@@ -11,9 +11,9 @@ function CreateEvent() {
     <div>
       <HeaderReturn />
       <h3>CreateEvent</h3>
-      {/* <InputFieldTitle />
-      <InputFieldTitle />
-      <InputFieldTitle /> */}
+      <InputTextField />
+      <InputTextField />
+      <InputTextField />
       <MapSmall />
       {/* the following line should be a 'ButtonLarge' component */}
       <button type="button" onClick={() => navigate('/myevents/create/participants')}>Add Participants</button>

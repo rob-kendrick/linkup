@@ -23,7 +23,8 @@ function HeaderReturn({ resetAvailability, text, passedFunction }: props) {
         <div className="hr__txt">{text}</div>
       </div>
       <div className="hr__option" data-testid="hr__option">
-        {passedFunction && resetAvailability ? <button className="hr__btnReset" type="button" onClick={() => passedFunction && passedFunction(true)}>Reset</button> : null}
+        {(passedFunction && resetAvailability)
+          ? <button className="hr__btnReset" type="button" onClick={() => passedFunction && passedFunction(true)}>Reset</button> : null}
       </div>
     </div>
   );
