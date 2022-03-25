@@ -8,3 +8,7 @@
   height: 462px;
   overflow: scroll;
 }
+
+.event-list-container::-webkit-scrollbar {
+  display: none;
+}

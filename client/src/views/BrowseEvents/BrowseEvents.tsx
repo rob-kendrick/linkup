@@ -41,7 +41,6 @@ function BrowseEvents() {
       <div className="be__filter-menu">
         <BrowseEventsMenu listClick={listClick} mapClick={mapClick} printDate={printDate} />
       </div>
-
       <div>
         {
           mapView
