@@ -11,6 +11,9 @@
   .hr__statusBar {
     display: none;
   }
+  .hr {
+    padding-top: 3.25rem;
+  }
 }
 
 .hr__main {
