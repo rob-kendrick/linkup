@@ -26,9 +26,11 @@ function BrowseEvents() {
   const printDate = (date:Date) => {
     const eventsByDate : any = [];
     events.data.forEach(((event) => {
-      if (moment(new Date(event.date)).format('MMMM Do YYYY') === moment(date).format('MMMM Do YYYY')) {
-        eventsByDate.push(event);
-      }
+      console.log(date);
+      console.log(event.date);
+      // if (moment(new Date(event.date)).format('MMMM Do YYYY') === moment(date).format('MMMM Do YYYY')) {
+      //   eventsByDate.push(event);
+      // }
       setFilteredEvents(eventsByDate);
     }));
   };
@@ -43,15 +45,11 @@ function BrowseEvents() {
       <div className="browse-events-map">
         {
           mapView
-            ? (<MapLarge events={filteredEvents.data} />)
-            : (<EventsList events={filteredEvents.data} />)
+            ? (<MapLarge eventList={filteredEvents.data} />)
+            : (<EventsList eventList={filteredEvents.data} />)
         }
 
       </div>
-
-      {/* <div className="navbar">
-        <NavBar />
-      </div> */}
     </div>
   );
 }

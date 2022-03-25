@@ -4,6 +4,7 @@ import select from '../../assets/HiSearch.svg';
 import calendar from '../../assets/BiCalendarHeart.svg';
 import chat from '../../assets/HiChat.svg';
 import profile from '../../assets/FaUser.svg';
+import './Navbar.css'
 
 function Navbar() {
   return (

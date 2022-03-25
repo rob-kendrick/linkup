@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+// @ts-ignore
+import React, { useRef, useEffect, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { LuEvent } from '../../utilities/types/Event';
@@ -6,13 +7,15 @@ import eventMarker from '../../assets/IoLocationSharp.svg';
 import userMarker from '../../assets/BiCurrentLocation.svg';
 
 interface eventProps {
-  events : LuEvent[];
+  eventList : LuEvent[];
 }
 
-export default function MapLarge({ events } : eventProps) {
+export default function MapLarge({ eventList } : eventProps) {
+  const [events, setEvents] = useState(eventList);
+
   console.log(events, 'these are the events from the map');
 
-  const mapRef : any = useRef();
+  const mapRef = useRef<any>();
   const markerRef = useRef();
 
   useEffect(() => {
@@ -49,26 +52,32 @@ export default function MapLarge({ events } : eventProps) {
 
   const executedOnce = useRef<boolean>();
 
+  console.log(events, 'After first useEffect');
+
   useEffect(() => {
+    console.log(events, 'MapLarge, second useEffect');
     if (typeof executedOnce.current === 'undefined') {
       executedOnce.current = true;
       return;
     }
 
     mapRef.current.eachLayer((layer:any) => {
+      console.log(layer, 'Delete Layers');
       mapRef.current.removeLayer(layer);
     });
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(mapRef.current);
+    console.log(events, 'Second layer after tile');
 
     events.forEach((event) => {
+      console.log('Second useEffect, markers');
       const myIcon = L.divIcon({
         className: 'my-div-icon',
         html: `<div data-event-id=${event.id_event}> <img src=${eventMarker} alt="marker" style="width:30px;"/></div>`,
       });
       const eventLat = typeof event.lat === 'string' ? parseFloat(event.lat) : event.lat;
       const eventLng = typeof event.lng === 'string' ? parseFloat(event.lng) : event.lng;
-      L.marker([eventLat, eventLng], { icon: myIcon }).addTo(mapRef.current).bindPopup(`${event.title} <br> ${event.date}`).openPopup();
+      return L.marker([eventLat, eventLng], { icon: myIcon }).addTo(mapRef.current).bindPopup(`${event.title} <br> ${event.date}`).openPopup();
     });
   }, [events]);
 
