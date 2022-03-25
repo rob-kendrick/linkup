@@ -1,11 +1,19 @@
 import React from 'react';
 import MenuListItem from './MenuListItem/MenuListItem';
+import type { MenuListItemProps } from './MenuListItem/MenuListItem';
 
-function MenuList() {
+function MenuList({ data } : {data:MenuListItemProps[]}) {
+  const menuListItem = data.map((el:MenuListItemProps) => (
+    <MenuListItem
+      link={el.link}
+      text={el.text}
+      svgLogo={el.svgLogo}
+    />
+  ));
+
   return (
-    <div>
-      <h3>MenuList</h3>
-      <MenuListItem />
+    <div className="MenuList">
+      { menuListItem }
     </div>
   );
 }
