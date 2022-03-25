@@ -3,12 +3,10 @@
   background-color: white;
 }
 
-textarea {
-  resize: none;
-  padding: 10px 15px;
+.itf__wrap {width:auto; height:auto; position:relative;
 }
 
-.form-input  {
+.itf__input  {
   border: 1.5px solid var(--color4-grey1);
   box-sizing: border-box;
   border-radius: 8px;
@@ -20,24 +18,16 @@ textarea {
   line-height:  150%;
 }
 
-.form-input:valid + .input-label,
-.form-input:focus + .input-label{
-  font-size: 10px;
-  color: #afbdcf;
-  top: -5px;
-  left: 10px;
-  background: white;
-  padding: 0px 5px 0px 5px;
+.itf__textarea {
+  resize: none;
+  padding: 10px 15px;
 }
 
-.input-wrap {width:auto; height:auto; position:relative;
-}
-
-.input-wrap .input-label {
+.itf__label {
   background-color: transparent;
   position: absolute;
   font-size: 16px;
-  color: #afbdcf;
+  color: rgb(182, 182, 182);
   padding: 14px;
   top: 5px;
   left: 5px;
@@ -45,4 +35,25 @@ textarea {
   -moz-transition:0.2s ease all;
   -webkit-transition:0.2s ease all;
   pointer-events: none;
+}
+
+.itf__input:valid + .itf__label,
+.itf__input:focus + .itf__label{
+  border-radius: 4px;
+  font-size: 11px;
+  color: grey;
+  top: -5px;
+  left: 10px;
+  background: white;
+  padding: 0px 5px 2px 5px;
+}
+
+.itf__error {
+  position: absolute;
+  font-size: 11px;
+  color: #FF4D00;
+  top: -15px;
+  right: 50px;
+  background: white;
+  padding: 0px 5px 0px 5px;
 }

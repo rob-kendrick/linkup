@@ -16,43 +16,42 @@ type Props = Partial<UseFormRegisterReturn> & {
 
 const InputTextField = React.forwardRef<HTMLInputElement, Props>(
   ({
-    className, errorMessage, label, rows, type, name, ...props
+    className, errorMessage, label, type, name, ...props
   }, ref) => (
-    <div className={`${className} input-wrap`}>
+    <div className={`${className} itf__wrap`}>
       <input
-        className="form-input"
-        // eslint-disable-next-line react/jsx-props-no-spreading
+        className="itf__input"
         {...props}
         ref={ref as React.LegacyRef<HTMLInputElement>}
         type={type || 'text'}
         name={name}
         required
       />
-      {label && <label className="input-label" htmlFor={name}>{label}</label>}
-      {errorMessage && <p className="error">{errorMessage}</p>}
+      {label && <label className="itf__label" htmlFor={name}>{label}</label>}
+      {errorMessage && <p className="itf__error">{errorMessage}</p>}
     </div>
   ),
 );
 
   type InputTextAreaProps = Props & {
-    rows?: number;
     onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   };
 
 const InputTextArea = React.forwardRef<HTMLTextAreaElement, InputTextAreaProps>(
   ({
-    className, label, rows, type, name, ...props
+    className, errorMessage, label, rows, type, name, ...props
   }, ref) => (
-    <div className={`${className} input-wrap`}>
+    <div className={`${className} itf__wrap`}>
       <textarea
-        className="form-input"
-        // eslint-disable-next-line react/jsx-props-no-spreading
+        className="itf__input itf__textarea"
         {...props}
         ref={ref as unknown as React.LegacyRef<HTMLTextAreaElement>}
         rows={rows}
+        name={name}
         required
       />
-      {label && <label className="input-label" htmlFor={name}>{label}</label>}
+      {label && <label className="itf__label" htmlFor={name}>{label}</label>}
+      {errorMessage && <p className="itf__error">{errorMessage}</p>}
     </div>
   ),
 );
