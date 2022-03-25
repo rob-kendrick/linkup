@@ -15,9 +15,27 @@
   flex-direction: column;
   align-items: center;
   font-size: 12px;
-  color:white;
+  color: var(--color2-fg-deselect);
+  fill: var(--color2-fg-select);
   width: 5rem;
   padding-bottom: 2em;
+}
+
+.n__button--select{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  background-image: var(--color2-fg-select);
+  clip-path: url(#clip);
+  -webkit-clip-path: url(#clip);
+  /* background-clip: text; */
+  width: 5rem;
+  padding-bottom: 2em;
+  /* -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent; */
 }
 
 .n__icon-container {
@@ -31,8 +49,6 @@
 .n__icon{
   height: 2rem;
   width: 2rem;
-  fill:white;
-  color:white;
   margin-bottom: 5px;
 }
 
