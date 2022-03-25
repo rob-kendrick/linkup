@@ -9,7 +9,7 @@ import '@testing-library/jest-dom';
 import HeaderReturn from './HeaderReturn';
 
 describe('HeaderReturn component', () => {
-  it('renders w/o resent btn when option is set to false', () => {
+  it('renders w/o reset btn when option is set to false', () => {
     const { getByTestId } = render(
       <BrowserRouter>
         <HeaderReturn resetAvailability={false} text="Activity details" />
