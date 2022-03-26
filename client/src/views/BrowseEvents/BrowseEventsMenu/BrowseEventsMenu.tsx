@@ -1,26 +1,31 @@
-import React, { useState, useEffect, MouseEventHandler } from 'react';
+// @ts-nocheck
+
+import React, {
+  useState, useContext, useEffect, MouseEventHandler,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import list from '../../../assets/MdFormatListBulleted.svg';
-import map from '../../../assets/FaRegMap.svg';
-import filter from '../../../assets/BiFilter.svg';
+import { ReactComponent as MdFormatListBulleted } from '../../../assets/MdFormatListBulleted.svg';
+import { ReactComponent as FaRegMap } from '../../../assets/FaRegMap.svg';
+import { ReactComponent as BiFilter } from '../../../assets/BiFilter.svg';
 import './BrowseEventsMenu.css';
 import HeaderMain from '../../../components/HeaderMain/HeaderMain';
+import browseEventsContext from '../../../contexts/browse-events.context';
 
-interface toogleInt {
-  mapClick: MouseEventHandler;
-  listClick: MouseEventHandler;
-  printDate : Function;
-}
-
-function BrowseEventsMenu({ listClick, mapClick, printDate } : toogleInt) {
+function BrowseEventsMenu() {
   const navigate = useNavigate();
+  const [dateSelected, setDateSelected] = useState<Date>([]);
   const [dates, setDates] = useState<Date[]>([]);
 
+  const {
+    filterByDate,
+    toggleMapList,
+    mapView,
+  } = useContext<any>(browseEventsContext);
+
   useEffect(() => {
-    const dateArr = [];
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i <= 31; i++) {
+    const dateArr:Date[] = [];
+    for (let i = 0; i <= 31; i += 1) {
       const date = new Date();
       date.setDate(date.getDate() + i);
       dateArr.push(date);
@@ -28,55 +33,63 @@ function BrowseEventsMenu({ listClick, mapClick, printDate } : toogleInt) {
     setDates(dateArr);
   }, []);
 
+  const handleClickDate:MouseEventHandler = (e, thisDate) => {
+    setDateSelected(thisDate);
+    filterByDate(thisDate);
+  };
+
+  const dateList = dates.map((el:any) => (
+    <button
+      onClick={(e) => handleClickDate(e, el)}
+      key={el.toString()}
+      className={`bem__selectors-dates-item ${dateSelected === el ? 'bem__selector-active' : ''}`}
+      type="button"
+    >
+      <p className="bem__selectors-dates-item-details">{moment(el).format('ddd')}</p>
+      <p className="bem__selectors-dates-item-details">{moment(el).format('DD')}</p>
+    </button>
+  ));
+
   return (
-    <div className="filter-menu-container">
-      <div className="filter-menu-calendar">
-        <HeaderMain
-          title="Browse Events"
-        />
-      </div>
-      <div className="filter-menu-calendar">
-        {dates.map((date) => (
-          <button type="button" className="date-picker-selector" key={date.toString()} onClick={() => printDate(date)}>
-            <div>
-              <p className="date-picker-details">{moment(date).format('ddd')}</p>
-              <p className="date-picker-details">{moment(date).format('DD')}</p>
-            </div>
-          </button>
-        ))}
+    <div className="bem__container">
 
+      <HeaderMain title="Browse Activities" />
+
+      <div className="bem__selectors-dates">
+        {dateList}
       </div>
 
-      <div className="filter-menu-button-container">
+      <div className="bem__selectors-btns">
 
-        <div className="filter-menu-button-left-section">
-          <div>
-            <button className="small-button" type="button" onClick={listClick}>
-              <img src={list} alt="list icon" className="button-icon" />
-              {' '}
-              List
-            </button>
-          </div>
+        <button
+          type="button"
+          onClick={toggleMapList}
+          className={`bem__selectors-btns-btn ${!mapView ? 'bem__selector-active' : ''}`}
+        >
+          <MdFormatListBulleted />
+          <p>List</p>
+        </button>
 
-          <div>
-            <button className="small-button" type="button" onClick={mapClick}>
-              <img src={map} alt="list icon" className="button-icon" />
-              Map
-            </button>
-          </div>
+        <button
+          type="button"
+          onClick={toggleMapList}
+          className={`bem__selectors-btns-btn ${mapView ? 'bem__selector-active' : ''}`}
+        >
+          <FaRegMap />
+          <p>Map</p>
+        </button>
 
-        </div>
-
-        <div>
-          <button className="small-button" type="button" onClick={() => navigate('/events/filters')}>
-            <img src={filter} alt="list icon" className="button-icon" />
-            Filters
-          </button>
-        </div>
-
+        <button
+          type="button"
+          onClick={() => navigate('/events/filters')}
+          className="bem__selectors-btns-btn bem__selectors-btns-btn-right"
+        >
+          <BiFilter />
+          <p>Filter</p>
+        </button>
       </div>
-
     </div>
+
   );
 }
 

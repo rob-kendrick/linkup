@@ -3,11 +3,11 @@ import './HeaderMain.css';
 
 function HeaderMain({ title }:{title:string}) {
   return (
-    <h2
+    <h3
       className="hm__title"
     >
       {title}
-    </h2>
+    </h3>
   );
 }
 

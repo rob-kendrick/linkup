@@ -16,8 +16,15 @@
   align-items: center;
   font-size: 12px;
   color:white;
+  background-color: inherit;
+  border: none;
   width: 5rem;
   padding-bottom: 2em;
+}
+
+.n__button-active{
+  color:red !important;
+  fill: red !important;;
 }
 
 .n__icon-container {
@@ -31,9 +38,8 @@
 .n__icon{
   height: 2rem;
   width: 2rem;
-  fill:white;
-  color:white;
   margin-bottom: 5px;
+  background-color: inherit;
 }
 
 .n__icon-small{

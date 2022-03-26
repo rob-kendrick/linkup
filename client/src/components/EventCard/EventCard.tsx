@@ -19,11 +19,14 @@ function EventCard({ event, eventList }: Events) {
       to={`/events/${event.id_event}`}
       key={event.id_event}
     >
+      {event}
 
       <div key={event.id_event} className="activity-card">
+
         <div>
           {event.tags}
         </div>
+
         <div className="activity-card-profile">
           <div>
             <div><img src={event.creator.profile_picture} alt="event creator" className="activity-card-picture" /></div>

@@ -1,7 +1,5 @@
-.be__filter-menu{
-  background-color:rgb(249, 249, 249);
-  height: 25vh;
+.be__container{
   width: 100%;
-  padding: 0px;
-  margin: 0px;
+  flex-grow:1;
+  /* background-color: magenta; */
 }
