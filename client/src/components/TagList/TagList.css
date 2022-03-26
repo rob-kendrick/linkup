@@ -7,7 +7,12 @@
 
 #tg_individual-tag {
   background-color: var(--color5-grey2);
-  margin: 5px !important;
+  margin: 10px 5px !important;
   padding: 5px 12px;
   border-radius: 3px;   
+}
+
+.tg__header-text{
+  margin:0px; 
+  font-size: 0.6rem;
 }

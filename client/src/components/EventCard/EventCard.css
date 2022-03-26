@@ -3,12 +3,16 @@ a {
   text-decoration: inherit; /* no underline */
 }
 
+
 .ec_main-container{
   background-color:white;
   margin:20px; 
   margin-bottom: 20px;
   border-radius: 10px;
-  margin: 20px; 
+  margin: 20px;
+  max-width: 330px;
+  min-width: 330px;
+  min-height: 290px;  
 }
 
 .ec_tag-component-container {
@@ -49,6 +53,19 @@ a {
   width: 52px; 
 }
 
+.ec__header-text{
+  margin: 0px; 
+}
+.ec_header-info{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-left: 3%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
 .ec_details{
   display: flex;
   flex-direction: row; 
@@ -64,15 +81,7 @@ a {
   width: 90%;
 }
 
-.ec_header-info{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-left: 3%;
-  padding-top: 1%;
-  padding-bottom: 1%;
-}
+
 
 .ec_icon-container{
   display: flex;

@@ -30,8 +30,8 @@ function EventCard({ event, eventList }: Events) {
               <div><img src={event.creator.profile_picture} alt="event creator" className="ec_profile-picture" /></div>
             </div>
             <div className="ec_header-info">
-              <h4>{event.title}</h4>
-              <p>{event.creator.first_name}</p>
+              <h4 className="ec__header-text">{event.title}</h4>
+              <p className="ec__header-text">{event.creator.first_name}</p>
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@ function EventCard({ event, eventList }: Events) {
               <div className="ec_details-icon"><img src={marker} alt="marker pin" /></div>
             </div>
             <div className="ec_details-text">
-              <p>
+              <p className="ec__header-text">
                 {event.street_name}
                 {' '}
                 {event.street_number}
@@ -59,7 +59,7 @@ function EventCard({ event, eventList }: Events) {
               <div className="ec_details-icon"><img src={marker} alt="marker pin" /></div>
             </div>
             <div className="ec_details-text">
-              <p>{moment(event.date).format('h:mm')}</p>
+              <p className="ec__header-text">{moment(event.date).format('h:mm')}</p>
             </div>
           </div>
         </div>

@@ -1,7 +1,10 @@
-.event-list-container{
+.evl__container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   background-color: #F2F2F2;
   overflow: scroll;
-  max-height:430px;
+  max-height: 61vh;
 }
 
 .event-list-container::-webkit-scrollbar {
