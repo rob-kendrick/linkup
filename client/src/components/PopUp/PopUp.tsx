@@ -1,41 +1,56 @@
 import React from 'react';
 import PopUpBtn from './PopUpBtn/PopUpBtn';
+import './popUp.css';
+import type { LuEvent, LuEvent } from '../../utilities/types/Event';
+import { useParams, useNavigate } from 'react-router-dom';
+import eventApi from '/../../utilities/api/event.api';
+import userApi from '../../utilities/api/user.api';
+import { RootState } from '../../utilities/redux/store';
+import eventActions from '../../utilities/redux/actions/event.actions';
 
 type props = {
   useCase: string;
+  hidePopup: () => void;
+  currentEvent: LuEvent
 };
 
-function PopUp({ useCase }: props) {
-  // const linkupHandler:roleFunction = () => {
-  //   console.log('linkup');
-  //   return true;
+function PopUp({ useCase, hidePopup, currentEvent }: props) {
+  // const params = useParams();
+  // const { eventid } = params;
+
+  // const currentUser = useSelector(
+  //   (state: RootState) => state.userReducer.currentUser,
+  // );
+
+  // const alteredEvent = {
+  //   ...currentEvent,
+  //   participants: [...currentEvent!.participants, {
+  //     id_user: currentUser!.id_user,
+  //     first_name: currentUser!.first_name,
+  //     profile_picture: currentUser!.profile_picture,
+  //   }],
   // };
 
-  // const leaveEventHandler = () => {
-  //   console.log('leave event');
-  // };
+  // eventApi.editEvent(alteredEvent! as LuEvent).then((response) => {
+  //   dispatch(eventActions.editEventAction(response.data));
+  // });
 
-  // const hidePopUp = (arg:string) => {
-  // console.log('hide popout');
-  // };
+  const joinEvent = () => {
+
+  };
 
   return (
     <div className="pu__container">
       {useCase === 'signup'
         ? (
           <div>
-            {' '}
-            BODY SIGN IN
-            <PopUpBtn text="Cancel" />
+            <PopUpBtn text="Linkup" hidePopup={hidePopup} joinEvent={joinEvent} />
+            <PopUpBtn text="Cancel" hidePopup={hidePopup} />
           </div>
         )
         : (
           <div>
-            {' '}
-            Body leave
-            <PopUpBtn
-              text="No"
-            />
+            <PopUpBtn text="No" hidePopup={hidePopup} />
           </div>
         )}
     </div>

@@ -28,9 +28,10 @@ function EventDetails() {
   const participation = currentEvent.participants.some(
     (participant) => participant.id_user === Number(user_id),
   );
+  // const participation = true;
 
-  const popupStatus = () => {
-    setShowPopup(true);
+  const hidePopup = () => {
+    setShowPopup(false);
   };
 
   return (
@@ -50,15 +51,16 @@ function EventDetails() {
         ? (
           <div>
             <button type="button" onClick={() => navigate(`/events/${params.eventid}/chat`)}>Chat</button>
-            <button type="button">Cancel / Leave Activity</button>
+            <button type="button" onClick={() => setShowPopup(true)}>Cancel / Leave Activity</button>
+            {showPopup ? <PopUp currentEvent={currentEvent} useCase="leave" hidePopup={hidePopup} /> : null}
           </div>
         )
         : (
           <div>
-            <button type="button" onClick={popupStatus}>Linkup</button>
+            <button type="button" onClick={() => setShowPopup(true)}>Linkup</button>
+            {showPopup ? <PopUp currentEvent={currentEvent} useCase="signup" hidePopup={hidePopup} /> : null}
           </div>
         )}
-      {showPopup ? <PopUp useCase="signup" /> : null}
     </div>
   );
 }
