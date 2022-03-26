@@ -11,6 +11,7 @@
 }
 
 .n__button{
+  white-space: nowrap;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,7 +19,7 @@
   color:white;
   background-color: inherit;
   border: none;
-  width: 5rem;
+  width: 5em;
   height: 5em;
   padding-bottom: 2em;
 }
@@ -43,12 +44,11 @@
 .n__icon{
   height: 2.5rem;
   width: 2.5rem;
-  margin-bottom: 5px;
-  background-color: inherit;
+  /* background-color: inherit; */
 }
 
 .n__icon-small{
-  padding-top: 0.4em;
-  height: 1.4rem;
-  width: 1.4rem;
+  padding: 0.35em;
+  height: 2.15em;
+  width: 2.15em;
 }
