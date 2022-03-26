@@ -3,7 +3,6 @@ import React from 'react';
 import './TagList.css';
 
 function TagList({ tags } : any) {
-  console.log(tags, 'from TagList');
   return (
     <div className="tg_inner-container">
       { tags.map((tag) => (
