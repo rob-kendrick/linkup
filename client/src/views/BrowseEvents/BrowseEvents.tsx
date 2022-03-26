@@ -24,7 +24,7 @@ const dayMatch = (date1:string, date2:string) => {
 };
 
 function BrowseEvents() {
-  const [mapView, setMapView] = useState(false);
+  const [mapView, setMapView] = useState(true);
   const [allEvents, setAllEvents] = useState<any[]>(mockEventsData.data);
   const [dateFilter, setDateFilter] = useState<any[]>(mockEventsData.data);
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
@@ -38,7 +38,6 @@ function BrowseEvents() {
 
   // for testing purposes
   useEffect(() => {
-    console.log(filteredEvents);
   }, [filteredEvents]);
 
   // list/map toggle
@@ -70,8 +69,8 @@ function BrowseEvents() {
     <browseEventsContext.Provider value={context}>
       <div className="be__container">
         <BrowseEventsMenu />
-        {mapView && (<MapLarge />)}
-        {!mapView && (<EventsList />)}
+        {mapView && (<MapLarge filteredEvents={filteredEvents} />)}
+        {!mapView && (<EventsList filteredEvents={filteredEvents} />)}
       </div>
     </browseEventsContext.Provider>
 
