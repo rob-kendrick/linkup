@@ -1,50 +1,116 @@
-.activity-card-profile{
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
+.ac_main-container{
+  background-color:white;
+  margin:20px; 
+  margin-bottom: 20px;
+  border-radius: 10px;
+  margin: 20px; 
+}
+
+.tl_component-container {
+  display: flex; 
+  flex-direction: row; 
+  align-items: center;
+  justify-content: space-between;
+  padding:4%; 
+}
+
+.ac_profile{
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-around;
+  width: 100%; 
   margin:0px;
-  padding: 10px; 
+  margin-bottom: 5%;  
 }
 
-.activity-card-header-info{
-  margin-left: 10px;
+.ac_profile-inner-container{
+  display: flex;
+  flex-direction: row;
+  width: 90%;
 }
 
-#activity-card-title{
-  margin: 0px; 
+.ac_profile-picture-container{
+  display: flex;
+  width: 20%; 
+  align-self: flex-start;
 }
 
-#activity-card-user{
-  margin: 0px;
+.ac_profile-picture{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  border-radius: 50%;
+  width: 52px; 
 }
 
-.activity-card-details{
+.ac_details{
   display: flex;
   flex-direction: row; 
   align-items: center;
+  justify-content: center;
+  margin-bottom: 2%;
+  margin-top: 2%;
 }
 
-.activity-card-details-icon{
+.ac_details-inner-container{
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  border-radius: 50%;
-  background-color: #F2F2F2;
-  width: 24px;
-  height: 24px;
-  padding: 3px;
-  margin-right: 10px; 
+  width: 90%;
+}
+
+.ac_header-info{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-left: 3%;
+  padding-top: 1%;
+  padding-bottom: 1%;
 }
 
 .activity-card-details{
   display: flex;
   align-items: center; 
-  width: 90%;
-  margin: 10px; 
+  width: 100%;
+}
+
+.ac_icon-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ac_details-icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #F2F2F2;
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+  margin-right: 10px;
+}
+
+
+.ac_details-text{
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+.ac_button-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 5% 0% 5% 0%; 
   
 }
 
-a {
-  color: inherit; /* blue colors for links too */
-  text-decoration: inherit; /* no underline */
-}
+

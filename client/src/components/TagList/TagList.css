@@ -1,0 +1,13 @@
+.tg_inner-container{
+  display:flex; 
+  flex-direction:row;
+  flex-wrap: wrap;
+  align-items:center;
+}
+
+#tg_individual-tag {
+  background-color: var(--color5-grey2);
+  margin: 5px !important;
+  padding: 5px 12px;
+  border-radius: 3px;   
+}
