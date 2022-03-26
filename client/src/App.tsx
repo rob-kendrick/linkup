@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dispatch } from 'redux';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -31,12 +31,22 @@ import eventActions from './utilities/redux/actions/event.actions';
 function App() {
   const { pathname } = useLocation();
   const dispatch: Dispatch<any> = useDispatch();
+  const [fetchStatus, setFetchStatus] = useState('idle');
 
   useEffect(() => {
+    setFetchStatus('loading');
     eventApi.getAllEvents().then((response) => {
       dispatch(eventActions.getEventsAction(response.data));
-    }).catch();
+      setFetchStatus('success');
+    }).catch(() => setFetchStatus('error'));
   }, []);
+
+  if (fetchStatus === 'idle' || fetchStatus === 'loading') {
+    return <div> Loading </div>;
+  }
+  if (fetchStatus === 'error') {
+    return <div> Error </div>;
+  }
 
   return (
     <div className="app-container-delete">
@@ -65,11 +75,11 @@ function App() {
         <Route path="profile/changepassword" element={<ChangePassword />} />
       </Routes>
       {(pathname === '/'
-          || pathname === '/events'
-          || pathname === '/myevents'
-          || pathname === '/chatlist'
-          || pathname === '/profile')
-          && <Navbar />}
+        || pathname === '/events'
+        || pathname === '/myevents'
+        || pathname === '/chatlist'
+        || pathname === '/profile')
+        && <Navbar />}
     </div>
   );
 }
