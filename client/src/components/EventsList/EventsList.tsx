@@ -11,7 +11,7 @@ function EventList() {
   } = useContext(browseEventsContext);
 
   const eventCardList = () => {
-    filteredEvents.map((thisEvent) => (<div>{thisEvent}</div>));
+    filteredEvents.map((thisEvent) => (<EventCard event={thisEvent} />));
   };
 
   return (

@@ -19,7 +19,6 @@ function EventCard({ event, eventList }: Events) {
       to={`/events/${event.id_event}`}
       key={event.id_event}
     >
-      {event}
 
       <div key={event.id_event} className="ec_main-container">
         <div className="ec_tag-component-container">
