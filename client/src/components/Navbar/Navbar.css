@@ -19,25 +19,30 @@
   background-color: inherit;
   border: none;
   width: 5rem;
+  height: 5em;
   padding-bottom: 2em;
 }
 
-.n__button-active{
-  color:red !important;
-  fill: red !important;;
+.n__button-active svg{
+  fill: #FF2965;
+}
+
+.n__button-active text{
+  color: #FF2965;
 }
 
 .n__icon-container {
   display: flex;
   justify-content: center;
-  width: 2em;
-  height: 2em;
-  margin-bottom: 1em;
+  align-items: center;
+  width: 2.5em;
+  height: 2.5em;
+  margin-bottom: 0.6em;
 }
 
 .n__icon{
-  height: 2rem;
-  width: 2rem;
+  height: 2.5rem;
+  width: 2.5rem;
   margin-bottom: 5px;
   background-color: inherit;
 }
