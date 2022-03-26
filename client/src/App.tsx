@@ -25,7 +25,7 @@ import './App.css';
 import SignUp from './views/Authentication/SignUp/SignUp';
 import Login from './views/Authentication/Login/Login';
 import StartPage from './views/Authentication/StartPage/StartPage';
-// import LandingPage from './views/Authentication/LandingPage/LandingPage';
+import LandingPage from './views/Authentication/LandingPage/LandingPage';
 
 function App() {
   const { pathname } = useLocation();

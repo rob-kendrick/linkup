@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { InputTextField } from '../../../components/Form/InputTextField/InputTextField';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
@@ -7,8 +6,7 @@ import { User } from '../../../utilities/types/User';
 import './ChangePassword.css';
 
 function ChangePassword() {
-  const navigate = useNavigate();
-
+  
   const {
     register,
     handleSubmit,

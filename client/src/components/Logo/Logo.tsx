@@ -1,9 +1,11 @@
 import React from 'react';
+import luLogo from '../../assets/luLogo.png';
+import './Logo.css';
 
 function Logo() {
   return (
-    <div className="logo-container">
-      <img src="../../assets/logo.png" alt="app logo" />
+    <div className="l__container">
+      <img src={luLogo} alt="LinkUp Logo" />
     </div>
   );
 }
