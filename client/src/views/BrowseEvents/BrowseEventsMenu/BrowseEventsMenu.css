@@ -1,26 +1,116 @@
+.bem__container {
+ display: flex;
+ flex-direction: column;
+ align-items: space-between;
+ box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.23);
 
+}
+
+.bem__selectors {
+
+}
+
+.bem__selectors-dates {
+  /* padding: 0 4%; */
+  display:flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  margin-left: 3px;
+  margin-right: 3px;
+
+  margin-bottom: 20px;
+
+}
+
+.bem__selectors-dates::-webkit-scrollbar {
+  display: none;
+}
+
+.bem__selectors-dates-item {
+  cursor: pointer;
+  background-color: var(--color5-grey2);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10%;
+  min-width: 48px;
+  min-height: 48px;
+  margin: 0 6px;
+  border: 1px solid var(--color5-grey2);
+}
+
+.bem__selectors-dates-item-details{
+  margin: 0px;
+  font-size: 0.8rem;
+}
+
+
+.bem__selectors-btns {
+  display: flex;
+  flex-direction: row;
+  margin: 0px 10px 20px;
+}
+
+.bem__selectors-btns-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  min-width: 100px;
+  border-radius: 6%;
+  height: 44px;
+  font-size: 15px;
+  outline: none;
+  background-color: white;
+  border: 2px solid var(--color5-grey2);
+}
+
+.bem__selectors-btns-btn-right {
+margin-left:auto;
+}
+
+.bem__selectors-btns-btn-right:active {
+  background-color: #263056;
+  color:white;
+}
+
+.bem__selector-active{
+  background-color: #263056;
+  color:white;
+}
+
+
+/*  old */
 .filter-menu-button-container{
   display: flex;
   flex-direction: row;
   padding-left: 20px;
   padding-right: 20px;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
+
 
 }
 
 .filter-menu-button-left-section{
   display: flex;
   flex-direction: row;
-  flex:2; 
+  flex:2;
   overflow: hidden;
 }
 
-.filter-menu-calendar{ 
+.filter-menu-calendar{
   padding-top: 10px;
   display: flex;
   flex-direction: row;
-  overflow-x: scroll; 
+  overflow-x: scroll;
+
+}
+
+.filter-menu-calendar::-webkit-scrollbar {
+  display: none;
 }
 
 .date-picker-selector{
@@ -30,7 +120,7 @@
   justify-content: center;
   background-color: #D9D9D9;
   border-radius: 10%;
-  min-width: 48px; 
+  min-width: 48px;
   min-height: 48px;
   margin: 5px;
   margin-top: 20px;
@@ -43,9 +133,19 @@ background-color: #263056;
 color:white;
 }
 
-.date-picker-details{
-  margin: 0px;
-  font-size: 0.8rem;
+
+
+.bem__btn {
+  font-size: 13px;
+  display: flex;
+  width: 50px;
+  height: 50px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  border: solid 1.5px #D9D9D9;
+  border-radius: 3px;
+  background-color: transparent;
 }
 
 /* Buttons */
@@ -54,22 +154,22 @@ color:white;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 99px;
+  width: 10%;
   height: 44px;
   left: 31px;
   top: 184px;
   border: solid 1.5px #D9D9D9;
-  border-radius: 3px; 
-  background-color: transparent; 
+  border-radius: 3px;
+  background-color: transparent;
 }
 
 .small-button:focus{
   background-color: #263056;
   color:white;
   border: none;
-  border-radius: 3px;  
+  border-radius: 3px;
 }
 
 .button-icon{
-  margin-right: 10px; 
+  margin-right: 10px;
 }

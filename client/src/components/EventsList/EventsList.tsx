@@ -1,28 +1,24 @@
-import React, { useState } from 'react';
+// @ts-nocheck
+import React, { useState, useContext } from 'react';
 import EventCard from '../EventCard/EventCard';
 import type { LuEvent } from '../../utilities/types/Event';
 import './EventsList.css';
+import browseEventsContext from '../../contexts/browse-events.context';
 
-interface eventProps {
-  eventList : LuEvent[];
-}
+function EventList() {
+  const {
+    filteredEvents,
+  } = useContext(browseEventsContext);
 
-function EventList({ eventList }: eventProps) {
-  const events = eventList;
-
-  console.log(events, 'EventList component events');
+  const eventCardList = () => {
+    filteredEvents.map((thisEvent) => (<div>{thisEvent}</div>));
+  };
 
   return (
-    <div className="event-list-container">
-      <h3>EventList</h3>
-      {events.map((event) => (
-        <EventCard
-          eventList={eventList}
-          key={event.id_event}
-          event={event}
-        />
-      ))}
+    <div>
+      { eventCardList }
     </div>
+
   );
 }
 
