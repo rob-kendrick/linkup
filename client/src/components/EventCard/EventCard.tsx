@@ -19,40 +19,51 @@ function EventCard({ event, eventList }: Events) {
       to={`/events/${event.id_event}`}
       key={event.id_event}
     >
-      {event}
 
-      <div key={event.id_event} className="activity-card">
-
-        <div>
-          {event.tags}
+      <div key={event.id_event} className="ec_main-container">
+        <div className="ec_tag-component-container">
+          <TagList tags={event.tags} />
         </div>
-
-        <div className="activity-card-profile">
-          <div>
-            <div><img src={event.creator.profile_picture} alt="event creator" className="activity-card-picture" /></div>
+        <div className="ec_profile">
+          <div className="ec_profile-inner-container">
+            <div className="ec_profile-picture-container">
+              <div><img src={event.creator.profile_picture} alt="event creator" className="ec_profile-picture" /></div>
+            </div>
+            <div className="ec_header-info">
+              <h4>{event.title}</h4>
+              <p>{event.creator.first_name}</p>
+            </div>
           </div>
-          <div className="activity-card-header-info">
-            <h4 id="activity-card-title">{event.title}</h4>
-            <p id="activity-card-user">{event.creator.first_name}</p>
+        </div>
+        <div className="ec_details">
+          <div className="ec_details-inner-container">
+            <div className="ec_icon-container">
+              <div className="ec_details-icon"><img src={marker} alt="marker pin" /></div>
+            </div>
+            <div className="ec_details-text">
+              <p>
+                {event.street_name}
+                {' '}
+                {event.street_number}
+                {', '}
+                {event.postcode}
+                {' '}
+                {event.city}
+              </p>
+            </div>
           </div>
         </div>
-        <div className="activity-card-details">
-          <div className="activity-card-details-icon"><img src={marker} alt="marker pin" /></div>
-          <p>
-            {event.street_name}
-            {' '}
-            {event.street_number}
-            {', '}
-            {event.postcode}
-            {' '}
-            {event.city}
-          </p>
+        <div className="ec_details">
+          <div className="ec_details-inner-container">
+            <div className="ec_icon-container">
+              <div className="ec_details-icon"><img src={marker} alt="marker pin" /></div>
+            </div>
+            <div className="ec_details-text">
+              <p>{moment(event.date).format('h:mm')}</p>
+            </div>
+          </div>
         </div>
-        <div className="activity-card-details">
-          <div className="activity-card-details-icon"><img src={marker} alt="marker pin" /></div>
-          <p>{moment(event.date).format('h:mm')}</p>
-        </div>
-        <div className="activity-card-button-container">
+        <div className="ec_button-container">
           <ButtonEventsMenu name="LinkUp" />
           <ButtonEventsMenu name={`${event.participants.length} participants`} />
         </div>
