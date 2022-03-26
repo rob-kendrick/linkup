@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { ReactComponent as HiSearch } from '../../assets/HiSearch.svg';
 import { ReactComponent as BiCalendarHeart } from '../../assets/BiCalendarHeart.svg';
 import { ReactComponent as HiChat } from '../../assets/HiChat.svg';
@@ -7,18 +7,14 @@ import { ReactComponent as FaUser } from '../../assets/FaUser.svg';
 import './Navbar.css';
 
 function Navbar() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const handleClick = (el:number) => {
-    setCurrentPage(el);
-  };
+  const { pathname } = useLocation();
   return (
     <div className="n__container">
 
       <Link to="/events">
         <button
           type="button"
-          className={`n__button ${currentPage === 1 && 'n__button-active'}`}
-          onClick={() => handleClick(1)}
+          className={`n__button ${pathname === '/events' && 'n__button-active'}`}
         >
           <div className="n__icon-container">
             <HiSearch className="n__icon" />
@@ -30,8 +26,7 @@ function Navbar() {
       <Link to="/myevents">
         <button
           type="button"
-          className={`n__button ${currentPage === 2 && 'n__button-active'}`}
-          onClick={() => handleClick(2)}
+          className={`n__button ${pathname === '/myevents' && 'n__button-active'}`}
         >
           <div className="n__icon-container">
             <BiCalendarHeart className="n__icon" />
@@ -43,8 +38,7 @@ function Navbar() {
       <Link to="/chatlist">
         <button
           type="button"
-          className={`n__button ${currentPage === 3 && 'n__button-active'}`}
-          onClick={() => handleClick(3)}
+          className={`n__button ${pathname === '/chatlist' && 'n__button-active'}`}
         >
           <div className="n__icon-container">
             <HiChat className="n__icon" />
@@ -56,8 +50,7 @@ function Navbar() {
       <Link to="/profile">
         <button
           type="button"
-          className={`n__button ${currentPage === 4 && 'n__button-active'}`}
-          onClick={() => handleClick(4)}
+          className={`n__button ${pathname === '/profile' && 'n__button-active'}`}
         >
           <div className="n__icon-container">
             <FaUser className="n__icon" />
