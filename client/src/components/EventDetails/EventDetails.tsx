@@ -9,15 +9,12 @@ import MapSmall from '../MapSmall/MapSmall';
 import ProfilePicture from '../ProfilePicture/ProfilePicture';
 import TagList from '../TagList/TagList';
 import ParticipantList from './ParticipantList/ParticipantList';
-import type { LuEvent } from '../../utilities/types/Event';
-import userApi from '../../utilities/api/user.api';
+import PopUp from '../PopUp/PopUp';
 
 function EventDetails() {
-  const [selectedEvent, setSelectedEvent] = useState<LuEvent>();
-  // const [];
-  const user_id = 1;
-  const params = useParams();
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
+  const params = useParams();
   const { eventid } = params;
   const currentEvent = useSelector(
     (state: RootState) => state.eventReducer.allEvents.filter(
@@ -25,15 +22,15 @@ function EventDetails() {
     ),
   )[0];
 
+  const user_id = 1;
   dayjs.extend(advancedFormat);
   const date = dayjs(currentEvent.date).format('dddd, Do MMMM, H:MM');
-
   const participation = currentEvent.participants.some(
     (participant) => participant.id_user === Number(user_id),
   );
 
-  const showPopup = () => {
-
+  const popupStatus = () => {
+    setShowPopup(true);
   };
 
   return (
@@ -58,12 +55,10 @@ function EventDetails() {
         )
         : (
           <div>
-            <button type="button" onClick={showPopup}>Linkup</button>
+            <button type="button" onClick={popupStatus}>Linkup</button>
           </div>
         )}
-      <div className="ed__popup">
-        POPUP
-      </div>
+      {showPopup ? <PopUp useCase="signup" /> : null}
     </div>
   );
 }

@@ -1,7 +1,11 @@
 import React from 'react';
 import PopUpBtn from './PopUpBtn/PopUpBtn';
 
-function PopUp(role: string) {
+type props = {
+  useCase: string;
+};
+
+function PopUp({ useCase }: props) {
   // const linkupHandler:roleFunction = () => {
   //   console.log('linkup');
   //   return true;
@@ -17,7 +21,7 @@ function PopUp(role: string) {
 
   return (
     <div className="pu__container">
-      {role === 'signup'
+      {useCase === 'signup'
         ? (
           <div>
             {' '}
