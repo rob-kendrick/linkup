@@ -3,7 +3,7 @@ a {
   text-decoration: inherit; /* no underline */
 }
 
-.ac_main-container{
+.ec_main-container{
   background-color:white;
   margin:20px; 
   margin-bottom: 20px;
@@ -11,7 +11,7 @@ a {
   margin: 20px; 
 }
 
-.tl_component-container {
+.ec_tag-component-container {
   display: flex; 
   flex-direction: row; 
   align-items: center;
@@ -19,7 +19,7 @@ a {
   padding:4%; 
 }
 
-.ac_profile{
+.ec_profile{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -29,19 +29,19 @@ a {
   margin-bottom: 5%;  
 }
 
-.ac_profile-inner-container{
+.ec_profile-inner-container{
   display: flex;
   flex-direction: row;
   width: 90%;
 }
 
-.ac_profile-picture-container{
+.ec_profile-picture-container{
   display: flex;
   width: 20%; 
   align-self: flex-start;
 }
 
-.ac_profile-picture{
+.ec_profile-picture{
   display: flex;
   align-items: center;
   justify-content:center;
@@ -49,7 +49,7 @@ a {
   width: 52px; 
 }
 
-.ac_details{
+.ec_details{
   display: flex;
   flex-direction: row; 
   align-items: center;
@@ -58,13 +58,13 @@ a {
   margin-top: 2%;
 }
 
-.ac_details-inner-container{
+.ec_details-inner-container{
   display: flex;
   flex-direction: row;
   width: 90%;
 }
 
-.ac_header-info{
+.ec_header-info{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -74,19 +74,13 @@ a {
   padding-bottom: 1%;
 }
 
-.activity-card-details{
-  display: flex;
-  align-items: center; 
-  width: 100%;
-}
-
-.ac_icon-container{
+.ec_icon-container{
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.ac_details-icon{
+.ec_details-icon{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,13 +93,13 @@ a {
 }
 
 
-.ac_details-text{
+.ec_details-text{
   display: flex; 
   align-items: center;
   justify-content: center;
 }
 
-.ac_button-container{
+.ec_button-container{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
