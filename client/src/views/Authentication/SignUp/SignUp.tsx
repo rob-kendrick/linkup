@@ -4,15 +4,7 @@ import { InputTextField, InputTextArea } from '../../../components/Form/InputTex
 import InputPhoto from '../../../components/Form/InputPhoto/InputPhoto';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 import './SignUp.css';
-
-interface User {
-  profile_picture: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  bio: string;
-  password: string;
-}
+import { User } from '../../../utilities/types/User';
 
 function SignUp() {
   const {
@@ -25,8 +17,6 @@ function SignUp() {
       first_name: '',
       last_name: '',
       bio: '',
-      email: '',
-      password: '',
     },
   });
 

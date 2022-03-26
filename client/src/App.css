@@ -4,7 +4,6 @@
   height: 100vh;
   width: 100vw;
   /* position: fixed; */
-
 }
 
 .routes-container {
@@ -13,12 +12,3 @@
   flex-grow: 1;
   background-color: white;
 }
-
-.navbar-delete {
-  position: absolute;
-  width: 100%;
-  background-color: grey;
-  height: 100px;
-  bottom: 0px;
-}
-
