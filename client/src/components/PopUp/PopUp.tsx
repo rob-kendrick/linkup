@@ -1,11 +1,39 @@
 import React from 'react';
+import PopUpBtn from './PopUpBtn/PopUpBtn';
 
-function PopUp() {
+function PopUp(role: string) {
+  // const linkupHandler:roleFunction = () => {
+  //   console.log('linkup');
+  //   return true;
+  // };
+
+  // const leaveEventHandler = () => {
+  //   console.log('leave event');
+  // };
+
+  // const hidePopUp = (arg:string) => {
+  // console.log('hide popout');
+  // };
+
   return (
-    <div>
-      <h3>PopUp</h3>
-      <button type="button">Cancel</button>
-      <button type="button">Confirm</button>
+    <div className="pu__container">
+      {role === 'signup'
+        ? (
+          <div>
+            {' '}
+            BODY SIGN IN
+            <PopUpBtn text="Cancel" />
+          </div>
+        )
+        : (
+          <div>
+            {' '}
+            Body leave
+            <PopUpBtn
+              text="No"
+            />
+          </div>
+        )}
     </div>
   );
 }
