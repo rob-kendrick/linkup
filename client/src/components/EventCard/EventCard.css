@@ -1,50 +1,110 @@
-.activity-card-profile{
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
+.ec_main-container{
+  background-color:white;
+  margin:20px; 
+  margin-bottom: 20px;
+  border-radius: 10px;
+  margin: 20px; 
+}
+
+.ec_tag-component-container {
+  display: flex; 
+  flex-direction: row; 
+  align-items: center;
+  justify-content: space-between;
+  padding:4%; 
+}
+
+.ec_profile{
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-around;
+  width: 100%; 
   margin:0px;
-  padding: 10px; 
+  margin-bottom: 5%;  
 }
 
-.activity-card-header-info{
-  margin-left: 10px;
+.ec_profile-inner-container{
+  display: flex;
+  flex-direction: row;
+  width: 90%;
 }
 
-#activity-card-title{
-  margin: 0px; 
+.ec_profile-picture-container{
+  display: flex;
+  width: 20%; 
+  align-self: flex-start;
 }
 
-#activity-card-user{
-  margin: 0px;
+.ec_profile-picture{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  border-radius: 50%;
+  width: 52px; 
 }
 
-.activity-card-details{
+.ec_details{
   display: flex;
   flex-direction: row; 
   align-items: center;
+  justify-content: center;
+  margin-bottom: 2%;
+  margin-top: 2%;
 }
 
-.activity-card-details-icon{
+.ec_details-inner-container{
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  width: 90%;
+}
+
+.ec_header-info{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-left: 3%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.ec_icon-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ec_details-icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
   background-color: #F2F2F2;
   width: 24px;
   height: 24px;
   padding: 3px;
-  margin-right: 10px; 
+  margin-right: 10px;
 }
 
-.activity-card-details{
+
+.ec_details-text{
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+.ec_button-container{
   display: flex;
-  align-items: center; 
-  width: 90%;
-  margin: 10px; 
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 5% 0% 5% 0%; 
   
 }
 
-a {
-  color: inherit; /* blue colors for links too */
-  text-decoration: inherit; /* no underline */
-}
+

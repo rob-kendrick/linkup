@@ -16,18 +16,12 @@
   width: 20px;
 }
 
-
-.activity-card{
-  background-color:white;
-  margin:20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  margin: 20px;
-}
-
-.activity-card-picture{
-  border-radius: 50%;
-  width: 52px;
+.browse-events-filter-menu{
+  background-color:rgb(249, 249, 249);
+  height: 25vh;
+  width: 375px;
+  padding: 0px;
+  margin: 0px;
 }
 
 .browse-events {
