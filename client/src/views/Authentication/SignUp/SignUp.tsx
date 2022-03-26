@@ -5,6 +5,7 @@ import InputPhoto from '../../../components/Form/InputPhoto/InputPhoto';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 import './SignUp.css';
 import { User } from '../../../utilities/types/User';
+import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 
 function SignUp() {
   const {
@@ -30,7 +31,10 @@ function SignUp() {
         text="Signup with E-mail"
       />
       <div className="su__container">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          id="test"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <InputPhoto />
           <InputTextField
             type="text"
@@ -78,7 +82,16 @@ function SignUp() {
               },
             })}
           />
-          <input type="submit" />
+          <ButtonLarge
+            type="submit"
+            value="Sign up"
+            style="fill"
+          />
+          <ButtonLarge
+            type="reset"
+            value="Cancel Activity"
+            style="stroke"
+          />
         </form>
       </div>
     </div>
