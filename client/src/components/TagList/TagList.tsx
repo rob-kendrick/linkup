@@ -1,11 +1,16 @@
+// @ts-nocheck
 import React from 'react';
-import Tag from './Tag/Tag';
+import './TagList.css';
 
-function TagList() {
+function TagList({ tags } : any) {
+  console.log(tags, 'from TagList');
   return (
-    <div>
-      <div>TagList</div>
-      <Tag />
+    <div className="tg_inner-container">
+      { tags.map((tag) => (
+        <div key={tag} id="tg_individual-tag">
+          <p>{tag}</p>
+        </div>
+      ))}
     </div>
   );
 }
