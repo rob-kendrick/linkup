@@ -60,7 +60,7 @@ function Navbar() {
           onClick={() => handleClick(4)}
         >
           <div className="n__icon-container">
-            <FaUser className="n__icon n__icon-small" />
+            <FaUser className="n__icon" />
           </div>
           <text>Profile</text>
         </button>
