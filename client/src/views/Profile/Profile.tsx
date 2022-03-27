@@ -24,7 +24,7 @@ const profileListData = [
     svgLogo: HiLockClosed,
   },
   {
-    link: '/profile',
+    link: '/logout',
     text: 'Logout',
     svgLogo: ImExit,
   },
