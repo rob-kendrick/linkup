@@ -21,7 +21,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 10%;
+  border-radius: 25px;
+  background-color: white;
 }
 
 .pu__mainContainer {
@@ -31,6 +32,21 @@
 .pu__btnContainer {
   display: flex;
   flex-direction: row-reverse;
+  width: 100%;
+}
+.pu__btnContainer
+  button:nth-child(1) {
+  border-radius: 0
+    0
+    25px
+    0;
+}
+.pu__btnContainer
+  button:nth-child(2) {
+  border-radius: 0
+    0
+    0
+    25px;
 }
 
 .pu__btnTxtContainer {

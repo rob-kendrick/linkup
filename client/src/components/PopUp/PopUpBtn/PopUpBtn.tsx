@@ -1,8 +1,5 @@
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable no-unused-vars */
 import React from 'react';
-import { Dispatch } from 'redux';
-import { useDispatch, useSelector } from 'react-redux';
+import './popUpBtn.css';
 
 type Props = {
   text: string;
@@ -14,24 +11,20 @@ type Props = {
 function PopUpBtn({ text, hidePopup, onClick }: Props) {
   if (text === 'Linkup' || text === 'Yes, Cancel') {
     return (
-      <div>
-        <button type="button" onClick={() => { hidePopup(); onClick!(); }}>
-          {' '}
-          {text}
-          {' '}
-        </button>
-      </div>
+      <button className="pubtn__btn" type="button" onClick={() => { hidePopup(); onClick!(); }}>
+        {' '}
+        <p className="pubtn__txt">{text}</p>
+        {' '}
+      </button>
     );
   }
 
   return (
-    <div>
-      <button type="button" onClick={() => { hidePopup(); }}>
-        {' '}
-        {text}
-        {' '}
-      </button>
-    </div>
+    <button className="pubtn__btn" type="button" onClick={() => { hidePopup(); }}>
+      {' '}
+      <p className="pubtn__txt">{text}</p>
+      {' '}
+    </button>
 
   );
 }

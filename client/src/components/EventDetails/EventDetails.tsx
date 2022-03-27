@@ -41,12 +41,12 @@ function EventDetails() {
       <HeaderReturn text="Activity Details" />
       <div>
         {date}
-        <TagList />
+        {/* <TagList /> */}
         <h3>{currentEvent.title}</h3>
       </div>
       <div>
         <ProfilePicture />
-        <MapSmall />
+        {/* <MapSmall /> */}
         {participation ? <ParticipantList /> : null}
       </div>
       {participation

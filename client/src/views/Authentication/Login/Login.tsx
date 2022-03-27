@@ -5,7 +5,7 @@ import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 import { InputTextField } from '../../../components/Form/InputTextField/InputTextField';
 import { User } from '../../../utilities/types/User';
-import './Login.css';
+import './login.css';
 
 function Login() {
   const {
