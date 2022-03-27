@@ -27,8 +27,11 @@ import StartPage from './views/Authentication/StartPage/StartPage';
 import eventApi from './utilities/api/event.api';
 import eventActions from './utilities/redux/actions/event.actions';
 import userApi from './utilities/api/user.api';
-// import LandingPage from './views/Authentication/LandingPage/LandingPage';
+import LandingPage from './views/Authentication/LandingPage/LandingPage';
 import userActions from './utilities/redux/actions/user.actions';
+import ProtectedRoute from './views/Authentication/ProtectedRoute';
+import PublicRoute from './views/Authentication/PublicRoute';
+import Logout from './views/Authentication/Logout';
 
 function App() {
   const { pathname } = useLocation();
@@ -64,32 +67,35 @@ function App() {
     <div className="app-container">
       <div className="routes-container">
         <Routes>
-          <Route path="/" element={<BrowseEvents />} />
-          {/* <Route path="/" element={<LandingPage />} /> */}
-          <Route path="/start" element={<StartPage />} />
-          <Route path="/register" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="events" element={<BrowseEvents />} />
-          <Route path="events/:eventid" element={<EventDetails />} />
-          <Route path="events/:eventid/chat" element={<ChatGroup />} />
-          <Route path="events/filters" element={<BrowseEventsFilters />} />
-          <Route path="events/filters/title" element={<FilterTitle />} />
-          <Route path="events/filters/tags" element={<FilterTags />} />
-          <Route path="events/filters/hosts" element={<FilterHosts />} />
-          <Route path="events/filters/participants" element={<FilterParticipants />} />
-          <Route path="myevents" element={<MyEvents />} />
-          <Route path="myevents/create" element={<CreateEvent />} />
-          <Route path="myevents/create/participants" element={<AddParticipants />} />
-          <Route path="chatlist" element={<ChatList />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="profile/friends" element={<Friends />} />
-          <Route path="users/:userid" element={<UserDetails />} />
-          <Route path="profile/profileedit" element={<ProfileEdit />} />
-          <Route path="profile/changepassword" element={<ChangePassword />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route element={<PublicRoute />}>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/start" element={<StartPage />} />
+            <Route path="/register" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+          </Route>
+          <Route element={<ProtectedRoute />}>
+            <Route path="events" element={<BrowseEvents />} />
+            <Route path="events/:eventid" element={<EventDetails />} />
+            <Route path="events/:eventid/chat" element={<ChatGroup />} />
+            <Route path="events/filters" element={<BrowseEventsFilters />} />
+            <Route path="events/filters/title" element={<FilterTitle />} />
+            <Route path="events/filters/tags" element={<FilterTags />} />
+            <Route path="events/filters/hosts" element={<FilterHosts />} />
+            <Route path="events/filters/participants" element={<FilterParticipants />} />
+            <Route path="myevents" element={<MyEvents />} />
+            <Route path="myevents/create" element={<CreateEvent />} />
+            <Route path="myevents/create/participants" element={<AddParticipants />} />
+            <Route path="chatlist" element={<ChatList />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="profile/friends" element={<Friends />} />
+            <Route path="users/:userid" element={<UserDetails />} />
+            <Route path="profile/profileedit" element={<ProfileEdit />} />
+            <Route path="profile/changepassword" element={<ChangePassword />} />
+          </Route>
         </Routes>
       </div>
-      {(pathname === '/'
-        || pathname === '/events'
+      {(pathname === '/events'
         || pathname === '/myevents'
         || pathname === '/chatlist'
         || pathname === '/profile')
