@@ -3,15 +3,19 @@ a {
   text-decoration: inherit; /* no underline */
 }
 
-.ec_main-container{
+
+.ec__main-container{
   background-color:white;
   margin:20px; 
   margin-bottom: 20px;
   border-radius: 10px;
-  margin: 20px; 
+  margin: 20px;
+  max-width: 330px;
+  min-width: 330px;
+  min-height: 290px;  
 }
 
-.ec_tag-component-container {
+.ec__tag-component-container {
   display: flex; 
   flex-direction: row; 
   align-items: center;
@@ -19,7 +23,7 @@ a {
   padding:4%; 
 }
 
-.ec_profile{
+.ec__profile{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -29,19 +33,19 @@ a {
   margin-bottom: 5%;  
 }
 
-.ec_profile-inner-container{
+.ec__profile-inner-container{
   display: flex;
   flex-direction: row;
   width: 90%;
 }
 
-.ec_profile-picture-container{
+.ec__profile-picture-container{
   display: flex;
   width: 20%; 
   align-self: flex-start;
 }
 
-.ec_profile-picture{
+.ec__profile-picture{
   display: flex;
   align-items: center;
   justify-content:center;
@@ -49,22 +53,10 @@ a {
   width: 52px; 
 }
 
-.ec_details{
-  display: flex;
-  flex-direction: row; 
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 2%;
-  margin-top: 2%;
+.ec__header-text{
+  margin: 0px; 
 }
-
-.ec_details-inner-container{
-  display: flex;
-  flex-direction: row;
-  width: 90%;
-}
-
-.ec_header-info{
+.ec__header-info{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -74,13 +66,30 @@ a {
   padding-bottom: 1%;
 }
 
-.ec_icon-container{
+.ec__details{
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+.ec__details-inner-container{
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+}
+
+
+
+.ec__icon-container{
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.ec_details-icon{
+.ec__details-icon{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,13 +102,13 @@ a {
 }
 
 
-.ec_details-text{
+.ec__details-text{
   display: flex; 
   align-items: center;
   justify-content: center;
 }
 
-.ec_button-container{
+.ec__button-container{
   display: flex;
   flex-direction: row;
   justify-content: space-around;

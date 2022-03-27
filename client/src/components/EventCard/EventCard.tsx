@@ -20,28 +20,28 @@ function EventCard({ event, eventList }: Events) {
       key={event.id_event}
     >
 
-      <div key={event.id_event} className="ec_main-container">
-        <div className="ec_tag-component-container">
+      <div key={event.id_event} className="ec__main-container">
+        <div className="ec__tag-component-container">
           <TagList tags={event.tags} />
         </div>
-        <div className="ec_profile">
-          <div className="ec_profile-inner-container">
-            <div className="ec_profile-picture-container">
-              <div><img src={event.creator.profile_picture} alt="event creator" className="ec_profile-picture" /></div>
+        <div className="ec__profile">
+          <div className="ec__profile-inner-container">
+            <div className="ec__profile-picture-container">
+              <div><img src={event.creator.profile_picture} alt="event creator" className="ec__profile-picture" /></div>
             </div>
-            <div className="ec_header-info">
-              <h4>{event.title}</h4>
-              <p>{event.creator.first_name}</p>
+            <div className="ec__header-info">
+              <h4 className="ec__header-text">{event.title}</h4>
+              <p className="ec__header-text">{event.creator.first_name}</p>
             </div>
           </div>
         </div>
-        <div className="ec_details">
-          <div className="ec_details-inner-container">
-            <div className="ec_icon-container">
-              <div className="ec_details-icon"><img src={marker} alt="marker pin" /></div>
+        <div className="ec__details">
+          <div className="ec__details-inner-container">
+            <div className="ec__icon-container">
+              <div className="ec__details-icon"><img src={marker} alt="marker pin" /></div>
             </div>
-            <div className="ec_details-text">
-              <p>
+            <div className="ec__details-text">
+              <p className="ec__header-text">
                 {event.street_name}
                 {' '}
                 {event.street_number}
@@ -53,17 +53,17 @@ function EventCard({ event, eventList }: Events) {
             </div>
           </div>
         </div>
-        <div className="ec_details">
-          <div className="ec_details-inner-container">
-            <div className="ec_icon-container">
-              <div className="ec_details-icon"><img src={marker} alt="marker pin" /></div>
+        <div className="ec__details">
+          <div className="ec__details-inner-container">
+            <div className="ec__icon-container">
+              <div className="ec__details-icon"><img src={marker} alt="marker pin" /></div>
             </div>
-            <div className="ec_details-text">
-              <p>{moment(event.date).format('h:mm')}</p>
+            <div className="ec__details-text">
+              <p className="ec__header-text">{moment(event.date).format('h:mm')}</p>
             </div>
           </div>
         </div>
-        <div className="ec_button-container">
+        <div className="ec__button-container">
           <ButtonEventsMenu name="LinkUp" />
           <ButtonEventsMenu name={`${event.participants.length} participants`} />
         </div>

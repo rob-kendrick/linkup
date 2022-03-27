@@ -12,8 +12,10 @@ function EventList({ filteredEvents } : eventProps) {
   const eventCardList = filteredEvents.map((thisEvent) => (<EventCard event={thisEvent} />));
 
   return (
-    <div>
-      { eventCardList }
+    <div className="evl__main-container">
+      <div className="evl__inner-container">
+        { eventCardList }
+      </div>
     </div>
 
   );
