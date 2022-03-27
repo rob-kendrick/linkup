@@ -1,0 +1,10 @@
+.pl {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.pl__userContainer {
+  display: flex;
+  align-items: center;
+}

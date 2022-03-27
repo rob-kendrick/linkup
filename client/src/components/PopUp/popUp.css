@@ -1,0 +1,87 @@
+.pu__container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(
+    38,
+    48,
+    86,
+    0.5
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pu__fieldContainer
+  > * {
+  margin: 1.2rem
+    1rem
+    0
+    1rem;
+}
+
+.pu__cardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  background-color: white;
+  width: 90vw;
+}
+
+.pu__mainContainer {
+  padding: 1rem;
+}
+
+.pu__btnContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+}
+.pu__btnContainer
+  button:nth-child(1) {
+  border-radius: 0
+    0
+    25px
+    0;
+}
+.pu__btnContainer
+  button:nth-child(2) {
+  border-radius: 0
+    0
+    0
+    25px;
+}
+
+.pu__btnTxtContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pu__hLight {
+  font-weight: 300;
+  margin: 0;
+  padding: 1rem
+    1rem
+    0
+    1rem;
+}
+
+.pu__hMed {
+  font-weight: 500;
+  margin: 0;
+  padding: 1rem
+    2rem
+    0
+    2rem;
+}
+
+.pu__pMed {
+  font-weight: 300;
+  font-size: 0.8rem;
+}

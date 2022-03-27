@@ -1,0 +1,40 @@
+.puf__container {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem
+    0;
+}
+
+.puf__txtContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  display: flex;
+  padding-left: 0.5rem;
+}
+
+.puf__imgContainer {
+  /* width: 10%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  background-color: rgb(
+    229,
+    229,
+    229
+  );
+}
+
+.puf__h4 {
+  font-size: 0.8rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+.puf__p {
+  font-size: 0.7rem;
+  margin: 0;
+  font-weight: 400;
+  padding-bottom: 0.1rem;
+}
