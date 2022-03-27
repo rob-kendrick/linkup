@@ -49,7 +49,6 @@ function SignUp() {
       />
       <div className="su__container">
         <form
-          id="test"
           onSubmit={handleSubmit(onSubmit)}
         >
           <InputPhoto />

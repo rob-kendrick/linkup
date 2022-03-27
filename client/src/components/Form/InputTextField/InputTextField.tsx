@@ -27,7 +27,7 @@ const InputTextField = React.forwardRef<HTMLInputElement, Props>(
         name={name}
         required
       />
-      {label && <label className="itf__label" htmlFor={name}>{label}</label>}
+      {label && <label className={`itf__label ${(type === 'datetime-local') && 'itf__label-datetime'}`} htmlFor={name}>{label}</label>}
       {errorMessage && <p className="itf__error">{errorMessage}</p>}
     </div>
   ),
