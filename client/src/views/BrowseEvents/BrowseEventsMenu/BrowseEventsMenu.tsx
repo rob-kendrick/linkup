@@ -16,8 +16,7 @@ import { InputTextField } from '../../../components/Form/InputTextField/InputTex
 import FaUsers from '../../../assets/FaUsers.svg';
 import FaUser from '../../../assets/FaUser.svg';
 import HiLockClosed from '../../../assets/HiLockClosed.svg';
-import ImExit from '../../../assets/ImExit.svg';
-
+import BiCalenderHeart from '../../../assets/BiCalendarHeart.svg';
 import MdTitle from '../../../assets/MdTitle.svg';
 import AiFillTag from '../../../assets/AiFillTag.svg';
 
@@ -38,7 +37,7 @@ function BrowseEventsMenu({
   const [dates, setDates] = useState<Date[]>([]);
   const [showSearchbar, setShowSearchbar] = useState<boolean>(false);
   const inputField = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const [currentFilter, setCurrentFilter] = useState<string>('date');
+  const [currentFilter, setCurrentFilter] = useState<string>('Date');
 
   useEffect(() => {
     const dateArr:Date[] = [];
@@ -165,6 +164,7 @@ function BrowseEventsMenu({
           </button>
           <div className={`bem__selectors-filters-drop-down ${showDropDown ? 'bem__selectors-drop-down-show' : ''}`}>
             <DropDown
+              currentFilter={currentFilter}
               handleSelectDropDown={handleSelectDropDown}
             />
           </div>
@@ -182,6 +182,10 @@ export default BrowseEventsMenu;
 
 const dropDownData = [
   {
+    text: 'Date',
+    svgLogo: BiCalenderHeart,
+  },
+  {
     text: 'Title',
     svgLogo: MdTitle,
   },
@@ -197,21 +201,23 @@ const dropDownData = [
     text: 'Participants',
     svgLogo: FaUsers,
   },
+
 ];
 
-function DropDown({ handleSelectDropDown }:any) {
+function DropDown({ handleSelectDropDown, currentFilter }:any) {
   const dropDown = dropDownData.map((el) => (
-    <>
+    <div className={`dd__item-wrapper ${currentFilter === el.text ? 'dd__item-wrapper-hide' : ''}`}>
+
       <div
-        className="drop-down-element"
+        className="dd__item"
         onClick={() => handleSelectDropDown(el.text)}
       >
-        <img className="dd_icon" src={el.svgLogo} />
-        <p className="dd__text">{el.text}</p>
+        <img className="dd__item-icon" src={el.svgLogo} />
+        <p className="dd__item-text">{el.text}</p>
 
       </div>
-      <hr className="line" />
-    </>
+      <hr className="dd_item-line" />
+    </div>
 
   ));
 
