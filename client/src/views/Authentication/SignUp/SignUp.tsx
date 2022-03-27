@@ -4,15 +4,8 @@ import { InputTextField, InputTextArea } from '../../../components/Form/InputTex
 import InputPhoto from '../../../components/Form/InputPhoto/InputPhoto';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 import './SignUp.css';
-
-interface User {
-  profile_picture: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  bio: string;
-  password: string;
-}
+import { User } from '../../../utilities/types/User';
+import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 
 function SignUp() {
   const {
@@ -25,8 +18,6 @@ function SignUp() {
       first_name: '',
       last_name: '',
       bio: '',
-      email: '',
-      password: '',
     },
   });
 
@@ -40,7 +31,10 @@ function SignUp() {
         text="Signup with E-mail"
       />
       <div className="su__container">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          id="test"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <InputPhoto />
           <InputTextField
             type="text"
@@ -88,7 +82,16 @@ function SignUp() {
               },
             })}
           />
-          <input type="submit" />
+          <ButtonLarge
+            type="submit"
+            value="Sign up"
+            style="fill"
+          />
+          <ButtonLarge
+            type="reset"
+            value="Cancel Activity"
+            style="stroke"
+          />
         </form>
       </div>
     </div>

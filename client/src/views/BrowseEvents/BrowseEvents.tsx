@@ -1,58 +1,81 @@
-import React, { useState } from 'react';
-import moment from 'moment';
+// @ts-nocheck
+
+import React, {
+  useEffect, useMemo, useState, MouseEventHandler,
+} from 'react';
+import browseEventsContext from '../../contexts/browse-events.context';
 import BrowseEventsMenu from './BrowseEventsMenu/BrowseEventsMenu';
 import EventsList from '../../components/EventsList/EventsList';
 import MapLarge from '../../components/MapLarge/MapLarge';
-import * as mockEventsData from '../../utilities/mocks/db-data/events-db-data.json';
+import mockEventsData from '../../utilities/mocks/db-data/events-db-data.json';
+import './BrowseEvents.css';
 
-
-
+const dayMatch = (date1:string, date2:string) => {
+  const date3 = new Date(date1);
+  const date4 = new Date(date2);
+  if (
+    date3.getFullYear() === date4.getFullYear()
+  && date3.getMonth() === date4.getMonth()
+  && date3.getDate() === date4.getDate()
+  ) {
+    return true;
+  }
+  return false;
+};
 
 function BrowseEvents() {
   const [mapView, setMapView] = useState(true);
-  const [listView, setListView] = useState(false);
+  const [allEvents, setAllEvents] = useState<any[]>(mockEventsData.data);
+  const [dateFilter, setDateFilter] = useState<any[]>(mockEventsData.data);
+  const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
 
-  const [events, setEvents] = useState(mockEventsData);
-  const [filteredEvents, setFilteredEvents] = useState(events);
+  // on first run, populate filtered list with all events
 
-  const mapClick = () => {
-    setMapView(true);
-    setListView(false);
+  // merge all filtered lists
+  useEffect(() => {
+    setFilteredEvents(dateFilter);
+  }, [dateFilter]);
+
+  // for testing purposes
+  useEffect(() => {
+  }, [filteredEvents]);
+
+  // list/map toggle
+  const toggleMapList:MouseEventHandler = () => {
+    setMapView(!mapView);
   };
 
-  const listClick = () => {
-    setListView(true);
-    setMapView(false);
+  // filter events by date
+  const filterByDate = (thisDate) => {
+    const newEvents = allEvents.filter(
+      (event) => {
+        if (dayMatch(event.date, thisDate)) return event;
+      },
+    );
+    setDateFilter(newEvents);
   };
 
-  const printDate = (date:Date) => {
-    const eventsByDate : any = [];
-    events.data.forEach(((event) => {
-      console.log(date, '/////------> date');
-      console.log(event.date);
-      // if (moment(new Date(event.date)).format('MMMM Do YYYY') === moment(date).format('MMMM Do YYYY')) {
-      //   eventsByDate.push(event);
-      // }
-    }));
-    setFilteredEvents(eventsByDate);
-  };
+  const context = useMemo(() => ({
+    filteredEvents,
+    mapView,
+    filterByDate,
+    toggleMapList,
+  }), [
+    filteredEvents,
+    mapView,
+  ]);
 
   return (
-    <div className="browse-events-container">
-      {/* Temporary CSS on the global CSS file */}
-      <div className="browse-events-filter-menu">
-        <BrowseEventsMenu listClick={listClick} mapClick={mapClick} printDate={printDate} />
+    <browseEventsContext.Provider value={context}>
+      <div className="be__container">
+        <BrowseEventsMenu />
+        <div className="be__container-inner">
+          {mapView && (<MapLarge filteredEvents={filteredEvents} />)}
+          {!mapView && (<EventsList filteredEvents={filteredEvents} />)}
+        </div>
       </div>
+    </browseEventsContext.Provider>
 
-      <div className="browse-events-map">
-        {
-          mapView
-            ? (<MapLarge eventList={filteredEvents.data} />)
-            : (<EventsList eventList={filteredEvents.data} />)
-        }
-
-      </div>
-    </div>
   );
 }
 

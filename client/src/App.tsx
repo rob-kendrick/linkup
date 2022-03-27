@@ -61,31 +61,33 @@ function App() {
   }
 
   return (
-    <div className="app-container-delete">
-      <Routes>
-        <Route path="/" element={<BrowseEvents />} />
-        {/* <Route path="/" element={<LandingPage />} /> */}
-        <Route path="/start" element={<StartPage />} />
-        <Route path="/register" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="events" element={<BrowseEvents />} />
-        <Route path="events/:eventid" element={<EventDetails />} />
-        <Route path="events/:eventid/chat" element={<ChatGroup />} />
-        <Route path="events/filters" element={<BrowseEventsFilters />} />
-        <Route path="events/filters/title" element={<FilterTitle />} />
-        <Route path="events/filters/tags" element={<FilterTags />} />
-        <Route path="events/filters/hosts" element={<FilterHosts />} />
-        <Route path="events/filters/participants" element={<FilterParticipants />} />
-        <Route path="myevents" element={<MyEvents />} />
-        <Route path="myevents/create" element={<CreateEvent />} />
-        <Route path="myevents/create/participants" element={<AddParticipants />} />
-        <Route path="chatlist" element={<ChatList />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="profile/friends" element={<Friends />} />
-        <Route path="users/:userid" element={<UserDetails />} />
-        <Route path="profile/profileedit" element={<ProfileEdit />} />
-        <Route path="profile/changepassword" element={<ChangePassword />} />
-      </Routes>
+    <div className="app-container">
+      <div className="routes-container">
+        <Routes>
+          <Route path="/" element={<BrowseEvents />} />
+          {/* <Route path="/" element={<LandingPage />} /> */}
+          <Route path="/start" element={<StartPage />} />
+          <Route path="/register" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="events" element={<BrowseEvents />} />
+          <Route path="events/:eventid" element={<EventDetails />} />
+          <Route path="events/:eventid/chat" element={<ChatGroup />} />
+          <Route path="events/filters" element={<BrowseEventsFilters />} />
+          <Route path="events/filters/title" element={<FilterTitle />} />
+          <Route path="events/filters/tags" element={<FilterTags />} />
+          <Route path="events/filters/hosts" element={<FilterHosts />} />
+          <Route path="events/filters/participants" element={<FilterParticipants />} />
+          <Route path="myevents" element={<MyEvents />} />
+          <Route path="myevents/create" element={<CreateEvent />} />
+          <Route path="myevents/create/participants" element={<AddParticipants />} />
+          <Route path="chatlist" element={<ChatList />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="profile/friends" element={<Friends />} />
+          <Route path="users/:userid" element={<UserDetails />} />
+          <Route path="profile/profileedit" element={<ProfileEdit />} />
+          <Route path="profile/changepassword" element={<ChangePassword />} />
+        </Routes>
+      </div>
       {(pathname === '/'
         || pathname === '/events'
         || pathname === '/myevents'

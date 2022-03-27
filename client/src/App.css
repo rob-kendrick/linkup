@@ -1,29 +1,17 @@
-.navbar-delete {
-  position: absolute;
-  width: 100%;
-  background-color: grey;
-  height: 100px;
-  bottom: 0px;
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  /* position: fixed; */
 }
 
-.list-container-delete {
-  max-height: 600px;
-  overflow: auto
-}
-
-.list-item-delete {
-  width: 80%;
-  margin: 20px;
+.routes-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   background-color: white;
-}
+  overflow: hidden;
 
-.flex-row-delete {
-  background-color: grey;
-  display: flex;
-}
-
-.space-around-delete {
-  display: flex;
-  justify-content: space-around;
-  right: 0px;
 }

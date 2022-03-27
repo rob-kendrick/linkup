@@ -20,36 +20,50 @@ function EventCard({ event, eventList }: Events) {
       key={event.id_event}
     >
 
-      <div key={event.id_event} className="activity-card">
-        <div>
-          {event.tags}
+      <div key={event.id_event} className="ec__main-container">
+        <div className="ec__tag-component-container">
+          <TagList tags={event.tags} />
         </div>
-        <div className="activity-card-profile">
-          <div>
-            <div><img src={event.creator.profile_picture} alt="event creator" className="activity-card-picture" /></div>
+        <div className="ec__profile">
+          <div className="ec__profile-inner-container">
+            <div className="ec__profile-picture-container">
+              <div><img src={event.creator.profile_picture} alt="event creator" className="ec__profile-picture" /></div>
+            </div>
+            <div className="ec__header-info">
+              <h4 className="ec__header-text">{event.title}</h4>
+              <p className="ec__header-text">{event.creator.first_name}</p>
+            </div>
           </div>
-          <div className="activity-card-header-info">
-            <h4 id="activity-card-title">{event.title}</h4>
-            <p id="activity-card-user">{event.creator.first_name}</p>
+        </div>
+        <div className="ec__details">
+          <div className="ec__details-inner-container">
+            <div className="ec__icon-container">
+              <div className="ec__details-icon"><img src={marker} alt="marker pin" /></div>
+            </div>
+            <div className="ec__details-text">
+              <p className="ec__header-text">
+                {event.street_name}
+                {' '}
+                {event.street_number}
+                {', '}
+                {event.postcode}
+                {' '}
+                {event.city}
+              </p>
+            </div>
           </div>
         </div>
-        <div className="activity-card-details">
-          <div className="activity-card-details-icon"><img src={marker} alt="marker pin" /></div>
-          <p>
-            {event.street_name}
-            {' '}
-            {event.street_number}
-            {', '}
-            {event.postcode}
-            {' '}
-            {event.city}
-          </p>
+        <div className="ec__details">
+          <div className="ec__details-inner-container">
+            <div className="ec__icon-container">
+              <div className="ec__details-icon"><img src={marker} alt="marker pin" /></div>
+            </div>
+            <div className="ec__details-text">
+              <p className="ec__header-text">{moment(event.date).format('h:mm')}</p>
+            </div>
+          </div>
         </div>
-        <div className="activity-card-details">
-          <div className="activity-card-details-icon"><img src={marker} alt="marker pin" /></div>
-          <p>{moment(event.date).format('h:mm')}</p>
-        </div>
-        <div className="activity-card-button-container">
+        <div className="ec__button-container">
           <ButtonEventsMenu name="LinkUp" />
           <ButtonEventsMenu name={`${event.participants.length} participants`} />
         </div>

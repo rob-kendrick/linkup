@@ -1,49 +1,62 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import select from '../../assets/HiSearch.svg';
-import calendar from '../../assets/BiCalendarHeart.svg';
-import chat from '../../assets/HiChat.svg';
-import profile from '../../assets/FaUser.svg';
+import { Link, useLocation } from 'react-router-dom';
+import { ReactComponent as HiSearch } from '../../assets/HiSearch.svg';
+import { ReactComponent as BiCalendarHeart } from '../../assets/BiCalendarHeart.svg';
+import { ReactComponent as HiChat } from '../../assets/HiChat.svg';
+import { ReactComponent as FaUser } from '../../assets/FaUser.svg';
 import './Navbar.css';
 
 function Navbar() {
+  const { pathname } = useLocation();
   return (
-    <div className="navbar">
-      <Link to="/events">
-        <div className="navbar-item">
-          <div><img src={select} alt="search icon" className="navbar-icon" /></div>
-          <div>Browse</div>
-        </div>
-      </Link>
+    <div className="n__container">
 
-      {' '}
-      |
+      <Link to="/events">
+        <button
+          type="button"
+          className={`n__button ${pathname === '/events' && 'n__button-active'}`}
+        >
+          <div className="n__icon-container">
+            <HiSearch className="n__icon" />
+          </div>
+          <text>Browse</text>
+        </button>
+      </Link>
 
       <Link to="/myevents">
-        <div className="navbar-item">
-          <div><img src={calendar} alt="search icon" className="navbar-icon" /></div>
-          <div>My Activities</div>
-        </div>
+        <button
+          type="button"
+          className={`n__button ${pathname === '/myevents' && 'n__button-active'}`}
+        >
+          <div className="n__icon-container">
+            <BiCalendarHeart className="n__icon" />
+          </div>
+          <text>My Activities</text>
+        </button>
       </Link>
-
-      {' '}
-      |
 
       <Link to="/chatlist">
-        <div className="navbar-item">
-          <div><img src={chat} alt="search icon" className="navbar-icon" /></div>
-          <div>Chat</div>
-        </div>
+        <button
+          type="button"
+          className={`n__button ${pathname === '/chatlist' && 'n__button-active'}`}
+        >
+          <div className="n__icon-container">
+            <HiChat className="n__icon" />
+          </div>
+          <text>Chat</text>
+        </button>
       </Link>
 
-      {' '}
-      |
-
       <Link to="/profile">
-        <div className="navbar-item">
-          <div><img src={profile} alt="search icon" className="navbar-icon" /></div>
-          <div>Profile</div>
-        </div>
+        <button
+          type="button"
+          className={`n__button ${pathname === '/profile' && 'n__button-active'}`}
+        >
+          <div className="n__icon-container">
+            <FaUser className="n__icon" />
+          </div>
+          <text>Profile</text>
+        </button>
       </Link>
 
     </div>

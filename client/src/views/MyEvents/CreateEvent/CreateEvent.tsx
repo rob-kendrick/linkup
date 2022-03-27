@@ -17,7 +17,7 @@ function CreateEvent() {
       <MapSmall />
       {/* the following line should be a 'ButtonLarge' component */}
       <button type="button" onClick={() => navigate('/myevents/create/participants')}>Add Participants</button>
-      <ButtonLarge />
+      {/* <ButtonLarge /> */}
     </div>
   );
 }

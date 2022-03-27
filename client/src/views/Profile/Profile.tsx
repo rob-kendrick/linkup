@@ -5,10 +5,11 @@ import FaUser from '../../assets/FaUser.svg';
 import HiLockClosed from '../../assets/HiLockClosed.svg';
 import ImExit from '../../assets/ImExit.svg';
 import './Profile.css';
+import HeaderMain from '../../components/HeaderMain/HeaderMain';
 
 const profileListData = [
   {
-    link: 'profile/friends',
+    link: '/profile/friends',
     text: 'Friends',
     svgLogo: FaUsers,
   },
@@ -32,7 +33,9 @@ const profileListData = [
 function Profile() {
   return (
     <div>
-      <h3 className="p__header">Profile</h3>
+      <HeaderMain
+        title="Profile"
+      />
       <MenuList data={profileListData} />
     </div>
   );
