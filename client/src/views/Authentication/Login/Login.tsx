@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 import { InputTextField } from '../../../components/Form/InputTextField/InputTextField';
 import { User } from '../../../utilities/types/User';
+import authApi from '../../../utilities/api/auth.api';
 import './Login.css';
 
 function Login() {
@@ -19,8 +19,10 @@ function Login() {
     },
   });
 
-  const onSubmit = (data: User) => {
+  const onSubmit = async (data: User) => {
     console.log(data);
+    const response = await authApi.login(data);
+    console.log(response);
   };
   return (
     <div>
@@ -57,13 +59,11 @@ function Login() {
               },
             })}
           />
-          <Link to="/events">
-            <ButtonLarge
-              type="submit"
-              value="Log in"
-              style="fill"
-            />
-          </Link>
+          <ButtonLarge
+            type="submit"
+            value="Log in"
+            style="fill"
+          />
         </form>
       </div>
     </div>
