@@ -35,7 +35,7 @@ function Login() {
       if (response.status === 503) setErrorMessage('503 service unavailable');
     } else if (response.data.accessToken) {
       localStorage.setItem('accessToken', response.data.accessToken);
-      localStorage.setItem('user_id', response.data.user.user_id);
+      localStorage.setItem('id_user', response.data.user.id_user);
       navigate('/events');
       // props.setIsAuthenticated(true);
     }
