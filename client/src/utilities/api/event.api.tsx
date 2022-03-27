@@ -103,7 +103,7 @@ const eventApi = {
       return { error: true, message: e.message, code: e.code };
     }),
 
-  leaveEvent: (eventId: number, userId: number) => fetch(`${baseUrl}}/${eventId}/${userId}`, {
+  leaveEvent: (eventId: number, userId: number) => fetch(`${baseUrl}/events/leave/${eventId}/users/${userId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

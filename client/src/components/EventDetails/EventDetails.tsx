@@ -12,23 +12,26 @@ import ParticipantList from './ParticipantList/ParticipantList';
 import PopUp from '../PopUp/PopUp';
 
 function EventDetails() {
-  const [showPopup, setShowPopup] = useState(false);
+  dayjs.extend(advancedFormat);
   const navigate = useNavigate();
   const params = useParams();
-  const { eventid } = params;
+
+  const [showPopup, setShowPopup] = useState(false);
+
   const currentEvent = useSelector(
     (state: RootState) => state.eventReducer.allEvents.filter(
-      (event) => event.id_event === Number(eventid),
+      (event) => event.id_event === Number(params.eventid),
     ),
   )[0];
 
-  const user_id = useSelector((state: RootState) => state.userReducer.currentUser?.id_user);
-  dayjs.extend(advancedFormat);
   const date = dayjs(currentEvent.date).format('dddd, Do MMMM, H:MM');
+  // TEMPORARY DUE TO LACK OF AUTH
+  // eslint-disable-next-line camelcase
+  const user_id = useSelector((state: RootState) => state.userReducer.currentUser?.id_user);
+
   const participation = currentEvent.participants.some(
     (participant) => participant.id_user === Number(user_id),
   );
-  // const participation = true;
 
   const hidePopup = () => {
     setShowPopup(false);
