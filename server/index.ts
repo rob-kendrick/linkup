@@ -17,7 +17,7 @@ const PORT = 4000;
 
 const app = express();
 
-app.use(cors(corsConfig));
+app.use(cors());
 app.use(morgan('short'));
 app.use(express.json());
 app.use('/', router);

@@ -92,7 +92,14 @@ const login = async (req: Request, res: Response) => {
     const { id_user } = validUser;
     const accessToken = jwt.sign({ id_user }, JWT_SECRET_KEY);
 
-    return res.send({ data: { accessToken } });
+    return res.send({
+      data: {
+        accessToken,
+        user: {
+          id_user,
+        },
+      },
+    });
   } catch (err) {
     return res.status(500).send(err);
   }

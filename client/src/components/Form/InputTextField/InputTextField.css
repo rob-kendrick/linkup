@@ -7,6 +7,7 @@
   border-radius: 8px;
   font-size: 16px;
   padding-left: 20px;
+  padding-right: 20px;
   min-height: 3.5em;
   max-width: 400px;
   width: 90vw;
@@ -35,6 +36,16 @@
 
 .itf__input:valid + .itf__label,
 .itf__input:focus + .itf__label{
+  border-radius: 4px;
+  font-size: 11px;
+  color: grey;
+  top: -5px;
+  left: 10px;
+  background: white;
+  padding: 0px 5px 2px 5px;
+}
+
+.itf__label-datetime {
   border-radius: 4px;
   font-size: 11px;
   color: grey;
