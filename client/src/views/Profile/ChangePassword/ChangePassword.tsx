@@ -1,23 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { InputTextField } from '../../../components/Form/InputTextField/InputTextField';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
-import { User } from '../../../utilities/types/User';
+import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import './ChangePassword.css';
 
+interface PasswordChange {
+  password_old: string,
+  password_new: string,
+  password_confirm: string,
+}
+
 function ChangePassword() {
-  
+  const [errorMessage, setErrorMessage] = useState('');
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<User>({
+  } = useForm<PasswordChange>({
     defaultValues: {
-      password: '',
+      password_old: '',
+      password_new: '',
+      password_confirm: '',
     },
   });
 
-  const onSubmit = (data: User) => {
+  const onSubmit = (data: PasswordChange) => {
     console.log(data);
   };
 
@@ -30,9 +39,19 @@ function ChangePassword() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputTextField
             type="password"
-            label="Password"
-            errorMessage={errors.password?.message}
-            {...register('password', {
+            label="Current password"
+            errorMessage={errors.password_old?.message}
+            {...register('password_old', {
+              required: 'This field is required',
+            })}
+          />
+          <br />
+          <br />
+          <InputTextField
+            type="password"
+            label="New password"
+            errorMessage={errors.password_new?.message}
+            {...register('password_new', {
               required: 'This field is required',
               minLength: {
                 value: 8,
@@ -42,9 +61,9 @@ function ChangePassword() {
           />
           <InputTextField
             type="password"
-            label="Confirm Password"
-            errorMessage={errors.password?.message}
-            {...register('password', {
+            label="Confirm new password"
+            errorMessage={errors.password_confirm?.message}
+            {...register('password_confirm', {
               required: 'This field is required',
               minLength: {
                 value: 8,
@@ -52,8 +71,13 @@ function ChangePassword() {
               },
             })}
           />
-          <input type="submit" />
-          <input type="reset" />
+          <ButtonLarge
+            type="submit"
+            value="Save Changes"
+            style="fill"
+          />
+          {(errorMessage !== '')
+          && <text>{errorMessage}</text>}
         </form>
       </div>
     </div>
