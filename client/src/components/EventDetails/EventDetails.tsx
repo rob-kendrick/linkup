@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import dayjs from 'dayjs';
-import advancedFormat from 'dayjs/plugin/advancedFormat';
 import { RootState } from '../../utilities/redux/store';
 import HeaderReturn from '../HeaderReturn/HeaderReturn';
 import MapSmall from '../MapSmall/MapSmall';
@@ -10,9 +8,9 @@ import ProfilePicture from '../ProfilePicture/ProfilePicture';
 import TagList from '../TagList/TagList';
 import ParticipantList from './ParticipantList/ParticipantList';
 import PopUp from '../PopUp/PopUp';
+import useDate from '../../utilities/hooks/useDate';
 
 function EventDetails() {
-  dayjs.extend(advancedFormat);
   const navigate = useNavigate();
   const params = useParams();
 
@@ -24,7 +22,8 @@ function EventDetails() {
     ),
   )[0];
 
-  const date = dayjs(currentEvent.date).format('dddd, Do MMMM, H:MM');
+  const date = useDate(currentEvent.date);
+
   // TEMPORARY DUE TO LACK OF AUTH
   // eslint-disable-next-line camelcase
   const user_id = useSelector((state: RootState) => state.userReducer.currentUser?.id_user);

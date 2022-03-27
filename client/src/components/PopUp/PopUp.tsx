@@ -7,6 +7,7 @@ import eventActions from '../../utilities/redux/actions/event.actions';
 import PopUpBtn from './PopUpBtn/PopUpBtn';
 import './popUp.css';
 import type { LuEvent } from '../../utilities/types/Event';
+import PopUpField from './PopUpField/PopUpField';
 
 type props = {
   useCase: string;
@@ -54,14 +55,32 @@ function PopUp({ useCase, hidePopup, currentEvent }: props) {
       {useCase === 'signup'
         ? (
           <div>
-            <PopUpBtn text="Linkup" hidePopup={hidePopup} onClick={joinEvent} />
-            <PopUpBtn text="Cancel" hidePopup={hidePopup} />
+            <div>
+              <p>LinkUp Confirmation</p>
+              <h3>Are you sure?</h3>
+            </div>
+            <div>
+              {/* <PopUpField currentEvent={currentEvent} text="location" /> */}
+              {/* <PopUpField currentEvent={currentEvent} text="date" /> */}
+              {/* <PopUpField currentEvent={currentEvent} text="host" /> */}
+            </div>
+            <div>
+              <PopUpBtn text="Linkup" hidePopup={hidePopup} onClick={joinEvent} />
+              <PopUpBtn text="Cancel" hidePopup={hidePopup} />
+            </div>
           </div>
+
         )
         : (
           <div>
-            <PopUpBtn text="Yes, Cancel" hidePopup={hidePopup} onClick={leaveEvent} />
-            <PopUpBtn text="No" hidePopup={hidePopup} />
+            <div>
+              <h3>Are you sure?</h3>
+              <p>Do you really want to cancel the activity?</p>
+            </div>
+            <div>
+              <PopUpBtn text="Yes, Cancel" hidePopup={hidePopup} onClick={leaveEvent} />
+              <PopUpBtn text="No" hidePopup={hidePopup} />
+            </div>
           </div>
         )}
     </div>
