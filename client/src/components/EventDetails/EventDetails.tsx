@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { RootState } from '../../utilities/redux/store';
 import HeaderReturn from '../HeaderReturn/HeaderReturn';
 import MapSmall from '../MapSmall/MapSmall';
-import ProfilePicture from '../ProfilePicture/ProfilePicture';
+// import ProfilePicture from '../ProfilePicture/ProfilePicture';
 import TagList from '../TagList/TagList';
 import ParticipantList from './ParticipantList/ParticipantList';
 import PopUp from '../PopUp/PopUp';
@@ -55,7 +55,7 @@ function EventDetails() {
           <p className="ed__fontRegular">{currentEvent.description}</p>
         </div>
         <MapSmall />
-        {participation ? <ParticipantList /> : null}
+        {participation ? <ParticipantList currentEvent={currentEvent} /> : null}
       </div>
       {participation
         ? (
