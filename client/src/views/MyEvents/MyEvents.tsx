@@ -40,8 +40,6 @@ function MyEvents() {
     setFilteredEvents(userAttending);
   };
 
-  console.log(filteredEvents);
-
   return (
     <div className="mev__main-container">
       <HeaderMain
