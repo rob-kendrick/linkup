@@ -25,11 +25,11 @@
 }
 
 .n__button-active svg{
-  fill: #FF2965;
+  fill: var(--color6-grad-mean);
 }
 
 .n__button-active text{
-  color: #FF2965;
+  color: var(--color6-grad-mean);
 }
 
 .n__icon-container {

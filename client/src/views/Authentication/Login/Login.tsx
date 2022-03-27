@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
@@ -8,9 +8,11 @@ import authApi from '../../../utilities/api/auth.api';
 import './Login.css';
 
 function Login() {
+  const [wrongCredentialsErr, setWrongCredentialsErr] = useState(false);
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<User>({
     defaultValues: {
@@ -19,10 +21,19 @@ function Login() {
     },
   });
 
-  const onSubmit = async (data: User) => {
-    console.log(data);
-    const response = await authApi.login(data);
+  // if (watch('email')) setWrongCredentialsErr(false);
+
+  const onSubmit = async (formData: User) => {
+    console.log(formData);
+    const response = await authApi.login(formData);
     console.log(response);
+    if (response.error) {
+      console.log(response.error);
+      setWrongCredentialsErr(true);
+    } else {
+      console.log(response.data.accessToken);
+      localStorage.setItem('accessToken', response.data.accessToken);
+    }
   };
   return (
     <div>
@@ -31,7 +42,6 @@ function Login() {
       />
       <div className="login__container">
         <form
-          id="test"
           onSubmit={handleSubmit(onSubmit)}
         >
           <InputTextField
@@ -44,6 +54,7 @@ function Login() {
                 value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
                 message: 'Please enter valid E-mail',
               },
+              onChange: () => setWrongCredentialsErr(false),
             })}
           />
 
@@ -53,10 +64,7 @@ function Login() {
             errorMessage={errors.password?.message}
             {...register('password', {
               required: 'This field is required',
-              minLength: {
-                value: 8,
-                message: 'Minimun length 8 characters',
-              },
+              onChange: () => setWrongCredentialsErr(false),
             })}
           />
           <ButtonLarge
@@ -64,6 +72,8 @@ function Login() {
             value="Log in"
             style="fill"
           />
+          {wrongCredentialsErr
+          && <text>Wrong e-mail or password</text>}
         </form>
       </div>
     </div>
