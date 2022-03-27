@@ -1,0 +1,33 @@
+.puf__container {
+  display: flex;
+  flex-direction: row;
+  padding-top: 1rem;
+}
+
+.puf__txtContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0.5rem
+    1.5rem;
+}
+
+.puf__imgContainer {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.puf__h4 {
+  font-size: 0.8rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+.puf__p {
+  font-size: 0.7rem;
+  margin: 0;
+  font-weight: 400;
+  padding-bottom: 0.1rem;
+}
