@@ -3,4 +3,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+.su__container text {
+  color: var(--color6-grad-mean);
+  font-size: small;
 }

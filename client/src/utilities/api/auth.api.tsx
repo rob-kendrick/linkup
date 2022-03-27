@@ -16,14 +16,15 @@ const authApi = {
         const result = response.json();
         return result;
       }
-      throw Error('Server error');
+      return response;
     })
     .catch((e) => {
-      console.log(e);
-      return { error: true, message: e.message, code: e.code };
+      e.ok = false;
+      e.status = 503;
+      return (e);
     }),
 
-  register: (user: User) => fetch(`${baseUrl}/create/`, {
+  register: (user: User) => fetch(`${baseUrl}/auth/create/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -34,11 +35,12 @@ const authApi = {
       if (response.status < 300) {
         return response.json();
       }
-      throw Error('Server error');
+      return response;
     })
     .catch((e) => {
-      console.log(e);
-      return { error: true, message: e.message, code: e.code };
+      e.ok = false;
+      e.status = 503;
+      return (e);
     }),
 
   // TODO: logout

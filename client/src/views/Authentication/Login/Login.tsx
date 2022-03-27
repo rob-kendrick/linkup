@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
@@ -8,12 +9,13 @@ import authApi from '../../../utilities/api/auth.api';
 import './Login.css';
 
 function Login() {
-  const [wrongCredentialsErr, setWrongCredentialsErr] = useState(false);
-  const [serverErr, setServerErr] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<User>({
     defaultValues: {
@@ -26,11 +28,16 @@ function Login() {
 
   const onSubmit = async (formData: User) => {
     const response = await authApi.login(formData);
-    if (response.error) {
-      if (response.message === 'Failed to fetch') setServerErr(true);
-      else setWrongCredentialsErr(true);
-    } else {
+    if (response.ok === false) {
+      if (response.status === 400) setErrorMessage('Wrong e-mail or password');
+      if (response.status === 404) setErrorMessage('404 not found');
+      if (response.status === 500) setErrorMessage('500 server error');
+      if (response.status === 503) setErrorMessage('503 service unavailable');
+    } else if (response.data.accessToken) {
       localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('user_id', response.data.user.user_id);
+      navigate('/events');
+      // props.setIsAuthenticated(true);
     }
   };
   return (
@@ -53,8 +60,7 @@ function Login() {
                 message: 'Please enter valid E-mail',
               },
               onChange: () => {
-                setWrongCredentialsErr(false);
-                setServerErr(false);
+                setErrorMessage('');
               },
             })}
           />
@@ -66,8 +72,7 @@ function Login() {
             {...register('password', {
               required: 'This field is required',
               onChange: () => {
-                setWrongCredentialsErr(false);
-                setServerErr(false);
+                setErrorMessage('');
               },
             })}
           />
@@ -76,10 +81,8 @@ function Login() {
             value="Log in"
             style="fill"
           />
-          {wrongCredentialsErr
-          && <text>Wrong e-mail or password</text>}
-          {serverErr
-          && <text>Server error</text>}
+          {(errorMessage !== '')
+          && <text>{errorMessage}</text>}
         </form>
       </div>
     </div>
