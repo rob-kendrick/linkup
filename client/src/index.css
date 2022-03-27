@@ -26,4 +26,6 @@ a {
   --color3-alert: linear-gradient(#FF00D6, #FF4D00);
   --color4-grey1: #c9c9c9;
   --color5-grey2: #F2F2F2;
+
+  --color6-grad-mean: #FF2965;
 }

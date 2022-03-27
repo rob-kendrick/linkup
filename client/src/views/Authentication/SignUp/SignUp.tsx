@@ -1,28 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { InputTextField, InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
 import InputPhoto from '../../../components/Form/InputPhoto/InputPhoto';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 import './SignUp.css';
 import { User } from '../../../utilities/types/User';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
+import authApi from '../../../utilities/api/auth.api';
 
 function SignUp() {
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<User>({
     defaultValues: {
-      profile_picture: '',
+      email: '',
+      password: '',
       first_name: '',
       last_name: '',
+      profile_picture: 'none',
       bio: '',
     },
   });
 
-  const onSubmit = (data: User) => {
-    console.log(data);
+  const onSubmit = async (formData: User) => {
+    const response = await authApi.register(formData);
+    if (response.ok === false) {
+      if (response.status === 400) setErrorMessage('Wrong e-mail or password');
+      if (response.status === 404) setErrorMessage('404 not found');
+      if (response.status === 409) setErrorMessage('E-Mail already taken');
+      if (response.status === 500) setErrorMessage('500 server error');
+      if (response.status === 503) setErrorMessage('503 service unavailable');
+    } else if (response.data) {
+      navigate('/login');
+    }
   };
 
   return (
@@ -32,7 +49,6 @@ function SignUp() {
       />
       <div className="su__container">
         <form
-          id="test"
           onSubmit={handleSubmit(onSubmit)}
         >
           <InputPhoto />
@@ -40,13 +56,23 @@ function SignUp() {
             type="text"
             label="First Name"
             errorMessage={errors.first_name?.message}
-            {...register('first_name', { required: 'This field is required' })}
+            {...register('first_name', {
+              required: 'This field is required',
+              onChange: () => {
+                setErrorMessage('');
+              },
+            })}
           />
           <InputTextField
             type="text"
             label="Last Name"
             errorMessage={errors.last_name?.message}
-            {...register('last_name', { required: 'This field is required' })}
+            {...register('last_name', {
+              required: 'This field is required',
+              onChange: () => {
+                setErrorMessage('');
+              },
+            })}
           />
 
           <InputTextArea
@@ -54,7 +80,12 @@ function SignUp() {
             label="Bio"
             errorMessage={errors.bio?.message}
             rows={3}
-            {...register('bio', { required: 'This field is required' })}
+            {...register('bio', {
+              required: 'This field is required',
+              onChange: () => {
+                setErrorMessage('');
+              },
+            })}
           />
 
           <InputTextField
@@ -66,6 +97,9 @@ function SignUp() {
               pattern: {
                 value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
                 message: 'Please enter valid E-mail',
+              },
+              onChange: () => {
+                setErrorMessage('');
               },
             })}
           />
@@ -80,6 +114,9 @@ function SignUp() {
                 value: 8,
                 message: 'Minimun length 8 characters',
               },
+              onChange: () => {
+                setErrorMessage('');
+              },
             })}
           />
           <ButtonLarge
@@ -87,11 +124,8 @@ function SignUp() {
             value="Sign up"
             style="fill"
           />
-          <ButtonLarge
-            type="reset"
-            value="Cancel Activity"
-            style="stroke"
-          />
+          {(errorMessage !== '')
+          && <text>{errorMessage}</text>}
         </form>
       </div>
     </div>

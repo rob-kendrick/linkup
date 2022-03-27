@@ -1,13 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 import { InputTextField } from '../../../components/Form/InputTextField/InputTextField';
 import { User } from '../../../utilities/types/User';
-import './login.css';
+import authApi from '../../../utilities/api/auth.api';
+import './Login.css';
 
 function Login() {
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -19,8 +24,21 @@ function Login() {
     },
   });
 
-  const onSubmit = (data: User) => {
-    console.log(data);
+  // if (watch('email')) setWrongCredentialsErr(false);
+
+  const onSubmit = async (formData: User) => {
+    const response = await authApi.login(formData);
+    if (response.ok === false) {
+      if (response.status === 400) setErrorMessage('Wrong e-mail or password');
+      if (response.status === 404) setErrorMessage('404 not found');
+      if (response.status === 500) setErrorMessage('500 server error');
+      if (response.status === 503) setErrorMessage('503 service unavailable');
+    } else if (response.data.accessToken) {
+      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('id_user', response.data.user.id_user);
+      navigate('/events');
+      // props.setIsAuthenticated(true);
+    }
   };
   return (
     <div>
@@ -29,7 +47,6 @@ function Login() {
       />
       <div className="login__container">
         <form
-          id="test"
           onSubmit={handleSubmit(onSubmit)}
         >
           <InputTextField
@@ -42,6 +59,9 @@ function Login() {
                 value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
                 message: 'Please enter valid E-mail',
               },
+              onChange: () => {
+                setErrorMessage('');
+              },
             })}
           />
 
@@ -51,19 +71,18 @@ function Login() {
             errorMessage={errors.password?.message}
             {...register('password', {
               required: 'This field is required',
-              minLength: {
-                value: 8,
-                message: 'Minimun length 8 characters',
+              onChange: () => {
+                setErrorMessage('');
               },
             })}
           />
-          <Link to="/events">
-            <ButtonLarge
-              type="submit"
-              value="Log in"
-              style="fill"
-            />
-          </Link>
+          <ButtonLarge
+            type="submit"
+            value="Log in"
+            style="fill"
+          />
+          {(errorMessage !== '')
+          && <text>{errorMessage}</text>}
         </form>
       </div>
     </div>

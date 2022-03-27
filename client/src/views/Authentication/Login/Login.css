@@ -1,12 +1,12 @@
-.su__container {
-  width: 100%;
+.login__container {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.su__container text {
+.login__container text {
   color: var(--color6-grad-mean);
   font-size: small;
 }
