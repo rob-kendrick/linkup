@@ -50,12 +50,8 @@ function BrowseEventsMenu({
   }, []);
 
   useEffect(() => {
-    console.log(currentFilter);
+    if (currentFilter !== 'Date') inputField.current.focus();
   }, [currentFilter]);
-
-  React.useEffect(() => {
-    if (showSearchbar) inputField.current.focus();
-  }, [showSearchbar]);
 
   const handleClickDate:MouseEventHandler|any = (thisDate:string) => {
     if (thisDate === dateSelected) {
@@ -107,21 +103,24 @@ function BrowseEventsMenu({
     <div className="bem__container">
       <HeaderMain title="Browse Activities" />
       <div className="bem-selectors-toggle">
-        {!showSearchbar && (
-        <div className="bem__selectors-dates">
-          {dateList}
-        </div>
+
+        {currentFilter === 'Date' && (
+          <div className="bem__selectors-dates">
+            {dateList}
+          </div>
         )}
-        {showSearchbar && (
-        <InputTextField
-          ref={inputField}
-          onChange={handleTitleSearchChange}
-          className="bem__selectors-searchbar"
-          type="text"
-          label="Search Title"
-          value={titleSearchValue}
-        />
+
+        {currentFilter !== 'Date' && (
+          <InputTextField
+            ref={inputField}
+            onChange={handleTitleSearchChange}
+            className="bem__selectors-searchbar"
+            type="text"
+            label={`Search ${currentFilter}`}
+            value={titleSearchValue}
+          />
         )}
+
       </div>
 
       <div className="bem__selectors-btns">
@@ -143,15 +142,6 @@ function BrowseEventsMenu({
           <FaRegMap />
           <p>Map</p>
         </button>
-        {/* <div
-          role="switch"
-          aria-hidden="true"
-          tabIndex={0}
-          className=""
-          onClick={handleClickSearch}
-        >
-          <HiSearch />
-        </div> */}
 
         <div className="bem__selectors-fitlers bem__selectors-btns-btn-right">
           <button

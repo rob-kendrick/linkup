@@ -11,7 +11,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .bem__selectors-dates {
@@ -98,8 +97,9 @@ margin-left:auto;
   right:12px;
   display: flex;
   flex-direction: column;
-box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.23);
-display:none;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.23);
+  display:none;
+  width:150px;
 
 }
 
@@ -109,6 +109,7 @@ display:none;
   display:block !important;
   border-radius: 4px;
 }
+
 .dd__item-wrapper-hide{
   display:none;
 
