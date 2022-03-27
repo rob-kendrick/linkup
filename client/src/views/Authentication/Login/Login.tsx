@@ -9,6 +9,7 @@ import './Login.css';
 
 function Login() {
   const [wrongCredentialsErr, setWrongCredentialsErr] = useState(false);
+  const [serverErr, setServerErr] = useState(false);
   const {
     register,
     handleSubmit,
@@ -24,14 +25,11 @@ function Login() {
   // if (watch('email')) setWrongCredentialsErr(false);
 
   const onSubmit = async (formData: User) => {
-    console.log(formData);
     const response = await authApi.login(formData);
-    console.log(response);
     if (response.error) {
-      console.log(response.error);
-      setWrongCredentialsErr(true);
+      if (response.message === 'Failed to fetch') setServerErr(true);
+      else setWrongCredentialsErr(true);
     } else {
-      console.log(response.data.accessToken);
       localStorage.setItem('accessToken', response.data.accessToken);
     }
   };
@@ -54,7 +52,10 @@ function Login() {
                 value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
                 message: 'Please enter valid E-mail',
               },
-              onChange: () => setWrongCredentialsErr(false),
+              onChange: () => {
+                setWrongCredentialsErr(false);
+                setServerErr(false);
+              },
             })}
           />
 
@@ -64,7 +65,10 @@ function Login() {
             errorMessage={errors.password?.message}
             {...register('password', {
               required: 'This field is required',
-              onChange: () => setWrongCredentialsErr(false),
+              onChange: () => {
+                setWrongCredentialsErr(false);
+                setServerErr(false);
+              },
             })}
           />
           <ButtonLarge
@@ -74,6 +78,8 @@ function Login() {
           />
           {wrongCredentialsErr
           && <text>Wrong e-mail or password</text>}
+          {serverErr
+          && <text>Server error</text>}
         </form>
       </div>
     </div>
