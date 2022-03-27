@@ -14,7 +14,7 @@ import browseEventsContext from '../../../contexts/browse-events.context';
 
 function BrowseEventsMenu() {
   const navigate = useNavigate();
-  const [dateSelected, setDateSelected] = useState<Date>([]);
+  const [dateSelected, setDateSelected] = useState<Date>(null);
   const [dates, setDates] = useState<Date[]>([]);
 
   const {
@@ -33,14 +33,19 @@ function BrowseEventsMenu() {
     setDates(dateArr);
   }, []);
 
-  const handleClickDate:MouseEventHandler = (e, thisDate) => {
-    setDateSelected(thisDate);
-    filterByDate(thisDate);
+  const handleClickDate:MouseEventHandler = (thisDate) => {
+    if (thisDate === dateSelected) {
+      setDateSelected(null);
+      filterByDate(null);
+    } else {
+      setDateSelected(thisDate);
+      filterByDate(thisDate);
+    }
   };
 
   const dateList = dates.map((el:any) => (
     <button
-      onClick={(e) => handleClickDate(e, el)}
+      onClick={() => handleClickDate(el)}
       key={el.toString()}
       className={`bem__selectors-dates-item ${dateSelected === el ? 'bem__selector-active' : ''}`}
       type="button"

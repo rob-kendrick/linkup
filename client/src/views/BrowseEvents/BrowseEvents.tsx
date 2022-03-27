@@ -29,8 +29,6 @@ function BrowseEvents() {
   const [dateFilter, setDateFilter] = useState<any[]>(mockEventsData.data);
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
 
-  // on first run, populate filtered list with all events
-
   // merge all filtered lists
   useEffect(() => {
     setFilteredEvents(dateFilter);
@@ -47,12 +45,13 @@ function BrowseEvents() {
 
   // filter events by date
   const filterByDate = (thisDate) => {
+    if (thisDate === null) return setDateFilter(allEvents);
     const newEvents = allEvents.filter(
       (event) => {
         if (dayMatch(event.date, thisDate)) return event;
       },
     );
-    setDateFilter(newEvents);
+    return setDateFilter(newEvents);
   };
 
   const context = useMemo(() => ({
