@@ -1,12 +1,24 @@
-.evl__container{
+.evl__main-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #F2F2F2;
+  width: 100vw;
+}
+
+.evl__inner-container{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: #F2F2F2;
+  justify-content: center;
   overflow: scroll;
+  width: 90%;
   max-height: 61vh;
 }
 
 .event-list-container::-webkit-scrollbar {
+  display: none;
+}
+.evl__inner-container::-webkit-scrollbar {
   display: none;
 }

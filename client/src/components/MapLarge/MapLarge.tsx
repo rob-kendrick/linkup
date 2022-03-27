@@ -20,8 +20,7 @@ export default function MapLarge({ filteredEvents } : eventProps) {
   const [position, setPosition] = useState<number[]>([52.520008, 13.404954]);
   const [eventArray, setEventArray] = useState(filteredEvents);
 
-  useEffect(() => {
-    console.log(eventArray, 'EVENT ARRAY');
+  useEffect(() => {
   }, [eventArray]);
 
   useEffect(() => {
@@ -69,15 +68,6 @@ export default function MapLarge({ filteredEvents } : eventProps) {
       <TileLayer
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
       />
-      {/* <Marker position={position}>
-        <Popup>
-          A pretty CSS3 popup.
-          {' '}
-          <br />
-          {' '}
-          Easily customizable.
-        </Popup>
-      </Marker> */}
       <div>{allMarkers}</div>
     </MapContainer>
   );
