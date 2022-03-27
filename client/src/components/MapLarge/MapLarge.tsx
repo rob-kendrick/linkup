@@ -64,7 +64,12 @@ export default function MapLarge({ filteredEvents } : eventProps) {
   });
 
   return (
-    <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+    <MapContainer
+      className="ml__container"
+      center={position}
+      zoom={13}
+      scrollWheelZoom={false}
+    >
       <TileLayer
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
       />

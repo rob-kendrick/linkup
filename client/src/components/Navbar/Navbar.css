@@ -5,7 +5,8 @@
   align-items: center;
   justify-content: space-evenly;
   background-color:#263056;
-  height: 14vh;
+  height:110px;
+  min-height: 110px;
   width: 100%;
   display: flex;
 }
