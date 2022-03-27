@@ -69,8 +69,10 @@ function BrowseEvents() {
     <browseEventsContext.Provider value={context}>
       <div className="be__container">
         <BrowseEventsMenu />
-        {mapView && (<MapLarge filteredEvents={filteredEvents} />)}
-        {!mapView && (<EventsList filteredEvents={filteredEvents} />)}
+        <div className="be__container-inner">
+          {mapView && (<MapLarge filteredEvents={filteredEvents} />)}
+          {!mapView && (<EventsList filteredEvents={filteredEvents} />)}
+        </div>
       </div>
     </browseEventsContext.Provider>
 

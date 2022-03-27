@@ -1,5 +1,11 @@
 .be__container{
   width: 100%;
   flex-grow:1;
-  /* background-color: magenta; */
+  overflow: hidden;
+}
+
+.be__container-inner{
+  width: 100%;
+  height:calc(100% - 261px);
+  overflow: hidden;
 }
