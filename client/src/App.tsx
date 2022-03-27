@@ -46,8 +46,8 @@ function App() {
   // TEMPORARY FUNCTION TO PROVIDE GLOBALLY ACCESSIBLE MOCK USER
   useEffect(() => {
     setFetchStatus('loading');
-    userApi.getAllUsers().then((response) => {
-      dispatch(userActions.getUserByIdAction(response.data[0]));
+    userApi.getUserById(11).then((response) => {
+      dispatch(userActions.getUserByIdAction(response.data));
       setFetchStatus('success');
     }).catch(() => setFetchStatus('error'));
   }, []);

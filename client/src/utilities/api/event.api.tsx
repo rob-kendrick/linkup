@@ -57,7 +57,9 @@ const eventApi = {
   })
     .then((response) => {
       if (response.status < 300) {
-        return response.json();
+        const result = response.json();
+        console.log('api', result);
+        return result;
       }
       throw Error('Server error');
     })
@@ -83,7 +85,7 @@ const eventApi = {
       return { error: true, message: e.message, code: e.code };
     }),
 
-  joinEvent: (eventId: number, userId: number) => fetch(`${baseUrl}/events/leave/${eventId}/${userId}`, {
+  joinEvent: (eventId: number, userId: number) => fetch(`${baseUrl}/events/join/${eventId}/users/${userId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

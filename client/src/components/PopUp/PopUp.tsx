@@ -1,12 +1,12 @@
 import React from 'react';
-import PopUpBtn from './PopUpBtn/PopUpBtn';
-import './popUp.css';
-import type { LuEvent, LuEvent } from '../../utilities/types/Event';
-import { useParams, useNavigate } from 'react-router-dom';
-import eventApi from '/../../utilities/api/event.api';
-import userApi from '../../utilities/api/user.api';
+import { Dispatch } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
+import eventApi from '../../utilities/api/event.api';
 import { RootState } from '../../utilities/redux/store';
 import eventActions from '../../utilities/redux/actions/event.actions';
+import PopUpBtn from './PopUpBtn/PopUpBtn';
+import './popUp.css';
+import type { LuEvent } from '../../utilities/types/Event';
 
 type props = {
   useCase: string;
@@ -15,28 +15,38 @@ type props = {
 };
 
 function PopUp({ useCase, hidePopup, currentEvent }: props) {
-  // const params = useParams();
-  // const { eventid } = params;
+  const dispatch: Dispatch<any> = useDispatch();
 
-  // const currentUser = useSelector(
-  //   (state: RootState) => state.userReducer.currentUser,
-  // );
+  const currentUser = useSelector(
+    (state: RootState) => state.userReducer.currentUser,
+  );
 
-  // const alteredEvent = {
-  //   ...currentEvent,
-  //   participants: [...currentEvent!.participants, {
-  //     id_user: currentUser!.id_user,
-  //     first_name: currentUser!.first_name,
-  //     profile_picture: currentUser!.profile_picture,
-  //   }],
-  // };
+  const eventWithAddedParticipant = {
+    ...currentEvent,
+    participants: [...currentEvent!.participants, {
+      id_user: currentUser!.id_user,
+      first_name: currentUser!.first_name,
+      profile_picture: currentUser!.profile_picture,
+    }],
+  };
 
-  // eventApi.editEvent(alteredEvent! as LuEvent).then((response) => {
-  //   dispatch(eventActions.editEventAction(response.data));
-  // });
+  const eventWithRemovedParticipant = {
+    ...currentEvent,
+    participants: [...currentEvent!.participants.filter(
+      (participant) => participant.id_user !== currentUser!.id_user,
+    )],
+  };
 
   const joinEvent = () => {
+    eventApi.joinEvent(eventWithAddedParticipant.id_event, currentUser!.id_user).then(() => {
+      dispatch(eventActions.editEventAction(eventWithAddedParticipant));
+    });
+  };
 
+  const leaveEvent = () => {
+    eventApi.leaveEvent(eventWithAddedParticipant.id_event, currentUser!.id_user).then(() => {
+      dispatch(eventActions.editEventAction(eventWithRemovedParticipant));
+    });
   };
 
   return (
@@ -44,12 +54,13 @@ function PopUp({ useCase, hidePopup, currentEvent }: props) {
       {useCase === 'signup'
         ? (
           <div>
-            <PopUpBtn text="Linkup" hidePopup={hidePopup} joinEvent={joinEvent} />
+            <PopUpBtn text="Linkup" hidePopup={hidePopup} onClick={joinEvent} />
             <PopUpBtn text="Cancel" hidePopup={hidePopup} />
           </div>
         )
         : (
           <div>
+            <PopUpBtn text="Yes, Cancel" hidePopup={hidePopup} onClick={leaveEvent} />
             <PopUpBtn text="No" hidePopup={hidePopup} />
           </div>
         )}

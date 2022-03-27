@@ -22,7 +22,7 @@ function EventDetails() {
     ),
   )[0];
 
-  const user_id = 1;
+  const user_id = useSelector((state: RootState) => state.userReducer.currentUser?.id_user);
   dayjs.extend(advancedFormat);
   const date = dayjs(currentEvent.date).format('dddd, Do MMMM, H:MM');
   const participation = currentEvent.participants.some(
