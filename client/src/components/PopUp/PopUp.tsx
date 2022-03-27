@@ -54,17 +54,18 @@ function PopUp({ useCase, hidePopup, currentEvent }: props) {
     <div className="pu__container">
       {useCase === 'signup'
         ? (
-          <div>
-            <div>
-              <p>LinkUp Confirmation</p>
-              <h3>Are you sure?</h3>
+          <div className="pu__cardContainer">
+            <div className="pu__mainContainer">
+              <div className="pu__btnTxtContainer">
+                <h5 className="pu__hLight">LinkUp Confirmation</h5>
+              </div>
+              <div className="pu__fieldContainer">
+                <PopUpField currentEvent={currentEvent} text="location" />
+                <PopUpField currentEvent={currentEvent} text="date" />
+                <PopUpField currentEvent={currentEvent} text="host" />
+              </div>
             </div>
-            <div>
-              <PopUpField currentEvent={currentEvent} text="location" />
-              <PopUpField currentEvent={currentEvent} text="date" />
-              <PopUpField currentEvent={currentEvent} text="host" />
-            </div>
-            <div>
+            <div className="pu__btnContainer">
               <PopUpBtn text="Linkup" hidePopup={hidePopup} onClick={joinEvent} />
               <PopUpBtn text="Cancel" hidePopup={hidePopup} />
             </div>
@@ -72,12 +73,12 @@ function PopUp({ useCase, hidePopup, currentEvent }: props) {
 
         )
         : (
-          <div>
-            <div>
-              <h3>Are you sure?</h3>
-              <p>Do you really want to cancel the activity?</p>
+          <div className="pu__cardContainer">
+            <div className="pu__btnTxtContainer">
+              <h3 className="pu__hMed">Are you sure?</h3>
+              <p className="pu__pMed">Do you really want to cancel the activity?</p>
             </div>
-            <div>
+            <div className="pu__btnContainer">
               <PopUpBtn text="Yes, Cancel" hidePopup={hidePopup} onClick={leaveEvent} />
               <PopUpBtn text="No" hidePopup={hidePopup} />
             </div>

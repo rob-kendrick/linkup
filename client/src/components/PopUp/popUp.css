@@ -4,8 +4,50 @@
   height: 100vh;
   top: 0;
   left: 0;
-  background-color: red;
+  background-color: rgba(
+    38,
+    48,
+    86,
+    0.5
+  );
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 95%;
+}
+
+.pu__cardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10%;
+}
+
+.pu__mainContainer {
+  padding: 1rem;
+}
+
+.pu__btnContainer {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.pu__btnTxtContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pu__hLight {
+  font-weight: 300;
+}
+
+.pu__hMed {
+  font-weight: 500;
+}
+
+.pu__pMed {
+  font-weight: 300;
+  font-size: 0.8rem;
 }
