@@ -1,0 +1,28 @@
+.ed {
+  padding: 1rem;
+}
+
+.ed__fontSecondary {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.ed__fontRegular {
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+
+.ed__titile {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.ed__mainContentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ed__txtContainer {
+}

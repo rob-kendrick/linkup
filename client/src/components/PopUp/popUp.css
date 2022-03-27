@@ -13,7 +13,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 95%;
+}
+
+.pu__fieldContainer
+  > * {
+  margin: 1.2rem
+    1rem
+    0
+    1rem;
 }
 
 .pu__cardContainer {

@@ -9,6 +9,8 @@ import TagList from '../TagList/TagList';
 import ParticipantList from './ParticipantList/ParticipantList';
 import PopUp from '../PopUp/PopUp';
 import useDate from '../../utilities/hooks/useDate';
+import PopUpField from '../PopUp/PopUpField/PopUpField';
+import './eventDetails.css';
 
 function EventDetails() {
   const navigate = useNavigate();
@@ -37,16 +39,22 @@ function EventDetails() {
   };
 
   return (
-    <div>
+    <div className="ed">
       <HeaderReturn text="Activity Details" />
-      <div>
-        {date}
-        {/* <TagList /> */}
-        <h3>{currentEvent.title}</h3>
+      <div className="ed__header">
+        <p className="ed__fontSecondary">{date}</p>
+        <h3 className="ed__titile">{currentEvent.title}</h3>
+        <TagList tags={currentEvent.tags} />
       </div>
-      <div>
-        <ProfilePicture />
-        {/* <MapSmall /> */}
+      <div className="ed__mainContentContainer">
+        <div className="ed__txtContainer">
+          <PopUpField text="Location" currentEvent={currentEvent} />
+          <PopUpField text="Date" currentEvent={currentEvent} />
+          <PopUpField text="Host" currentEvent={currentEvent} />
+          <p className="ed__fontSecondary">Description</p>
+          <p className="ed__fontRegular">{currentEvent.description}</p>
+        </div>
+        <MapSmall />
         {participation ? <ParticipantList /> : null}
       </div>
       {participation
