@@ -58,6 +58,7 @@ function PopUp({ useCase, hidePopup, currentEvent }: props) {
             <div className="pu__mainContainer">
               <div className="pu__btnTxtContainer">
                 <h5 className="pu__hLight">LinkUp Confirmation</h5>
+                <h3>{currentEvent.description}</h3>
               </div>
               <div className="pu__fieldContainer">
                 <PopUpField currentEvent={currentEvent} text="location" />

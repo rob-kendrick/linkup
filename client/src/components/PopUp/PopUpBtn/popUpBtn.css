@@ -10,3 +10,15 @@
 .pubtn__txt {
   font-weight: 500;
 }
+
+.pubtn__btn--color {
+  background-image: var(
+    --color2-fg-select
+  );
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}

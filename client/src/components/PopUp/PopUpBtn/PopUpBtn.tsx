@@ -9,7 +9,17 @@ type Props = {
 }
 
 function PopUpBtn({ text, hidePopup, onClick }: Props) {
-  if (text === 'Linkup' || text === 'Yes, Cancel') {
+  if (text === 'Linkup') {
+    return (
+      <button className="pubtn__btn pubtn__btn--color" type="button" onClick={() => { hidePopup(); onClick!(); }}>
+        {' '}
+        <p className="pubtn__txt">{text}</p>
+        {' '}
+      </button>
+    );
+  }
+
+  if (text === 'Yes, Cancel') {
     return (
       <button className="pubtn__btn" type="button" onClick={() => { hidePopup(); onClick!(); }}>
         {' '}
