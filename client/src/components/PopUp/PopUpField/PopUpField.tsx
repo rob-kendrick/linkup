@@ -1,6 +1,6 @@
 import React from 'react';
 import { LuEvent } from '../../../utilities/types/Event';
-import { ReactComponent as LocationIcon } from '../../../assets/BiCurrentLocation.svg';
+import { ReactComponent as LocationIcon } from '../../../assets/IoLocationSharp.svg';
 import { ReactComponent as TimeIcon } from '../../../assets/BiTimeFive.svg';
 import useDate from '../../../utilities/hooks/useDate';
 
@@ -43,13 +43,15 @@ function PopUpField({ text, currentEvent }: Props) {
   if (text === 'host') {
     return (
       <div>
+        <img src={currentEvent.creator.profile_picture} alt="" />
         <div>
           <p>{text}</p>
-          <h4>{ }</h4>
+          <h4>{currentEvent.creator.first_name}</h4>
         </div>
       </div>
     );
   }
+  return <div><p>User not found</p></div>;
 }
 
 export default PopUpField;

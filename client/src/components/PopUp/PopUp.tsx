@@ -60,9 +60,9 @@ function PopUp({ useCase, hidePopup, currentEvent }: props) {
               <h3>Are you sure?</h3>
             </div>
             <div>
-              {/* <PopUpField currentEvent={currentEvent} text="location" /> */}
-              {/* <PopUpField currentEvent={currentEvent} text="date" /> */}
-              {/* <PopUpField currentEvent={currentEvent} text="host" /> */}
+              <PopUpField currentEvent={currentEvent} text="location" />
+              <PopUpField currentEvent={currentEvent} text="date" />
+              <PopUpField currentEvent={currentEvent} text="host" />
             </div>
             <div>
               <PopUpBtn text="Linkup" hidePopup={hidePopup} onClick={joinEvent} />
