@@ -1,27 +1,37 @@
 // @ts-nocheck
 
 import React, {
-  useState, useContext, useEffect, MouseEventHandler,
+  useState, useEffect, MouseEventHandler, useRef,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { ReactComponent as MdFormatListBulleted } from '../../../assets/MdFormatListBulleted.svg';
 import { ReactComponent as FaRegMap } from '../../../assets/FaRegMap.svg';
 import { ReactComponent as BiFilter } from '../../../assets/BiFilter.svg';
+import { ReactComponent as HiSearch } from '../../../assets/HiSearch.svg';
+
 import './BrowseEventsMenu.css';
 import HeaderMain from '../../../components/HeaderMain/HeaderMain';
-import browseEventsContext from '../../../contexts/browse-events.context';
+import { InputTextField } from '../../../components/Form/InputTextField/InputTextField';
 
-function BrowseEventsMenu() {
+interface myProps {
+  props : {
+    mapView: any
+    filterByTitle: any
+    toggleMapList: any
+    filterByDate: any
+  }
+}
+
+function BrowseEventsMenu({
+  props,
+}: myProps) {
   const navigate = useNavigate();
-  const [dateSelected, setDateSelected] = useState<Date>(null);
+  const [dateSelected, setDateSelected] = useState<string|null>(null);
+  const [titleSearchValue, setTitleSearchValue] = useState<string|undefined>(undefined);
   const [dates, setDates] = useState<Date[]>([]);
-
-  const {
-    filterByDate,
-    toggleMapList,
-    mapView,
-  } = useContext<any>(browseEventsContext);
+  const [showSearchbar, setShowSearchbar] = useState<boolean>(false);
+  const inputField = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   useEffect(() => {
     const dateArr:Date[] = [];
@@ -33,14 +43,27 @@ function BrowseEventsMenu() {
     setDates(dateArr);
   }, []);
 
-  const handleClickDate:MouseEventHandler = (thisDate) => {
+  React.useEffect(() => {
+    if (showSearchbar) inputField.current.focus();
+  }, [showSearchbar]);
+
+  const handleClickDate:MouseEventHandler|any = (thisDate:string) => {
     if (thisDate === dateSelected) {
       setDateSelected(null);
-      filterByDate(null);
+      props.filterByDate(null);
     } else {
       setDateSelected(thisDate);
-      filterByDate(thisDate);
+      props.filterByDate(thisDate);
     }
+  };
+
+  const handleClickSearch:MouseEventHandler = () => {
+    setShowSearchbar(!showSearchbar);
+  };
+  const handleTitleSearchChange:InputEvent = (e) => {
+    const input = e.target.value;
+    setTitleSearchValue(input);
+    props.filterByTitle(input);
   };
 
   const dateList = dates.map((el:any) => (
@@ -57,19 +80,31 @@ function BrowseEventsMenu() {
 
   return (
     <div className="bem__container">
-
       <HeaderMain title="Browse Activities" />
-
-      <div className="bem__selectors-dates">
-        {dateList}
+      <div className="bem-selectors-toggle">
+        {!showSearchbar && (
+        <div className="bem__selectors-dates">
+          {dateList}
+        </div>
+        )}
+        {showSearchbar && (
+        <InputTextField
+          ref={inputField}
+          onChange={handleTitleSearchChange}
+          className="bem__selectors-searchbar"
+          type="text"
+          label="Search Title"
+          value={titleSearchValue}
+        />
+        )}
       </div>
 
       <div className="bem__selectors-btns">
 
         <button
           type="button"
-          onClick={toggleMapList}
-          className={`bem__selectors-btns-btn ${!mapView ? 'bem__selector-active' : ''}`}
+          onClick={props.toggleMapList}
+          className={`bem__selectors-btns-btn ${!props.mapView ? 'bem__selector-active' : ''}`}
         >
           <MdFormatListBulleted />
           <p>List</p>
@@ -77,13 +112,21 @@ function BrowseEventsMenu() {
 
         <button
           type="button"
-          onClick={toggleMapList}
-          className={`bem__selectors-btns-btn ${mapView ? 'bem__selector-active' : ''}`}
+          onClick={props.toggleMapList}
+          className={`bem__selectors-btns-btn ${props.mapView ? 'bem__selector-active' : ''}`}
         >
           <FaRegMap />
           <p>Map</p>
         </button>
-
+        <div
+          role="switch"
+          aria-hidden="true"
+          tabIndex={0}
+          className=""
+          onClick={handleClickSearch}
+        >
+          <HiSearch />
+        </div>
         <button
           type="button"
           onClick={() => navigate('/events/filters')}
@@ -92,6 +135,8 @@ function BrowseEventsMenu() {
           <BiFilter />
           <p>Filter</p>
         </button>
+
+        <div />
       </div>
     </div>
 

@@ -6,19 +6,23 @@
  height:261px;;
 }
 
-.bem__selectors {
+.bem-selectors-toggle {
+  min-height: 68px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
 }
 
 .bem__selectors-dates {
-  /* padding: 0 4%; */
   display:flex;
   flex-direction: row;
   overflow-x: scroll;
-  margin-left: 3px;
-  margin-right: 3px;
+  margin-left:4px
 
-  margin-bottom: 20px;
+}
+
+.bem__selectors-searchbar{
 
 }
 
@@ -51,6 +55,8 @@
   display: flex;
   flex-direction: row;
   margin: 0px 10px 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .bem__selectors-btns-btn {

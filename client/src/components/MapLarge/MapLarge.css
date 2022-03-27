@@ -23,3 +23,9 @@ background-color:pink;
   height: 100%;
   width: 375px;
 }
+
+.marker-pin {
+  fill:#FF2965;
+  height: 50px;
+  width: 50px;
+}
