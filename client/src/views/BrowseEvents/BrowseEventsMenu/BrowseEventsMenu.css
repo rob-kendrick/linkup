@@ -88,94 +88,51 @@ margin-left:auto;
 }
 
 
-/*  old */
-.filter-menu-button-container{
-  display: flex;
-  flex-direction: row;
-  padding-left: 20px;
-  padding-right: 20px;
-  justify-content: center;
-  align-items: center;
-
-
+.bem__selectors-fitlers {
 }
 
-.filter-menu-button-left-section{
-  display: flex;
-  flex-direction: row;
-  flex:2;
-  overflow: hidden;
-}
-
-.filter-menu-calendar{
-  padding-top: 10px;
-  display: flex;
-  flex-direction: row;
-  overflow-x: scroll;
-
-}
-
-.filter-menu-calendar::-webkit-scrollbar {
-  display: none;
-}
-
-.date-picker-selector{
+.bem__selectors-filters-drop-down {
+  background-color: white;
+  position: fixed; /* Sit on top of the page content */
+  right:10px;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #D9D9D9;
-  border-radius: 10%;
-  min-width: 48px;
-  min-height: 48px;
-  margin: 5px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border: none;
-}
-
-.date-picker-selector:focus{
-background-color: #263056;
-color:white;
+box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.23);
+display:none;
+width:150px;;
 }
 
 
+.bem__selectors-drop-down-show {
 
-.bem__btn {
-  font-size: 13px;
+display:block !important;
+
+}
+
+
+.drop-down-element {
   display: flex;
-  width: 50px;
-  height: 50px;
-  flex-direction: row;
+  height:70px;
   align-items: center;
-  justify-content: space-around;
-  border: solid 1.5px #D9D9D9;
-  border-radius: 3px;
-  background-color: transparent;
+  /* justify-content: space-between; */
+padding:5px;
+
 }
 
-/* Buttons */
-.small-button {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 10%;
-  height: 44px;
-  left: 31px;
-  top: 184px;
-  border: solid 1.5px #D9D9D9;
-  border-radius: 3px;
-  background-color: transparent;
+.line{
+  border: 0.5px solid var(--color4-grey1);
+  /* margin-left:10px */
 }
 
-.small-button:focus{
-  background-color: #263056;
-  color:white;
-  border: none;
-  border-radius: 3px;
+
+.dd__icon{
+  padding: 0 1em 0 1.5em;
+  height: 1.5em;
+  margin-right: 20px;
 }
 
-.button-icon{
-  margin-right: 10px;
+.dd__text {
+  font-weight:400;
+  font-size:16px;
 }

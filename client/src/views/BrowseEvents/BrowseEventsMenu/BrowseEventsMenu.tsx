@@ -1,7 +1,6 @@
 // @ts-nocheck
-
 import React, {
-  useState, useEffect, MouseEventHandler, useRef,
+  useState, useEffect, MouseEventHandler, useRef, ChangeEvent, FormEvent,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
@@ -13,6 +12,14 @@ import { ReactComponent as HiSearch } from '../../../assets/HiSearch.svg';
 import './BrowseEventsMenu.css';
 import HeaderMain from '../../../components/HeaderMain/HeaderMain';
 import { InputTextField } from '../../../components/Form/InputTextField/InputTextField';
+
+import FaUsers from '../../../assets/FaUsers.svg';
+import FaUser from '../../../assets/FaUser.svg';
+import HiLockClosed from '../../../assets/HiLockClosed.svg';
+import ImExit from '../../../assets/ImExit.svg';
+
+import MdTitle from '../../../assets/MdTitle.svg';
+import AiFillTag from '../../../assets/AiFillTag.svg';
 
 interface myProps {
   props : {
@@ -26,12 +33,12 @@ interface myProps {
 function BrowseEventsMenu({
   props,
 }: myProps) {
-  const navigate = useNavigate();
   const [dateSelected, setDateSelected] = useState<string|null>(null);
-  const [titleSearchValue, setTitleSearchValue] = useState<string|undefined>(undefined);
+  const [titleSearchValue, setTitleSearchValue] = useState<string>('');
   const [dates, setDates] = useState<Date[]>([]);
   const [showSearchbar, setShowSearchbar] = useState<boolean>(false);
   const inputField = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const [currentFilter, setCurrentFilter] = useState<string>('date');
 
   useEffect(() => {
     const dateArr:Date[] = [];
@@ -42,6 +49,10 @@ function BrowseEventsMenu({
     }
     setDates(dateArr);
   }, []);
+
+  useEffect(() => {
+    console.log(currentFilter);
+  }, [currentFilter]);
 
   React.useEffect(() => {
     if (showSearchbar) inputField.current.focus();
@@ -60,8 +71,11 @@ function BrowseEventsMenu({
   const handleClickSearch:MouseEventHandler = () => {
     setShowSearchbar(!showSearchbar);
   };
-  const handleTitleSearchChange:InputEvent = (e) => {
-    const input = e.target.value;
+
+  const handleTitleSearchChange:any = (e: ChangeEvent<HTMLInputElement>):void => {
+    const input:string = e.target.value;
+    console.log(input);
+
     setTitleSearchValue(input);
     props.filterByTitle(input);
   };
@@ -77,6 +91,18 @@ function BrowseEventsMenu({
       <p className="bem__selectors-dates-item-details">{moment(el).format('DD')}</p>
     </button>
   ));
+
+  const [showDropDown, setShowDropDown] = useState<boolean>(false);
+
+  const handleOpenDropDown = () => {
+    setShowDropDown(!showDropDown);
+  };
+
+  const handleSelectDropDown = (filter) => {
+    setShowDropDown(false);
+    setCurrentFilter(filter);
+    handleClickSearch();
+  };
 
   return (
     <div className="bem__container">
@@ -118,7 +144,7 @@ function BrowseEventsMenu({
           <FaRegMap />
           <p>Map</p>
         </button>
-        <div
+        {/* <div
           role="switch"
           aria-hidden="true"
           tabIndex={0}
@@ -126,15 +152,24 @@ function BrowseEventsMenu({
           onClick={handleClickSearch}
         >
           <HiSearch />
+        </div> */}
+
+        <div className="bem__selectors-fitlers bem__selectors-btns-btn-right">
+          <button
+            type="button"
+            onClick={handleOpenDropDown}
+            className={`bem__selectors-fitlers bem__selectors-btns-btn ${showDropDown ? 'bem__selector-active' : ''}`}
+          >
+            <BiFilter />
+            <p>Filter</p>
+          </button>
+          <div className={`bem__selectors-filters-drop-down ${showDropDown ? 'bem__selectors-drop-down-show' : ''}`}>
+            <DropDown
+              handleSelectDropDown={handleSelectDropDown}
+            />
+          </div>
+
         </div>
-        <button
-          type="button"
-          onClick={() => navigate('/events/filters')}
-          className="bem__selectors-btns-btn bem__selectors-btns-btn-right"
-        >
-          <BiFilter />
-          <p>Filter</p>
-        </button>
 
         <div />
       </div>
@@ -144,3 +179,46 @@ function BrowseEventsMenu({
 }
 
 export default BrowseEventsMenu;
+
+const dropDownData = [
+  {
+    text: 'Title',
+    svgLogo: MdTitle,
+  },
+  {
+    text: 'Tags',
+    svgLogo: AiFillTag,
+  },
+  {
+    text: 'Host',
+    svgLogo: FaUser,
+  },
+  {
+    text: 'Participants',
+    svgLogo: FaUsers,
+  },
+];
+
+function DropDown({ handleSelectDropDown }:any) {
+  const dropDown = dropDownData.map((el) => (
+    <>
+      <div
+        className="drop-down-element"
+        onClick={() => handleSelectDropDown(el.text)}
+      >
+        <img className="dd_icon" src={el.svgLogo} />
+        <p className="dd__text">{el.text}</p>
+
+      </div>
+      <hr className="line" />
+    </>
+
+  ));
+
+  return (
+    <>
+      { dropDown }
+    </>
+
+  );
+}
