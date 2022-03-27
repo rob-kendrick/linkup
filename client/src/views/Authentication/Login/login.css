@@ -2,5 +2,11 @@
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+}
+
+.login__container text {
+  color: var(--color6-grad-mean);
+  font-size: small;
 }
