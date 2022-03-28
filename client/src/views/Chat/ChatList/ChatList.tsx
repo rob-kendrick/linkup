@@ -33,10 +33,11 @@ function ChatList() {
       />
       <div className="cl_itemContainer">
         {events && events!.map((event) => (
-          <UserProfile
-            key={event.id_event}
-            event={event}
-          />
+          <div> ds </div>
+          // <UserProfile
+          //   key={event.id_event}
+          //   event={event}
+          // />
         ))}
       </div>
     </div>
