@@ -1,3 +1,6 @@
+/* eslint-disable react/style-prop-object */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -11,6 +14,7 @@ import PopUp from '../PopUp/PopUp';
 import useDate from '../../utilities/hooks/useDate';
 import PopUpField from '../PopUp/PopUpField/PopUpField';
 import './eventDetails.css';
+import ButtonLarge from '../Form/ButtonLarge/ButtonLarge';
 
 function EventDetails() {
   const navigate = useNavigate();
@@ -56,14 +60,20 @@ function EventDetails() {
           {participation
             ? (
               <div>
-                <button type="button" onClick={() => navigate(`/events/${params.eventid}/chat`)}>Chat</button>
-                <button type="button" onClick={() => setShowPopup(true)}>Cancel / Leave Activity</button>
+                <div role="button" onClick={() => navigate(`/events/${params.eventid}/chat`)}>
+                  <ButtonLarge style="fill" type="submit" value="Chat" />
+                </div>
+                <div role="button" onClick={() => setShowPopup(true)}>
+                  <ButtonLarge style="stroke" type="submit" value="Cancel / Leave Activity" />
+                </div>
                 {showPopup ? <PopUp currentEvent={currentEvent} useCase="leave" hidePopup={hidePopup} /> : null}
               </div>
             )
             : (
               <div>
-                <button type="button" onClick={() => setShowPopup(true)}>Linkup</button>
+                <div role="button" onClick={() => setShowPopup(true)}>
+                  <ButtonLarge style="fill" type="submit" value="LinkUp" />
+                </div>
                 {showPopup ? <PopUp currentEvent={currentEvent} useCase="signup" hidePopup={hidePopup} /> : null}
               </div>
             )}
