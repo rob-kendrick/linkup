@@ -65,6 +65,7 @@ export default function MapLarge({ filteredEvents } : eventProps) {
 
   return (
     <MapContainer
+      tap={false}
       className="ml__container"
       center={position}
       zoom={13}
