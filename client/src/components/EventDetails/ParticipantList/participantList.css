@@ -1,10 +1,19 @@
 .pl {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
+  width: 100%;
 }
 
-.pl__userContainer {
+.pl__participantsContainer {
   display: flex;
   align-items: center;
+  padding-top: 1rem;
+}
+
+.pl__participantName {
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: 400;
 }

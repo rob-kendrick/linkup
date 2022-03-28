@@ -6,7 +6,7 @@ import eventActions from '../../utilities/redux/actions/event.actions';
 import PopUpBtn from './PopUpBtn/PopUpBtn';
 import './popUp.css';
 import type { LuEvent } from '../../utilities/types/Event';
-import PopUpField from './PopUpField/PopUpField';
+import EventField from '../EventField/EventField';
 import userApi from '../../utilities/api/user.api';
 import { User } from '../../utilities/types/User';
 
@@ -66,9 +66,9 @@ function PopUp({ useCase, hidePopup, currentEvent }: props) {
                   <h3 className="pu__hMed">{currentEvent.description}</h3>
                 </div>
                 <div className="pu__fieldContainer">
-                  <PopUpField currentEvent={currentEvent} text="Location" />
-                  <PopUpField currentEvent={currentEvent} text="Date" />
-                  <PopUpField currentEvent={currentEvent} text="Host" />
+                  <EventField currentEvent={currentEvent} text="Location" />
+                  <EventField currentEvent={currentEvent} text="Date" />
+                  <EventField currentEvent={currentEvent} text="Host" />
                 </div>
               </div>
               <div className="pu__btnContainer">

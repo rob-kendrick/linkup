@@ -12,7 +12,7 @@ import TagList from '../TagList/TagList';
 import ParticipantList from './ParticipantList/ParticipantList';
 import PopUp from '../PopUp/PopUp';
 import useDate from '../../utilities/hooks/useDate';
-import PopUpField from '../PopUp/PopUpField/PopUpField';
+import EventField from '../EventField/EventField';
 import './eventDetails.css';
 import ButtonLarge from '../Form/ButtonLarge/ButtonLarge';
 
@@ -48,9 +48,9 @@ function EventDetails() {
           </div>
           <div className="ed__mainContentContainer">
             <div className="ed__txtContainer">
-              <PopUpField text="Location" currentEvent={currentEvent} />
-              <PopUpField text="Date" currentEvent={currentEvent} />
-              <PopUpField text="Host" currentEvent={currentEvent} />
+              <EventField text="Location" currentEvent={currentEvent} />
+              <EventField text="Date" currentEvent={currentEvent} />
+              <EventField text="Host" currentEvent={currentEvent} />
               <p className="ed__fontSecondary">Description</p>
               <p className="ed__fontRegular">{currentEvent.description}</p>
             </div>

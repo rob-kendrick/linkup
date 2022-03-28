@@ -1,9 +1,11 @@
 import React from 'react';
-import { LuEvent } from '../../../utilities/types/Event';
-import { ReactComponent as LocationIcon } from '../../../assets/IoLocationSharp.svg';
-import { ReactComponent as TimeIcon } from '../../../assets/BiTimeFive.svg';
-import useDate from '../../../utilities/hooks/useDate';
-import './popUpField.css';
+import { LuEvent } from '../../utilities/types/Event';
+import locationIcon from '../../assets/IoLocationSharp.svg';
+import dateSvg from '../../assets/BiTimeFive.svg';
+import Icon from '../Icon/Icon';
+import useDate from '../../utilities/hooks/useDate';
+import './eventField.css';
+import ProfilePicture from '../ProfilePicture/ProfilePicture';
 
 type Props = {
   text: string,
@@ -14,12 +16,12 @@ const svgStyle = {
   width: '1.8rem', height: '1.8rem', backgroundColor: 'rgb( 229,229,229)', borderRadius: '50%', padding: '2px',
 };
 
-function PopUpField({ text, currentEvent }: Props) {
+function EventField({ text, currentEvent }: Props) {
   if (text === 'Location') {
     return (
       <div className="puf__container">
         <div className="puf__imgContainer">
-          <LocationIcon style={svgStyle} />
+          <Icon icon={locationIcon} alt="date" />
         </div>
         <div className="puf__txtContainer">
           <p className="puf__p">{text}</p>
@@ -41,7 +43,7 @@ function PopUpField({ text, currentEvent }: Props) {
     return (
       <div className="puf__container">
         <div className="puf__imgContainer">
-          <TimeIcon style={svgStyle} />
+          <Icon icon={dateSvg} alt="date" />
         </div>
         <div className="puf__txtContainer">
           <p className="puf__p">{text}</p>
@@ -55,9 +57,12 @@ function PopUpField({ text, currentEvent }: Props) {
   if (text === 'Host') {
     return (
       <div className="puf__container">
-        {/* waiting for the component -  temporary placeholder */}
         <div className="puf__imgContainer">
-          <img style={svgStyle} src={currentEvent.creator.profile_picture} alt="" />
+          <ProfilePicture
+            userPicture={currentEvent.creator.profile_picture}
+            alt={currentEvent.creator.first_name}
+            size="1.8rem"
+          />
         </div>
         <div className="puf__txtContainer">
           <p className="puf__p">{text}</p>
@@ -69,4 +74,4 @@ function PopUpField({ text, currentEvent }: Props) {
   return <div><p>User not found</p></div>;
 }
 
-export default PopUpField;
+export default EventField;
