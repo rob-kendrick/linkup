@@ -5,8 +5,10 @@ import ButtonEventsMenu from '../Form/ButtonEventsMenu/ButtonEventsMenu';
 import ProfilePicture from '../ProfilePicture/ProfilePicture';
 import TagList from '../TagList/TagList';
 import marker from '../../assets/IoLocationSharp.svg';
+import time from '../../assets/BiTimeFive.svg';
 import './EventCard.css';
 import { LuEvent } from '../../utilities/types/Event';
+import Icon from '../Icon/Icon';
 
 interface Events {
   event: LuEvent
@@ -41,7 +43,10 @@ function EventCard({ event }: Events) {
         <div className="ec__details">
           <div className="ec__details-inner-container">
             <div className="ec__icon-container">
-              <div className="ec__details-icon"><img src={marker} alt="marker pin" /></div>
+              <Icon
+                icon={marker}
+                alt={marker}
+              />
             </div>
             <div className="ec__details-text">
               <p className="ec__header-text">
@@ -59,10 +64,13 @@ function EventCard({ event }: Events) {
         <div className="ec__details">
           <div className="ec__details-inner-container">
             <div className="ec__icon-container">
-              <div className="ec__details-icon"><img src={marker} alt="marker pin" /></div>
+              <Icon
+                icon={time}
+                alt={time}
+              />
             </div>
             <div className="ec__details-text">
-              <p className="ec__header-text">{moment(event.date).format('h:mm')}</p>
+              <p className="ec__header-text">{moment(event.date).format('h:mm A')}</p>
             </div>
           </div>
         </div>

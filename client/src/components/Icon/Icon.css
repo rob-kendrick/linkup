@@ -1,0 +1,11 @@
+.icn__details-icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #F2F2F2;
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+  margin-right: 10px;
+}
