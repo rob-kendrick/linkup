@@ -329,6 +329,74 @@ const deleteAllUsers = async (req: Request, res: Response) => {
   }
 };
 
+// get all events created by a user
+const getUserCreatedEvents = async (req: Request, res: Response) => {
+  try {
+    const userId: number = Number(req.params.userid);
+    const newEvent = await prisma.user.findUnique({
+      where: {
+        id_user: userId,
+      },
+      select: {
+        events_created: {
+          select: {
+            id_event: true,
+            title: true,
+            max_participants: true,
+            date: true,
+            description: true,
+            participants: {
+              select: {
+                id_user: true,
+                first_name: true,
+                profile_picture: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    res.status(200).send({ data: newEvent?.events_created });
+  } catch (err) {
+    res.status(500).send({ error: err });
+  }
+};
+
+// get all events a user is participating in
+const getUserParticipatingEvents = async (req: Request, res: Response) => {
+  try {
+    const userId: number = Number(req.params.userid);
+    const event = await prisma.user.findUnique({
+      where: {
+        id_user: userId,
+      },
+      select: {
+        events_participating: {
+          select: {
+            id_event: true,
+            title: true,
+            max_participants: true,
+            date: true,
+            description: true,
+            participants: {
+              select: {
+                id_user: true,
+                first_name: true,
+                profile_picture: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    res.status(200).send({ data: event?.events_participating });
+  } catch (err) {
+    res.status(500).send({ error: err });
+  }
+};
+
 export default {
   getUserById,
   getAllUsers,
@@ -337,73 +405,6 @@ export default {
   removeFriend,
   deleteUser,
   deleteAllUsers,
+  getUserCreatedEvents,
+  getUserParticipatingEvents,
 };
-
-// deactivated
-// // get all events created by a user
-// const getUserCreatedEvents = async (req: Request, res: Response) => {
-//   try {
-//     const userId: number = Number(req.params.userid);
-//     const newEvent = await prisma.user.findUnique({
-//       where: {
-//         id_user: userId,
-//       },
-//       select: {
-//         events_created: {
-//           select: {
-//             id_event: true,
-//             title: true,
-//             max_participants: true,
-//             date: true,
-//             description: true,
-//             participants: {
-//               select: {
-//                 id_user: true,
-//                 first_name: true,
-//                 profile_picture: true,
-//               },
-//             },
-//           },
-//         },
-//       },
-//     });
-
-//     res.status(200).send({ data: newEvent?.events_created });
-//   } catch (err) {
-//     res.status(500).send({ error: err });
-//   }
-// };
-
-// // get all events a user is participating in
-// const getUserParticipatingEvents = async (req: Request, res: Response) => {
-//   try {
-//     const userId: number = Number(req.params.userid);
-//     const event = await prisma.user.findUnique({
-//       where: {
-//         id_user: userId,
-//       },
-//       select: {
-//         events_participating: {
-//           select: {
-//             id_event: true,
-//             title: true,
-//             max_participants: true,
-//             date: true,
-//             description: true,
-//             participants: {
-//               select: {
-//                 id_user: true,
-//                 first_name: true,
-//                 profile_picture: true,
-//               },
-//             },
-//           },
-//         },
-//       },
-//     });
-
-//     res.status(200).send({ data: event?.events_participating });
-//   } catch (err) {
-//     res.status(500).send({ error: err });
-//   }
-// };
