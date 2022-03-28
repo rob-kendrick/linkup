@@ -1,13 +1,11 @@
 // @ts-nocheck
 import React, {
-  useState, useEffect, MouseEventHandler, useRef, ChangeEvent, FormEvent,
+  useState, useEffect, MouseEventHandler, useRef, ChangeEvent,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { ReactComponent as MdFormatListBulleted } from '../../../assets/MdFormatListBulleted.svg';
 import { ReactComponent as FaRegMap } from '../../../assets/FaRegMap.svg';
 import { ReactComponent as BiFilter } from '../../../assets/BiFilter.svg';
-import { ReactComponent as HiSearch } from '../../../assets/HiSearch.svg';
 
 import './BrowseEventsMenu.css';
 import HeaderMain from '../../../components/HeaderMain/HeaderMain';
@@ -15,7 +13,6 @@ import { InputTextField } from '../../../components/Form/InputTextField/InputTex
 
 import FaUsers from '../../../assets/FaUsers.svg';
 import FaUser from '../../../assets/FaUser.svg';
-import HiLockClosed from '../../../assets/HiLockClosed.svg';
 import BiCalenderHeart from '../../../assets/BiCalendarHeart.svg';
 import MdTitle from '../../../assets/MdTitle.svg';
 import AiFillTag from '../../../assets/AiFillTag.svg';
@@ -69,8 +66,6 @@ function BrowseEventsMenu({
 
   const handleTitleSearchChange:any = (e: ChangeEvent<HTMLInputElement>):void => {
     const input:string = e.target.value;
-    console.log(input);
-
     setTitleSearchValue(input);
     props.filterByTitle(input);
   };

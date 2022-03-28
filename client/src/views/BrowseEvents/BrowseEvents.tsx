@@ -42,9 +42,6 @@ function BrowseEvents() {
     setFilteredEvents(tempFilter);
   }, [dateFilter, titleFilter]);
 
-  useEffect(() => {
-    console.log(filteredEvents);
-  }, [filteredEvents]);
 
   // for testing purposes
   useEffect(() => {
