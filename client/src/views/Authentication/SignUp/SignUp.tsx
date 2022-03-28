@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { toPng } from 'html-to-image';
 import { InputTextField, InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
 import InputPhoto from '../../../components/Form/InputPhoto/InputPhoto';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
@@ -11,9 +12,15 @@ import authApi from '../../../utilities/api/auth.api';
 
 function SignUp() {
   const [errorMessage, setErrorMessage] = useState('');
-  const [imageUrl, setImageUrl] = useState('https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg');
+  const [avatarName, setAvatarName] = useState(String(Math.random()));
+  const [imageUrl, setImageUrl] = useState('');
+  const [avatarSvg, setAvatarSvg] = useState<HTMLElement | null>(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(imageUrl);
+  }, [imageUrl]);
 
   const {
     register,
@@ -30,12 +37,44 @@ function SignUp() {
     },
   });
 
-  const onSubmit = async (formData: User) => {
+  function uploadImage(imageData: string) {
+    const data = new FormData();
+    data.append('file', imageData);
+    data.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET!);
+    data.append('cloud_name', process.env.REACT_APP_CLOUDINARY_CLOUD_NAME!);
+    return fetch(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`, {
+      method: 'post',
+      body: data,
+    });
+  }
+
+  function convertSvg() {
+    if (avatarSvg) {
+      toPng(avatarSvg)
+        .then((dataUrl) => {
+          uploadImage(dataUrl)
+            .then((resp) => resp.json())
+            .then((result) => {
+              if (result.url) {
+                setImageUrl(result.url);
+              } setErrorMessage('Photo upload failed');
+            })
+            .catch(() => setErrorMessage('Photo upload failed'));
+        })
+        .catch((error) => {
+          setErrorMessage('Image conversion failed');
+          console.error(error);
+        });
+    }
+  }
+
+  async function signUp(formData: User) {
     const userData = formData;
     userData.profile_picture = imageUrl;
+    console.log(userData);
     const response = await authApi.register(userData);
     if (response.ok === false) {
-      if (response.status === 400) setErrorMessage('Wrong e-mail or password');
+      if (response.status === 400) setErrorMessage('Data validation failed on server');
       if (response.status === 404) setErrorMessage('404 not found');
       if (response.status === 409) setErrorMessage('E-Mail already taken');
       if (response.status === 500) setErrorMessage('500 server error');
@@ -43,7 +82,17 @@ function SignUp() {
     } else if (response.data) {
       // navigate('/login');
     }
-  };
+  }
+
+  function onSubmit(formData: User) {
+    if (imageUrl === '') {
+      console.log('its a svg');
+      convertSvg()
+    } else {
+      console.log('its a real image');
+      signUp(formData);
+    }
+  }
 
   return (
     <div>
@@ -58,6 +107,8 @@ function SignUp() {
             imageUrl={imageUrl}
             setImageUrl={setImageUrl}
             setErrorMessage={setErrorMessage}
+            avatarName={avatarName}
+            setAvatarSvg={setAvatarSvg}
           />
           <InputTextField
             type="text"
@@ -65,8 +116,9 @@ function SignUp() {
             errorMessage={errors.first_name?.message}
             {...register('first_name', {
               required: 'This field is required',
-              onChange: () => {
+              onChange: (e) => {
                 setErrorMessage('');
+                setAvatarName(e.target.value);
               },
             })}
           />
