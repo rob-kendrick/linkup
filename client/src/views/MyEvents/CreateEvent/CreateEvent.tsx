@@ -54,8 +54,8 @@ function CreateEvent() {
       const fullEvent = Object.assign(formData, mockAddress);
       fullEvent.participants_to_add = participantsToAdd;
       fullEvent.creator_id = user;
-      console.log(fullEvent);
       const response = await eventApi.postEvent(fullEvent);
+      console.log('AAAAAAAAAAH', response);
       if (response.error) setErrorMessage('Server error');
       else setErrorMessage('Event created!');
 
