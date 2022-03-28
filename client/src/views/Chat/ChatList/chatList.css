@@ -1,0 +1,16 @@
+.cl_itemContainer
+  > *
+  + * {
+  padding-top: 1rem;
+  position: relative;
+  /* border-top: 1px
+    solid
+    red; */
+}
+
+.cl_itemContainer
+  > *
+  + *:before {
+  width: 50%;
+  background-color: orange;
+}

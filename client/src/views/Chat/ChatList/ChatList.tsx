@@ -1,22 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import ChatListItem from './ChatListItem.tsx/ChatListItem';
-import eventMockData from '../../../utilities/mocks/db-data/events-db-data.json';
 import HeaderMain from '../../../components/HeaderMain/HeaderMain';
-
-const eventData: any[] = eventMockData.data;
+import UserProfile from '../../../components/UserProfile/UserProfile';
+import { RootState } from '../../../utilities/redux/store';
+import './chatList.css';
+import userApi from '../../../utilities/api/user.api';
+import { User } from '../../../utilities/types/User';
 
 function ChatList() {
+  const events = useSelector(
+    (state: RootState) => state.eventReducer.allEvents,
+  );
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const userId = Number(localStorage.getItem('id_user'));
+    userApi.getUserById(userId)
+      .then((response) => setCurrentUser(response.data))
+      .catch();
+  }, []);
+
   return (
-    <div className="event-list-delete">
+    <div className="s">
       <HeaderMain
         title="Chat"
       />
-      {eventData.map((event) => (
-        <ChatListItem
-          key={event.id}
-          event={event}
-        />
-      ))}
+      <div className="cl_itemContainer">
+        {currentUser?.events_created.length
+          ? (
+            currentUser?.events_participating.map((event) => (
+              <UserProfile
+                key={event.id_event}
+                event={event}
+              />
+            )))
+          : null}
+        {currentUser?.events_participating.map((event) => (
+          <UserProfile
+            key={event.id_event}
+            event={event}
+          />
+        ))}
+      </div>
     </div>
   );
 }
