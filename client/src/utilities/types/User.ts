@@ -7,7 +7,7 @@ export interface User {
   bio: string;
   email: string;
   profile_picture: string;
-  events_created: EventBasicData;
+  events_created: EventBasicData[];
   events_participating: EventBasicData[]
   password: string;
   date_created: Date;
