@@ -14,16 +14,10 @@
 }
 
 .puf__imgContainer {
-  /* width: 10%; */
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 25px;
-  background-color: rgb(
-    229,
-    229,
-    229
-  );
 }
 
 .puf__h4 {

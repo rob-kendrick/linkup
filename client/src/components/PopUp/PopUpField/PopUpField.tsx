@@ -10,12 +10,16 @@ type Props = {
   currentEvent: LuEvent
 }
 
+const svgStyle = {
+  width: '1.8rem', height: '1.8rem', backgroundColor: 'rgb( 229,229,229)', borderRadius: '50%', padding: '2px',
+};
+
 function PopUpField({ text, currentEvent }: Props) {
   if (text === 'Location') {
     return (
       <div className="puf__container">
         <div className="puf__imgContainer">
-          <LocationIcon style={{ width: '100%', height: '1.8rem' }} />
+          <LocationIcon style={svgStyle} />
         </div>
         <div className="puf__txtContainer">
           <p className="puf__p">{text}</p>
@@ -37,7 +41,7 @@ function PopUpField({ text, currentEvent }: Props) {
     return (
       <div className="puf__container">
         <div className="puf__imgContainer">
-          <TimeIcon style={{ width: '100%', height: '1.8rem' }} />
+          <TimeIcon style={svgStyle} />
         </div>
         <div className="puf__txtContainer">
           <p className="puf__p">{text}</p>
@@ -53,7 +57,7 @@ function PopUpField({ text, currentEvent }: Props) {
       <div className="puf__container">
         {/* waiting for the component -  temporary placeholder */}
         <div className="puf__imgContainer">
-          <img style={{ width: '35px', height: '35px' }} src={currentEvent.creator.profile_picture} alt="" />
+          <img style={svgStyle} src={currentEvent.creator.profile_picture} alt="" />
         </div>
         <div className="puf__txtContainer">
           <p className="puf__p">{text}</p>

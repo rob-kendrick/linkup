@@ -57,12 +57,19 @@ function App() {
   // END
 
   if (fetchStatus === 'idle' || fetchStatus === 'loading') {
-    return <div> Loading </div>;
+    return (
+      <div>
+        {' '}
+        Loading
+        {' '}
+        {console.log('loading')}
+        {' '}
+      </div>
+    );
   }
   if (fetchStatus === 'error') {
     return <div> Error </div>;
   }
-
   return (
     <div className="app-container">
       <div className="routes-container">
