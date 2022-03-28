@@ -2,6 +2,8 @@
 width:100%;
 height:100%;
 background-color:pink;
+z-index: 0; /* needs to be specified otherwise drop down is hidden */
+
 }
 
 
@@ -22,4 +24,10 @@ background-color:pink;
   flex-direction: column;
   height: 100%;
   width: 375px;
+}
+
+.marker-pin {
+  fill:#FF2965;
+  height: 50px;
+  width: 50px;
 }
