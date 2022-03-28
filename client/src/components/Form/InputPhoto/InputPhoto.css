@@ -1,0 +1,11 @@
+.ip__container {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ip__input {
+  
+}
