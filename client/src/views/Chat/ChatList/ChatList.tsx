@@ -26,6 +26,8 @@ function ChatList() {
       .catch();
   }, []);
 
+  console.log('!', events);
+
   return (
     <div className="s">
       <HeaderMain
@@ -33,11 +35,11 @@ function ChatList() {
       />
       <div className="cl_itemContainer">
         {events && events!.map((event) => (
-          <div> ds </div>
-          // <UserProfile
-          //   key={event.id_event}
-          //   event={event}
-          // />
+          // <div> ds </div>
+          <UserProfile
+            key={event.id_event}
+            event={event}
+          />
         ))}
       </div>
     </div>
