@@ -4,7 +4,7 @@ import SelectUsers from '../../../../components/SelectUsers/SelectUsers';
 
 function AddParticipants() {
   return (
-    <div>
+    <div className='add-participants-container'>
       <HeaderReturn />
       <h3>AddParticipants</h3>
       <SelectUsers />
