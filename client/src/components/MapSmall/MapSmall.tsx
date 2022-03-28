@@ -7,7 +7,7 @@ import {
 import './MapSmall.css';
 
 interface EventLocation {
-  lat:number
+  lat: number
   lng: number
 }
 
@@ -27,7 +27,7 @@ function MapSmall({ lat, lng }: EventLocation) {
   });
 
   return (
-    
+
     <MapContainer
       tap={false}
       className="ms__container"
