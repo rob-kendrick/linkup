@@ -55,7 +55,7 @@ function EventDetails() {
               <p className="ed__fontRegular">{currentEvent.description}</p>
             </div>
             <MapSmall />
-            {participation ? <ParticipantList currentEvent={currentEvent} /> : null}
+            <ParticipantList currentEvent={currentEvent} />
           </div>
           {participation
             ? (
