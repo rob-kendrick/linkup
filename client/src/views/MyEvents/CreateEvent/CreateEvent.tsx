@@ -26,8 +26,8 @@ function CreateEvent() {
 
   const [address, setAddress] = useState({});
 
-  const findEventAddress = () => {
-
+  const findEventAddress = (inputAddress : any) => {
+    console.log(inputAddress);
   };
 
   const {

@@ -8,8 +8,18 @@ import {
 import './MapCreate.css';
 
 interface FindAdress {
-  findEventAddress: () => void;
+  findEventAddress: any;
 }
+
+const formatAddress = (input) => ({
+  lat: input.latitude,
+  lng: input.longitude,
+  street_number: input.number,
+  street_name: input.name,
+  postcode: input.postal_code,
+  city: input.locality,
+  country: input.country,
+});
 
 function MapCreate({ findEventAddress } : FindAdress) {
   const [lat, setLat] = useState(52.520008);
@@ -29,6 +39,21 @@ function MapCreate({ findEventAddress } : FindAdress) {
     setMarkerLat(e.latlng.lat);
     setMarkerLng(e.latlng.lng);
   };
+
+  const getRevGeoLocation = () => {
+    const requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+    };
+    fetch(`http://api.positionstack.com/v1/reverse?access_key=196a66c8284773cffe2741c9b5e1f321&query=${markerLat},${markerLng}&limit=1`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => findEventAddress(formatAddress(result.data[0])))
+      .catch((error) => console.log('error', error));
+  };
+
+  useEffect(() => {
+    getRevGeoLocation();
+  }, [markerLat, markerLng]);
 
   const myIcon = L.divIcon({
     iconSize: [35, 35],
