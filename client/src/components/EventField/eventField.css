@@ -8,8 +8,8 @@
 .puf__txtContainer {
   display: flex;
   flex-direction: column;
+
   width: 90%;
-  display: flex;
   padding-left: 0.5rem;
 }
 

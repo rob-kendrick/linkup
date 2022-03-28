@@ -12,10 +12,6 @@ type Props = {
   currentEvent: LuEvent
 }
 
-const svgStyle = {
-  width: '1.8rem', height: '1.8rem', backgroundColor: 'rgb( 229,229,229)', borderRadius: '50%', padding: '2px',
-};
-
 function EventField({ text, currentEvent }: Props) {
   if (text === 'Location') {
     return (
