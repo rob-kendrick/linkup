@@ -33,6 +33,11 @@
 .ed__txtContainer {
 }
 
+.ed__map-container {
+  height: 400px;
+  width: 100vw;  
+}
+
 .ed__btnContainer {
   display: flex;
   flex-direction: column;
