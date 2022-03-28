@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import { InputTextField, InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
@@ -22,6 +22,12 @@ const mockAddress = {
 function CreateEvent() {
   const [errorMessage, setErrorMessage] = useState('');
   const [showParticipants, setShowParticipants] = useState(false);
+  const [participantsToAdd, setParticipantsToAdd] = useState([]);
+
+  // keeping track of participants to add for dev purposes
+  useEffect(() => {
+    console.log(participantsToAdd, 'CREATE EVENT STATE');
+  }, [participantsToAdd]);
 
   const {
     register,
@@ -35,6 +41,7 @@ function CreateEvent() {
     },
   });
 
+  // conditionally rendering participants list
   const toggleParticipants = () => {
     // set ShowParticipants to true, which conditionally renders user list
     setShowParticipants(!showParticipants);
@@ -44,8 +51,10 @@ function CreateEvent() {
     const user = Number(localStorage.getItem('id_user'));
     if (user) {
       const fullEvent = Object.assign(formData, mockAddress);
+      fullEvent.participants_to_add = participantsToAdd;
       fullEvent.creator_id = user;
       const response = await eventApi.postEvent(fullEvent);
+      console.log('AAAAAAAAAAH', response);
       if (response.error) setErrorMessage('Server error');
       else setErrorMessage('Event created!');
 
@@ -98,6 +107,20 @@ function CreateEvent() {
                 },
               })}
             />
+            <MapSmall />
+            <div>
+              {participantsToAdd.length > 0
+              && (
+              <p>
+                You selected
+                {' '}
+                {participantsToAdd.length}
+                {' '}
+                participants
+              </p>
+              )}
+            </div>
+
             {/* Div for conditionally rendering user list */}
             <div onClick={toggleParticipants}>
               <ButtonLarge
@@ -111,8 +134,8 @@ function CreateEvent() {
               value="Link Up"
               style="fill"
             />
-            {(errorMessage !== '')
-          && <text>{errorMessage}</text>}
+            {/* {(errorMessage !== '')
+          && <text>{errorMessage}</text>} */}
           </form>
         </div>
       </div>
@@ -120,6 +143,7 @@ function CreateEvent() {
         {showParticipants === true && (
         <UserList
           toggleParticipants={toggleParticipants}
+          setParticipantsToAdd={setParticipantsToAdd}
         />
         )}
 

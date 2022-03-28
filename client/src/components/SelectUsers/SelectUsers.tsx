@@ -9,7 +9,7 @@ function SelectUsers() {
     <div>
       <h3>SelectUsers</h3>
       <SearchField />
-      <UserList />
+      {/* <UserList /> */}
       {/* button should be 'ButtonLarge' component */}
       {/* button should trigger /src/components/Popup */}
       <button type="button" onClick={() => navigate(-1)}>Apply</button>
