@@ -10,10 +10,9 @@ import { LuEvent } from '../../utilities/types/Event';
 
 interface Events {
   event: LuEvent
-  eventList : LuEvent[];
 }
 
-function EventCard({ event, eventList }: Events) {
+function EventCard({ event }: Events) {
   return (
     <Link
       to={`/events/${event.id_event}`}
@@ -27,7 +26,11 @@ function EventCard({ event, eventList }: Events) {
         <div className="ec__profile">
           <div className="ec__profile-inner-container">
             <div className="ec__profile-picture-container">
-              <div><img src={event.creator.profile_picture} alt="event creator" className="ec__profile-picture" /></div>
+              <ProfilePicture
+                userPicture={event.creator.profile_picture}
+                alt={event.creator.first_name}
+                size="52px"
+              />
             </div>
             <div className="ec__header-info">
               <h4 className="ec__header-text">{event.title}</h4>
