@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import dayjs from 'dayjs';
-import advancedFormat from 'dayjs/plugin/advancedFormat';
 import { RootState } from '../../utilities/redux/store';
 import HeaderReturn from '../HeaderReturn/HeaderReturn';
 import MapSmall from '../MapSmall/MapSmall';
@@ -17,9 +15,8 @@ import './eventDetails.css';
 function EventDetails() {
   const navigate = useNavigate();
   const params = useParams();
-
   const [showPopup, setShowPopup] = useState(false);
-
+  const userId = localStorage.getItem('id_user');
   const hidePopup = () => {
     setShowPopup(false);
   };
@@ -30,13 +27,10 @@ function EventDetails() {
     ),
   )[0];
 
-  // TEMPORARY DUE TO LACK OF AUTH
-  // eslint-disable-next-line camelcase
-  const user_id = useSelector((state: RootState) => state.userReducer.currentUser?.id_user);
   if (currentEvent) {
     const date = useDate(currentEvent.date);
     const participation = currentEvent.participants.some(
-      (participant) => participant.id_user === Number(user_id),
+      (participant) => participant.id_user === Number(userId),
     );
 
     return (
