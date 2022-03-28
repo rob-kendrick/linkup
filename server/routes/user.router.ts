@@ -15,11 +15,11 @@ userRouter.delete('/:userid/friends/remove/:friendid', userController.removeFrie
 
 userRouter.delete('/:userid', userController.deleteUser);
 
+userRouter.get('/:userid/events/created/', userController.getUserCreatedEvents);
+
+userRouter.get('/:userid/events/participating/', userController.getUserParticipatingEvents);
+
 // dev only
 userRouter.delete('/', userController.deleteAllUsers);
-
-// not in use
-// userRouter.get('/:userid/events/created/', userController.getUserCreatedEvents);
-// userRouter.get('/:userid/events/participating/', userController.getUserParticipatingEvents);
 
 export default userRouter;

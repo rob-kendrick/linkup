@@ -6,8 +6,6 @@ import {
   MapContainer, TileLayer, Marker, Popup,
 } from 'react-leaflet';
 import type { LuEvent } from '../../utilities/types/Event';
-// import eventMarker from '../../assets/IoLocationSharp.svg';
-// import userMarker from '../../assets/BiCurrentLocation.svg';
 import './MapLarge.css';
 
 interface eventProps {
@@ -54,10 +52,16 @@ export default function MapLarge({ filteredEvents } : eventProps) {
         position={eventPosition}
         icon={myIcon}
       >
-        <Popup>
-          <img src={filteredEvent.creator.profile_picture} alt={filteredEvent.creator.username} style={{ width: '48px', borderRadius: '50%' }} />
-          <h3>{filteredEvent.title}</h3>
-          <h4>{filteredEvent.creator.first_name}</h4>
+        <Popup className="Popup">
+          <div id="ml__popup-container">
+            <div id="ml__popup-picture">
+              <img src={filteredEvent.creator.profile_picture} alt={filteredEvent.creator.username} style={{ width: '48px', borderRadius: '50%' }} />
+            </div>
+            <div id="ml__popup-event-details">
+              <h3 id="ml__popup-event-title">{filteredEvent.title}</h3>
+              <h4 id="ml__popup-event-user">{filteredEvent.creator.first_name}</h4>
+            </div>
+          </div>
         </Popup>
       </Marker>
     );

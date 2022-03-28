@@ -11,6 +11,7 @@ import authApi from '../../../utilities/api/auth.api';
 
 function SignUp() {
   const [errorMessage, setErrorMessage] = useState('');
+  const [imageUrl, setImageUrl] = useState('https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg');
 
   const navigate = useNavigate();
 
@@ -24,13 +25,15 @@ function SignUp() {
       password: '',
       first_name: '',
       last_name: '',
-      profile_picture: 'none',
+      profile_picture: '',
       bio: '',
     },
   });
 
   const onSubmit = async (formData: User) => {
-    const response = await authApi.register(formData);
+    const userData = formData;
+    userData.profile_picture = imageUrl;
+    const response = await authApi.register(userData);
     if (response.ok === false) {
       if (response.status === 400) setErrorMessage('Wrong e-mail or password');
       if (response.status === 404) setErrorMessage('404 not found');
@@ -38,7 +41,7 @@ function SignUp() {
       if (response.status === 500) setErrorMessage('500 server error');
       if (response.status === 503) setErrorMessage('503 service unavailable');
     } else if (response.data) {
-      navigate('/login');
+      // navigate('/login');
     }
   };
 
@@ -51,7 +54,11 @@ function SignUp() {
         <form
           onSubmit={handleSubmit(onSubmit)}
         >
-          <InputPhoto />
+          <InputPhoto
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+            setErrorMessage={setErrorMessage}
+          />
           <InputTextField
             type="text"
             label="First Name"
