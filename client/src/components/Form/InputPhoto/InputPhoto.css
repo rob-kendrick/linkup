@@ -1,11 +1,25 @@
 .ip__container {
+  margin: 1em;
   display: flex;
   flex-grow: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+.ip__pp-container {
+  position: relative;
+}
 
-.ip__input {
-  
+.ip__button {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  border-radius: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color1-fg);
+  width: 2em;
+  height: 2em;
+  background-image: var(--color1-bg);
 }

@@ -31,18 +31,18 @@ function SignUp() {
   });
 
   const onSubmit = async (formData: User) => {
-    formData.profile_picture = imageUrl;
-    console.log(formData);
-    // const response = await authApi.register(formData);
-    // if (response.ok === false) {
-    //   if (response.status === 400) setErrorMessage('Wrong e-mail or password');
-    //   if (response.status === 404) setErrorMessage('404 not found');
-    //   if (response.status === 409) setErrorMessage('E-Mail already taken');
-    //   if (response.status === 500) setErrorMessage('500 server error');
-    //   if (response.status === 503) setErrorMessage('503 service unavailable');
-    // } else if (response.data) {
-    // navigate('/login');
-    // }
+    const userData = formData;
+    userData.profile_picture = imageUrl;
+    const response = await authApi.register(userData);
+    if (response.ok === false) {
+      if (response.status === 400) setErrorMessage('Wrong e-mail or password');
+      if (response.status === 404) setErrorMessage('404 not found');
+      if (response.status === 409) setErrorMessage('E-Mail already taken');
+      if (response.status === 500) setErrorMessage('500 server error');
+      if (response.status === 503) setErrorMessage('503 service unavailable');
+    } else if (response.data) {
+      // navigate('/login');
+    }
   };
 
   return (
@@ -57,6 +57,7 @@ function SignUp() {
           <InputPhoto
             imageUrl={imageUrl}
             setImageUrl={setImageUrl}
+            setErrorMessage={setErrorMessage}
           />
           <InputTextField
             type="text"
