@@ -52,7 +52,9 @@ function CreateEvent() {
     const user = Number(localStorage.getItem('id_user'));
     if (user) {
       const fullEvent = Object.assign(formData, mockAddress);
+      fullEvent.participants_to_add = participantsToAdd;
       fullEvent.creator_id = user;
+      console.log(fullEvent);
       const response = await eventApi.postEvent(fullEvent);
       if (response.error) setErrorMessage('Server error');
       else setErrorMessage('Event created!');
@@ -132,8 +134,8 @@ function CreateEvent() {
               value="Link Up"
               style="fill"
             />
-            {(errorMessage !== '')
-          && <text>{errorMessage}</text>}
+            {/* {(errorMessage !== '')
+          && <text>{errorMessage}</text>} */}
           </form>
         </div>
       </div>
