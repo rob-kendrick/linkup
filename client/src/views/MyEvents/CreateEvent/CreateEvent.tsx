@@ -7,6 +7,7 @@ import { LuEvent } from '../../../utilities/types/Event';
 import eventApi from '../../../utilities/api/event.api';
 import './CreateEvent.css';
 import UserList from '../../../components/SelectUsers/UserList/UserList';
+import MapCreate from '../../../components/MapCreate/MapCreate';
 
 // TODO: delete mockAddress when retrieve lat, lng and adress from map
 const mockAddress = {
@@ -22,6 +23,12 @@ const mockAddress = {
 function CreateEvent() {
   const [errorMessage, setErrorMessage] = useState('');
   const [showParticipants, setShowParticipants] = useState(false);
+
+  const [address, setAddress] = useState({});
+
+  const findEventAddress = () => {
+
+  };
 
   const {
     register,
@@ -98,6 +105,11 @@ function CreateEvent() {
                 },
               })}
             />
+
+            <div className="ce__map-container">
+              <MapCreate findEventAddress={findEventAddress} />
+            </div>
+
             {/* Div for conditionally rendering user list */}
             <div onClick={toggleParticipants}>
               <ButtonLarge
@@ -124,6 +136,7 @@ function CreateEvent() {
         )}
 
       </div>
+
     </div>
   );
 }
