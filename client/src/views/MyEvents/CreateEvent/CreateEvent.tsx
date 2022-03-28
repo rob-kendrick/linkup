@@ -37,7 +37,7 @@ function CreateEvent() {
   });
 
   const toggleParticipants = () => {
-    console.log('click firing!');
+    // set ShowParticipants to true, which conditionally renders user list
     setShowParticipants(!showParticipants);
   };
 
@@ -100,8 +100,8 @@ function CreateEvent() {
               })}
             />
             <MapSmall />
+            {/* Div for conditionally rendering user list */}
             <div onClick={toggleParticipants}>
-
               <ButtonLarge
                 type="button"
                 value="Add Participants"
