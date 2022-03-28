@@ -103,6 +103,10 @@ const createEvent = async (req: Request, res: Response) => {
     // convert date and id into correct data types
     const date: Date = new Date(req.body.date);
     const creator_id: number = Number(req.body.creator_id);
+    const participantsToAdd = req.body.participants_to_add.map((el:number) => ({
+      id_user: el,
+    }));
+    delete req.body.participants_to_add;
     const eventInput: Event = {
       ...req.body,
       date,
@@ -115,7 +119,12 @@ const createEvent = async (req: Request, res: Response) => {
     }
 
     const newEvent = await prisma.event.create({
-      data: eventInput,
+      data: {
+        ...eventInput,
+        participants: {
+          connect: participantsToAdd,
+        },
+      },
       include: {
         participants: true,
         creator: {
