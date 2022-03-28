@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import { InputTextField, InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
@@ -23,6 +23,12 @@ const mockAddress = {
 function CreateEvent() {
   const [errorMessage, setErrorMessage] = useState('');
   const [showParticipants, setShowParticipants] = useState(false);
+  const [participantsToAdd, setParticipantsToAdd] = useState([]);
+
+  // keeping track of participants to add for dev purposes
+  useEffect(() => {
+    console.log(participantsToAdd, 'CREATE EVENT STATE');
+  }, [participantsToAdd]);
 
   const {
     register,
@@ -36,6 +42,7 @@ function CreateEvent() {
     },
   });
 
+  // conditionally rendering participants list
   const toggleParticipants = () => {
     // set ShowParticipants to true, which conditionally renders user list
     setShowParticipants(!showParticipants);
@@ -100,6 +107,18 @@ function CreateEvent() {
               })}
             />
             <MapSmall />
+            <div>
+              {participantsToAdd.length > 0
+              && (
+              <p>
+                You selected
+                {' '}
+                {participantsToAdd.length}
+                {' '}
+                participants
+              </p>
+              )}
+            </div>
             {/* Div for conditionally rendering user list */}
             <div onClick={toggleParticipants}>
               <ButtonLarge
@@ -122,6 +141,7 @@ function CreateEvent() {
         {showParticipants === true && (
         <UserList
           toggleParticipants={toggleParticipants}
+          setParticipantsToAdd={setParticipantsToAdd}
         />
         )}
 
