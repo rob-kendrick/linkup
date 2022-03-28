@@ -48,7 +48,7 @@ const userApi = {
       return { error: true, message: e.message, code: e.code };
     }),
 
-  getUserCreatedEvents: (id: number) => fetch(`${baseUrl}/${id}/events/created`)
+  getUserCreatedEvents: (id: number) => fetch(`${baseUrl}/users/${id}/events/created`)
     .then((response) => {
       if (response.status < 300) {
         return response.json();
@@ -60,7 +60,7 @@ const userApi = {
       return { error: true, message: e.message, code: e.code };
     }),
 
-  getUserParticipatingEvents: (id: number) => fetch(`${baseUrl}/${id}/events/participating`)
+  getUserParticipatingEvents: (id: number) => fetch(`${baseUrl}/users/${id}/events/participating`)
     .then((response) => {
       if (response.status < 300) {
         return response.json();

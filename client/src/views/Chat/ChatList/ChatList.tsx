@@ -7,15 +7,20 @@ import { RootState } from '../../../utilities/redux/store';
 import './chatList.css';
 import userApi from '../../../utilities/api/user.api';
 import { User } from '../../../utilities/types/User';
+import { LuEvent } from '../../../utilities/types/Event';
 
 function ChatList() {
-  const events = useSelector(
-    (state: RootState) => state.eventReducer.allEvents,
-  );
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [events, setEvents] = useState<LuEvent[] | null>(null);
 
   useEffect(() => {
     const userId = Number(localStorage.getItem('id_user'));
+    userApi.getUserCreatedEvents(userId)
+      .then((response) => setEvents(response.data))
+      .catch();
+    userApi.getUserParticipatingEvents(userId)
+      .then((response) => setEvents(response.data))
+      .catch();
     userApi.getUserById(userId)
       .then((response) => setCurrentUser(response.data))
       .catch();
@@ -27,16 +32,7 @@ function ChatList() {
         title="Chat"
       />
       <div className="cl_itemContainer">
-        {currentUser?.events_created.length
-          ? (
-            currentUser?.events_participating.map((event) => (
-              <UserProfile
-                key={event.id_event}
-                event={event}
-              />
-            )))
-          : null}
-        {currentUser?.events_participating.map((event) => (
+        {events && events!.map((event) => (
           <UserProfile
             key={event.id_event}
             event={event}
