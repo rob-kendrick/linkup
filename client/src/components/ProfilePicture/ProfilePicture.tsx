@@ -14,7 +14,7 @@ function ProfilePicture({ userPicture, size, alt } : UserPicture) {
         className="pp__picture"
         src={userPicture}
         alt={alt}
-        style={{ width: `${size}` }}
+        style={{ width: `${size}`, height: `${size}` }}
       />
     </div>
   );
