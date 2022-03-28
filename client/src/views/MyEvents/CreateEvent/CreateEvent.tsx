@@ -7,6 +7,7 @@ import MapSmall from '../../../components/MapSmall/MapSmall';
 import { LuEvent } from '../../../utilities/types/Event';
 import eventApi from '../../../utilities/api/event.api';
 import './CreateEvent.css';
+import UserList from '../../../components/SelectUsers/UserList/UserList';
 
 // TODO: delete mockAddress when retrieve lat, lng and adress from map
 const mockAddress = {
@@ -21,6 +22,7 @@ const mockAddress = {
 
 function CreateEvent() {
   const [errorMessage, setErrorMessage] = useState('');
+  const [showParticipants, setShowParticipants] = useState(false);
 
   const {
     register,
@@ -33,6 +35,11 @@ function CreateEvent() {
       description: '',
     },
   });
+
+  const toggleParticipants = () => {
+    console.log('click firing!');
+    setShowParticipants(!showParticipants);
+  };
 
   const onSubmit = async (formData: LuEvent) => {
     const user = Number(localStorage.getItem('id_user'));
@@ -49,61 +56,75 @@ function CreateEvent() {
 
   return (
     <div>
-      <HeaderReturn
-        text="Create Activity"
-      />
-      <div className="ce__container">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <InputTextField
-            type="text"
-            label="Title"
-            errorMessage={errors.title?.message}
-            {...register('title', {
-              required: 'This field is required',
-              onChange: () => {
-                setErrorMessage('');
-              },
-            })}
-          />
-          <InputTextField
-            type="datetime-local"
-            label="Date and time"
-            errorMessage={errors.date?.message}
-            {...register('date', {
-              required: 'This field is required',
-              onChange: () => {
-                setErrorMessage('');
-              },
-            })}
-          />
-          <InputTextArea
-            type="text"
-            label="Description"
-            errorMessage={errors.description?.message}
-            rows={3}
-            {...register('description', {
-              required: 'This field is required',
-              onChange: () => {
-                setErrorMessage('');
-              },
-            })}
-          />
-          <MapSmall />
-          <ButtonLarge
-            type="submit"
-            value="Add Participants"
-            style="black"
-          />
-          <ButtonLarge
-            type="submit"
-            value="Link Up"
-            style="fill"
-          />
-          {(errorMessage !== '')
+
+      <div className={`ce__wrapper ${showParticipants ? 'ce__wrapper_hidden' : ''}`}>
+        <HeaderReturn
+          text="Create Activity"
+        />
+        <div className="ce__container">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <InputTextField
+              type="text"
+              label="Title"
+              errorMessage={errors.title?.message}
+              {...register('title', {
+                required: 'This field is required',
+                onChange: () => {
+                  setErrorMessage('');
+                },
+              })}
+            />
+            <InputTextField
+              type="datetime-local"
+              label="Date and time"
+              errorMessage={errors.date?.message}
+              {...register('date', {
+                required: 'This field is required',
+                onChange: () => {
+                  setErrorMessage('');
+                },
+              })}
+            />
+            <InputTextArea
+              type="text"
+              label="Description"
+              errorMessage={errors.description?.message}
+              rows={3}
+              {...register('description', {
+                required: 'This field is required',
+                onChange: () => {
+                  setErrorMessage('');
+                },
+              })}
+            />
+            <MapSmall />
+            <div onClick={toggleParticipants}>
+
+              <ButtonLarge
+                type="button"
+                value="Add Participants"
+                style="black"
+              />
+            </div>
+            <ButtonLarge
+              type="submit"
+              value="Link Up"
+              style="fill"
+            />
+            {(errorMessage !== '')
           && <text>{errorMessage}</text>}
-        </form>
+          </form>
+        </div>
+      </div>
+      <div>
+        {showParticipants === true && (
+        <UserList
+          toggleParticipants={toggleParticipants}
+        />
+        )}
+
       </div>
     </div>
   );

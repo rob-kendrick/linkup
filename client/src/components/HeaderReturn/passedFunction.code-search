@@ -1,0 +1,9 @@
+# Query: passedFunction
+# ContextLines: 1
+
+1 result - 1 file
+
+client/src/components/HeaderReturn/HeaderReturn.spec.tsx:
+  24        <BrowserRouter>
+  25:         <HeaderReturn resetAvailability text="Activity details" passedResetFunction={() => true} />
+  26        </BrowserRouter>,

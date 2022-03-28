@@ -9,11 +9,20 @@ import './headerReturn.css';
 type props = {
   resetAvailability?: boolean;
   text?: string;
-  passedFunction?: (args: boolean) => boolean;
+  passedResetFunction?: (args: boolean) => boolean;
+  passedReturnFunction?: (args: void) => any
 };
 
-function HeaderReturn({ resetAvailability, text, passedFunction }: props) {
+function HeaderReturn({
+  resetAvailability, text, passedResetFunction, passedReturnFunction,
+}: props) {
   const navigate = useNavigate();
+
+  const returnFunction = () => {
+    if (passedReturnFunction) {
+      passedReturnFunction();
+    } else navigate(-1);
+  };
 
   return (
     <div className="hr">
@@ -22,13 +31,13 @@ function HeaderReturn({ resetAvailability, text, passedFunction }: props) {
       </div>
       <div className="hr__main">
         <div className="hr__container">
-          <button className="hr__btn" type="button" onClick={() => navigate(-1)}>
+          <button className="hr__btn" type="button" onClick={returnFunction}>
             <SvgArrow />
           </button>
           <div className="hr__txt">{text}</div>
         </div>
         <div className="hr__option" data-testid="hr__option">
-          {passedFunction && resetAvailability ? <button className="hr__btnReset" type="button" onClick={() => passedFunction && passedFunction(true)}>Reset</button> : null}
+          {passedResetFunction && resetAvailability ? <button className="hr__btnReset" type="button" onClick={() => passedResetFunction && passedResetFunction(true)}>Reset</button> : null}
         </div>
       </div>
     </div>

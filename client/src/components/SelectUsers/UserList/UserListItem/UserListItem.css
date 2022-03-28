@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500;1,700&display=swap');
+
+.user-list-item-container {
+  width: auto;
+  margin: 0px 10px;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  height: 60px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* border: 1px solid red; */
+  right: 0px;
+}
+
+.user-list-item {
+ /* border: 1px solid blue; */
+ height: 100%;
+ width: 75%;
+ display: flex;
+ align-items: center;
+}
+
+.user-list-item-name {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 420;
+  font-size: 1.15rem;
+  color: var(  --color2-bg)
+}
+
+.user-list-item-profile-picture {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  width: 1.8em;
+  height: 1.8em;
+  border: 0.11em solid currentColor;
+  border-radius: 1%;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+  color: var(  --color2-bg);
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 1.8em;
+  height: 1.8em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  background-color: #09005a;
+  clip-path: fill-box;
+  color: black
+  /* clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%); */
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+  color: black
+}
+
+input[type="checkbox"]:checked::after {
+  transform: scale(1);
+  color:red
+}
+
+
+
+
