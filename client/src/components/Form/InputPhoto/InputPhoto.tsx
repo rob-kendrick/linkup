@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Avatar from 'boring-avatars';
 import ProfilePicture from '../../ProfilePicture/ProfilePicture';
 import { ReactComponent as FaPlus } from '../../../assets/FaPlus.svg';
