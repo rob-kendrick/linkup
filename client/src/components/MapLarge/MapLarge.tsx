@@ -1,14 +1,14 @@
 // @ts-nocheck
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import type { LuEvent } from '../../utilities/types/Event';
-import eventMarker from '../../assets/IoLocationSharp.svg';
-import userMarker from '../../assets/BiCurrentLocation.svg';
-import './MapLarge.css';
 import {
   MapContainer, TileLayer, Marker, Popup,
 } from 'react-leaflet';
+import type { LuEvent } from '../../utilities/types/Event';
+// import eventMarker from '../../assets/IoLocationSharp.svg';
+// import userMarker from '../../assets/BiCurrentLocation.svg';
+import './MapLarge.css';
 
 interface eventProps {
   filteredEvents : LuEvent[];
@@ -23,17 +23,17 @@ export default function MapLarge({ filteredEvents } : eventProps) {
   useEffect(() => {
   }, [eventArray]);
 
-  useEffect(() => {
-    const userPosition = [];
-    navigator.geolocation.getCurrentPosition((location) => {
-      userPosition.push(location.coords.latitude);
-      userPosition.push(location.coords.longitude);
-      setPosition(userPosition);
-    });
-  }, []);
+  // useEffect(() => {
+  //   const userPosition = [];
+  //   navigator.geolocation.getCurrentPosition((location) => {
+  //     userPosition.push(location.coords.latitude);
+  //     userPosition.push(location.coords.longitude);
+  //     setPosition(userPosition);
+  //   });
+  // }, []);
 
   const myIcon = L.divIcon({
-    iconSize: [26, 26],
+    iconSize: [35, 35],
     iconAnchor: [13, 26],
     popupAnchor: [0, -32],
     html: `<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -48,9 +48,9 @@ export default function MapLarge({ filteredEvents } : eventProps) {
 
   const allMarkers = filteredEvents.map((filteredEvent) => {
     const eventPosition = [filteredEvent.lat, filteredEvent.lng];
-    console.log(eventPosition);
     return (
       <Marker
+        key={filteredEvent.id_event}
         position={eventPosition}
         icon={myIcon}
       >
