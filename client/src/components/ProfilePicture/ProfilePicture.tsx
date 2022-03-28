@@ -2,12 +2,12 @@ import React from 'react';
 import './ProfilePicture.css';
 
 interface UserPicture {
-  userPicture? : string;
+  userPicture?: string;
   size?: string;
   alt?: string;
 }
 
-function ProfilePicture({ userPicture, size, alt } : UserPicture) {
+function ProfilePicture({ userPicture, size, alt }: UserPicture) {
   return (
     <div className="pp__container">
       <img
