@@ -5,17 +5,17 @@ import { toPng } from 'html-to-image';
 import { InputTextField, InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
 import InputPhoto from '../../../components/Form/InputPhoto/InputPhoto';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
-import './SignUp.css';
 import { User } from '../../../utilities/types/User';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import authApi from '../../../utilities/api/auth.api';
+import './SignUp.css';
 
 function SignUp() {
   const [errorMessage, setErrorMessage] = useState('');
   const [avatarName, setAvatarName] = useState(String(Math.random()));
   const [imageUrl, setImageUrl] = useState('');
   const [avatarSvg, setAvatarSvg] = useState<HTMLElement | null>(null);
-  // const [formData, setFormData] = useState<User | null>(null);
+  const [formData, setFormData] = useState<User | null>(null);
 
   const navigate = useNavigate();
 
@@ -38,63 +38,62 @@ function SignUp() {
     },
   });
 
-  async function signUp(formData: User) {
-    const userData = formData;
-    userData.profile_picture = imageUrl;
-    console.log(userData);
-    const response = await authApi.register(userData);
-    if (response.ok === false) {
-      if (response.status === 400) setErrorMessage('Data validation failed on server');
-      if (response.status === 404) setErrorMessage('404 not found');
-      if (response.status === 409) setErrorMessage('E-Mail already taken');
-      if (response.status === 500) setErrorMessage('500 server error');
-      if (response.status === 503) setErrorMessage('503 service unavailable');
-    } else if (response.data) {
-      // navigate('/login');
+  async function signUp() {
+    if (formData) {
+      const userData = formData;
+      userData.profile_picture = imageUrl;
+      console.log(userData);
+      const response = await authApi.register(userData);
+      if (response.ok === false) {
+        if (response.status === 400) setErrorMessage('Data validation failed on server');
+        if (response.status === 404) setErrorMessage('404 not found');
+        if (response.status === 409) setErrorMessage('E-Mail already taken');
+        if (response.status === 500) setErrorMessage('500 server error');
+        if (response.status === 503) setErrorMessage('503 service unavailable');
+      } else if (response.data) {
+        navigate('/login');
+      }
     }
   }
 
-  function uploadImage(formData: User, imageData: string) {
+  function uploadImage(imageData: string) {
     const data = new FormData();
     data.append('file', imageData);
     data.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET!);
     data.append('cloud_name', process.env.REACT_APP_CLOUDINARY_CLOUD_NAME!);
-    fetch(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`, {
+    return fetch(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`, {
       method: 'post',
       body: data,
     })
       .then((resp) => resp.json())
       .then((result) => {
         setImageUrl(result.url);
-        signUp(formData);
+        signUp();
       })
       .catch(() => setErrorMessage('Photo upload failed'));
   }
 
-  // function convertSvg() {
-  //   if (avatarSvg) {
-  //     toPng(avatarSvg)
-  //       .then((dataUrl) => {
-  //         console.log(dataUrl);
-  //         // uploadImage(dataUrl);
-  //       })
-  //       .catch((error) => {
-  //         setErrorMessage('Image conversion failed');
-  //         console.error(error);
-  //       });
-  //   }
-  // }
+  function convertSvg() {
+    if (avatarSvg) {
+      toPng(avatarSvg)
+        .then((dataUrl) => {
+          uploadImage(dataUrl);
+        })
+        .catch((error) => {
+          setErrorMessage('Image conversion failed');
+          console.error(error);
+        });
+    }
+  }
 
-  function onSubmit(formData: User) {
-    // setFormData(formData);
+  function onSubmit(data: User) {
+    setFormData(data);
     if (imageUrl === '') {
       console.log('its a svg');
-      const svgSerial = new XMLSerializer().serializeToString(document.getElementsByTagName('svg')[1]);
-      const svgBase64 = window.btoa(svgSerial);
-      uploadImage(formData, `data:image/png;base64,${svgBase64}`);
+      convertSvg();
     } else {
       console.log('its a real image');
-      signUp(formData);
+      signUp();
     }
   }
 
