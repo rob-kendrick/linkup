@@ -26,7 +26,9 @@ function ChatList() {
       .catch();
   }, []);
 
-  console.log('!', events);
+  const handleClick = () => {
+    console.log('onClikc');
+  };
 
   return (
     <div className="s">
@@ -35,11 +37,12 @@ function ChatList() {
       />
       <div className="cl_itemContainer">
         {events && events!.map((event) => (
-          // <div> ds </div>
-          <UserProfile
-            key={event.id_event}
-            event={event}
-          />
+          <div role="button" onClick={() => handleClick()} onKeyDown={(e) => (e.key === 'Enter' ? handleClick() : null)} tabIndex={0}>
+            <UserProfile
+              key={event.id_event}
+              event={event}
+            />
+          </div>
         ))}
       </div>
     </div>
