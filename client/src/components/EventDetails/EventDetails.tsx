@@ -1,7 +1,7 @@
 /* eslint-disable react/style-prop-object */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { RootState } from '../../utilities/redux/store';
@@ -31,6 +31,9 @@ function EventDetails() {
     ),
   )[0];
 
+  const { lat } = currentEvent;
+  const { lng } = currentEvent;
+
   if (currentEvent) {
     const date = useDate(currentEvent.date);
     const participation = currentEvent.participants.some(
@@ -54,7 +57,9 @@ function EventDetails() {
               <p className="ed__fontSecondary">Description</p>
               <p className="ed__fontRegular">{currentEvent.description}</p>
             </div>
-            <MapSmall />
+            <div className="ed__map-container">
+              <MapSmall lat={lat} lng={lng} />
+            </div>
             <ParticipantList currentEvent={currentEvent} />
           </div>
           {participation
