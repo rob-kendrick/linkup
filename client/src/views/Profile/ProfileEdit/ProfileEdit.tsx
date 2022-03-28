@@ -26,7 +26,7 @@ function ProfileEdit() {
   const onSubmit = (data: User) => {
     console.log(data);
   };
-  
+
   return (
     <div>
       <HeaderReturn
@@ -34,7 +34,7 @@ function ProfileEdit() {
       />
       <div className="pe__container">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <InputPhoto />
+          {/* <InputPhoto /> */}
           <InputTextField
             type="text"
             label="First Name"

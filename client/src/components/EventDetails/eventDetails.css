@@ -1,5 +1,13 @@
 .ed {
-  padding: 1rem;
+  display: flex;
+  overflow: scroll;
+
+  flex-direction: column;
+  height: 100%;
+  padding: 0
+    1rem
+    1rem
+    1rem;
 }
 
 .ed__fontSecondary {
@@ -22,7 +30,24 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: scroll;
 }
 
 .ed__txtContainer {
+}
+
+.ed__map-container {
+  height: 400px;
+  width: 100%;
+}
+
+.ed__btnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  margin-top: auto;
+  /* position: fixed; */
+  /* align-self: flex-start; */
 }
