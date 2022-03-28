@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import { InputTextField, InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
-import MapSmall from '../../../components/MapSmall/MapSmall';
 import { LuEvent } from '../../../utilities/types/Event';
 import eventApi from '../../../utilities/api/event.api';
 import './CreateEvent.css';
@@ -99,7 +98,6 @@ function CreateEvent() {
                 },
               })}
             />
-            <MapSmall />
             {/* Div for conditionally rendering user list */}
             <div onClick={toggleParticipants}>
               <ButtonLarge
