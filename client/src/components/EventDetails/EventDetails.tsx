@@ -59,7 +59,7 @@ function EventDetails() {
           </div>
           {participation
             ? (
-              <div>
+              <div className="ed__btnContainer">
                 <div role="button" onClick={() => navigate(`/events/${params.eventid}/chat`)}>
                   <ButtonLarge style="fill" type="submit" value="Chat" />
                 </div>
@@ -70,7 +70,7 @@ function EventDetails() {
               </div>
             )
             : (
-              <div>
+              <div className="ed__btnContainer">
                 <div role="button" onClick={() => setShowPopup(true)}>
                   <ButtonLarge style="fill" type="submit" value="LinkUp" />
                 </div>

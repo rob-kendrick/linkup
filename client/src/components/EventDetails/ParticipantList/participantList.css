@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   padding-top: 1rem;
+  overflow: scroll;
 }
 
 .pl__participantName {
