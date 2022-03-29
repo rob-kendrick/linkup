@@ -1,64 +1,83 @@
 // @ts-nocheck
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {
-  MapContainer, TileLayer, Marker,
+  MapContainer, TileLayer, Marker, Popup,
 } from 'react-leaflet';
 import './MapCreate.css';
+import * as ELG from 'esri-leaflet-geocoder';
 
 interface FindAdress {
   findEventAddress: any;
 }
 
-const formatAddress = (input) => ({
-  lat: input.latitude,
-  lng: input.longitude,
-  street_number: input.number,
-  street_name: input.name,
-  postcode: input.postal_code,
-  city: input.locality,
-  country: input.country,
+interface Location {
+  lat: number,
+  lat: number,
+  street: string,
+  postcode: string,
+  city: string,
+  country: string,
+}
+
+const formatAddress:Function<Location> = (input) => ({
+  lat: input.latlng.lat,
+  lng: input.latlng.lng,
+  street: input.address.Address,
+  postcode: input.address.Postal,
+  city: input.address.City,
+  country: input.address.CountryCode,
 });
 
 function MapCreate({ findEventAddress } : FindAdress) {
   const [lat, setLat] = useState(52.520008);
   const [lng, setLng] = useState(13.404954);
 
-  const [markerLat, setMarkerLat] = useState(lat);
-  const [markerLng, setMarkerLng] = useState(lng);
+  const [markerLat, setMarkerLat] = useState(null);
+  const [markerLng, setMarkerLng] = useState(null);
+
+  const [addressObj, setAddressObj] = useState(null);
+  const [addressStr, setAddressStr] = useState('');
+
+  const [myMap, setMyMap] = useState();
+  const [refReady, setRefReady] = useState(false);
+  const popupRef = useRef();
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(async (location) => {
-      await setLat(location.coords.latitude);
-      await setLng(location.coords.longitude);
+    if (refReady && myMap) {
+      popupRef.current.openOn(myMap);
+    }
+  }, [markerLat, markerLng, refReady, myMap]);
+
+  useEffect(() => {
+    if (addressObj) setAddressStr(`${addressObj.street}, ${addressObj.city} ${addressObj.postcode}`);
+  }, [addressObj]);
+
+  const handleAddLocation = async (e : MouseEvent) => {
+    const newLat = e.latlng.lat;
+    const newLng = e.latlng.lng;
+    setMarkerLat(newLat);
+    setMarkerLng(newLng);
+
+    const geocodeService = ELG.geocodeService({
+      apikey: process.env.REACT_APP_ESRI_API_KEY,
     });
-  }, []);
 
-  const handleAddLocation = (e : MouseEvent) => {
-    setMarkerLat(e.latlng.lat);
-    setMarkerLng(e.latlng.lng);
+    await geocodeService.reverse().latlng([newLat, newLng]).run((error, result) => {
+      if (error) {
+        console.error(error);
+      } else {
+        setAddressObj(formatAddress(result));
+        findEventAddress(formatAddress(result));
+      }
+    });
   };
-
-  const getRevGeoLocation = () => {
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-    };
-    fetch(`http://api.positionstack.com/v1/reverse?access_key=196a66c8284773cffe2741c9b5e1f321&query=${markerLat},${markerLng}&limit=1`, requestOptions)
-      .then((response) => response.json())
-      .then((result) => findEventAddress(formatAddress(result.data[0])))
-      .catch((error) => console.log('error', error));
-  };
-
-  useEffect(() => {
-    getRevGeoLocation();
-  }, [markerLat, markerLng]);
 
   const myIcon = L.divIcon({
     iconSize: [35, 35],
-    iconAnchor: [13, 26],
-    popupAnchor: [0, -32],
+    iconAnchor: [17.5, 35],
+    popupAnchor: [0, -35],
     html: `<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
        viewBox="0 0 492.452 492.452" style="enable-background:new 0 0 492.452 492.452;" xml:space="preserve">
     <path id="XMLID_152_" d="M246.181,0C127.095,0,59.533,102.676,84.72,211.82c17.938,77.722,126.259,280.631,161.462,280.631
@@ -68,7 +87,7 @@ function MapCreate({ findEventAddress } : FindAdress) {
     </svg>`,
     className: 'marker-pin',
   });
-
+  // myIcon.openPopup();
   return (
 
     <MapContainer
@@ -78,17 +97,30 @@ function MapCreate({ findEventAddress } : FindAdress) {
       zoom={13}
       scrollWheelZoom={false}
       whenCreated={(map) => {
-        // setMyMap(map);
+        setMyMap(map);
         map.on('click', handleAddLocation);
       }}
     >
       <TileLayer
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
       />
+      {markerLat && markerLng && (
       <Marker
         position={[markerLat, markerLng]}
         icon={myIcon}
-      />
+      >
+
+        <Popup
+          ref={(r) => {
+            popupRef.current = r;
+            setRefReady(true);
+          }}
+        >
+
+          {addressStr}
+        </Popup>
+      </Marker>
+      ) }
     </MapContainer>
   );
 }
