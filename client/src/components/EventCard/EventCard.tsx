@@ -53,9 +53,7 @@ function EventCard({ event }: Events) {
             </div>
             <div className="ec__details-text">
               <p className="ec__header-text">
-                {event.street_name}
-                {' '}
-                {event.street_number}
+                {event.street}
                 {', '}
                 {event.postcode}
                 {' '}

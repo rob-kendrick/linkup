@@ -20,3 +20,8 @@
   width: 100%;
   background-color:aquamarine;
 }
+
+.ce__container text {
+  color: var(--color6-grad-mean);
+  font-size: small;
+}
