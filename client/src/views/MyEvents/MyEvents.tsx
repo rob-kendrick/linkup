@@ -8,25 +8,21 @@ import mockEventsData from '../../utilities/mocks/db-data/events-db-data.json';
 import LuEvent from '../../utilities/types/Event';
 import './MyEvents.css';
 
-// interface MyEvents {
-//   myEvents : LuEvent[];
-// }
+interface MyEvents {
+  myEvents : LuEvent[];
+}
 
 function MyEvents() {
   const events = useSelector(
     (state: RootState) => state.eventReducer.allEvents,
   );
-  const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
+  const [filteredEvents, setFilteredEvents] = useState<LuEvent[]>([]);
 
   const userId = Number(localStorage.getItem('id_user'));
 
   const filterHosted = () => {
-    console.log('I am hosting');
-    console.log('events I am hosting', events);
-
     const userHosted = events.filter((e) => (userId === e.creator_id));
     setFilteredEvents(userHosted);
-    console.log(userHosted, 'User hosted');
   };
 
   const filterAttending = () => {
