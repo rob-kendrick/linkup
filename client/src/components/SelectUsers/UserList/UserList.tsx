@@ -45,8 +45,8 @@ function UserList({ toggleParticipants, setParticipantsToAdd }: props) {
     // the user ids are stored as strings in staging area
     // so we parse them into ints for for the parent state
     const tempArr = [];
-    for (let i = 0; i < userStagingArr.length; i++) {
-      tempArr.push(parseInt(userStagingArr[i], 36));
+    for (let i = 0; i < userStagingArr.length; i += 1) {
+      tempArr.push(userStagingArr[i]);
     }
     setParticipantsToAdd(tempArr);
     toggleParticipants();
