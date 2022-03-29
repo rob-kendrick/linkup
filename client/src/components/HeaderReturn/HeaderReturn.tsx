@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/require-default-props */
 import React, { useState } from 'react';
+import { io, Socket } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as SvgArrow } from '../../assets/IoIosArrowBack.svg';
 import { ReactComponent as IphoneStatusBar } from '../../assets/IphoneStatusBar.svg';
@@ -8,20 +9,32 @@ import { LuEvent } from '../../utilities/types/Event';
 import ProfilePicture from '../ProfilePicture/ProfilePicture';
 import './headerReturn.css';
 
+interface ServerToClientEvents {
+  noArg: () => void;
+  basicEmit: (a: number, b: string, c: Buffer) => void;
+}
+
+interface ClientToServerEvents {
+  leaveRoom: (userId: number, eventId: number) => void;
+}
+
 type props = {
   resetAvailability?: boolean;
   text?: string;
   passedResetFunction?: (args: boolean) => boolean;
   passedReturnFunction?: (args: void) => any
   luEvent?: LuEvent
+  socket?: Socket<ServerToClientEvents, ClientToServerEvents>
 };
 
 function HeaderReturn({
-  resetAvailability, text, passedResetFunction, passedReturnFunction, luEvent,
+  resetAvailability, text, passedResetFunction, passedReturnFunction, luEvent, socket,
 }: props) {
   const navigate = useNavigate();
+  const userId = localStorage.getItem('id_user');
 
   const returnFunction = () => {
+    if (socket) socket.emit('leaveRoom', Number(userId), luEvent!.id_event);
     if (passedReturnFunction) {
       passedReturnFunction();
     } else navigate(-1);
