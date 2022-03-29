@@ -7,8 +7,6 @@ import { Server } from "socket.io";
 import { createServer } from 'http';
 import router from './routes/index';
 // import prisma from './db';
-const http = require('http');
-const socketio = require('socket.io');
 
 const corsConfig = {
   // REMOVE-START
@@ -44,18 +42,13 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer, {
 
 io.on('connection', (socket) => {
   socket.on('joinRoom', (userId, eventId) => {
-    console.log('user', userId, 'event', eventId);
     socket.join(String(eventId));
   });
   socket.on('emitMsgFromClient', (userId, eventId, msg) => {
-    console.log(userId, eventId, msg);
-    // socket.broadcast.emit('basicEmit', msg);
-
     io.in(String(eventId)).emit('basicEmit', userId, eventId, msg);
   });
 
   socket.on('leaveRoom', (userId, eventId) => {
-    console.log('user', userId, 'event', eventId);
     socket.leave(String(eventId));
   });
 });
