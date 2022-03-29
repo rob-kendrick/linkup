@@ -340,11 +340,31 @@ const getUserCreatedEvents = async (req: Request, res: Response) => {
       select: {
         events_created: {
           select: {
+
             id_event: true,
             title: true,
+            description: true,
+            creator_id: true,
+            min_participants: true,
             max_participants: true,
             date: true,
-            description: true,
+            date_created: true,
+            date_updated: true,
+            lat: true,
+            lng: true,
+            street_number: true,
+            street_name: true,
+            postcode: true,
+            city: true,
+            country: true,
+            tags: true,
+            creator: {
+              select: {
+                id_user: true,
+                first_name: true,
+                profile_picture: true,
+              },
+            },
             participants: {
               select: {
                 id_user: true,
@@ -367,18 +387,38 @@ const getUserCreatedEvents = async (req: Request, res: Response) => {
 const getUserParticipatingEvents = async (req: Request, res: Response) => {
   try {
     const userId: number = Number(req.params.userid);
-    const event = await prisma.user.findUnique({
+    const newEvent = await prisma.user.findUnique({
       where: {
         id_user: userId,
       },
       select: {
         events_participating: {
           select: {
+
             id_event: true,
             title: true,
+            description: true,
+            creator_id: true,
+            min_participants: true,
             max_participants: true,
             date: true,
-            description: true,
+            date_created: true,
+            date_updated: true,
+            lat: true,
+            lng: true,
+            street_number: true,
+            street_name: true,
+            postcode: true,
+            city: true,
+            country: true,
+            tags: true,
+            creator: {
+              select: {
+                id_user: true,
+                first_name: true,
+                profile_picture: true,
+              },
+            },
             participants: {
               select: {
                 id_user: true,
@@ -391,7 +431,7 @@ const getUserParticipatingEvents = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).send({ data: event?.events_participating });
+    res.status(200).send({ data: newEvent?.events_participating });
   } catch (err) {
     res.status(500).send({ error: err });
   }
