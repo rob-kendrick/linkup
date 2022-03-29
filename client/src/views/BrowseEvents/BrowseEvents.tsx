@@ -49,8 +49,9 @@ function BrowseEvents() {
   // dipslay events NOT created by user and only in the future
 
   useEffect(() => {
-    const fe = events.filter((el) => el.creator_id !== userId && checkDateisInFuture(el.date))
-      .sort((a, b) => new Date(b.date) - new Date(a.date));
+    const fe = events
+    // const fe = events.filter((el) => checkDateisInFuture(el.date))
+    //   .sort((a, b) => new Date(b.date) - new Date(a.date));
     setAllEvents(fe);
     setDateFilter(fe);
     setTitleFilter(fe);

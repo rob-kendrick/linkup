@@ -3,7 +3,6 @@
   align-items: center;
   padding-top: 1.4em;
   padding-left: 2.4em;
-  /* background-color: var(--color2-bg); */
   margin-bottom: 0.8em;
 }
 
@@ -12,11 +11,4 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   font-size: 1.2em;
-  /* text-transform: uppercase; */
-  /* background-image: var(--color2-fg-select);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-background-clip: text;
-  -moz-text-fill-color: transparent; */
 }

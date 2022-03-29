@@ -8,6 +8,7 @@ import {
 } from 'react-leaflet';
 import type { LuEvent } from '../../utilities/types/Event';
 import './MapLarge.css';
+import ProfilePicture from '../ProfilePicture/ProfilePicture';
 
 interface eventProps {
   filteredEvents : LuEvent[];
@@ -43,10 +44,11 @@ export default function MapLarge({ filteredEvents } : eventProps) {
           <Popup closeButton={false}>
             <div className="ml__popup-container">
               <div className="ml__popup-picture">
-                <img
-                  src={filteredEvent.creator.profile_picture}
+                <ProfilePicture
+                  userPicture={filteredEvent.creator.profile_picture}
+                  size={48}
                   alt={filteredEvent.creator.username}
-                  style={{ width: '48px', borderRadius: '50%' }}
+                  userName={filteredEvent.creator.username}
                 />
               </div>
               <div className="ml__popup-event-details">
