@@ -70,6 +70,7 @@ export default function MapLarge({ filteredEvents } : eventProps) {
       >
         <Link to={`/events/${filteredEvent.id_event}`}>
           <Popup
+            closeButton={false}
             ref={(r) => {
               popupRef.current = r;
               setRefReady(true);

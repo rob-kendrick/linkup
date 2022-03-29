@@ -51,13 +51,14 @@
 }
 
 .ml__popup-event-title{
-  font-size:0.7rem;
-  margin: 0px;
+  margin: 0;
+  font-size:0.9rem;
 }
 
 .ml__popup-event-user{
-  margin: 0px;
-  font-size:0.6rem;
+  margin: 0;
+  font-size:0.8rem;
+  font-weight: 600;
 }
 
 .leaflet-popup-tip-container {
@@ -67,5 +68,4 @@
 .leaflet-popup-content-wrapper .leaflet-popup-content {
   margin:0;
   padding:0;
-  width:fit-content;
 }
