@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import { InputTextField, InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
@@ -21,7 +22,8 @@ const mockAddress = {
 };
 
 function CreateEvent() {
-  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
+  const [notification, setNotification] = useState('');
   const [showParticipants, setShowParticipants] = useState(false);
   const [participantsToAdd, setParticipantsToAdd] = useState([]);
 
@@ -51,21 +53,29 @@ function CreateEvent() {
   const onSubmit = async (formData: LuEvent) => {
     const user = Number(localStorage.getItem('id_user'));
     if (user) {
-      const fullEvent = Object.assign(formData, mockAddress);
-      fullEvent.participants_to_add = participantsToAdd;
-      fullEvent.creator_id = user;
-      const response = await eventApi.postEvent(fullEvent);
-      console.log('AAAAAAAAAAH', response);
-      if (response.error) setErrorMessage('Server error');
-      else setErrorMessage('Event created!');
+      try {
+        const fullEvent = Object.assign(formData, mockAddress);
+        fullEvent.participants_to_add = participantsToAdd;
+        fullEvent.creator_id = user;
+        const response = await eventApi.postEvent(fullEvent);
+        if (response.data) {
+          console.log('success !!!!!!!!');
+          navigate('/myevents');
+        }
+        console.log('AAAAAAAAAAH', response);
+        if (response.error) setNotification('Server error');
+        else setNotification('Event created!');
+      } catch (err) {
+        console.log('ERROR POSTING EVENT :', err);
+      }
 
       // TODO: delete msg when user stored in Redux
-    } else setErrorMessage('Could not find user in local storage');
+    } else setNotification('Could not find user in local storage');
   };
 
   return (
     <div>
-
+      {/* Conditional rendering + header with back button */}
       <div className={`ce__wrapper ${showParticipants ? 'ce__wrapper_hidden' : ''}`}>
         <HeaderReturn
           text="Create Activity"
@@ -74,6 +84,7 @@ function CreateEvent() {
           <form
             onSubmit={handleSubmit(onSubmit)}
           >
+            {/* Inputs */}
             <InputTextField
               type="text"
               label="Title"
@@ -81,7 +92,7 @@ function CreateEvent() {
               {...register('title', {
                 required: 'This field is required',
                 onChange: () => {
-                  setErrorMessage('');
+                  setNotification('');
                 },
               })}
             />
@@ -92,7 +103,7 @@ function CreateEvent() {
               {...register('date', {
                 required: 'This field is required',
                 onChange: () => {
-                  setErrorMessage('');
+                  setNotification('');
                 },
               })}
             />
@@ -104,11 +115,12 @@ function CreateEvent() {
               {...register('description', {
                 required: 'This field is required',
                 onChange: () => {
-                  setErrorMessage('');
+                  setNotification('');
                 },
               })}
             />
             <MapSmall />
+            {/* Rendering text based on participants added */}
             <div>
               {participantsToAdd.length > 0
               && (
@@ -131,11 +143,11 @@ function CreateEvent() {
             </div>
             <ButtonLarge
               type="submit"
-              value="Link Up"
+              value="Create"
               style="fill"
             />
-            {/* {(errorMessage !== '')
-          && <text>{errorMessage}</text>} */}
+            {(notification !== '')
+          && <p>{notification}</p>}
           </form>
         </div>
       </div>
