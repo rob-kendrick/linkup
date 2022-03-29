@@ -2,6 +2,7 @@
 // Imports
 import { current } from '@reduxjs/toolkit';
 import React from 'react';
+import ProfilePicture from '../../../ProfilePicture/ProfilePicture';
 // CSS
 import './UserListItem.css';
 
@@ -33,10 +34,14 @@ function UserListItem({
   return (
     <div className="user-list-item-container">
       <div className="user-list-item">
-        <div
+        <div className="uli_profile-pic-container">
+
+          <ProfilePicture userPicture={user.profile_picture} userName={user.first_name} size={50} alt={user.first_name} />
+        </div>
+        {/* <div
           className="user-list-item-profile-picture"
           style={{ background: `url(${user.profile_picture})`, backgroundSize: 'cover' }}
-        />
+        /> */}
         <p className="user-list-item-name">{user.first_name}</p>
 
       </div>
