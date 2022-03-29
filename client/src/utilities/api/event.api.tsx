@@ -1,20 +1,10 @@
+// import performRequest from '../helper/apiRequest';
 import handleError from '../helper/apiErrorHandling';
 import type { LuEvent } from '../types/Event';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const eventApi = {
-  getAllEvents: () => fetch(`${baseUrl}/events`)
-    .then((response) => {
-      if (response.status < 300) {
-        const result = response.json();
-        console.log('API', result);
-        return result;
-      }
-      throw Error('Server error');
-    })
-    .catch(handleError),
-
   getEventById: (id: number) => fetch(`${baseUrl}/events/${id}`)
     .then((response) => {
       if (response.status < 300) {
