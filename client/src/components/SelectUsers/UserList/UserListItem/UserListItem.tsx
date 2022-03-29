@@ -15,18 +15,16 @@ function UserListItem({
 }: props) {
   // This code kinda sucks, but it will update and remove user ids to staging array
   // when the user checks the checkboxes
-  // USER IDS ARE STRING IN HERE BECAUSE FILTERING WOULD NOT WORK ON NUMBERS!!!!
-  // We parse these ids back into numbers in UserList
 
   const updateParticipants = () => {
     // Person to remove is an array. If the length > 0, we filter that person out
-    const personToRemove = userStagingArr.filter((item: any) => item.includes(String(user.id_user)));
+    const personToRemove = userStagingArr.filter((item: number) => item === user.id_user);
     // Removing 'personToRemove' via filtering
     if (personToRemove.length === 0) {
-      setUserStagingArr((previous: any) => [...previous, String(user.id_user)]);
+      setUserStagingArr((previous: any) => [...previous, user.id_user]);
     } else {
       // if there is no person to remove, add them to staging array
-      setUserStagingArr(userStagingArr.filter((item: any) => !item.includes(String(user.id_user))));
+      setUserStagingArr(userStagingArr.filter((item: number) => item !== user.id_user));
     }
   };
 

@@ -106,6 +106,7 @@ const createEvent = async (req: Request, res: Response) => {
     const participantsToAdd = req.body.participants_to_add.map((el:number) => ({
       id_user: el,
     }));
+
     delete req.body.participants_to_add;
     const eventInput: Event = {
       ...req.body,
