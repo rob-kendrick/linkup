@@ -107,7 +107,7 @@ function CreateEvent() {
                 },
               })}
             />
-            <MapSmall />
+            {/* <MapSmall /> */}
             <div>
               {participantsToAdd.length > 0
               && (

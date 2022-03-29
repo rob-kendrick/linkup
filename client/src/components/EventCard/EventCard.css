@@ -107,9 +107,11 @@
 .ec__button-container{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
+  flex-grow: 1;
+  align-items: center;
   padding: 5% 0% 5% 0%;
-
+  margin-bottom: auto;
 }
 
 

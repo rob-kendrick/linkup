@@ -9,6 +9,8 @@ import time from '../../assets/BiTimeFive.svg';
 import './EventCard.css';
 import { LuEvent } from '../../utilities/types/Event';
 import Icon from '../Icon/Icon';
+import ButtonSmall from '../Form/ButtonSmall/ButtonSmall';
+import '../Form/ButtonSmall/ButtonSmall.css';
 
 interface Events {
   event: LuEvent
@@ -75,8 +77,20 @@ function EventCard({ event }: Events) {
           </div>
         </div>
         <div className="ec__button-container">
-          <ButtonEventsMenu name="LinkUp" />
-          <ButtonEventsMenu name={`${event.participants.length} participants`} />
+          <div className="ec__button-bn-left">
+            <ButtonSmall
+              style="fill"
+              value="Link Up"
+              type="button"
+            />
+          </div>
+          <div className="ec__button-bn-rigth">
+            <ButtonSmall
+              style="grey"
+              value={`${event.participants.length} are going`}
+              type="button"
+            />
+          </div>
         </div>
       </div>
 
