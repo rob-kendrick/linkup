@@ -37,7 +37,7 @@ function HeaderReturn({
           <button className="hr__btn" type="button" onClick={returnFunction}>
             <SvgArrow />
           </button>
-          {luEvent ? <div style={{ marginRight: '1rem' }}><ProfilePicture userPicture={luEvent.creator.profile_picture} size="20px" alt={luEvent.description} /></div> : null}
+          {luEvent ? <div style={{ marginRight: '1rem' }}><ProfilePicture userPicture={luEvent.creator.profile_picture} size={20} alt={luEvent.description} /></div> : null}
           <div className="hr__txt">{text}</div>
         </div>
         <div className="hr__option" data-testid="hr__option">
