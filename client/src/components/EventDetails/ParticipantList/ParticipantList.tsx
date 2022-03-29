@@ -13,6 +13,7 @@ function ParticipantList({ currentEvent }: Props) {
       {currentEvent.participants.map((participant) => (
         <div className="pl__userContainer">
           {/* <ProfilePicture /> */}
+          {/* Also pass userName={event.creator.first_name} to ProfilePicture component for Avatar image! */}
           <img style={{ width: '35px', height: '35px' }} src={participant.profile_picture} alt="userPhoto" />
           <p>{participant.first_name}</p>
         </div>

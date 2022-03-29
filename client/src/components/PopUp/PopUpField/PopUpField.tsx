@@ -52,6 +52,7 @@ function PopUpField({ text, currentEvent }: Props) {
     return (
       <div className="puf__container">
         {/* waiting for the component -  temporary placeholder */}
+        {/* also pass userName={event.creator.first_name} to ProfilePicture for the Avatar image! */}
         <div className="puf__imgContainer">
           <img style={{ width: '35px', height: '35px' }} src={currentEvent.creator.profile_picture} alt="" />
         </div>
