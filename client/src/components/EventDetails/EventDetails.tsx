@@ -11,7 +11,7 @@ import MapSmall from '../MapSmall/MapSmall';
 import TagList from '../TagList/TagList';
 import ParticipantList from './ParticipantList/ParticipantList';
 import PopUp from '../PopUp/PopUp';
-import useDate from '../../utilities/hooks/useDate';
+import useDate from '../../utilities/helper/useDate';
 import EventField from '../EventField/EventField';
 import './eventDetails.css';
 import ButtonLarge from '../Form/ButtonLarge/ButtonLarge';
