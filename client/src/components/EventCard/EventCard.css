@@ -114,4 +114,11 @@
   margin-bottom: auto;
 }
 
+.ec__button-bn-rigth{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 

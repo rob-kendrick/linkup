@@ -38,9 +38,10 @@
 .bs__button-stroke-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   position:relative;
-  margin-bottom: 10px;
 }
+
 .bs__button-stroke-container::before {
   content: "";
   position: absolute;
