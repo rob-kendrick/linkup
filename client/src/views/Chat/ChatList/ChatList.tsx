@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import ChatListItem from './ChatListItem.tsx/ChatListItem';
 import HeaderMain from '../../../components/HeaderMain/HeaderMain';
 import UserProfile from '../../../components/UserProfile/UserProfile';
@@ -12,7 +13,7 @@ import { LuEvent } from '../../../utilities/types/Event';
 function ChatList() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [events, setEvents] = useState<LuEvent[] | null>(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const userId = Number(localStorage.getItem('id_user'));
     userApi.getUserCreatedEvents(userId)
@@ -26,10 +27,9 @@ function ChatList() {
       .catch();
   }, []);
 
-  const handleClick = () => {
-    console.log('onClikc');
+  const handleClick = (eventEl: LuEvent) => {
+    navigate(`/events/${eventEl.id_event}/chat`);
   };
-  console.log(events);
 
   return (
     <div className="s">
@@ -37,11 +37,11 @@ function ChatList() {
         title="Chat"
       />
       <div className="cl_itemContainer">
-        {events && events!.map((event) => (
-          <div role="button" onClick={() => handleClick()} onKeyDown={(e) => (e.key === 'Enter' ? handleClick() : null)} tabIndex={0}>
+        {events && events!.map((eventEl) => (
+          <div role="button" onClick={() => handleClick(eventEl)} onKeyDown={(e) => (e.key === 'Enter' ? handleClick(eventEl) : null)} tabIndex={0}>
             <UserProfile
-              key={event.id_event}
-              event={event}
+              key={eventEl.id_event}
+              event={eventEl}
             />
           </div>
         ))}
