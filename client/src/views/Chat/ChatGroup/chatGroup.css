@@ -1,46 +1,26 @@
-.cg {
+.cG {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  padding: 0
-    1rem
-    1rem
-    1rem;
+  height: 100vh;
 }
 
-/* .ed__fontSecondary {
-  font-weight: 700;
-  font-size: 0.9rem;
-}
-
-.ed__fontRegular {
-  font-weight: 400;
-  font-size: 0.9rem;
-}
-
-.ed__titile {
-  font-weight: 700;
-  font-size: 1.1rem;
-}
-
-.ed__mainContentContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.ed__txtContainer {
-} */
 .cG__mainContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 89%;
+  background-color: rgb(
+    242,
+    242,
+    242
+  );
 }
 .cG__chatMsgsContainer {
-  flex-grow: 15;
+  height: 100%;
+  width: 100%;
 }
+
 .cG__inputContainer {
   display: flex;
   flex-direction: column;
@@ -48,6 +28,7 @@
   align-items: center;
   padding-top: 1rem;
   margin-top: auto;
-  /* position: fixed; */
-  /* align-self: flex-start; */
+  background-color: white;
+  height: 11%;
+  width: 100%;
 }
