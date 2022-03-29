@@ -1,12 +1,12 @@
 
 
 .user-list-container {
-  align-items: space-between;
   height: 100vh;
   width: 100vw;
   background-color: white;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
 }
 
@@ -21,12 +21,8 @@
 .ul_submitter {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 10px;
-}
-
-.ul_submitter:hover {
-  cursor: pointer;
-  width: fit-content;
 }
 
 .ul-search-container {
