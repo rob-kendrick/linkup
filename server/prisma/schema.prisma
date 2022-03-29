@@ -12,11 +12,11 @@ datasource db {
 
 model user {
   id_user              Int      @id @default(autoincrement())
-  first_name           String   @db.VarChar(50)
+  first_name           String   @db.VarChar(20)
   last_name            String   @db.VarChar(50)
   bio                  String   @db.VarChar(255)
   email                String   @unique @db.VarChar(255)
-  profile_picture      String
+  profile_picture      String?
   events_created       event[]  @relation(name: "created_events")
   events_participating event[]  @relation(name: "participating_events", references: [id_event])
   password             String
@@ -39,8 +39,7 @@ model event {
   date_updated     DateTime? @updatedAt
   lat              Float
   lng              Float
-  street_number    String?
-  street_name      String
+  street           String
   postcode         String
   city             String
   country          String

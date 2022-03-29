@@ -10,8 +10,7 @@ interface Event {
   date: Date
   lat: number
   lng: number
-  street_number: string
-  street_name: string
+  street: string
   postcode: string
   city: string
   country : string
@@ -28,7 +27,7 @@ const validateEventInfo = (event: Event) => {
     || !event.date
     || !event.lat
     || !event.lng
-    || !event.street_name
+    || !event.street
     || !event.postcode
     || !event.city
     || !event.country) {

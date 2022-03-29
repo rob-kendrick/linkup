@@ -12,7 +12,7 @@ interface User {
   password: string;
   first_name: string;
   last_name: string;
-  profile_picture: string;
+  profile_picture?: string;
   bio: string;
 }
 
@@ -36,10 +36,12 @@ const createUser = async (req: Request, res: Response) => {
       return res.status(400).send({ error: 'Invalid user data' });
     }
 
+    const email = req.body.email.toLowerCase();
+
     // Check if user already exists in DB
     const emailExists = await prisma.user.findUnique({
       where: {
-        email: req.body.email,
+        email,
       },
     });
     if (emailExists) {
@@ -54,6 +56,7 @@ const createUser = async (req: Request, res: Response) => {
     // Adding hashed password to our user object
     const body = {
       ...req.body,
+      email,
       password: hashedPassword,
     };
 
