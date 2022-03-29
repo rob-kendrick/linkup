@@ -128,7 +128,6 @@ function CreateEvent() {
                 },
               })}
             />
-
             <div className="ce__map-container">
               <MapCreate findEventAddress={findEventAddress} />
               {/* <MapSmall /> */}

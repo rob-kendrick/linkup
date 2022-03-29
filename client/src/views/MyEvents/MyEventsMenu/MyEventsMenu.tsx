@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as HiPencilAlt } from '../../../assets/HiPencilAlt.svg';
 import './MyEventsMenu.css';
@@ -11,6 +11,13 @@ interface Functions {
 function MyEventsMenu({ filterHosted, filterAttending } : Functions) {
   const navigate = useNavigate();
 
+  const [toggle, setToggle] = useState(true);
+
+  const onClickChange = (func : any) => {
+    setToggle(!toggle);
+    !toggle ? filterHosted() : filterAttending();
+  };
+
   return (
     <div>
 
@@ -20,16 +27,16 @@ function MyEventsMenu({ filterHosted, filterAttending } : Functions) {
         <div className="mem__inner-left-container">
           <button
             type="button"
-            className="mem__selectors-btns-btn"
-            onClick={filterHosted}
+            className={toggle ? 'mem__selectors-btns-btn-active' : 'mem__selectors-btns-btn'}
+            onClick={onClickChange}
           >
             <p>Hosting</p>
           </button>
 
           <button
             type="button"
-            className="mem__selectors-btns-btn"
-            onClick={filterAttending}
+            className={toggle ? 'mem__selectors-btns-btn' : 'mem__selectors-btns-btn-active'}
+            onClick={onClickChange}
           >
             <p>Participating</p>
           </button>

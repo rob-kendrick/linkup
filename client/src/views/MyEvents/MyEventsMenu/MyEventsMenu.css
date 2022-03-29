@@ -29,9 +29,18 @@
   border: 2px solid var(--color5-grey2);
 }
 
-.mem__selectors-btns-btn:focus {
+
+.mem__selectors-btns-btn-active {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  min-width: 100px;
+  border-radius: 6%;
+  border:none; 
+  height: 44px;
+  font-size: 15px;
+  outline: none;
   background-color: #263056;
   color:white;
-  border-radius: 6%;
-  border: none; 
 }

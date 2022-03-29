@@ -1,17 +1,17 @@
 .bs__button  {
   box-sizing: border-box;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 3px;
+  font-size: 0.7rem;
   min-height: 2.6em;
-  max-width: 100px;
-  width: 100%;
-  margin-bottom: 10px;
+  min-width: 142px;
+  margin: 5px; 
   line-height: 150%;
   font-weight: bold;
 }
 
 .bs__button-fill {
   border: 0;
+  font-weight: 100;
   background-image: var(--color1-bg);
   color: var(--color1-fg);
 }
@@ -48,7 +48,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 6px;
+  border-radius: 3px;
   padding: 1px;
   background: var(--color1-bg);
   -webkit-mask:
