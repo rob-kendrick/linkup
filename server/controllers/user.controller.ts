@@ -157,6 +157,8 @@ const editUserInfo = async (req: Request, res: Response) => {
     const newUserBio: string = req.body.bio;
     const newFirstName: string = req.body.first_name;
     const newLastName: string = req.body.last_name;
+    const newProfilePicture: string = req.body.profile_picture;
+
     // Updating user bio
     const updatedUser = await prisma.user.update({
       where: {
@@ -166,6 +168,7 @@ const editUserInfo = async (req: Request, res: Response) => {
         bio: newUserBio,
         first_name: newFirstName,
         last_name: newLastName,
+        profile_picture: newProfilePicture,
       },
       include: {
         events_created: {
@@ -437,6 +440,51 @@ const getUserParticipatingEvents = async (req: Request, res: Response) => {
   }
 };
 
+const bcrypt = require('bcrypt');
+
+const SALT_NUMBER: number = Number(process.env.SALT_NUMBER) || 10;
+
+const changePassword = async (req: Request, res: Response) => {
+  try {
+    const userId : number = Number(req.params.userid);
+    const validUser = await prisma.user.findUnique({
+      where: {
+        id_user: userId,
+      },
+    });
+    if (!validUser) {
+      return res.status(400).send({ error: 'user not found' });
+    }
+
+    if (req.body.password_old === '') throw new Error('old password cannot be empty');
+    if (req.body.password_new === '') throw new Error('new password cannot be empty');
+
+    const validOldPassword = await bcrypt.compare(
+      req.body.password_old,
+      validUser.password,
+    );
+
+    if (!validOldPassword) {
+      return res.status(400).send({ error: 'wrong password' });
+    }
+    const salt = await bcrypt.genSalt(SALT_NUMBER);
+    const hashedPassword = await bcrypt.hash(req.body.password_new, salt);
+
+    const updatedPassword = await prisma.user.update({
+      where: {
+        id_user: userId,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    });
+
+    return res.status(202).send({ data: { updatedPassword } });
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
+
 export default {
   getUserById,
   getAllUsers,
@@ -447,4 +495,5 @@ export default {
   deleteAllUsers,
   getUserCreatedEvents,
   getUserParticipatingEvents,
+  changePassword,
 };
