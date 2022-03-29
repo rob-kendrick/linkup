@@ -1,28 +1,9 @@
-@import "../../index.css";
-
-.hr {
-  background-color: white;
-  height: 11%;
-}
-
-.hr__statusBar {
-  padding-bottom: 1rem;
-}
-@media only screen and (min-width: 430px) {
-  .hr__statusBar {
-    display: none;
-  }
-  .hr {
-    padding-top: 3.25rem;
-  }
-}
-
 .hr__main {
   display: flex;
   justify-content: space-between;
-  padding: 0
+  padding: 1.6rem
     1rem
-    1rem
+    1.6rem
     1rem;
 }
 
@@ -64,9 +45,8 @@
 }
 
 .hr__btn {
-  height: 100%;
   color: black;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   display: flex;
   align-items: center;
   background-color: white;

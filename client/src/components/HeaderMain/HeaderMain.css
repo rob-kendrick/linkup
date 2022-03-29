@@ -1,10 +1,22 @@
 .hm__title {
-  padding-top: 3em;
-  padding-bottom: 1em;
-  padding-left: 1.5em;
-  font-weight: 800;
-  font-size: 18px;
-  line-height: 21px;
   display: flex;
   align-items: center;
+  padding-top: 1.4em;
+  padding-left: 2.4em;
+  /* background-color: var(--color2-bg); */
+  margin-bottom: 0.8em;
+}
+
+.hm__title h3 {
+  color: black;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  font-size: 1.2em;
+  /* text-transform: uppercase; */
+  /* background-image: var(--color2-fg-select);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent; */
 }

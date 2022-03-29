@@ -2,8 +2,8 @@
  display: flex;
  flex-direction: column;
  align-items: space-between;
- box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.23);
- height:261px;;
+ box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.23);
+ height:240px;
 }
 
 .bem-selectors-toggle {
@@ -11,18 +11,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 1.8em;
 }
 
 .bem__selectors-dates {
+  margin-bottom: 2em;
   display:flex;
   flex-direction: row;
   overflow-x: scroll;
-  margin-left:4px
-
-}
-
-.bem__selectors-searchbar{
-
 }
 
 .bem__selectors-dates::-webkit-scrollbar {
@@ -53,9 +49,12 @@
 .bem__selectors-btns {
   display: flex;
   flex-direction: row;
-  margin: 0px 10px 20px;
+  /* margin: 0px 10px 20px; */
   justify-content: center;
   align-items: center;
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-bottom: 2em;
 }
 
 .bem__selectors-btns-btn {
@@ -64,8 +63,8 @@
   justify-content: space-evenly;
   align-items: center;
   min-width: 100px;
-  border-radius: 6%;
-  height: 44px;
+  border-radius: 4px;
+  height: 3.2em;
   font-size: 15px;
   outline: none;
   background-color: white;

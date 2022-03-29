@@ -6,13 +6,17 @@
   align-items:center;
   justify-content:space-around;
   padding-bottom: 5%;
+  margin-top: 0.8em;
+  margin-left: 1.6em;
+  margin-right: 1.6em;
+  margin-bottom: 0.6em;
 }
 
 .mem__inner-left-container{
-  display:flex; 
+  display:flex;
   flex-direction: row;
   align-items:flex-start;
-  justify-content:space-around; 
+  justify-content:space-around;
 }
 
 .mem__selectors-btns-btn {
@@ -37,7 +41,7 @@
   align-items: center;
   min-width: 100px;
   border-radius: 6%;
-  border:none; 
+  border:none;
   height: 44px;
   font-size: 15px;
   outline: none;
