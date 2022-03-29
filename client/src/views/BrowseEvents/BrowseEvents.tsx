@@ -3,7 +3,7 @@
 import React, {
   useEffect, useMemo, useState, MouseEventHandler, ChangeEvent,
 } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, RootState } from 'react-redux';
 import { ChangeHandler } from 'react-hook-form';
 import browseEventsContext from '../../contexts/browse-events.context';
 import BrowseEventsMenu from './BrowseEventsMenu/BrowseEventsMenu';
@@ -13,7 +13,9 @@ import mockEventsData from '../../utilities/mocks/db-data/events-db-data.json';
 import './BrowseEvents.css';
 import { LuEvent } from '../../utilities/types/Event';
 
-const dayMatch = (date1:string, date2:string) => {
+// helper functions
+// return true if two dates are on the same day
+const checkDatesSameDay = (date1:string, date2:string) => {
   const date3 = new Date(date1);
   const date4 = new Date(date2);
   if (
@@ -25,30 +27,40 @@ const dayMatch = (date1:string, date2:string) => {
   }
   return false;
 };
-
+// returns common elements of 2 arrays
 const getArraysIntersection = (a1, a2) => a1.filter((el) => a2.includes(el));
+// return true if date is in the future
+const checkDateisInFuture = (date: string) => (new Date(date) >= new Date());
+// sory by date, newest first
 
 function BrowseEvents() {
+  const userId = Number(localStorage.getItem('id_user'));
   const events = useSelector(
     (state: RootState) => state.eventReducer.allEvents,
   );
 
   const [mapView, setMapView] = useState(true);
-  const [allEvents, setAllEvents] = useState<LuEvent[]|null>(events);
-  const [dateFilter, setDateFilter] = useState<LuEvent[]>(events);
-  const [titleFilter, setTitleFilter] = useState<LuEvent[]>(events);
-
+  const [allEvents, setAllEvents] = useState<LuEvent[]>([]);
+  const [dateFilter, setDateFilter] = useState<LuEvent[]>([]);
+  const [titleFilter, setTitleFilter] = useState<LuEvent[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<LuEvent[]>([]);
+
+  // on first load, filter events from redux store,
+  // dipslay events NOT created by user and only in the future
+
+  useEffect(() => {
+    const fe = events.filter((el) => el.creator_id !== userId && checkDateisInFuture(el.date))
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
+    setAllEvents(fe);
+    setDateFilter(fe);
+    setTitleFilter(fe);
+  }, []);
 
   // merge all filtered lists
   useEffect(() => {
     const tempFilter = getArraysIntersection(dateFilter, titleFilter);
     setFilteredEvents(tempFilter);
   }, [dateFilter, titleFilter]);
-
-  // for testing purposes
-  useEffect(() => {
-  }, [filteredEvents]);
 
   // list/map toggle
   const toggleMapList:MouseEventHandler = () => {
@@ -60,7 +72,7 @@ function BrowseEvents() {
     if (thisDate === null) return setDateFilter(allEvents);
     const newEvents = allEvents.filter(
       (event) => {
-        if (dayMatch(event.date, thisDate)) return event;
+        if (checkDatesSameDay(event.date, thisDate)) return event;
         return null;
       },
     );
