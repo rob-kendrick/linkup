@@ -26,7 +26,6 @@ export default function ChatGroup() {
   const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:4000');
 
   useEffect(() => {
-    console.log('USEEFFECT');
     socket.emit('joinRoom', Number(userId), state.currentEvent.id_event);
   }, []);
 
@@ -44,8 +43,6 @@ export default function ChatGroup() {
   const submitHandler = (e: any) => {
     e.preventDefault();
     const msg = e.target.elements.chat.value;
-    // createPost(msg);
-    // console.log('chat msg');
     socket.emit('emitMsgFromClient', Number(userId), state.currentEvent.id_event, msg);
   };
 
