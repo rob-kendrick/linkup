@@ -7,6 +7,8 @@ type Props = {
 }
 
 export default function UserProfile({ event }: Props) {
+  console.log(event);
+
   return (
     <div className="ec__profile">
       <div className="ec__profile-inner-container">

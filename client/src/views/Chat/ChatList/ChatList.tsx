@@ -29,6 +29,7 @@ function ChatList() {
   const handleClick = () => {
     console.log('onClikc');
   };
+  console.log(events);
 
   return (
     <div className="s">
