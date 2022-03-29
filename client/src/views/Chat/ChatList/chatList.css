@@ -1,13 +1,16 @@
-.cl_itemContainer {
-  padding-top: 1rem;
-  border-top: 1px
-    solid;
+.cl_itemContainer
+  > * {
+  border-bottom: 1px
+    solid
+    rgb(
+      217,
+      217,
+      217
+    );
 }
 
 .cl_itemContainer
-  > * {
+  > *
+  + * {
   padding-top: 1rem;
-  border-bottom: 1px
-    solid
-    black;
 }
