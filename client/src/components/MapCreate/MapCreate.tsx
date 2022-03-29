@@ -109,13 +109,13 @@ function MapCreate({ setLocation } : {setLocation:Function}) {
       >
 
         <Popup
+          closeButton={false}
           ref={(r) => {
             popupRef.current = r;
             setRefReady(true);
           }}
         >
-
-          {addressStr}
+          <p className="mc__popup">{addressStr}</p>
         </Popup>
       </Marker>
       ) }

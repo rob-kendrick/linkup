@@ -1,5 +1,6 @@
 // @ts-nocheck
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {
@@ -7,39 +8,14 @@ import {
 } from 'react-leaflet';
 import type { LuEvent } from '../../utilities/types/Event';
 import './MapLarge.css';
-import { Link } from 'react-router-dom';
 
 interface eventProps {
   filteredEvents : LuEvent[];
 }
 
 export default function MapLarge({ filteredEvents } : eventProps) {
-  // const [events, setEvents] = useState(eventList);
-
   const [position, setPosition] = useState<number[]>([52.520008, 13.404954]);
   const [eventArray, setEventArray] = useState(filteredEvents);
-
-  const [myMap, setMyMap] = useState();
-  const [refReady, setRefReady] = useState(false);
-  const popupRef = useRef();
-
-  useEffect(() => {
-    if (refReady && myMap) {
-      popupRef.current.openOn(myMap);
-    }
-  }, [refReady, myMap]);
-
-  useEffect(() => {
-  }, [eventArray]);
-
-  // useEffect(() => {
-  //   const userPosition = [];
-  //   navigator.geolocation.getCurrentPosition((location) => {
-  //     userPosition.push(location.coords.latitude);
-  //     userPosition.push(location.coords.longitude);
-  //     setPosition(userPosition);
-  //   });
-  // }, []);
 
   const myIcon = L.divIcon({
     iconSize: [35, 35],
@@ -62,20 +38,9 @@ export default function MapLarge({ filteredEvents } : eventProps) {
         key={filteredEvent.id_event}
         position={eventPosition}
         icon={myIcon}
-        whenCreated={(map) => {
-          setMyMap(map);
-          map.on('click', dropPin);
-        }}
-
       >
         <Link to={`/events/${filteredEvent.id_event}`}>
-          <Popup
-            closeButton={false}
-            ref={(r) => {
-              popupRef.current = r;
-              setRefReady(true);
-            }}
-          >
+          <Popup closeButton={false}>
             <div className="ml__popup-container">
               <div className="ml__popup-picture">
                 <img
@@ -102,9 +67,6 @@ export default function MapLarge({ filteredEvents } : eventProps) {
       center={position}
       zoom={13}
       scrollWheelZoom={false}
-      whenCreated={(map) => {
-        setMyMap(map);
-      }}
     >
       <TileLayer
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
