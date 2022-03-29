@@ -14,7 +14,8 @@
   display: flex;
   flex-direction: column;
   background-color: rgb(255, 255, 255);
-  flex-grow: 1
+  flex-grow: 1;
+  overflow: scroll
 }
 
 .ul_submitter {
