@@ -51,8 +51,6 @@ const resetDb = async (req:Request, res:Response) => {
 
     const results:any = {};
 
-    // const createAllUsers = await prisma.user.createMany({ data: mockUsers });
-    // results.createUsers = createAllUsers;
     results.createUsers = { count: 0 };
     for (const newUser of mockUsers) {
       const salt = await bcrypt.genSalt(SALT_NUMBER);
