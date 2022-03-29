@@ -8,7 +8,7 @@ import { LuEvent } from '../../../utilities/types/Event';
 import eventApi from '../../../utilities/api/event.api';
 import './CreateEvent.css';
 import UserList from '../../../components/SelectUsers/UserList/UserList';
-import MapSmall from '../../../components/MapSmall/MapSmall';
+import MapCreate from '../../../components/MapCreate/MapCreate';
 
 // TODO: delete mockAddress when retrieve lat, lng and adress from map
 const mockAddress = {
@@ -31,6 +31,12 @@ function CreateEvent() {
   useEffect(() => {
     console.log(participantsToAdd, 'CREATE EVENT STATE');
   }, [participantsToAdd]);
+
+  const [address, setAddress] = useState({});
+
+  const findEventAddress = (inputAddress : any) => {
+    console.log(inputAddress);
+  };
 
   const {
     register,
@@ -122,8 +128,12 @@ function CreateEvent() {
                 },
               })}
             />
-            {/* <MapSmall /> */}
-            {/* Rendering text based on participants added */}
+
+            <div className="ce__map-container">
+              <MapCreate findEventAddress={findEventAddress} />
+              {/* <MapSmall /> */}
+              {/* Rendering text based on participants added */}
+            </div>
             <div>
               {participantsToAdd.length > 0
               && (
@@ -166,6 +176,7 @@ function CreateEvent() {
         )}
 
       </div>
+
     </div>
   );
 }
