@@ -1,0 +1,34 @@
+.cG {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.cG__mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 89%;
+  background-color: rgb(
+    242,
+    242,
+    242
+  );
+}
+.cG__chatMsgsContainer {
+  height: 100%;
+  width: 100%;
+}
+
+.cG__inputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  margin-top: auto;
+  background-color: white;
+  height: 11%;
+  width: 100%;
+}

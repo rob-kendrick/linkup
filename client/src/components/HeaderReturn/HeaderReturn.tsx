@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as SvgArrow } from '../../assets/IoIosArrowBack.svg';
 import { ReactComponent as IphoneStatusBar } from '../../assets/IphoneStatusBar.svg';
+import { LuEvent } from '../../utilities/types/Event';
+import ProfilePicture from '../ProfilePicture/ProfilePicture';
 import './headerReturn.css';
 
 type props = {
@@ -11,10 +13,11 @@ type props = {
   text?: string;
   passedResetFunction?: (args: boolean) => boolean;
   passedReturnFunction?: (args: void) => any
+  luEvent?: LuEvent
 };
 
 function HeaderReturn({
-  resetAvailability, text, passedResetFunction, passedReturnFunction,
+  resetAvailability, text, passedResetFunction, passedReturnFunction, luEvent,
 }: props) {
   const navigate = useNavigate();
 
@@ -27,13 +30,14 @@ function HeaderReturn({
   return (
     <div className="hr">
       <div className="hr__statusBar">
-        <IphoneStatusBar style={{ width: '100%', height: '2rem' }} />
+        {/* <IphoneStatusBar style={{ width: '100%', height: '2rem' }} /> */}
       </div>
       <div className="hr__main">
         <div className="hr__container">
           <button className="hr__btn" type="button" onClick={returnFunction}>
             <SvgArrow />
           </button>
+          {luEvent ? <div style={{ marginRight: '1rem' }}><ProfilePicture userPicture={luEvent.creator.profile_picture} size={20} alt={luEvent.description} /></div> : null}
           <div className="hr__txt">{text}</div>
         </div>
         <div className="hr__option" data-testid="hr__option">

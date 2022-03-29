@@ -15,7 +15,7 @@ function ParticipantList({ currentEvent }: Props) {
           <ProfilePicture
             userPicture={participant.profile_picture}
             alt={participant.first_name}
-            size="1.8rem"
+            size={30}
           />
           <p className="pl__participantName">{participant.first_name}</p>
         </div>

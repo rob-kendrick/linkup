@@ -14,3 +14,9 @@
 .ce__wrapper_hidden {
   display: none;
 }
+
+.ce__map-container {
+  height: 400px;
+  width: 100%;
+  background-color:aquamarine;
+}

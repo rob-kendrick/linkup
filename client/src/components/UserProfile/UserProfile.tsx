@@ -14,7 +14,7 @@ export default function UserProfile({ event }: Props) {
           <ProfilePicture
             userPicture={event.creator.profile_picture}
             alt={event.creator.first_name}
-            size="52px"
+            size={52}
           />
         </div>
         <div className="ec__header-info">
