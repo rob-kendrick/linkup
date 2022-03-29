@@ -1,5 +1,6 @@
 // @ts-nocheck
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {
@@ -13,22 +14,8 @@ interface eventProps {
 }
 
 export default function MapLarge({ filteredEvents } : eventProps) {
-  // const [events, setEvents] = useState(eventList);
-
   const [position, setPosition] = useState<number[]>([52.520008, 13.404954]);
   const [eventArray, setEventArray] = useState(filteredEvents);
-
-  useEffect(() => {
-  }, [eventArray]);
-
-  // useEffect(() => {
-  //   const userPosition = [];
-  //   navigator.geolocation.getCurrentPosition((location) => {
-  //     userPosition.push(location.coords.latitude);
-  //     userPosition.push(location.coords.longitude);
-  //     setPosition(userPosition);
-  //   });
-  // }, []);
 
   const myIcon = L.divIcon({
     iconSize: [35, 35],
@@ -52,17 +39,23 @@ export default function MapLarge({ filteredEvents } : eventProps) {
         position={eventPosition}
         icon={myIcon}
       >
-        <Popup className="Popup">
-          <div id="ml__popup-container">
-            <div id="ml__popup-picture">
-              <img src={filteredEvent.creator.profile_picture} alt={filteredEvent.creator.username} style={{ width: '48px', borderRadius: '50%' }} />
+        <Link to={`/events/${filteredEvent.id_event}`}>
+          <Popup closeButton={false}>
+            <div className="ml__popup-container">
+              <div className="ml__popup-picture">
+                <img
+                  src={filteredEvent.creator.profile_picture}
+                  alt={filteredEvent.creator.username}
+                  style={{ width: '48px', borderRadius: '50%' }}
+                />
+              </div>
+              <div className="ml__popup-event-details">
+                <h3 className="ml__popup-event-title">{filteredEvent.title}</h3>
+                <h4 className="ml__popup-event-user">{filteredEvent.creator.first_name}</h4>
+              </div>
             </div>
-            <div id="ml__popup-event-details">
-              <h3 id="ml__popup-event-title">{filteredEvent.title}</h3>
-              <h4 id="ml__popup-event-user">{filteredEvent.creator.first_name}</h4>
-            </div>
-          </div>
-        </Popup>
+          </Popup>
+        </Link>
       </Marker>
     );
   });

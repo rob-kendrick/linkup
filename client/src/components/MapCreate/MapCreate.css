@@ -1,4 +1,10 @@
 .mc__container{
   height: 100%;
-  width: 100%; 
+  width: 100%;
+}
+
+.mc__popup {
+  font-size: 1.3em;
+  font-weight: 500;
+  padding: 0 20px;
 }
