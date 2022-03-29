@@ -38,7 +38,7 @@ function EventDetails() {
     );
 
     return (
-      <>
+      <article>
         <HeaderReturn text="Activity Details" />
         <div className="ed">
           <div className="ed__header">
@@ -78,7 +78,7 @@ function EventDetails() {
               </div>
             )}
         </div>
-      </>
+      </article>
     );
   }
   return <div>Loading</div>;
