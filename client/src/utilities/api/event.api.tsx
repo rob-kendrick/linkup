@@ -14,10 +14,7 @@ const eventApi = {
       }
       throw Error('Server error');
     })
-    .catch((e) => {
-      console.log(e);
-      return { error: true, message: e.message, code: e.code };
-    }),
+    .catch(handleError),
 
   getEventById: (id: number) => fetch(`${baseUrl}/events/${id}`)
     .then((response) => {
