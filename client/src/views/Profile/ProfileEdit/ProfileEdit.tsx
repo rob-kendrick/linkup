@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { InputTextField, InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
 import InputPhoto from '../../../components/Form/InputPhoto/InputPhoto';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 import { User } from '../../../utilities/types/User';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
-import './ProfileEdit.css';
 import userApi from '../../../utilities/api/user.api';
+import authApi from '../../../utilities/api/auth.api';
+import './ProfileEdit.css';
 
 function ProfileEdit() {
   const [errorMessage, setErrorMessage] = useState('');
   const [avatarName, setAvatarName] = useState(String(Math.random()));
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState('');
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -39,8 +43,20 @@ function ProfileEdit() {
       });
   }, [reset]);
 
-  const onSubmit = (data: User) => {
-    console.log(data);
+  const onSubmit = async (formData: User) => {
+    const userData = formData;
+    userData.profile_picture = imageUrl;
+    console.log(userData);
+    const response = await authApi.register(userData);
+    if (response.ok === false) {
+      if (response.status === 400) setErrorMessage('Data validation failed on server');
+      if (response.status === 404) setErrorMessage('404 not found');
+      if (response.status === 409) setErrorMessage('E-Mail already taken');
+      if (response.status === 500) setErrorMessage('500 server error');
+      if (response.status === 503) setErrorMessage('503 service unavailable');
+    } else if (response.data) {
+      navigate('/profile');
+    }
   };
 
   return (
@@ -50,15 +66,12 @@ function ProfileEdit() {
       />
       <div className="pe__container">
         <form onSubmit={handleSubmit(onSubmit)}>
-          {imageUrl
-          && (
           <InputPhoto
             imageUrl={imageUrl}
             setImageUrl={setImageUrl}
             setErrorMessage={setErrorMessage}
             avatarName={avatarName}
           />
-          )}
           <InputTextField
             type="text"
             label="First Name"

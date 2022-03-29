@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Avatar from 'boring-avatars';
 import ProfilePicture from '../../ProfilePicture/ProfilePicture';
 import { ReactComponent as FaPlus } from '../../../assets/FaPlus.svg';
@@ -12,10 +12,6 @@ function InputPhoto({
     setErrorMessage: Function,
     avatarName: string,
   }) {
-  useEffect(() => {
-    console.log('input photo: ', imageUrl);
-  }, []);
-
   const uploadImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const image = event.target.files[0];
