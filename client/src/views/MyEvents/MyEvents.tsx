@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import EventsList from '../../components/EventsList/EventsList';
 import HeaderMain from '../../components/HeaderMain/HeaderMain';
 import MyEventsMenu from './MyEventsMenu/MyEventsMenu';
@@ -12,33 +13,30 @@ import './MyEvents.css';
 // }
 
 function MyEvents() {
-  const userId = localStorage.getItem('id_user');
-
-  const [allEvents, setAllEvents] = useState<any[]>(mockEventsData.data);
+  const events = useSelector(
+    (state: RootState) => state.eventReducer.allEvents,
+  );
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
 
-  useEffect(() => {
-    setFilteredEvents(allEvents);
-    filterHosted();
-  }, []);
+  const userId = Number(localStorage.getItem('id_user'));
 
   const filterHosted = () => {
-    const userHosted = allEvents.filter((event) => {
-      if (userId === event.creator_id) {
-        return event;
-      }
-    });
+    console.log('I am hosting');
+    console.log('events I am hosting', events);
+
+    const userHosted = events.filter((e) => (userId === e.creator_id));
     setFilteredEvents(userHosted);
+    console.log(userHosted, 'User hosted');
   };
 
   const filterAttending = () => {
-    const userAttending = allEvents.filter((event) => {
-      if (userId in event.participants && userId !== event.creator_id) {
-        return event;
-      }
-    });
+    const userAttending = events.filter((event) => (userId in event.participants) && (userId !== event.id_user));
     setFilteredEvents(userAttending);
   };
+
+  useEffect(() => {
+    filterHosted();
+  }, []);
 
   return (
     <div className="mev__main-container">
