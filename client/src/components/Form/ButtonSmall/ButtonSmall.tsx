@@ -30,7 +30,7 @@ function ButtonSmall({ style, type, value } : ButtonProps) {
         && (
         <div className="bs__button bs__button-stroke-container">
           <input
-            className="bs__button bs__button-stroke"
+            className="bs__button bs__button-stroke bs__button-grey"
             type={type}
             value={value}
             form="test"
