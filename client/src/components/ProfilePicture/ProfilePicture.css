@@ -1,0 +1,10 @@
+.pp__container{
+  display: flex;
+  align-items: center;
+  justify-content: center;;
+}
+
+.pp__picture {
+  border-radius: 50%;
+  object-fit: cover;
+}

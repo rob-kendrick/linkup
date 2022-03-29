@@ -47,6 +47,30 @@ const userApi = {
       console.log(e);
       return { error: true, message: e.message, code: e.code };
     }),
+
+  getUserCreatedEvents: (id: number) => fetch(`${baseUrl}/users/${id}/events/created`)
+    .then((response) => {
+      if (response.status < 300) {
+        return response.json();
+      }
+      throw Error('Server error');
+    })
+    .catch((e) => {
+      console.log(e);
+      return { error: true, message: e.message, code: e.code };
+    }),
+
+  getUserParticipatingEvents: (id: number) => fetch(`${baseUrl}/users/${id}/events/participating`)
+    .then((response) => {
+      if (response.status < 300) {
+        return response.json();
+      }
+      throw Error('Server error');
+    })
+    .catch((e) => {
+      console.log(e);
+      return { error: true, message: e.message, code: e.code };
+    }),
 };
 
 export default userApi;
