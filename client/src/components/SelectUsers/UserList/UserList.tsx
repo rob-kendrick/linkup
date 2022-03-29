@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import UserListItem from './UserListItem/UserListItem';
-import userMockData from '../../../utilities/mocks/db-data/users-db-data.json';
 import './UserList.css';
 import HeaderReturn from '../../HeaderReturn/HeaderReturn';
 import ButtonLarge from '../../Form/ButtonLarge/ButtonLarge';
