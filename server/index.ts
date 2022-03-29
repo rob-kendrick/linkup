@@ -21,19 +21,13 @@ const PORT = 4000;
 
 const app = express();
 
-// io.on('connection', (socket:any) => {
-// //   console.log('SOCKET IO!');
-// //   // socket.on('hello', () => {
-// //   //   // ...
-// //   // });
-// //   // socket.emit('user connected');
-// });
-
 interface ServerToClientEvents {
-  basicEmit: (msg: string) => void;
+  basicEmit: (userId: number, eventId: number, msg: string) => void;
 }
 interface ClientToServerEvents {
   emitMsgFromClient: (userId: number, eventId: number, msg: string) => void;
+  joinRoom: (userId: number, eventId: number) => void;
+  leaveRoom: (userId: number, eventId: number) => void;
 }
 
 app.use(cors());
@@ -49,10 +43,20 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer, {
 });
 
 io.on('connection', (socket) => {
-  console.log('SOCKET');
-  socket.emit('basicEmit', 'msg1');
+  socket.on('joinRoom', (userId, eventId) => {
+    console.log('user', userId, 'event', eventId);
+    socket.join(String(eventId));
+  });
   socket.on('emitMsgFromClient', (userId, eventId, msg) => {
     console.log(userId, eventId, msg);
+    // socket.broadcast.emit('basicEmit', msg);
+
+    io.in(String(eventId)).emit('basicEmit', userId, eventId, msg);
+  });
+
+  socket.on('leaveRoom', (userId, eventId) => {
+    console.log('user', userId, 'event', eventId);
+    socket.leave(String(eventId));
   });
 });
 
