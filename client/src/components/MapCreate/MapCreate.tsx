@@ -8,13 +8,13 @@ import {
 import './MapCreate.css';
 import * as ELG from 'esri-leaflet-geocoder';
 
-interface FindAdress {
-  findEventAddress: any;
-}
+// interface FindAdress {
+//   findEventAddress: any;
+// }
 
 interface Location {
   lat: number,
-  lat: number,
+  lng: number,
   street: string,
   postcode: string,
   city: string,
@@ -30,7 +30,8 @@ const formatAddress:Function<Location> = (input) => ({
   country: input.address.CountryCode,
 });
 
-function MapCreate({ findEventAddress } : FindAdress) {
+function MapCreate({ setLocation } : any) {
+  // TODO: get current location of client device and fallback location
   const [lat, setLat] = useState(52.520008);
   const [lng, setLng] = useState(13.404954);
 
@@ -69,7 +70,7 @@ function MapCreate({ findEventAddress } : FindAdress) {
         console.error(error);
       } else {
         setAddressObj(formatAddress(result));
-        findEventAddress(formatAddress(result));
+        setLocation(formatAddress(result));
       }
     });
   };
@@ -87,7 +88,6 @@ function MapCreate({ findEventAddress } : FindAdress) {
     </svg>`,
     className: 'marker-pin',
   });
-  // myIcon.openPopup();
   return (
 
     <MapContainer

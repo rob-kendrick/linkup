@@ -10,29 +10,19 @@ import './CreateEvent.css';
 import UserList from '../../../components/SelectUsers/UserList/UserList';
 import MapCreate from '../../../components/MapCreate/MapCreate';
 
-// TODO: delete mockAddress when retrieve lat, lng and adress from map
-const mockAddress = {
-  lat: 52.520909,
-  lng: 13.46896,
-  street_number: '16',
-  street_name: 'Richard-Ermisch-Straße',
-  postcode: '10247',
-  city: 'Berlin',
-  country: 'Deutschland',
-};
 
 function CreateEvent() {
   const navigate = useNavigate();
   const [notification, setNotification] = useState('');
   const [showParticipants, setShowParticipants] = useState(false);
   const [participantsToAdd, setParticipantsToAdd] = useState([]);
+  const [location, setLocation] = useState({});
 
   // keeping track of participants to add for dev purposes
   useEffect(() => {
     console.log(participantsToAdd, 'CREATE EVENT STATE');
   }, [participantsToAdd]);
 
-  const [address, setAddress] = useState({});
 
   const findEventAddress = (inputAddress : any) => {
     console.log(inputAddress);
@@ -58,12 +48,13 @@ function CreateEvent() {
 
   const onSubmit = async (formData: LuEvent) => {
     const user = Number(localStorage.getItem('id_user'));
+    const fullEvent = formData;
     if (user) {
       try {
         // creating the request body
-        const fullEvent = Object.assign(formData, mockAddress);
         fullEvent.participants_to_add = participantsToAdd;
         fullEvent.creator_id = user;
+        console.log(fullEvent);
         // Posting the event
         const response = await eventApi.postEvent(fullEvent);
         // If event creation is sucess, redirect to 'my events'
@@ -129,7 +120,7 @@ function CreateEvent() {
               })}
             />
             <div className="ce__map-container">
-              <MapCreate findEventAddress={findEventAddress} />
+              <MapCreate setLocation={setLocation} />
               {/* <MapSmall /> */}
               {/* Rendering text based on participants added */}
             </div>
