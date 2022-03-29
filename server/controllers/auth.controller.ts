@@ -23,7 +23,6 @@ const validateUserInfo = (user: User) => {
     || !user.password
     || !user.first_name
     || !user.last_name
-    || !user.profile_picture
     || !user.bio
   ) return false;
   return true;
