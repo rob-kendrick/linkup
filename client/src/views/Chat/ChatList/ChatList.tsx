@@ -1,22 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import ChatListItem from './ChatListItem.tsx/ChatListItem';
-import eventMockData from '../../../utilities/mocks/db-data/events-db-data.json';
 import HeaderMain from '../../../components/HeaderMain/HeaderMain';
-
-const eventData: any[] = eventMockData.data;
+import UserProfile from '../../../components/UserProfile/UserProfile';
+import { RootState } from '../../../utilities/redux/store';
+import './chatList.css';
+import userApi from '../../../utilities/api/user.api';
+import { User } from '../../../utilities/types/User';
+import { LuEvent } from '../../../utilities/types/Event';
 
 function ChatList() {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [events, setEvents] = useState<LuEvent[] | null>(null);
+
+  useEffect(() => {
+    const userId = Number(localStorage.getItem('id_user'));
+    userApi.getUserCreatedEvents(userId)
+      .then((response) => setEvents(response.data))
+      .catch();
+    userApi.getUserParticipatingEvents(userId)
+      .then((response) => setEvents(response.data))
+      .catch();
+    userApi.getUserById(userId)
+      .then((response) => setCurrentUser(response.data))
+      .catch();
+  }, []);
+
+  const handleClick = () => {
+    console.log('onClikc');
+  };
+
   return (
-    <div className="event-list-delete">
+    <div className="s">
       <HeaderMain
         title="Chat"
       />
-      {eventData.map((event) => (
-        <ChatListItem
-          key={event.id}
-          event={event}
-        />
-      ))}
+      <div className="cl_itemContainer">
+        {events && events!.map((event) => (
+          <div role="button" onClick={() => handleClick()} onKeyDown={(e) => (e.key === 'Enter' ? handleClick() : null)} tabIndex={0}>
+            <UserProfile
+              key={event.id_event}
+              event={event}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

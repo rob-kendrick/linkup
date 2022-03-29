@@ -27,7 +27,7 @@ function HeaderReturn({
   return (
     <div className="hr">
       <div className="hr__statusBar">
-        <IphoneStatusBar style={{ width: '100%', height: '2rem' }} />
+        {/* <IphoneStatusBar style={{ width: '100%', height: '2rem' }} /> */}
       </div>
       <div className="hr__main">
         <div className="hr__container">

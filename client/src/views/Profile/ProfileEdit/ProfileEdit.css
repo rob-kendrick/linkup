@@ -4,3 +4,8 @@
   flex-direction: column;
   align-items: center;
 }
+
+.pe__container text {
+  color: var(--color6-grad-mean);
+  font-size: small;
+}

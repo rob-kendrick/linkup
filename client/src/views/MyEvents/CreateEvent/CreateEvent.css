@@ -17,6 +17,6 @@
 
 .ce__map-container {
   height: 400px;
-  width: 100vw;
+  width: 100%;
   background-color:aquamarine;
 }

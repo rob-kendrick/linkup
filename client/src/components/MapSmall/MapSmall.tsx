@@ -7,7 +7,7 @@ import {
 import './MapSmall.css';
 
 interface EventLocation {
-  lat:number
+  lat: number
   lng: number
 }
 

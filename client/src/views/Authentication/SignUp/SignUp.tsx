@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { InputTextField, InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
 import InputPhoto from '../../../components/Form/InputPhoto/InputPhoto';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
-import './SignUp.css';
 import { User } from '../../../utilities/types/User';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import authApi from '../../../utilities/api/auth.api';
+import './SignUp.css';
 
 function SignUp() {
   const [errorMessage, setErrorMessage] = useState('');
+  const [avatarName, setAvatarName] = useState(String(Math.random()));
+  const [imageUrl, setImageUrl] = useState('');
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(imageUrl);
+  }, [imageUrl]);
 
   const {
     register,
@@ -24,15 +30,18 @@ function SignUp() {
       password: '',
       first_name: '',
       last_name: '',
-      profile_picture: 'none',
+      profile_picture: '',
       bio: '',
     },
   });
 
-  const onSubmit = async (formData: User) => {
-    const response = await authApi.register(formData);
+  async function onSubmit(formData: User) {
+    const userData = formData;
+    userData.profile_picture = imageUrl;
+    console.log(userData);
+    const response = await authApi.register(userData);
     if (response.ok === false) {
-      if (response.status === 400) setErrorMessage('Wrong e-mail or password');
+      if (response.status === 400) setErrorMessage('Data validation failed on server');
       if (response.status === 404) setErrorMessage('404 not found');
       if (response.status === 409) setErrorMessage('E-Mail already taken');
       if (response.status === 500) setErrorMessage('500 server error');
@@ -40,7 +49,7 @@ function SignUp() {
     } else if (response.data) {
       navigate('/login');
     }
-  };
+  }
 
   return (
     <div>
@@ -51,15 +60,21 @@ function SignUp() {
         <form
           onSubmit={handleSubmit(onSubmit)}
         >
-          <InputPhoto />
+          <InputPhoto
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+            setErrorMessage={setErrorMessage}
+            avatarName={avatarName}
+          />
           <InputTextField
             type="text"
             label="First Name"
             errorMessage={errors.first_name?.message}
             {...register('first_name', {
               required: 'This field is required',
-              onChange: () => {
+              onChange: (e) => {
                 setErrorMessage('');
+                setAvatarName(e.target.value);
               },
             })}
           />

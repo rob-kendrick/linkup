@@ -1,4 +1,25 @@
 .user-list-container {
-  border: 1px solid rgb(0, 0, 0);
   background-color: white;
+
+}
+
+.ul_submitter {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.ul_submitter:hover {
+  cursor: pointer;
+  width: fit-content;
+}
+
+.ul-search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ul-result-container {
+  margin-top: 1vh;
 }
