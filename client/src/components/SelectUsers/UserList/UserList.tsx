@@ -89,8 +89,8 @@ function UserList({ toggleParticipants, setParticipantsToAdd }: props) {
                 index={index}
                 key={user.id_user}
                 user={user}
-                userStagingArr={userStagingArr}
-                setUserStagingArr={setUserStagingArr}
+                stagingArray={userStagingArr}
+                setStagingArray={setUserStagingArr}
                 array={array}
               />
             );
