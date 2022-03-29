@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { InputTextField, InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
 import InputPhoto from '../../../components/Form/InputPhoto/InputPhoto';
@@ -6,10 +6,17 @@ import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 import { User } from '../../../utilities/types/User';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
 import './ProfileEdit.css';
+import userApi from '../../../utilities/api/user.api';
 
 function ProfileEdit() {
+  const [errorMessage, setErrorMessage] = useState('');
+  const [avatarName, setAvatarName] = useState(String(Math.random()));
+  const [user, setUser] = useState<User | null>(null);
+  const [imageUrl, setImageUrl] = useState('');
+
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<User>({
@@ -23,6 +30,19 @@ function ProfileEdit() {
     },
   });
 
+  useEffect(() => {
+    const currentUserId = Number(localStorage.getItem('id_user'));
+    userApi.getUserById(currentUserId)
+      .then((user) => {
+        console.log(user);
+        setUser(user.data);
+        reset(user.data);
+        setAvatarName(user.data.first_name);
+        setImageUrl(user.data.profile_picture);
+      });
+  }, [reset]);
+
+
   const onSubmit = (data: User) => {
     console.log(data);
   };
@@ -34,12 +54,23 @@ function ProfileEdit() {
       />
       <div className="pe__container">
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* <InputPhoto /> */}
+          <InputPhoto
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+            setErrorMessage={setErrorMessage}
+            avatarName={avatarName}
+          />
           <InputTextField
             type="text"
             label="First Name"
             errorMessage={errors.first_name?.message}
-            {...register('first_name', { required: 'This field is required' })}
+            {...register('first_name', {
+              required: 'This field is required',
+              onChange: (e) => {
+                setErrorMessage('');
+                setAvatarName(e.target.value);
+              },
+            })}
           />
           <InputTextField
             type="text"
