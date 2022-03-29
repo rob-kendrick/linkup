@@ -1,3 +1,5 @@
+// import performRequest from '../helper/apiRequest';
+import handleError from '../helper/apiErrorHandling';
 import type { LuEvent } from '../types/Event';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
@@ -12,10 +14,7 @@ const eventApi = {
       }
       throw Error('Server error');
     })
-    .catch((e) => {
-      console.log(e);
-      return { error: true, message: e.message, code: e.code };
-    }),
+    .catch(handleError),
 
   getEventById: (id: number) => fetch(`${baseUrl}/events/${id}`)
     .then((response) => {
@@ -25,10 +24,7 @@ const eventApi = {
       }
       throw Error('Server error');
     })
-    .catch((e) => {
-      console.log(e);
-      return { error: true, message: e.message, code: e.code };
-    }),
+    .catch(handleError),
 
   postEvent: (event: LuEvent) => fetch(`${baseUrl}/events`, {
     method: 'POST',
@@ -43,10 +39,7 @@ const eventApi = {
       }
       throw Error('Server error');
     })
-    .catch((e) => {
-      console.log(e);
-      return { error: true, message: e.message, code: e.code };
-    }),
+    .catch(handleError),
 
   editEvent: (event: LuEvent) => fetch(`${baseUrl}/events/${event.id_event}`, {
     method: 'PATCH',
@@ -63,10 +56,7 @@ const eventApi = {
       }
       throw Error('Server error');
     })
-    .catch((e) => {
-      console.log(e);
-      return { error: true, message: e.message, code: e.code };
-    }),
+    .catch(handleError),
 
   deleteEvent: (id: number) => fetch(`${baseUrl}/events/${id}`, {
     method: 'DELETE',
@@ -80,10 +70,7 @@ const eventApi = {
       }
       throw Error('Server error');
     })
-    .catch((e) => {
-      console.log(e);
-      return { error: true, message: e.message, code: e.code };
-    }),
+    .catch(handleError),
 
   joinEvent: (eventId: number, userId: number) => fetch(`${baseUrl}/events/join/${eventId}/users/${userId}`, {
     method: 'PATCH',
@@ -98,10 +85,7 @@ const eventApi = {
       }
       throw Error('Server error');
     })
-    .catch((e) => {
-      console.log(e);
-      return { error: true, message: e.message, code: e.code };
-    }),
+    .catch(handleError),
 
   leaveEvent: (eventId: number, userId: number) => fetch(`${baseUrl}/events/leave/${eventId}/users/${userId}`, {
     method: 'PATCH',
@@ -115,10 +99,7 @@ const eventApi = {
       }
       throw Error('Server error');
     })
-    .catch((e) => {
-      console.log(e);
-      return { error: true, message: e.message, code: e.code };
-    }),
+    .catch(handleError),
 };
 
 export default eventApi;

@@ -11,7 +11,7 @@ import MapSmall from '../MapSmall/MapSmall';
 import TagList from '../TagList/TagList';
 import ParticipantList from './ParticipantList/ParticipantList';
 import PopUp from '../PopUp/PopUp';
-import useDate from '../../utilities/hooks/useDate';
+import useDate from '../../utilities/helper/useDate';
 import EventField from '../EventField/EventField';
 import './eventDetails.css';
 import ButtonLarge from '../Form/ButtonLarge/ButtonLarge';
@@ -41,7 +41,7 @@ function EventDetails() {
     );
 
     return (
-      <>
+      <article style={{ height: '100%' }}>
         <HeaderReturn text="Activity Details" />
         <div className="ed">
           <div className="ed__header">
@@ -65,7 +65,7 @@ function EventDetails() {
           {participation
             ? (
               <div className="ed__btnContainer">
-                <div role="button" onClick={() => navigate(`/events/${params.eventid}/chat`)}>
+                <div role="button" onClick={() => navigate(`/events/${params.eventid}/chat`, { state: { currentEvent } })}>
                   <ButtonLarge style="fill" type="submit" value="Chat" />
                 </div>
                 <div role="button" onClick={() => setShowPopup(true)}>
@@ -83,7 +83,7 @@ function EventDetails() {
               </div>
             )}
         </div>
-      </>
+      </article>
     );
   }
   return <div>Loading</div>;

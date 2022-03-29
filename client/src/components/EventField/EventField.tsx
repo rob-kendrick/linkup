@@ -3,7 +3,7 @@ import { LuEvent } from '../../utilities/types/Event';
 import locationIcon from '../../assets/IoLocationSharp.svg';
 import dateSvg from '../../assets/BiTimeFive.svg';
 import Icon from '../Icon/Icon';
-import useDate from '../../utilities/hooks/useDate';
+import useDate from '../../utilities/helper/useDate';
 import './eventField.css';
 import ProfilePicture from '../ProfilePicture/ProfilePicture';
 
