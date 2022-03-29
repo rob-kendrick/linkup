@@ -30,8 +30,8 @@ const userApi = {
       return { error: true, message: e.message, code: e.code };
     }),
 
-  postUser: (user: User) => fetch(`${baseUrl}/users/`, {
-    method: 'POST',
+  editUserData: (userid: number, user: User) => fetch(`${baseUrl}/users/${userid}`, {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -41,11 +41,31 @@ const userApi = {
       if (response.status < 300) {
         return response.json();
       }
-      throw Error('Server error');
+      return response;
     })
     .catch((e) => {
-      console.log(e);
-      return { error: true, message: e.message, code: e.code };
+      e.ok = false;
+      e.status = 503;
+      return (e);
+    }),
+
+  editUserPassword: (userid: number, passwordData: {password_old:string, password_new:string}) => fetch(`${baseUrl}/users/${userid}/password`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(passwordData),
+  })
+    .then((response) => {
+      if (response.status < 300) {
+        return response.json();
+      }
+      return response;
+    })
+    .catch((e) => {
+      e.ok = false;
+      e.status = 503;
+      return (e);
     }),
 
   getUserCreatedEvents: (id: number) => fetch(`${baseUrl}/users/${id}/events/created`)
