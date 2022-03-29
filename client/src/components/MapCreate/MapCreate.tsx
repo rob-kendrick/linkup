@@ -8,10 +8,6 @@ import {
 import './MapCreate.css';
 import * as ELG from 'esri-leaflet-geocoder';
 
-// interface FindAdress {
-//   findEventAddress: any;
-// }
-
 interface Location {
   lat: number,
   lng: number,
@@ -30,7 +26,7 @@ const formatAddress:Function<Location> = (input) => ({
   country: input.address.CountryCode,
 });
 
-function MapCreate({ setLocation } : any) {
+function MapCreate({ setLocation } : {setLocation:Function}) {
   // TODO: get current location of client device and fallback location
   const [lat, setLat] = useState(52.520008);
   const [lng, setLng] = useState(13.404954);
@@ -52,10 +48,12 @@ function MapCreate({ setLocation } : any) {
   }, [markerLat, markerLng, refReady, myMap]);
 
   useEffect(() => {
-    if (addressObj) setAddressStr(`${addressObj.street}, ${addressObj.city} ${addressObj.postcode}`);
+    if (addressObj) {
+      setAddressStr(`${addressObj.street}, ${addressObj.city} ${addressObj.postcode}`);
+    }
   }, [addressObj]);
 
-  const handleAddLocation = async (e : MouseEvent) => {
+  const dropPin = async (e : MouseEvent) => {
     const newLat = e.latlng.lat;
     const newLng = e.latlng.lng;
     setMarkerLat(newLat);
@@ -98,7 +96,7 @@ function MapCreate({ setLocation } : any) {
       scrollWheelZoom={false}
       whenCreated={(map) => {
         setMyMap(map);
-        map.on('click', handleAddLocation);
+        map.on('click', dropPin);
       }}
     >
       <TileLayer

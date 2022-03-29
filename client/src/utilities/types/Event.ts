@@ -15,8 +15,7 @@ export interface LuEvent {
   date_updated?:string
   lat: number
   lng: number
-  street_number: string
-  street_name: string
+  street: string,
   postcode: string
   city: string
   country : string

@@ -22,9 +22,7 @@ function EventField({ text, currentEvent }: Props) {
         <div className="puf__txtContainer">
           <p className="puf__p">{text}</p>
           <h4 className="puf__h4">
-            {currentEvent.street_name}
-            {' '}
-            {currentEvent.street_number}
+            {currentEvent.street}
             ,
             {' '}
             {currentEvent.postcode}
