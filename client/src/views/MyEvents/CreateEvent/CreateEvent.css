@@ -10,3 +10,7 @@
   color: var(--color6-grad-mean);
   font-size: small;
 }
+
+.ce__wrapper_hidden {
+  display: none;
+}

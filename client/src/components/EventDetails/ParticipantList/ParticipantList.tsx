@@ -11,11 +11,13 @@ function ParticipantList({ currentEvent }: Props) {
   return (
     <div className="pl">
       {currentEvent.participants.map((participant) => (
-        <div className="pl__userContainer">
-          {/* <ProfilePicture /> */}
-          {/* Also pass userName={event.creator.first_name} to ProfilePicture component for Avatar image! */}
-          <img style={{ width: '35px', height: '35px' }} src={participant.profile_picture} alt="userPhoto" />
-          <p>{participant.first_name}</p>
+        <div key={participant.id_user} className="pl__participantsContainer">
+          <ProfilePicture
+            userPicture={participant.profile_picture}
+            alt={participant.first_name}
+            size={30}
+          />
+          <p className="pl__participantName">{participant.first_name}</p>
         </div>
       ))}
     </div>

@@ -26,9 +26,7 @@ import Login from './views/Authentication/Login/Login';
 import StartPage from './views/Authentication/StartPage/StartPage';
 import eventApi from './utilities/api/event.api';
 import eventActions from './utilities/redux/actions/event.actions';
-import userApi from './utilities/api/user.api';
 import LandingPage from './views/Authentication/LandingPage/LandingPage';
-import userActions from './utilities/redux/actions/user.actions';
 import ProtectedRoute from './views/Authentication/ProtectedRoute';
 import PublicRoute from './views/Authentication/PublicRoute';
 import Logout from './views/Authentication/Logout';
@@ -46,23 +44,20 @@ function App() {
     }).catch(() => setFetchStatus('error'));
   }, []);
 
-  // TEMPORARY FUNCTION TO PROVIDE GLOBALLY ACCESSIBLE MOCK USER
-  useEffect(() => {
-    setFetchStatus('loading');
-    userApi.getUserById(11).then((response) => {
-      dispatch(userActions.getUserByIdAction(response.data));
-      setFetchStatus('success');
-    }).catch(() => setFetchStatus('error'));
-  }, []);
-  // END
-
   if (fetchStatus === 'idle' || fetchStatus === 'loading') {
-    return <div> Loading </div>;
+    return (
+      <div>
+        {' '}
+        Loading
+        {' '}
+        {console.log('loading')}
+        {' '}
+      </div>
+    );
   }
   if (fetchStatus === 'error') {
     return <div> Error </div>;
   }
-
   return (
     <div className="app-container">
       <div className="routes-container">

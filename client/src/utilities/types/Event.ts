@@ -9,6 +9,7 @@ export interface LuEvent {
   min_participants?: number | null
   max_participants?: number | null
   participants: UserBasicData[]
+  participants_to_add?: number[]
   date: string
   date_created?:string
   date_updated?:string

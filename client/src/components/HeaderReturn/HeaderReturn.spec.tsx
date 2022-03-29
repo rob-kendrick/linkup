@@ -22,7 +22,7 @@ describe('HeaderReturn component', () => {
   it('renders with the reset button when resetAvailability is set to true and the callback is provided', async () => {
     const { getByTestId } = render(
       <BrowserRouter>
-        <HeaderReturn resetAvailability text="Activity details" passedFunction={() => true} />
+        <HeaderReturn resetAvailability text="Activity details" passedResetFunction={() => true} />
       </BrowserRouter>,
     );
     const parent = getByTestId('hr__option');
