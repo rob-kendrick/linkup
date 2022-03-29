@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {
@@ -7,6 +7,7 @@ import {
 } from 'react-leaflet';
 import type { LuEvent } from '../../utilities/types/Event';
 import './MapLarge.css';
+import { Link } from 'react-router-dom';
 
 interface eventProps {
   filteredEvents : LuEvent[];
@@ -17,6 +18,16 @@ export default function MapLarge({ filteredEvents } : eventProps) {
 
   const [position, setPosition] = useState<number[]>([52.520008, 13.404954]);
   const [eventArray, setEventArray] = useState(filteredEvents);
+
+  const [myMap, setMyMap] = useState();
+  const [refReady, setRefReady] = useState(false);
+  const popupRef = useRef();
+
+  useEffect(() => {
+    if (refReady && myMap) {
+      popupRef.current.openOn(myMap);
+    }
+  }, [refReady, myMap]);
 
   useEffect(() => {
   }, [eventArray]);
@@ -51,18 +62,34 @@ export default function MapLarge({ filteredEvents } : eventProps) {
         key={filteredEvent.id_event}
         position={eventPosition}
         icon={myIcon}
+        whenCreated={(map) => {
+          setMyMap(map);
+          map.on('click', dropPin);
+        }}
+
       >
-        <Popup className="Popup">
-          <div id="ml__popup-container">
-            <div id="ml__popup-picture">
-              <img src={filteredEvent.creator.profile_picture} alt={filteredEvent.creator.username} style={{ width: '48px', borderRadius: '50%' }} />
+        <Link to={`/events/${filteredEvent.id_event}`}>
+          <Popup
+            ref={(r) => {
+              popupRef.current = r;
+              setRefReady(true);
+            }}
+          >
+            <div className="ml__popup-container">
+              <div className="ml__popup-picture">
+                <img
+                  src={filteredEvent.creator.profile_picture}
+                  alt={filteredEvent.creator.username}
+                  style={{ width: '48px', borderRadius: '50%' }}
+                />
+              </div>
+              <div className="ml__popup-event-details">
+                <h3 className="ml__popup-event-title">{filteredEvent.title}</h3>
+                <h4 className="ml__popup-event-user">{filteredEvent.creator.first_name}</h4>
+              </div>
             </div>
-            <div id="ml__popup-event-details">
-              <h3 id="ml__popup-event-title">{filteredEvent.title}</h3>
-              <h4 id="ml__popup-event-user">{filteredEvent.creator.first_name}</h4>
-            </div>
-          </div>
-        </Popup>
+          </Popup>
+        </Link>
       </Marker>
     );
   });
@@ -74,6 +101,9 @@ export default function MapLarge({ filteredEvents } : eventProps) {
       center={position}
       zoom={13}
       scrollWheelZoom={false}
+      whenCreated={(map) => {
+        setMyMap(map);
+      }}
     >
       <TileLayer
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
