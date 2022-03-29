@@ -13,7 +13,9 @@ import { LuEvent } from '../../../utilities/types/Event';
 function ChatList() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [events, setEvents] = useState<LuEvent[] | null>(null);
+
   const navigate = useNavigate();
+
   useEffect(() => {
     const userId = Number(localStorage.getItem('id_user'));
     userApi.getUserCreatedEvents(userId)
@@ -27,8 +29,10 @@ function ChatList() {
       .catch();
   }, []);
 
-  const handleClick = (eventEl: LuEvent) => {
-    navigate(`/events/${eventEl.id_event}/chat`);
+  const handleClick = (luEvent: LuEvent) => {
+    console.log('handleClck', luEvent);
+
+    navigate(`/events/${luEvent.id_event}/chat`, { state: { currentEvent: luEvent } });
   };
 
   return (
@@ -37,11 +41,11 @@ function ChatList() {
         title="Chat"
       />
       <div className="cl_itemContainer">
-        {events && events!.map((eventEl) => (
-          <div role="button" onClick={() => handleClick(eventEl)} onKeyDown={(e) => (e.key === 'Enter' ? handleClick(eventEl) : null)} tabIndex={0}>
+        {events && events!.map((luEvent) => (
+          <div role="button" onClick={() => handleClick(luEvent)} onKeyDown={(e) => (e.key === 'Enter' ? handleClick(luEvent) : null)} tabIndex={0}>
             <UserProfile
-              key={eventEl.id_event}
-              event={eventEl}
+              key={luEvent.id_event}
+              event={luEvent}
             />
           </div>
         ))}

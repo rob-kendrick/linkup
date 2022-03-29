@@ -60,7 +60,7 @@ function EventDetails() {
           {participation
             ? (
               <div className="ed__btnContainer">
-                <div role="button" onClick={() => navigate(`/events/${params.eventid}/chat`)}>
+                <div role="button" onClick={() => navigate(`/events/${params.eventid}/chat`, { state: { currentEvent } })}>
                   <ButtonLarge style="fill" type="submit" value="Chat" />
                 </div>
                 <div role="button" onClick={() => setShowPopup(true)}>

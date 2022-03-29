@@ -1,40 +1,20 @@
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
-// import ProfilePicture from '../../../components/ProfilePicture/ProfilePicture';
-// import eventApi from '../../../utilities/api/event.api';
-// import { LuEvent } from '../../../utilities/types/Event';
-// import UserProfile from '../../../components/UserProfile/UserProfile';
-
-// function ChatGroup() {
-//   const params = useParams();
-//   const [event, setEvent] = useState<LuEvent>();
-
-//   useEffect(() => {
-//     eventApi.getEventById(Number(params.id))
-//       .then((response) => setEvent(response.data)).catch();
-//   }, []);
-
-//   return (
-//     <div>
-//       <HeaderReturn />
-//       <div>
-//         {event?.participants.map(
-//           () => <UserProfile event={event} />,
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default ChatGroup;
-
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
+import { LuEvent } from '../../../utilities/types/Event';
 
-type Props = {}
+interface LocationState {
+  state: { currentEvent: LuEvent }
+}
 
-export default function ChatGroup({ }: Props) {
+export default function ChatGroup() {
+  const location = useLocation();
+  const { state } = location as LocationState;
+  console.log(state);
+
   return (
-    <div>ChatGroup</div>
+    <div>
+      <HeaderReturn text={state.currentEvent.title} luEvent={state.currentEvent} />
+    </div>
   );
 }
