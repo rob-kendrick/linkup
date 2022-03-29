@@ -27,8 +27,6 @@ function ChatList() {
   }, []);
 
   const handleClick = (luEvent: LuEvent) => {
-    console.log('handleClck', luEvent);
-
     navigate(`/events/${luEvent.id_event}/chat`, { state: { currentEvent: luEvent } });
   };
 
@@ -39,7 +37,7 @@ function ChatList() {
       />
       <div className="cl_itemContainer">
         {events && events!.map((luEvent) => (
-          <div role="button" onClick={() => handleClick(luEvent)} onKeyDown={(e) => (e.key === 'Enter' ? handleClick(luEvent) : null)} tabIndex={0}>
+          <div key={luEvent.id_event} role="button" onClick={() => handleClick(luEvent)} onKeyDown={(e) => (e.key === 'Enter' ? handleClick(luEvent) : null)} tabIndex={0}>
             <UserProfile
               key={luEvent.id_event}
               event={luEvent}
