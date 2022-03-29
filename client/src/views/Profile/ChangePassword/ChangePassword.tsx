@@ -34,17 +34,16 @@ function ChangePassword() {
   const onSubmit = async (formData: PasswordChange) => {
     const passwordData = formData;
     delete passwordData.password_confirm;
-
     console.log(passwordData);
-    // const response = await userApi.editUserData(Number(localStorage.getItem('id_user')), passwordData);
-    // if (response.ok === false) {
-    //   if (response.status === 400) setErrorMessage('Data validation failed on server');
-    //   if (response.status === 404) setErrorMessage('404 not found');
-    //   if (response.status === 500) setErrorMessage('500 server error');
-    //   if (response.status === 503) setErrorMessage('503 service unavailable');
-    // } else if (response.data) {
-    //   navigate('/profile');
-    // }
+    const response = await userApi.editUserPassword(Number(localStorage.getItem('id_user')), passwordData);
+    if (response.ok === false) {
+      if (response.status === 400) setErrorMessage('Wrong Password');
+      if (response.status === 404) setErrorMessage('404 not found');
+      if (response.status === 500) setErrorMessage('500 server error');
+      if (response.status === 503) setErrorMessage('503 service unavailable');
+    } else if (response.data) {
+      navigate('/profile');
+    }
   };
 
   return (
