@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import ChatListItem from './ChatListItem.tsx/ChatListItem';
 import HeaderMain from '../../../components/HeaderMain/HeaderMain';
 import UserProfile from '../../../components/UserProfile/UserProfile';
-import { RootState } from '../../../utilities/redux/store';
 import './chatList.css';
 import userApi from '../../../utilities/api/user.api';
 import { User } from '../../../utilities/types/User';

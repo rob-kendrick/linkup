@@ -1,7 +1,8 @@
-@import '../../index.css';
+@import "../../index.css";
 
 .hr {
   background-color: white;
+  height: 11%;
 }
 
 .hr__statusBar {
@@ -19,7 +20,10 @@
 .hr__main {
   display: flex;
   justify-content: space-between;
-  padding: 0 1rem 1rem 1rem;
+  padding: 0
+    1rem
+    1rem
+    1rem;
 }
 
 .hr__container {
@@ -29,7 +33,7 @@
   align-items: center;
 }
 
-.hr__txt{ 
+.hr__txt {
   font-weight: 300;
   font-size: 1rem;
   letter-spacing: 0.05rem;
@@ -48,11 +52,13 @@
   font-weight: 700;
   line-height: 0.9;
   padding-right: 0.8rem;
-  background-image: var(--color2-fg-select);
+  background-image: var(
+    --color2-fg-select
+  );
   background-size: 100%;
   background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; 
+  -webkit-text-fill-color: transparent;
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
 }
@@ -69,6 +75,9 @@
   border: 0;
 }
 
-.hr__btn:hover > *  {
-  fill: var(--color2-bg);
+.hr__btn:hover
+  > * {
+  fill: var(
+    --color2-bg
+  );
 }

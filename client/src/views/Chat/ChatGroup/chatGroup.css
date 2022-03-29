@@ -1,14 +1,14 @@
-.ed {
+.cg {
   display: flex;
   flex-direction: column;
-  height: 89%;
+  height: 100%;
   padding: 0
     1rem
     1rem
     1rem;
 }
 
-.ed__fontSecondary {
+/* .ed__fontSecondary {
   font-weight: 700;
   font-size: 0.9rem;
 }
@@ -31,9 +31,17 @@
 }
 
 .ed__txtContainer {
+} */
+.cG__mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
-.ed__btnContainer {
+.cG__chatMsgsContainer {
+  flex-grow: 15;
+}
+.cG__inputContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;

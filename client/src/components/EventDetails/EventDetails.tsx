@@ -38,7 +38,7 @@ function EventDetails() {
     );
 
     return (
-      <article>
+      <article style={{ height: '100%' }}>
         <HeaderReturn text="Activity Details" />
         <div className="ed">
           <div className="ed__header">
