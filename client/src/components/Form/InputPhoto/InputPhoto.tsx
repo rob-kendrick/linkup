@@ -5,24 +5,14 @@ import { ReactComponent as FaPlus } from '../../../assets/FaPlus.svg';
 import './InputPhoto.css';
 
 function InputPhoto({
-  imageUrl, setImageUrl, setErrorMessage, avatarName, setAvatarSvg,
+  imageUrl, setImageUrl, setErrorMessage, avatarName,
 }:
   { imageUrl: string,
     setImageUrl: Function,
     setErrorMessage: Function,
     avatarName: string,
-    setAvatarSvg: Function
   }) {
-  useEffect(() => {
-    const svg = document.getElementsByTagName('svg')[1];
-    setAvatarSvg(svg);
-  }, []);
-
-  useEffect(() => {
-    const svg = document.getElementsByTagName('svg')[1];
-    setAvatarSvg(svg);
-  }, [avatarName]);
-
+    
   const uploadImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const image = event.target.files[0];
