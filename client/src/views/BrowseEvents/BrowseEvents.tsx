@@ -3,8 +3,8 @@
 import React, {
   useEffect, useMemo, useState, MouseEventHandler, ChangeEvent,
 } from 'react';
+import { useSelector } from 'react-redux';
 import { ChangeHandler } from 'react-hook-form';
-
 import browseEventsContext from '../../contexts/browse-events.context';
 import BrowseEventsMenu from './BrowseEventsMenu/BrowseEventsMenu';
 import EventsList from '../../components/EventsList/EventsList';
@@ -29,10 +29,14 @@ const dayMatch = (date1:string, date2:string) => {
 const getArraysIntersection = (a1, a2) => a1.filter((el) => a2.includes(el));
 
 function BrowseEvents() {
+  const events = useSelector(
+    (state: RootState) => state.eventReducer.allEvents,
+  );
+
   const [mapView, setMapView] = useState(true);
-  const [allEvents, setAllEvents] = useState<LuEvent[]|null>(mockEventsData.data);
-  const [dateFilter, setDateFilter] = useState<LuEvent[]>(mockEventsData.data);
-  const [titleFilter, setTitleFilter] = useState<LuEvent[]>(mockEventsData.data);
+  const [allEvents, setAllEvents] = useState<LuEvent[]|null>(events);
+  const [dateFilter, setDateFilter] = useState<LuEvent[]>(events);
+  const [titleFilter, setTitleFilter] = useState<LuEvent[]>(events);
 
   const [filteredEvents, setFilteredEvents] = useState<LuEvent[]>([]);
 
@@ -41,7 +45,6 @@ function BrowseEvents() {
     const tempFilter = getArraysIntersection(dateFilter, titleFilter);
     setFilteredEvents(tempFilter);
   }, [dateFilter, titleFilter]);
-
 
   // for testing purposes
   useEffect(() => {

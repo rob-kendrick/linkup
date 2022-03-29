@@ -12,7 +12,7 @@ import './MyEvents.css';
 // }
 
 function MyEvents() {
-  const userId = 3;
+  const userId = localStorage.getItem('id_user');
 
   const [allEvents, setAllEvents] = useState<any[]>(mockEventsData.data);
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
