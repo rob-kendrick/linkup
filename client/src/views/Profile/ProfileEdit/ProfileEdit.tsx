@@ -11,8 +11,7 @@ import userApi from '../../../utilities/api/user.api';
 function ProfileEdit() {
   const [errorMessage, setErrorMessage] = useState('');
   const [avatarName, setAvatarName] = useState(String(Math.random()));
-  const [user, setUser] = useState<User | null>(null);
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const {
     register,
@@ -33,15 +32,12 @@ function ProfileEdit() {
   useEffect(() => {
     const currentUserId = Number(localStorage.getItem('id_user'));
     userApi.getUserById(currentUserId)
-      .then((user) => {
-        console.log(user);
-        setUser(user.data);
-        reset(user.data);
-        setAvatarName(user.data.first_name);
-        setImageUrl(user.data.profile_picture);
+      .then((result) => {
+        reset(result.data);
+        setAvatarName(result.data.first_name);
+        setImageUrl(result.data.profile_picture);
       });
   }, [reset]);
-
 
   const onSubmit = (data: User) => {
     console.log(data);
@@ -54,12 +50,15 @@ function ProfileEdit() {
       />
       <div className="pe__container">
         <form onSubmit={handleSubmit(onSubmit)}>
+          {imageUrl
+          && (
           <InputPhoto
             imageUrl={imageUrl}
             setImageUrl={setImageUrl}
             setErrorMessage={setErrorMessage}
             avatarName={avatarName}
           />
+          )}
           <InputTextField
             type="text"
             label="First Name"
@@ -91,6 +90,8 @@ function ProfileEdit() {
             value="Save Changes"
             style="fill"
           />
+          {(errorMessage !== '')
+          && <text>{errorMessage}</text>}
         </form>
       </div>
     </div>
