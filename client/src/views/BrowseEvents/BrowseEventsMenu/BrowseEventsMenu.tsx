@@ -65,7 +65,7 @@ function BrowseEventsMenu({
     props.filterByTitle(input);
   };
 
-  const handleOpenDropDown = () => {
+  const handleClickFilter = () => {
     setShowDropDown(!showDropDown);
   };
 
@@ -134,7 +134,7 @@ function BrowseEventsMenu({
         <div className="bem__selectors-fitlers bem__selectors-btns-btn-right">
           <button
             type="button"
-            onClick={handleOpenDropDown}
+            onClick={handleClickFilter}
             className={`bem__selectors-fitlers bem__selectors-btns-btn ${showDropDown ? 'bem__selector-active' : ''}`}
           >
             <BiFilter />
