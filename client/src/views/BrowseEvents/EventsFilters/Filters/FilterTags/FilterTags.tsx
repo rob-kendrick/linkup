@@ -4,47 +4,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactTags from 'react-tag-autocomplete';
 import './FilterTags.css';
 
-const tagsMock = [{
-  id_tag: 1,
-  name: 'Sport',
-},
-{
-  id_tag: 2,
-  name: 'Game',
-},
-{
-  id_tag: 3,
-  name: 'Leisure',
-},
-{
-  id_tag: 4,
-  name: 'Excercise',
-},
-{
-  id_tag: 5,
-  name: 'Running',
-},
-{
-  id_tag: 6,
-  name: 'Learning',
-},
-{
-  id_tag: 7,
-  name: 'Relaxing',
-},
-{
-  id_tag: 8,
-  name: 'Outdoor',
-},
-{
-  id_tag: 9,
-  name: 'Indoor',
-},
-{
-  id_tag: 10,
-  name: 'Culture',
-}];
-
 interface myProps {
   filterByTag : any
 }
@@ -54,9 +13,11 @@ function FilterTags({ filterByTag }: myProps) {
   const [selectedTags, setSelectedTags] = useState([]);
 
   useEffect(() => {
-    setTagList(tagsMock);
+    fetch('http://localhost:4000/tags')
+      .then((response) => response.json())
+      .then((result) => setTagList(result.data))
+      .catch((error) => console.log('error', error));
   }, []);
-
 
   useEffect(() => {
     filterByTag(selectedTags);
@@ -74,7 +35,9 @@ function FilterTags({ filterByTag }: myProps) {
   const renderedTags = tagList.map((tag) => {
     let classNames = 'ft__btn ';
     if (selectedTags.includes(tag.name)) {
-      classNames += `ft__btn-selected color${tag.id_tag}`;
+      // if id_tag is 10 or greater, get units only as only 10 colors are available
+      const colorNumb = String(tag.id_tag - 1).split('').reverse()[0];
+      classNames += `ft__btn-selected color${colorNumb}`;
     } else {
       classNames += 'ft__btn-unselected';
     }
