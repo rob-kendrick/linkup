@@ -10,7 +10,7 @@ import {
 import type { LuEvent } from '../../utilities/types/Event';
 import './MapLarge.css';
 import ProfilePicture from '../ProfilePicture/ProfilePicture';
-import { useDateShort } from '../../utilities/helper/useDateShort';
+import { useDateShort } from '../../utilities/helper/useDate';
 
 interface eventProps {
   filteredEvents : LuEvent[];
