@@ -69,6 +69,19 @@ function UserDetails() {
           </div>
         )
         : (<LoadingSpinner />)}
+      <HeaderReturn />
+      <h3>UserDetails</h3>
+      <div>
+        User Id:
+        {' '}
+        {params.userid}
+        <ProfilePicture
+          userPicture="empty"
+          userName="empty"
+          alt="empty"
+          size={30}
+        />
+      </div>
     </div>
   );
 }

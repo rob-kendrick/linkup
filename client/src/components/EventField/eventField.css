@@ -1,34 +1,32 @@
 .puf__container {
   display: flex;
   flex-direction: row;
-  padding: 0.5rem
-    0;
+  padding: 0.5rem 0;
 }
 
 .puf__txtContainer {
   display: flex;
   flex-direction: column;
-
   width: 90%;
-  padding-left: 0.5rem;
+  padding-left: 1.2rem;
 }
 
 .puf__imgContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 25px;
+  border-radius: 50%;
 }
 
 .puf__h4 {
   font-size: 0.8rem;
   margin: 0;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .puf__p {
-  font-size: 0.7rem;
+  font-size: 0.8rem !important;
   margin: 0;
-  font-weight: 400;
+  font-weight: 300;
   padding-bottom: 0.1rem;
 }

@@ -1,0 +1,41 @@
+.dd__container {
+  border-radius: 4px;
+  position: fixed; /* Sit on top of the page content */
+  z-index: 1000;
+  right:10px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.23);
+  background-color: white;
+  overflow:hidden;
+}
+
+.dd__item-wrapper {
+
+}
+
+.dd__item{
+  display: flex;
+  height:4rem;
+  align-items: center;
+  padding:0.7em 1em;
+}
+
+.dd_item-line{
+  border: 0.5px solid var(--color4-grey1);
+  margin:0
+}
+
+.dd__item-icon{
+  height:20px;
+  margin-right:8px;
+}
+
+.dd__item-text {
+  font-weight:400;
+  font-size:16px;
+}
+
+.dd__item-active{
+  background-color: var(--color4-grey1);
+}

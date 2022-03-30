@@ -7,6 +7,7 @@ import { Server } from "socket.io";
 import { createServer } from 'http';
 import router from './routes/index';
 // import prisma from './db';
+import type { ServerToClientEvents, ClientToServerEvents } from './SocketTypes';
 
 const corsConfig = {
   // REMOVE-START
@@ -16,22 +17,10 @@ const corsConfig = {
 };
 
 const PORT = 4000;
-
 const app = express();
-
-interface ServerToClientEvents {
-  basicEmit: (userId: number, eventId: number, msg: string) => void;
-}
-interface ClientToServerEvents {
-  emitMsgFromClient: (userId: number, eventId: number, msg: string) => void;
-  joinRoom: (userId: number, eventId: number) => void;
-  leaveRoom: (userId: number, eventId: number) => void;
-}
-
 app.use(cors());
 app.use(morgan('short'));
 app.use(express.json());
-app.use('/', router);
 const httpServer = createServer(app);
 const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer, {
   cors: {
@@ -53,6 +42,10 @@ io.on('connection', (socket) => {
   });
 });
 
+app.use('/', router);
+
 httpServer.listen(PORT, () => {
   console.log(`🚀🚀🚀 Server up and listening on http://localhost:${PORT} ! 🚀🚀🚀`); // eslint-disable-line
 });
+
+export default io;

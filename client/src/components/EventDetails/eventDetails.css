@@ -1,53 +1,62 @@
 .ed {
-  display: flex;
-  overflow: scroll;
-
-  flex-direction: column;
-  height: 89%;
-  padding: 0
-    1rem
-    1rem
-    1rem;
-}
-
-.ed__fontSecondary {
-  font-weight: 700;
-  font-size: 0.9rem;
-}
-
-.ed__fontRegular {
-  font-weight: 400;
-  font-size: 0.9rem;
-}
-
-.ed__titile {
-  font-weight: 700;
-  font-size: 1.1rem;
-}
-
-.ed__mainContentContainer {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: scroll;
 }
 
-.ed__txtContainer {
+.ed h1{
+  font-size: 1.15em;
+  margin-bottom: 1em;
+}
+
+.ed h2{
+  font-size: 0.9em;
+  margin-top: 2em;
+}
+
+.ed h3{
+  margin: 1.8em 0 0.5em 0;
+  font-size: 0.9em;
+}
+
+.ed p{
+  margin: 0;
+  font-size: 0.9em;
+}
+
+.ed__indent {
+  margin: 0 1.4em;
+}
+
+.ed__container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.ed__header {
+  flex-grow: 1;
+}
+
+.ed__article {
+  overflow: scroll;
+  flex-grow: 4;
+}
+
+.ed__article::-webkit-scrollbar {
+  display: none;
 }
 
 .ed__map-container {
-  height: 400px;
-  width: 100%;
+  height: 40vh;
 }
 
-.ed__btnContainer {
+.ed__btn-container {
+  flex-grow: 10;
+  padding: 1.2em;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 1rem;
-  margin-top: auto;
-  /* position: fixed; */
-  /* align-self: flex-start; */
 }

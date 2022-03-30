@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Dispatch } from 'redux';
+import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+// import debounce from 'lodash.debounce';
 import BrowseEvents from './views/BrowseEvents/BrowseEvents';
 import MyEvents from './views/MyEvents/MyEvents';
 import ChatList from './views/Chat/ChatList/ChatList';
@@ -24,25 +23,15 @@ import './App.css';
 import SignUp from './views/Authentication/SignUp/SignUp';
 import Login from './views/Authentication/Login/Login';
 import StartPage from './views/Authentication/StartPage/StartPage';
-import eventApi from './utilities/api/event.api';
-import eventActions from './utilities/redux/actions/event.actions';
 import LandingPage from './views/Authentication/LandingPage/LandingPage';
 import ProtectedRoute from './views/Authentication/ProtectedRoute';
 import PublicRoute from './views/Authentication/PublicRoute';
 import Logout from './views/Authentication/Logout';
+import useFetch from './utilities/hooks/useFetch';
 
 function App() {
   const { pathname } = useLocation();
-  const dispatch: Dispatch<any> = useDispatch();
-  const [fetchStatus, setFetchStatus] = useState('idle');
-
-  useEffect(() => {
-    setFetchStatus('loading');
-    eventApi.getAllEvents().then((response) => {
-      dispatch(eventActions.getEventsAction(response.data));
-      setFetchStatus('success');
-    }).catch(() => setFetchStatus('error'));
-  }, []);
+  const { fetchStatus } = useFetch();
 
   if (fetchStatus === 'idle' || fetchStatus === 'loading') {
     return (

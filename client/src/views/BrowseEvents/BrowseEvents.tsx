@@ -1,27 +1,24 @@
 // @ts-nocheck
 
 import React, {
-  useEffect, useMemo, useState, MouseEventHandler, ChangeEvent,
+  useEffect, useState, MouseEventHandler,
 } from 'react';
 import { useSelector, RootState } from 'react-redux';
-import { ChangeHandler } from 'react-hook-form';
-import browseEventsContext from '../../contexts/browse-events.context';
 import BrowseEventsMenu from './BrowseEventsMenu/BrowseEventsMenu';
 import EventsList from '../../components/EventsList/EventsList';
 import MapLarge from '../../components/MapLarge/MapLarge';
-import mockEventsData from '../../utilities/mocks/db-data/events-db-data.json';
 import './BrowseEvents.css';
 import { LuEvent } from '../../utilities/types/Event';
-
+import useFetch from '../../utilities/hooks/useFetch';
 // helper functions
 // return true if two dates are on the same day
-const checkDatesSameDay = (date1:string, date2:string) => {
+const checkDatesSameDay = (date1: string, date2: string) => {
   const date3 = new Date(date1);
   const date4 = new Date(date2);
   if (
     date3.getFullYear() === date4.getFullYear()
-  && date3.getMonth() === date4.getMonth()
-  && date3.getDate() === date4.getDate()
+    && date3.getMonth() === date4.getMonth()
+    && date3.getDate() === date4.getDate()
   ) {
     return true;
   }
@@ -30,11 +27,9 @@ const checkDatesSameDay = (date1:string, date2:string) => {
 // returns common elements of 2 arrays
 const getArraysIntersection = (a1, a2) => a1.filter((el) => a2.includes(el));
 // return true if date is in the future
-const checkDateisInFuture = (date: string) => (new Date(date) >= new Date());
-// sory by date, newest first
+const checDateInFuture = (date: string) => (new Date(date) >= new Date());
 
 function BrowseEvents() {
-  const userId = Number(localStorage.getItem('id_user'));
   const events = useSelector(
     (state: RootState) => state.eventReducer.allEvents,
   );
@@ -45,31 +40,23 @@ function BrowseEvents() {
   const [titleFilter, setTitleFilter] = useState<LuEvent[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<LuEvent[]>([]);
 
-  // on first load, filter events from redux store,
-  // dipslay events NOT created by user and only in the future
-
+  // on first load, filter events from redux store removing past events
   useEffect(() => {
     const fe = events
-    // const fe = events.filter((el) => checkDateisInFuture(el.date))
-    //   .sort((a, b) => new Date(b.date) - new Date(a.date));
+      .filter((el) => checDateInFuture(el.date))
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
     setAllEvents(fe);
     setDateFilter(fe);
     setTitleFilter(fe);
   }, []);
 
-  // merge all filtered lists
-  useEffect(() => {
-    const tempFilter = getArraysIntersection(dateFilter, titleFilter);
-    setFilteredEvents(tempFilter);
-  }, [dateFilter, titleFilter]);
-
   // list/map toggle
-  const toggleMapList:MouseEventHandler = () => {
+  const toggleMapList: MouseEventHandler = () => {
     setMapView(!mapView);
   };
 
   // filter events by date
-  const filterByDate = (thisDate:string|null) => {
+  const filterByDate = (thisDate: string | null) => {
     if (thisDate === null) return setDateFilter(allEvents);
     const newEvents = allEvents.filter(
       (event) => {
@@ -80,6 +67,7 @@ function BrowseEvents() {
     return setDateFilter(newEvents);
   };
 
+  // filter events by title
   const filterByTitle = (input) => {
     if (!input) return setTitleFilter(allEvents);
     const newEvents = allEvents.filter(
@@ -88,9 +76,14 @@ function BrowseEvents() {
         return null;
       },
     );
-
     return setTitleFilter(newEvents);
   };
+
+  // merge all filtered lists everytime a filter is applied
+  useEffect(() => {
+    const tempFilter = getArraysIntersection(dateFilter, titleFilter);
+    setFilteredEvents(tempFilter);
+  }, [dateFilter, titleFilter]);
 
   return (
     <div className="be__container">

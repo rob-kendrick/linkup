@@ -15,12 +15,8 @@
   align-items: center;
 }
 
-.pu__fieldContainer
-  > * {
-  margin: 1.2rem
-    1rem
-    0
-    1rem;
+.pu__fieldContainer {
+  margin: 0rem 1rem;
 }
 
 .pu__cardContainer {
@@ -30,7 +26,8 @@
   align-items: center;
   border-radius: 25px;
   background-color: white;
-  width: 90vw;
+  min-width: 320px;
+  max-width: 90vw;
   z-index: 1;
 }
 
@@ -38,8 +35,13 @@
   padding: 1rem;
 }
 
+.pubtn__btn{
+  z-index: 999;
+}
+
 .pu__btnContainer {
   display: flex;
+  z-index: 998;
   flex-direction: row-reverse;
   width: 100%;
 }
@@ -67,19 +69,16 @@
 .pu__hLight {
   font-weight: 300;
   margin: 0;
-  padding: 1rem
-    1rem
-    0
-    1rem;
+  padding: 1em 1em 0 1em;
 }
 
 .pu__hMed {
+  font-size: 1.1em !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 500;
-  margin: 0;
-  padding: 1rem
-    2rem
-    0
-    2rem;
+  padding: 0rem 1rem 0 1rem;
 }
 
 .pu__pMed {
