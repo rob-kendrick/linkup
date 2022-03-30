@@ -39,7 +39,7 @@
 }
 
 .bem__fitlerbar-dates-item-spacer {
-  min-width:0.4rem;
+  min-width:10px;
 }
 
 .bem__fitlerbar-dates-item-details{
@@ -47,7 +47,7 @@
 }
 
 .bem__btns-container {
-  padding: 1rem 1rem 1.3rem 1rem;
+  padding: 1.2rem 1rem 1.5rem 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

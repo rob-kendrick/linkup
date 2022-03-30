@@ -20,11 +20,11 @@ a {
   --color1-bg: linear-gradient(#FF00D6, #FF4D00);
   --color1-fg: #FFFFFF;
   --color2-bg: #263056;
+  --color2-light: #d8def4;
   --color2-fg-select: linear-gradient(#FF00D6, #FF4D00);
   --color2-fg-deselect: #FFFFFF;
   --color3-alert: linear-gradient(#FF00D6, #FF4D00);
   --color4-grey1: #c9c9c9;
   --color5-grey2: #F2F2F2;
-
   --color6-grad-mean: #FF2965;
 }

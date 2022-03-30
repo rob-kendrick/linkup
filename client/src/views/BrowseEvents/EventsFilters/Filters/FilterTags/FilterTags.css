@@ -1,0 +1,76 @@
+
+.ft__container {
+  display: flex;
+  flex-direction: row;
+  overflow: scroll;
+  padding: 15px;
+
+}
+
+.ft__container::-webkit-scrollbar{
+  display: none;
+}
+
+.ft__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border:none;
+  padding:15px;
+  height:40px;
+  border-radius: 5px;
+}
+
+.ft__btn-selected {
+  background-color: white;
+  border: 2px solid transparent;
+}
+
+.ft__btn-unselected {
+  background-color: white;
+  border: 2px solid var(--color5-grey2);
+}
+
+.ft__btn-space {
+  padding: 7px;
+}
+
+.color1 {
+  background-color: #ABDEE6;
+}
+
+.color2 {
+  background-color: #CBAACB;
+}
+
+.color3 {
+  background-color: #FFFFB5;
+}
+
+.color4 {
+  background-color: #FFCCB6;
+}
+
+.color5 {
+  background-color: #D4F0F0;
+}
+
+.color6 {
+  background-color: #FEE1E8;
+}
+
+.color7 {
+  background-color: #FFD8BE;
+}
+
+.color8 {
+  background-color: #A2E1DB;
+}
+
+.color9 {
+  background-color: #ECD5E3;
+}
+
+.color10 {
+  background-color: #DCD3FF;
+}
