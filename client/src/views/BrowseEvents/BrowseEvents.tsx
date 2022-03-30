@@ -9,16 +9,16 @@ import EventsList from '../../components/EventsList/EventsList';
 import MapLarge from '../../components/MapLarge/MapLarge';
 import './BrowseEvents.css';
 import { LuEvent } from '../../utilities/types/Event';
-
+import useFetch from '../../utilities/hooks/useFetch';
 // helper functions
 // return true if two dates are on the same day
-const checkDatesSameDay = (date1:string, date2:string) => {
+const checkDatesSameDay = (date1: string, date2: string) => {
   const date3 = new Date(date1);
   const date4 = new Date(date2);
   if (
     date3.getFullYear() === date4.getFullYear()
-  && date3.getMonth() === date4.getMonth()
-  && date3.getDate() === date4.getDate()
+    && date3.getMonth() === date4.getMonth()
+    && date3.getDate() === date4.getDate()
   ) {
     return true;
   }
@@ -60,12 +60,12 @@ function BrowseEvents() {
   }, [dateFilter, titleFilter]);
 
   // list/map toggle
-  const toggleMapList:MouseEventHandler = () => {
+  const toggleMapList: MouseEventHandler = () => {
     setMapView(!mapView);
   };
 
   // filter events by date
-  const filterByDate = (thisDate:string|null) => {
+  const filterByDate = (thisDate: string | null) => {
     if (thisDate === null) return setDateFilter(allEvents);
     const newEvents = allEvents.filter(
       (event) => {
