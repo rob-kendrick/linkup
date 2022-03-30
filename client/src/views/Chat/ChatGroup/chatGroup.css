@@ -7,28 +7,41 @@
 .cG__mainContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 89%;
-  background-color: rgb(
-    242,
-    242,
-    242
-  );
+  flex-grow: 1;
 }
+
 .cG__chatMsgsContainer {
-  height: 100%;
-  width: 100%;
+  background-color: var(--color5-grey2);
+  height: 200px;
 }
 
 .cG__inputContainer {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 1rem;
-  margin-top: auto;
-  background-color: white;
-  height: 11%;
-  width: 100%;
+  background-color: pink;
 }
+
+.cG__input-field {
+  background-color: blueviolet;
+}
+
+.cG__button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: blue;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.cG__button {
+  margin: 10px;
+  align-self: flex-end;
+  background-image: var(--color1-bg);
+  border: none;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+

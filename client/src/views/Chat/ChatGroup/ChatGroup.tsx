@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { io, Socket } from 'socket.io-client';
+import { useForm } from 'react-hook-form';
+import { InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 import { LuEvent } from '../../../utilities/types/Event';
 import './chatGroup.css';
@@ -40,24 +42,43 @@ export default function ChatGroup() {
     createPost(userId, eventId, msg);
   });
 
-  const submitHandler = (e: any) => {
-    e.preventDefault();
-    const msg = e.target.elements.chat.value;
-    socket.emit('emitMsgFromClient', Number(userId), state.currentEvent.id_event, msg);
+  const sendMessage = (input: any) => {
+    socket.emit('emitMsgFromClient', Number(userId), state.currentEvent.id_event, input.message);
   };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   return (
     <article className="cG">
       <HeaderReturn text={state.currentEvent.title} luEvent={state.currentEvent} socket={socket} />
       <div className="cG__mainContainer">
-        <div id="msgArea" className="cG__chatMsgsContainer">Chat</div>
-        <div className="cG__inputContainer">
-          <form onSubmit={(e) => submitHandler(e)}>
-            <label htmlFor="chat" />
-            <input id="chat" name="chat" type="text" />
-            <button type="submit">Send</button>
-          </form>
-        </div>
+        <form onSubmit={handleSubmit(sendMessage)}>
+
+          <div id="msgArea" className="cG__chatMsgsContainer">Chat</div>
+
+          <div className="cG__inputContainer">
+            <div className="cG__input-field">
+              <InputTextArea
+                type="text"
+                errorMessage={errors.description?.message}
+                rows={5}
+                {...register('message', {
+                  required: 'This field is required',
+                  onChange: () => {
+                    console.log('hello');
+                  },
+                })}
+              />
+            </div>
+            <div className="cG__button-container">
+              <button className="cG__button" type="submit">S</button>
+            </div>
+          </div>
+        </form>
       </div>
     </article>
   );
