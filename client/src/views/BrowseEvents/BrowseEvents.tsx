@@ -100,6 +100,7 @@ function BrowseEvents() {
   // }, [filteredEvents]);
 
   return (
+
     <div className="be__container">
       <BrowseEventsMenu props={{
         mapView,

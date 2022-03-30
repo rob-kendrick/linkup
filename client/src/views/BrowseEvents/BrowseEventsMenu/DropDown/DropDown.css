@@ -5,7 +5,7 @@
   right:10px;
   display: flex;
   flex-direction: column;
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.23);
+  border: 2px solid var(--color5-grey2);
   background-color: white;
   overflow:hidden;
 }
@@ -22,7 +22,7 @@
 }
 
 .dd_item-line{
-  border: 0.5px solid var(--color4-grey1);
+  border: 0.5px solid var(--color5-grey2);
   margin:0
 }
 
