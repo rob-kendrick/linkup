@@ -62,6 +62,10 @@ function CreateEvent() {
               errorMessage={errors.title?.message}
               {...register('title', {
                 required: 'This field is required',
+                maxLength: {
+                  value: 30,
+                  message: 'Maximun length 30 characters',
+                },
                 onChange: () => {
                   setNotification('');
                 },
