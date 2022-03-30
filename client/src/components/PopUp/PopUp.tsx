@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import eventApi from '../../utilities/api/event.api';
 import eventActions from '../../utilities/redux/actions/event.actions';
 import PopUpBtn from './PopUpBtn/PopUpBtn';
@@ -17,6 +18,8 @@ type props = {
 };
 
 function PopUp({ useCase, setShowPopup, currentEvent }: props) {
+  const navigate = useNavigate();
+
   const dispatch: Dispatch<any> = useDispatch();
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   useEffect(() => {
@@ -50,14 +53,14 @@ function PopUp({ useCase, setShowPopup, currentEvent }: props) {
     };
 
     const leaveEvent = () => {
-      console.log('leave event');
       eventApi.leaveEvent(eventWithAddedParticipant.id_event, currentUser!.id_user).then(() => {
         dispatch(eventActions.editEventAction(eventWithRemovedParticipant));
       });
     };
 
     const cancelEvent = () => {
-      console.log('cancel event');
+      console.log('delete event');
+      eventApi.deleteEvent(eventWithAddedParticipant.id_event).then(() => navigate('/myevents'));
     };
 
     if (useCase === 'signup') {
@@ -100,7 +103,6 @@ function PopUp({ useCase, setShowPopup, currentEvent }: props) {
         </div>
       );
     }
-    // TODO: functionality
     if (useCase === 'cancel') {
       return (
         <div className="pu__container">
