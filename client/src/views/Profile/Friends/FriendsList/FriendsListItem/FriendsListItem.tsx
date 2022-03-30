@@ -10,7 +10,12 @@ function FriendsListItem({ user }: {user: any}) {
     >
       <div className="list-item-delete">
         {user.first_name}
-        <ProfilePicture />
+        <ProfilePicture
+          userPicture="empty"
+          userName="empty"
+          alt="empty"
+          size={30}
+        />
       </div>
     </Link>
   );

@@ -12,6 +12,7 @@ export default function UserProfile({ event }: Props) {
       <div className="ec__profile-inner-container">
         <div className="ec__profile-picture-container">
           <ProfilePicture
+            userName={event.creator.first_name}
             userPicture={event.creator.profile_picture}
             alt={event.creator.first_name}
             size={52}

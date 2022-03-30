@@ -54,6 +54,7 @@ function EventField({ text, currentEvent }: Props) {
         <div className="puf__imgContainer">
           <ProfilePicture
             userPicture={currentEvent.creator.profile_picture}
+            userName={currentEvent.creator.first_name}
             alt={currentEvent.creator.first_name}
             size={30}
           />
