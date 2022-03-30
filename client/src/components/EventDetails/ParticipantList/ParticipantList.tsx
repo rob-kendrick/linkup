@@ -14,6 +14,7 @@ function ParticipantList({ currentEvent }: Props) {
         <div key={participant.id_user} className="pl__participantsContainer">
           <ProfilePicture
             userPicture={participant.profile_picture}
+            userName={currentEvent.creator.first_name}
             alt={participant.first_name}
             size={30}
           />

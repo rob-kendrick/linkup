@@ -29,14 +29,6 @@ function UserList({ toggleParticipants, setParticipantsToAdd }: props) {
     });
   }, []);
 
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-
-  useEffect(() => {
-    console.log(' : : : STAGING AREA : : : ', userStagingArr);
-  }, [userStagingArr]);
-
   // function for searching userdata and setting state
   const search = (input) => {
     const results = [];

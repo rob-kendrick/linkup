@@ -13,7 +13,12 @@ function UserDetails() {
         User Id:
         {' '}
         {params.userid}
-        <ProfilePicture />
+        <ProfilePicture
+          userPicture="empty"
+          userName="empty"
+          alt="empty"
+          size={30}
+        />
       </div>
     </div>
   );

@@ -4,26 +4,30 @@ import HeaderMain from '../../../components/HeaderMain/HeaderMain';
 import UserProfile from '../../../components/UserProfile/UserProfile';
 import './chatList.css';
 import userApi from '../../../utilities/api/user.api';
-import { User } from '../../../utilities/types/User';
 import { LuEvent } from '../../../utilities/types/Event';
 
 function ChatList() {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [events, setEvents] = useState<LuEvent[] | null>(null);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const fetchData = async () => {
     const userId = Number(localStorage.getItem('id_user'));
-    userApi.getUserCreatedEvents(userId)
-      .then((response) => setEvents(response.data))
+    const createdEvents = await userApi.getUserCreatedEvents(userId)
+      .then((response) => response.data)
       .catch();
-    userApi.getUserParticipatingEvents(userId)
-      .then((response) => setEvents(response.data))
+
+    const participatingEvents = await userApi.getUserParticipatingEvents(userId)
+      .then((response) => response.data)
       .catch();
-    userApi.getUserById(userId)
-      .then((response) => setCurrentUser(response.data))
-      .catch();
+
+    if (events && events.length > 0) {
+      setEvents([...events, ...createdEvents, ...participatingEvents]);
+    } setEvents([...createdEvents, ...participatingEvents]);
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   const handleClick = (luEvent: LuEvent) => {
