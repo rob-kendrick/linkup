@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Dispatch } from 'redux';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { io, Socket } from 'socket.io-client';
+// import debounce from 'lodash.debounce';
 import BrowseEvents from './views/BrowseEvents/BrowseEvents';
 import MyEvents from './views/MyEvents/MyEvents';
 import ChatList from './views/Chat/ChatList/ChatList';
@@ -32,27 +33,12 @@ import ProtectedRoute from './views/Authentication/ProtectedRoute';
 import PublicRoute from './views/Authentication/PublicRoute';
 import Logout from './views/Authentication/Logout';
 import type { ServerToClientEvents } from './utilities/types/SocketTypes';
-
-const socket: Socket<ServerToClientEvents> = io('http://localhost:4000');
+import useFetch from './utilities/hooks/useFetch';
 
 function App() {
   const { pathname } = useLocation();
-  const dispatch: Dispatch<any> = useDispatch();
-  const [fetchStatus, setFetchStatus] = useState('idle');
-  const [backendNotification, setBackendNotification] = useState(false);
-  socket.on('changeNotification', () => {
-    console.log('SOCKER TRIGGERING API CALL');
 
-    setBackendNotification(!backendNotification);
-  });
-
-  useEffect(() => {
-    setFetchStatus('loading');
-    eventApi.getAllEvents().then((response) => {
-      dispatch(eventActions.getEventsAction(response.data));
-      setFetchStatus('success');
-    }).catch(() => setFetchStatus('error'));
-  }, [backendNotification]);
+  const { fetchStatus } = useFetch();
 
   if (fetchStatus === 'idle' || fetchStatus === 'loading') {
     return (
