@@ -11,7 +11,12 @@ function ChatListItem({ event }: {event:any}) {
       <div className="list-item-delete">
         <h3>ChatListItem</h3>
         {event.title}
-        <ProfilePicture />
+        <ProfilePicture
+          userPicture="empty"
+          userName="empty"
+          alt="empty"
+          size={30}
+        />
       </div>
     </Link>
   );
