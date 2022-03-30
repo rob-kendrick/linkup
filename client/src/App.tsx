@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Dispatch } from 'redux';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { io, Socket } from 'socket.io-client';
 import BrowseEvents from './views/BrowseEvents/BrowseEvents';
 import MyEvents from './views/MyEvents/MyEvents';
 import ChatList from './views/Chat/ChatList/ChatList';
@@ -30,11 +31,18 @@ import LandingPage from './views/Authentication/LandingPage/LandingPage';
 import ProtectedRoute from './views/Authentication/ProtectedRoute';
 import PublicRoute from './views/Authentication/PublicRoute';
 import Logout from './views/Authentication/Logout';
+import type { ServerToClientEvents } from './utilities/types/SocketTypes';
+
+const socket: Socket<ServerToClientEvents> = io('http://localhost:4000');
 
 function App() {
   const { pathname } = useLocation();
   const dispatch: Dispatch<any> = useDispatch();
   const [fetchStatus, setFetchStatus] = useState('idle');
+  const [backendNotification, setBackendNotification] = useState(false);
+  socket.on('changeNotification', () => {
+    setBackendNotification(!backendNotification);
+  });
 
   useEffect(() => {
     setFetchStatus('loading');
@@ -42,7 +50,7 @@ function App() {
       dispatch(eventActions.getEventsAction(response.data));
       setFetchStatus('success');
     }).catch(() => setFetchStatus('error'));
-  }, []);
+  }, [backendNotification]);
 
   if (fetchStatus === 'idle' || fetchStatus === 'loading') {
     return (

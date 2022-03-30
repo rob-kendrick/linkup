@@ -30,7 +30,7 @@ const checkDatesSameDay = (date1:string, date2:string) => {
 // returns common elements of 2 arrays
 const getArraysIntersection = (a1, a2) => a1.filter((el) => a2.includes(el));
 // return true if date is in the future
-const checkDateisInFuture = (date: string) => (new Date(date) >= new Date());
+const checDateInFuture = (date: string) => (new Date(date) >= new Date());
 // sory by date, newest first
 
 function BrowseEvents() {
@@ -50,8 +50,8 @@ function BrowseEvents() {
 
   useEffect(() => {
     const fe = events
-    // const fe = events.filter((el) => checkDateisInFuture(el.date))
-    //   .sort((a, b) => new Date(b.date) - new Date(a.date));
+      .filter((el) => checDateInFuture(el.date))
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
     setAllEvents(fe);
     setDateFilter(fe);
     setTitleFilter(fe);

@@ -11,7 +11,7 @@ import MapSmall from '../MapSmall/MapSmall';
 import TagList from '../TagList/TagList';
 import ParticipantList from './ParticipantList/ParticipantList';
 import PopUp from '../PopUp/PopUp';
-import useDate from '../../utilities/helper/useDate';
+import { useDateLong } from '../../utilities/helper/useDate';
 import EventField from '../EventField/EventField';
 import './eventDetails.css';
 import ButtonLarge from '../Form/ButtonLarge/ButtonLarge';
@@ -32,8 +32,10 @@ function EventDetails() {
   const { lng } = currentEvent;
 
   if (currentEvent) {
+
     const date = useDate(currentEvent.date);
     const participating = currentEvent.participants.some(
+
       (participant) => participant.id_user === Number(userId),
     );
     const hosting = (Number(userId) === currentEvent.creator_id);

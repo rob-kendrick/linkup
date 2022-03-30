@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+
 import {
   MapContainer, TileLayer, Marker, Popup,
 } from 'react-leaflet';
 import type { LuEvent } from '../../utilities/types/Event';
 import './MapLarge.css';
 import ProfilePicture from '../ProfilePicture/ProfilePicture';
+import { useDateShort } from '../../utilities/helper/useDate';
 
 interface eventProps {
   filteredEvents : LuEvent[];
@@ -46,7 +48,7 @@ export default function MapLarge({ filteredEvents } : eventProps) {
               <div className="ml__popup-picture">
                 <ProfilePicture
                   userPicture={filteredEvent.creator.profile_picture}
-                  size={48}
+                  size={60}
                   alt={filteredEvent.creator.username}
                   userName={filteredEvent.creator.username}
                 />
@@ -54,6 +56,7 @@ export default function MapLarge({ filteredEvents } : eventProps) {
               <div className="ml__popup-event-details">
                 <h3 className="ml__popup-event-title">{filteredEvent.title}</h3>
                 <h4 className="ml__popup-event-user">{filteredEvent.creator.first_name}</h4>
+                <span className="ml__popup-event-date">{useDateShort(filteredEvent.date)}</span>
               </div>
             </div>
           </Popup>
