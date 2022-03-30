@@ -19,10 +19,9 @@ function UserDetails() {
   const getUser = () => {
     const userdata = userApi.getUserById(userId)
       .then((response) => {
-        console.log(response.data);
         setUser(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {

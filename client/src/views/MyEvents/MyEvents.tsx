@@ -25,13 +25,11 @@ function MyEvents() {
   const filterHosted = () => {
     const userHosted = events.filter((e) => (userId === e.creator_id));
     setFilteredEvents(userHosted);
-    console.log(userHosted, 'User Hosting event');
   };
 
   const filterAttending = () => {
     const userAttending = events.filter((event) => event.participants.some((user) => user.id_user === userId));
     setFilteredEvents(userAttending);
-    console.log(userAttending, 'User Attending event');
   };
 
   return (

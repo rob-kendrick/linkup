@@ -9,7 +9,6 @@ const eventApi = {
     .then((response) => {
       if (response.status < 300) {
         const result = response.json();
-        console.log('API', result);
         return result;
       }
       throw Error('Server error');
@@ -51,7 +50,6 @@ const eventApi = {
     .then((response) => {
       if (response.status < 300) {
         const result = response.json();
-        console.log('api', result);
         return result;
       }
       throw Error('Server error');

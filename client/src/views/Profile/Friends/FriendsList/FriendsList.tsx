@@ -21,7 +21,6 @@ function FriendsList() {
     setCurrentUser(uid);
     // Calling api to populate userData and final search result. We map from search result later
     userApi.getAllUsers().then((res) => {
-      console.log(res.data);
       setUserData(res.data);
       setFinalSearchResult(res.data);
     });
