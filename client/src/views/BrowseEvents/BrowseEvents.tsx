@@ -1,15 +1,12 @@
 // @ts-nocheck
 
 import React, {
-  useEffect, useMemo, useState, MouseEventHandler, ChangeEvent,
+  useEffect, useState, MouseEventHandler,
 } from 'react';
 import { useSelector, RootState } from 'react-redux';
-import { ChangeHandler } from 'react-hook-form';
-import browseEventsContext from '../../contexts/browse-events.context';
 import BrowseEventsMenu from './BrowseEventsMenu/BrowseEventsMenu';
 import EventsList from '../../components/EventsList/EventsList';
 import MapLarge from '../../components/MapLarge/MapLarge';
-import mockEventsData from '../../utilities/mocks/db-data/events-db-data.json';
 import './BrowseEvents.css';
 import { LuEvent } from '../../utilities/types/Event';
 
@@ -34,7 +31,6 @@ const checDateInFuture = (date: string) => (new Date(date) >= new Date());
 // sory by date, newest first
 
 function BrowseEvents() {
-  const userId = Number(localStorage.getItem('id_user'));
   const events = useSelector(
     (state: RootState) => state.eventReducer.allEvents,
   );
