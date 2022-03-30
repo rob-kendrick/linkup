@@ -11,6 +11,7 @@ import HeaderMain from '../../../components/HeaderMain/HeaderMain';
 import { InputTextField } from '../../../components/Form/InputTextField/InputTextField';
 
 import DropDown from './DropDown/DropDown';
+import FilterTags from '../EventsFilters/Filters/FilterTags/FilterTags';
 
 interface myProps {
   props : {
@@ -28,7 +29,7 @@ function BrowseEventsMenu({
   const [titleSearchValue, setTitleSearchValue] = useState<string>('');
   const [datesNextMonth, setDatesNextMonth] = useState<Date[]>([]);
   const inputField = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const [currentFilter, setCurrentFilter] = useState<string>('Date');
+  const [currentFilter, setCurrentFilter] = useState<string>('Tags');
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
 
   // on first run render all dates for next month
@@ -44,7 +45,7 @@ function BrowseEventsMenu({
 
   // when filter is changes, auto focus the search field
   useEffect(() => {
-    if (currentFilter !== 'Date') inputField.current.focus();
+    if (currentFilter === 'Title') inputField.current.focus();
   }, [currentFilter]);
 
   // handle date filter and pass trigger function on parent
@@ -101,7 +102,7 @@ function BrowseEventsMenu({
           </div>
         )}
 
-        {currentFilter !== 'Date' && (
+        {currentFilter === 'Title' && (
           <InputTextField
             ref={inputField}
             onChange={handleTitleSearchChange}
@@ -109,6 +110,10 @@ function BrowseEventsMenu({
             label={`Search ${currentFilter}`}
             value={titleSearchValue}
           />
+        )}
+
+        {currentFilter === 'Tags' && (
+          <FilterTags filterByTag={props.filterByTag} />
         )}
       </div>
 
