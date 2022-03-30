@@ -32,7 +32,6 @@ function EventDetails() {
   const { lng } = currentEvent;
 
   if (currentEvent) {
-
     const date = useDateLong(currentEvent.date);
     const participating = currentEvent.participants.some(
 
@@ -84,24 +83,24 @@ function EventDetails() {
                 </div>
               )}
             {(hosting)
-                && (
+              && (
                 <div>
                   <div role="button" onClick={() => setShowPopup(true)}>
                     <ButtonLarge style="stroke" type="submit" value="Cancel Activity" />
                   </div>
                   {showPopup ? <PopUp currentEvent={currentEvent} useCase="cancel" setShowPopup={setShowPopup} /> : null}
                 </div>
-                )}
+              )}
             {
-                (participating) && (
-                  <div>
-                    <div role="button" onClick={() => setShowPopup(true)}>
-                      <ButtonLarge style="stroke" type="submit" value="Leave Activity" />
-                    </div>
-                    {showPopup ? <PopUp currentEvent={currentEvent} useCase="leave" setShowPopup={setShowPopup} /> : null}
+              (participating) && (
+                <div>
+                  <div role="button" onClick={() => setShowPopup(true)}>
+                    <ButtonLarge style="stroke" type="submit" value="Leave Activity" />
                   </div>
-                )
-              }
+                  {showPopup ? <PopUp currentEvent={currentEvent} useCase="leave" setShowPopup={setShowPopup} /> : null}
+                </div>
+              )
+            }
           </div>
         </div>
       </div>
