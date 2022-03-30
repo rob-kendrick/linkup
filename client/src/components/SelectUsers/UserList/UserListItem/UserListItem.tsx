@@ -38,10 +38,7 @@ function UserListItem({
 
           <ProfilePicture userPicture={user.profile_picture} userName={user.first_name} size={50} alt={user.first_name} />
         </div>
-        {/* <div
-          className="user-list-item-profile-picture"
-          style={{ background: `url(${user.profile_picture})`, backgroundSize: 'cover' }}
-        /> */}
+
         <p className="user-list-item-name">{user.first_name}</p>
 
       </div>
