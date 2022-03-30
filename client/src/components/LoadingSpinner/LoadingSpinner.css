@@ -1,15 +1,18 @@
-.loading-spinner {
-  display: flex
+.lsp__main-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh; 
 }
 
-.loading-spinner:before {
+.lsp__spinner {
+  display: flex;
+}
+
+.lsp__spinner:before {
   content: "";
   box-sizing: border-box;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -30px;
-  margin-left: -30px;
   border-radius: 50%;
   border: 100px solid transparent;
   border-top-color: #0e124e;
