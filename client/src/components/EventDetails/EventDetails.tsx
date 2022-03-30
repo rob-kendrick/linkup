@@ -21,9 +21,6 @@ function EventDetails() {
   const params = useParams();
   const [showPopup, setShowPopup] = useState(false);
   const userId = localStorage.getItem('id_user');
-  const hidePopup = () => {
-    setShowPopup(false);
-  };
 
   const currentEvent = useSelector(
     (state: RootState) => state.eventReducer.allEvents.filter(
@@ -35,55 +32,79 @@ function EventDetails() {
   const { lng } = currentEvent;
 
   if (currentEvent) {
-    const date = useDateLong(currentEvent.date);
-    const participation = currentEvent.participants.some(
+
+    const date = useDate(currentEvent.date);
+    const participating = currentEvent.participants.some(
+
       (participant) => participant.id_user === Number(userId),
     );
+    const hosting = (Number(userId) === currentEvent.creator_id);
 
     return (
-      <article style={{ height: '100%' }}>
+      <div className="ed">
         <HeaderReturn text="Activity Details" />
-        <div className="ed">
-          <div className="ed__header">
-            <p className="ed__fontSecondary">{date}</p>
-            <h3 className="ed__titile">{currentEvent.title}</h3>
+        <div className="ed__container">
+          <div className="ed__header ed__indent">
             <TagList tags={currentEvent.tags} />
+            <h2>{date}</h2>
+            <h1>{currentEvent.title}</h1>
           </div>
-          <div className="ed__mainContentContainer">
-            <div className="ed__txtContainer">
+          <article className="ed__article">
+            <div className="ed__indent">
               <EventField text="Location" currentEvent={currentEvent} />
               <EventField text="Date" currentEvent={currentEvent} />
               <EventField text="Host" currentEvent={currentEvent} />
-              <p className="ed__fontSecondary">Description</p>
-              <p className="ed__fontRegular">{currentEvent.description}</p>
+              <h3>Description</h3>
+              <p>{currentEvent.description}</p>
+              <h3>Location</h3>
             </div>
             <div className="ed__map-container">
               <MapSmall lat={lat} lng={lng} />
             </div>
-            <ParticipantList currentEvent={currentEvent} />
+            <div className="ed__indent">
+              <h3>Participants</h3>
+              <ParticipantList currentEvent={currentEvent} />
+            </div>
+          </article>
+          <div className="ed__btn-container">
+            {(participating || hosting)
+              ? (
+                <div>
+                  <div role="button" onClick={() => navigate(`/events/${params.eventid}/chat`, { state: { currentEvent } })}>
+                    <ButtonLarge style="fill" type="submit" value="Chat" />
+                  </div>
+                </div>
+              )
+              : (
+                <div>
+                  <div role="button" onClick={() => setShowPopup(true)}>
+                    <ButtonLarge style="fill" type="submit" value="LinkUp" />
+                  </div>
+                  {showPopup ? <PopUp currentEvent={currentEvent} useCase="signup" setShowPopup={setShowPopup} /> : null}
+                </div>
+              )}
+            {(hosting)
+                && (
+                <div>
+                  <div role="button" onClick={() => setShowPopup(true)}>
+                    <ButtonLarge style="stroke" type="submit" value="Cancel Activity" />
+                  </div>
+                  {showPopup ? <PopUp currentEvent={currentEvent} useCase="cancel" setShowPopup={setShowPopup} /> : null}
+                </div>
+                )}
+            {
+                (participating) && (
+                  <div>
+                    <div role="button" onClick={() => setShowPopup(true)}>
+                      <ButtonLarge style="stroke" type="submit" value="Leave Activity" />
+                    </div>
+                    {showPopup ? <PopUp currentEvent={currentEvent} useCase="leave" setShowPopup={setShowPopup} /> : null}
+                  </div>
+                )
+              }
           </div>
-          {participation
-            ? (
-              <div className="ed__btnContainer">
-                <div role="button" onClick={() => navigate(`/events/${params.eventid}/chat`, { state: { currentEvent } })}>
-                  <ButtonLarge style="fill" type="submit" value="Chat" />
-                </div>
-                <div role="button" onClick={() => setShowPopup(true)}>
-                  <ButtonLarge style="stroke" type="submit" value="Cancel / Leave Activity" />
-                </div>
-                {showPopup ? <PopUp currentEvent={currentEvent} useCase="leave" hidePopup={hidePopup} /> : null}
-              </div>
-            )
-            : (
-              <div className="ed__btnContainer">
-                <div role="button" onClick={() => setShowPopup(true)}>
-                  <ButtonLarge style="fill" type="submit" value="LinkUp" />
-                </div>
-                {showPopup ? <PopUp currentEvent={currentEvent} useCase="signup" hidePopup={hidePopup} /> : null}
-              </div>
-            )}
         </div>
-      </article>
+      </div>
     );
   }
   return <div>Loading</div>;

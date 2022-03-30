@@ -1,16 +1,21 @@
 .pl {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 }
 
 .pl__participantsContainer {
+  padding: 0.3em 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding-top: 1rem;
   overflow: scroll;
+  flex-basis: 50%;
+}
+
+@media only screen and (min-width: 600px)  {
+  .pl__participantsContainer{
+  flex-basis: 25%;
+  }
 }
 
 .pl__participantName {

@@ -3,15 +3,15 @@ import './popUpBtn.css';
 
 type Props = {
   text: string;
-  hidePopup: () => void;
+  setShowPopup: Function;
   // eslint-disable-next-line react/require-default-props
   onClick?: () => void;
 }
 
-function PopUpBtn({ text, hidePopup, onClick }: Props) {
+function PopUpBtn({ text, setShowPopup, onClick }: Props) {
   if (text === 'Linkup') {
     return (
-      <button className="pubtn__btn pubtn__btn--color" type="button" onClick={() => { hidePopup(); onClick!(); }}>
+      <button className="pubtn__btn pubtn__btn--color" type="button" onClick={() => { setShowPopup(false); onClick!(); }}>
         {' '}
         <p className="pubtn__txt">{text}</p>
         {' '}
@@ -21,7 +21,7 @@ function PopUpBtn({ text, hidePopup, onClick }: Props) {
 
   if (text === 'Yes, Cancel') {
     return (
-      <button className="pubtn__btn" type="button" onClick={() => { hidePopup(); onClick!(); }}>
+      <button className="pubtn__btn" type="button" onClick={() => { setShowPopup(false); onClick!(); }}>
         {' '}
         <p className="pubtn__txt">{text}</p>
         {' '}
@@ -30,7 +30,7 @@ function PopUpBtn({ text, hidePopup, onClick }: Props) {
   }
 
   return (
-    <button className="pubtn__btn" type="button" onClick={() => { hidePopup(); }}>
+    <button className="pubtn__btn" type="button" onClick={() => { setShowPopup(false); }}>
       {' '}
       <p className="pubtn__txt">{text}</p>
       {' '}
