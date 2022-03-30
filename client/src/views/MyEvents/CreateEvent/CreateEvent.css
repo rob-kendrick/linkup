@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.ce__container text {
+.ce__container p {
   color: var(--color6-grad-mean);
   font-size: small;
 }
@@ -21,7 +21,7 @@
   background-color:aquamarine;
 }
 
-.ce__container text {
+.ce__container p {
   color: var(--color6-grad-mean);
   font-size: small;
 }

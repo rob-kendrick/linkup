@@ -11,6 +11,10 @@
   display: flex;
 }
 
+.n__container p {
+  margin: 0;
+}
+
 .n__button{
   white-space: nowrap;
   display: flex;
@@ -29,7 +33,7 @@
   fill: var(--color6-grad-mean);
 }
 
-.n__button-active text{
+.n__button-active {
   color: var(--color6-grad-mean);
 }
 
