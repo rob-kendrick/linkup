@@ -36,11 +36,7 @@ function App() {
   if (fetchStatus === 'idle' || fetchStatus === 'loading') {
     return (
       <div>
-        {' '}
         Loading
-        {' '}
-        {console.log('loading')}
-        {' '}
       </div>
     );
   }

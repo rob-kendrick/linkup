@@ -140,7 +140,7 @@ function SignUp() {
             style="fill"
           />
           {(errorMessage !== '')
-          && <text>{errorMessage}</text>}
+          && <p>{errorMessage}</p>}
         </form>
       </div>
     </div>

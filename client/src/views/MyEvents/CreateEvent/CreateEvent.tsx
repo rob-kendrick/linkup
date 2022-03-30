@@ -101,17 +101,17 @@ function CreateEvent() {
             <div>
               {participantsToAdd.length > 0
               && (
-              <text>
+              <p>
                 You selected
                 {' '}
                 {participantsToAdd.length}
                 {' '}
                 participants
-              </text>
+              </p>
               )}
               <br />
               {(notification !== '')
-            && <text>{notification}</text>}
+            && <p>{notification}</p>}
             </div>
             <div onClick={() => setParticipantsOverlay(!participantsOverlay)}>
               <ButtonLarge
