@@ -1,20 +1,70 @@
-import React from 'react';
+// @ts-nocheck
+import React, { useState, useEffect } from 'react';
 import FriendsListItem from './FriendsListItem/FriendsListItem';
 import userMockData from '../../../../utilities/mocks/db-data/users-db-data.json';
-
-const userData: any[] = userMockData.data;
+import userApi from '../../../../utilities/api/user.api';
+import { InputTextField } from '../../../../components/Form/InputTextField/InputTextField';
+import { User } from '../../../../utilities/types/User';
+import './FriendsList.css';
+import HeaderReturn from '../../../../components/HeaderReturn/HeaderReturn';
+import UserListItem from '../../../../components/SelectUsers/UserList/UserListItem/UserListItem';
 
 function FriendsList() {
+  const [userData, setUserData] = useState<User[]>([]);
+  const [currentUser, setCurrentUser] = useState< string | null>(null);
+  const [finalSearchResult, setFinalSearchResult] = useState<User[]>([]);
+
+  useEffect(() => {
+    // Grabbing user id from local storage
+    const uid = localStorage.getItem('id_user');
+    setCurrentUser(uid);
+    // Calling api to populate userData and final search result. We map from search result later
+    userApi.getAllUsers().then((res) => {
+      console.log(res.data);
+      setUserData(res.data);
+      setFinalSearchResult(res.data);
+    });
+  }, []);
+
+  const search = (input) => {
+    const results = [];
+    for (let i = 1; i < userData.length; i += 1) {
+      if (userData[i].first_name.toLowerCase().includes(input.toLowerCase())) {
+        results.push(userData[i]);
+      }
+    }
+    setFinalSearchResult(results);
+  };
+
+  const handleInput = (e: any) => {
+    const userInput = e.target.value;
+    if (userInput === '') return setFinalSearchResult(userData);
+    return search(userInput);
+  };
+
   return (
-    <div>
-      <h3>FriendsList</h3>
-      {userData.map((user) => (
-        <FriendsListItem
-          key={user.id_user}
-          user={user}
-        />
-      ))}
+    <div className="fl_friends-list-container">
+      <HeaderReturn text="Friends" />
+      <div className="fl_search-container">
+        <InputTextField onChange={handleInput} type="text" label="Search..." />
+      </div>
+
+      <div className="fl_main-content">
+
+        <div className="fl_results-container">
+          {finalSearchResult.map((user) => {
+            if (user.id_user === Number(currentUser)) return null;
+            return (
+              <UserListItem
+                key={user.id_user}
+                user={user}
+              />
+            );
+          })}
+        </div>
+      </div>
     </div>
+
   );
 }
 

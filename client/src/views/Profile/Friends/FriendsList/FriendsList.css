@@ -1,0 +1,27 @@
+.fl_friends-list-container {
+  /* height: 100vh;
+  width: 100vw; */
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.fl_search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fl_main-content {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  flex-grow: 1;
+  overflow: scroll
+}
+
+.fl_results-container {
+  margin-top: 1vh
+}
