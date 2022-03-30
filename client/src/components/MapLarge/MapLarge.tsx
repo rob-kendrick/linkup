@@ -70,7 +70,7 @@ export default function MapLarge({ filteredEvents } : eventProps) {
       tap={false}
       className="ml__container"
       center={position}
-      zoom={13}
+      zoom={12}
       scrollWheelZoom={false}
     >
       <TileLayer
