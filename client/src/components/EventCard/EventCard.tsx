@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
@@ -17,6 +18,7 @@ interface Events {
 }
 
 function EventCard({ event }: Events) {
+  const userId = localStorage.getItem('id_user');
   return (
     <Link
       to={`/events/${event.id_event}`}
@@ -53,9 +55,7 @@ function EventCard({ event }: Events) {
             </div>
             <div className="ec__details-text">
               <p className="ec__header-text">
-                {event.street_name}
-                {' '}
-                {event.street_number}
+                {event.street}
                 {', '}
                 {event.postcode}
                 {' '}
@@ -78,20 +78,77 @@ function EventCard({ event }: Events) {
           </div>
         </div>
         <div className="ec__button-container">
-          <div className="ec__button-bn-left">
-            <ButtonSmall
-              style="fill"
-              value="Link Up"
-              type="button"
-            />
-          </div>
-          <div className="ec__button-bn-rigth">
-            <ButtonSmall
-              style="grey"
-              value={`${event.participants.length} are going`}
-              type="button"
-            />
-          </div>
+
+          {/* LINK-UP and Going */}
+          {
+
+          (userId in event.participants === false) && (userId !== event.creator_id.toString())
+            ? (
+              <div className="ec__button-container">
+                <div className="ec__button-bn-left">
+                  <ButtonSmall
+                    style="fill"
+                    value="Link Up"
+                    type="button"
+                  />
+                </div>
+                <div className="ec__button-bn-rigth">
+                  <ButtonSmall
+                    style="grey"
+                    value={`${event.participants.length} are going`}
+                    type="button"
+                  />
+                </div>
+              </div>
+            ) : (false)
+          }
+
+          {/* Hosting */}
+          {userId === event.creator_id.toString()
+
+            ? (
+              <div className="ec__button-container">
+                <div className="ec__button-bn-left">
+                  <ButtonSmall
+                    style="grey"
+                    value={`${event.participants.length} are going`}
+                    type="button"
+                  />
+                </div>
+                <div className="ec__button-bn-rigth">
+                  <ButtonSmall
+                    style="stroke"
+                    value="Cancel Acvtivity"
+                    type="button"
+                  />
+                </div>
+              </div>
+
+            )
+
+            : (false)}
+
+          {/* Creator participating */}
+          {(userId !== event.creator_id.toString()) && (userId in event.participants)
+            ? (
+              <div className="ec__button-container">
+                <div className="ec__button-bn-left">
+                  <ButtonSmall
+                    style="grey"
+                    value={`${event.participants.length} are going`}
+                    type="button"
+                  />
+                </div>
+                <div className="ec__button-bn-rigth">
+                  <ButtonSmall
+                    style="stroke"
+                    value="Leave"
+                    type="button"
+                  />
+                </div>
+              </div>
+            ) : (false)}
+
         </div>
       </div>
 

@@ -18,6 +18,10 @@ function MyEventsMenu({ filterHosted, filterAttending } : Functions) {
     !toggle ? filterHosted() : filterAttending();
   };
 
+  // useEffect(() => {
+  //   filterHosted();
+  // }, [])
+
   return (
     <div>
 

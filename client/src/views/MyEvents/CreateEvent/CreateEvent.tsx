@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
@@ -10,33 +10,12 @@ import './CreateEvent.css';
 import UserList from '../../../components/SelectUsers/UserList/UserList';
 import MapCreate from '../../../components/MapCreate/MapCreate';
 
-// TODO: delete mockAddress when retrieve lat, lng and adress from map
-const mockAddress = {
-  lat: 52.520909,
-  lng: 13.46896,
-  street_number: '16',
-  street_name: 'Richard-Ermisch-Straße',
-  postcode: '10247',
-  city: 'Berlin',
-  country: 'Deutschland',
-};
-
 function CreateEvent() {
   const navigate = useNavigate();
   const [notification, setNotification] = useState('');
-  const [showParticipants, setShowParticipants] = useState(false);
+  const [participantsOverlay, setParticipantsOverlay] = useState(false);
   const [participantsToAdd, setParticipantsToAdd] = useState([]);
-
-  // keeping track of participants to add for dev purposes
-  useEffect(() => {
-    console.log(participantsToAdd, 'CREATE EVENT STATE');
-  }, [participantsToAdd]);
-
-  const [address, setAddress] = useState({});
-
-  const findEventAddress = (inputAddress : any) => {
-    console.log(inputAddress);
-  };
+  const [location, setLocation] = useState(null);
 
   const {
     register,
@@ -50,42 +29,26 @@ function CreateEvent() {
     },
   });
 
-  // conditionally rendering participants list
-  const toggleParticipants = () => {
-    // set ShowParticipants to true, which conditionally renders user list
-    setShowParticipants(!showParticipants);
-  };
-
   const onSubmit = async (formData: LuEvent) => {
-    const user = Number(localStorage.getItem('id_user'));
-    if (user) {
-      try {
-        // creating the request body
-        const fullEvent = Object.assign(formData, mockAddress);
-        fullEvent.participants_to_add = participantsToAdd;
-        fullEvent.creator_id = user;
-        // Posting the event
-        const response = await eventApi.postEvent(fullEvent);
-        // If event creation is sucess, redirect to 'my events'
-        if (response.data) {
-          setTimeout(() => { navigate('/myevents'); }, 2000);
-        }
-        console.log('AAAAAAAAAAH', response);
-        // Error handling
-        if (response.error) setNotification('Server error');
-        else setNotification('Event successfully created!');
-      } catch (err) {
-        console.log('ERROR POSTING EVENT :', err);
+    if (location === null) {
+      setNotification('Set a location fo your activity.');
+    } else {
+      const newEvent = formData;
+      newEvent.creator_id = Number(localStorage.getItem('id_user'));
+      newEvent.participants_to_add = participantsToAdd;
+      Object.assign(newEvent, location);
+      const response = await eventApi.postEvent(newEvent);
+      if (response.data) {
+        setTimeout(() => { navigate('/myevents'); }, 2000);
       }
-
-      // TODO: delete msg when user stored in Redux
-    } else setNotification('Could not find user in local storage');
+      if (response.error) setNotification('Server error');
+      else setNotification('Event successfully created!');
+    }
   };
 
   return (
     <div>
-      {/* Conditional rendering + header with back button */}
-      <div className={`ce__wrapper ${showParticipants ? 'ce__wrapper_hidden' : ''}`}>
+      <div className={`ce__wrapper ${participantsOverlay ? 'ce__wrapper_hidden' : ''}`}>
         <HeaderReturn
           text="Create Activity"
         />
@@ -93,7 +56,6 @@ function CreateEvent() {
           <form
             onSubmit={handleSubmit(onSubmit)}
           >
-            {/* Inputs */}
             <InputTextField
               type="text"
               label="Title"
@@ -129,25 +91,25 @@ function CreateEvent() {
               })}
             />
             <div className="ce__map-container">
-              <MapCreate findEventAddress={findEventAddress} />
-              {/* <MapSmall /> */}
+              <MapCreate setLocation={setLocation} />
               {/* Rendering text based on participants added */}
             </div>
             <div>
               {participantsToAdd.length > 0
               && (
-              <p>
+              <text>
                 You selected
                 {' '}
                 {participantsToAdd.length}
                 {' '}
                 participants
-              </p>
+              </text>
               )}
+              <br />
+              {(notification !== '')
+            && <text>{notification}</text>}
             </div>
-
-            {/* Div for conditionally rendering user list */}
-            <div onClick={toggleParticipants}>
+            <div onClick={() => setParticipantsOverlay(!participantsOverlay)}>
               <ButtonLarge
                 type="button"
                 value="Add Participants"
@@ -159,23 +121,17 @@ function CreateEvent() {
               value="Create"
               style="fill"
             />
-            {/* Show the user a notification if there is one */}
-            {(notification !== '')
-          && <p>{notification}</p>}
           </form>
         </div>
       </div>
-      {/* Toggling the user list for participant selection */}
       <div>
-        {showParticipants === true && (
+        {participantsOverlay === true && (
         <UserList
-          toggleParticipants={toggleParticipants}
+          toggleParticipants={() => setParticipantsOverlay(!participantsOverlay)}
           setParticipantsToAdd={setParticipantsToAdd}
         />
         )}
-
       </div>
-
     </div>
   );
 }

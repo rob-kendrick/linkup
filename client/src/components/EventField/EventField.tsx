@@ -3,7 +3,7 @@ import { LuEvent } from '../../utilities/types/Event';
 import locationIcon from '../../assets/IoLocationSharp.svg';
 import dateSvg from '../../assets/BiTimeFive.svg';
 import Icon from '../Icon/Icon';
-import useDate from '../../utilities/helper/useDate';
+import { useDateLong } from '../../utilities/helper/useDate';
 import './eventField.css';
 import ProfilePicture from '../ProfilePicture/ProfilePicture';
 
@@ -22,9 +22,7 @@ function EventField({ text, currentEvent }: Props) {
         <div className="puf__txtContainer">
           <p className="puf__p">{text}</p>
           <h4 className="puf__h4">
-            {currentEvent.street_name}
-            {' '}
-            {currentEvent.street_number}
+            {currentEvent.street}
             ,
             {' '}
             {currentEvent.postcode}
@@ -44,7 +42,7 @@ function EventField({ text, currentEvent }: Props) {
         <div className="puf__txtContainer">
           <p className="puf__p">{text}</p>
           <h4 className="puf__h4">
-            {useDate(currentEvent.date)}
+            {useDateLong(currentEvent.date)}
           </h4>
         </div>
       </div>

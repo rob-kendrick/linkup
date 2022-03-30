@@ -49,7 +49,7 @@
 }
 
 .ec__header-text{
-  font-size: 0.8rem; 
+  font-size: 0.8rem;
   margin: 0px;
 }
 .ec__header-info{
@@ -59,7 +59,7 @@
   justify-content: space-between;
   margin-left: 3%;
   padding-top: 1%;
-  padding-bottom: 1%; 
+  padding-bottom: 1%;
 }
 
 .ec__details{
@@ -82,7 +82,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 10px; 
+  margin-right: 10px;
 }
 
 .ec__details-icon{
@@ -112,6 +112,13 @@
   align-items: center;
   padding: 5% 0% 5% 0%;
   margin-bottom: auto;
+}
+
+.ec__button-bn-rigth{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 
