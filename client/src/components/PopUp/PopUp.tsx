@@ -12,11 +12,11 @@ import { User } from '../../utilities/types/User';
 
 type props = {
   useCase: string;
-  hidePopup: () => void;
+  setShowPopup: Function;
   currentEvent: LuEvent
 };
 
-function PopUp({ useCase, hidePopup, currentEvent }: props) {
+function PopUp({ useCase, setShowPopup, currentEvent }: props) {
   const dispatch: Dispatch<any> = useDispatch();
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   useEffect(() => {
@@ -50,50 +50,75 @@ function PopUp({ useCase, hidePopup, currentEvent }: props) {
     };
 
     const leaveEvent = () => {
+      console.log('leave event');
       eventApi.leaveEvent(eventWithAddedParticipant.id_event, currentUser!.id_user).then(() => {
         dispatch(eventActions.editEventAction(eventWithRemovedParticipant));
       });
     };
 
-    return (
-      <div className="pu__container">
-        {useCase === 'signup'
-          ? (
-            <div className="pu__cardContainer">
-              <div className="pu__mainContainer">
-                <div className="pu__btnTxtContainer">
-                  <h5 className="pu__hLight">LinkUp Confirmation</h5>
-                  <h3 className="pu__hMed">{currentEvent.description}</h3>
-                </div>
-                <div className="pu__fieldContainer">
-                  <EventField currentEvent={currentEvent} text="Location" />
-                  <EventField currentEvent={currentEvent} text="Date" />
-                  <EventField currentEvent={currentEvent} text="Host" />
-                </div>
-              </div>
-              <div className="pu__btnContainer">
-                <PopUpBtn text="Linkup" hidePopup={hidePopup} onClick={joinEvent} />
-                <PopUpBtn text="Cancel" hidePopup={hidePopup} />
-              </div>
-            </div>
+    const cancelEvent = () => {
+      console.log('cancel event');
+    };
 
-          )
-          : (
-            <div className="pu__cardContainer">
+    if (useCase === 'signup') {
+      return (
+        <div className="pu__container">
+          <div className="pu__cardContainer">
+            <div className="pu__mainContainer">
               <div className="pu__btnTxtContainer">
-                <h3 className="pu__hMed">Are you sure?</h3>
-                <p className="pu__pMed">Do you really want to cancel the activity?</p>
+                <h5 className="pu__hLight">LinkUp Confirmation</h5>
+                <h3 className="pu__hMed">{currentEvent.title}</h3>
               </div>
-              <div className="pu__btnContainer">
-                <PopUpBtn text="Yes, Cancel" hidePopup={hidePopup} onClick={leaveEvent} />
-                <PopUpBtn text="No" hidePopup={hidePopup} />
+              <div className="pu__fieldContainer">
+                <EventField currentEvent={currentEvent} text="Location" />
+                <EventField currentEvent={currentEvent} text="Date" />
+                <EventField currentEvent={currentEvent} text="Host" />
               </div>
             </div>
-          )}
-      </div>
-    );
+            <div className="pu__btnContainer">
+              <PopUpBtn text="Linkup" setShowPopup={setShowPopup} onClick={joinEvent} />
+              <PopUpBtn text="Cancel" setShowPopup={setShowPopup} />
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (useCase === 'leave') {
+      return (
+        <div className="pu__container">
+          <div className="pu__cardContainer">
+            <div className="pu__btnTxtContainer">
+              <h3 className="pu__hMed">Are you sure?</h3>
+              <p className="pu__pMed">Do you really want to leave the activity?</p>
+            </div>
+            <div className="pu__btnContainer">
+              <PopUpBtn text="Yes, leave" setShowPopup={setShowPopup} onClick={leaveEvent} />
+              <PopUpBtn text="No" setShowPopup={setShowPopup} />
+            </div>
+          </div>
+        </div>
+      );
+    }
+    // TODO: functionality
+    if (useCase === 'cancel') {
+      return (
+        <div className="pu__container">
+          <div className="pu__cardContainer">
+            <div className="pu__btnTxtContainer">
+              <h3 className="pu__hMed">Are you sure?</h3>
+              <p className="pu__pMed">Do you really want to cancel the activity?</p>
+            </div>
+            <div className="pu__btnContainer">
+              <PopUpBtn text="Yes, Cancel" setShowPopup={setShowPopup} onClick={cancelEvent} />
+              <PopUpBtn text="No" setShowPopup={setShowPopup} />
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
-  return <div>Loading</div>;
+  return (<div />);
 }
 
 export default PopUp;
