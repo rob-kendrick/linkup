@@ -6,7 +6,8 @@
   justify-content: center;
 }
 
-.su__container text {
+.su__container p {
   color: var(--color6-grad-mean);
+  margin: 0;
   font-size: small;
 }

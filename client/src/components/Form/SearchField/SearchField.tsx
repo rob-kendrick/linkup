@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './SearchField.css';
 import '../../../assets/HiSearch.svg';
 import userMockData from '../../../utilities/mocks/db-data/users-db-data.json';
@@ -10,10 +10,6 @@ function SearchField({ data }: any) {
 
   data = userMockData.data;
 
-  useEffect(() => {
-    console.log(result, '<<<RESSSSS');
-  }, [query]);
-
   const search = () => {
     for (let i = 1; i < data.length; i++) {
       if (data[i].first_name.toLowerCase().includes(query.toLowerCase())) {
@@ -23,7 +19,6 @@ function SearchField({ data }: any) {
   };
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('data!!!!!!!', data);
     const userInput = event.target.value;
     setQuery(userInput);
     search();

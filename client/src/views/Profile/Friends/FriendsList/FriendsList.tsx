@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import FriendsListItem from './FriendsListItem/FriendsListItem';
 import userMockData from '../../../../utilities/mocks/db-data/users-db-data.json';
 import userApi from '../../../../utilities/api/user.api';
@@ -20,7 +21,6 @@ function FriendsList() {
     setCurrentUser(uid);
     // Calling api to populate userData and final search result. We map from search result later
     userApi.getAllUsers().then((res) => {
-      console.log(res.data);
       setUserData(res.data);
       setFinalSearchResult(res.data);
     });
@@ -43,24 +43,25 @@ function FriendsList() {
   };
 
   return (
-    <div className="fl_friends-list-container">
+    <div className="fl__friends-list-container">
       <HeaderReturn text="Friends" />
-      <div className="fl_search-container">
+      <div className="fl__search-container">
         <InputTextField onChange={handleInput} type="text" label="Search..." />
       </div>
 
-      <div className="fl_results-container">
+      <div className="fl__results-container">
         {finalSearchResult.map((user) => {
           if (user.id_user === Number(currentUser)) return null;
           return (
-            <UserListItem
-              key={user.id_user}
-              user={user}
-            />
+            <Link to={`/users/${user.id_user}`}>
+              <UserListItem
+                key={user.id_user}
+                user={user}
+              />
+            </Link>
           );
         })}
       </div>
-
     </div>
 
   );

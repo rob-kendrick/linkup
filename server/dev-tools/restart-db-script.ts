@@ -113,7 +113,7 @@ const resetDb = async (req:Request, res:Response) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return res.status(500).send({ error: err });
   }
 };

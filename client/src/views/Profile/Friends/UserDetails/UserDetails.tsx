@@ -19,10 +19,9 @@ function UserDetails() {
   const getUser = () => {
     const userdata = userApi.getUserById(userId)
       .then((response) => {
-        console.log(response.data);
         setUser(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
@@ -43,18 +42,19 @@ function UserDetails() {
                     userPicture={user.profile_picture}
                     alt={user.first_name}
                     userName={user.first_name}
+                    size={191}
                   />
                 </div>
                 <div className="uds__info-container">
-                  <div>
-                    <h4>
-                      {user.first_name}
-                      {' '}
-                      {user.last_name}
-                    </h4>
-                  </div>
-                  <div>
+                      <h4 id="uds__title-name">
+                        {user.first_name}
+                        {' '}
+                        {user.last_name}
+                      </h4>
+                  <div className="uds__info-bio">
                     {user.bio}
+                    <div>
+                    </div>
                   </div>
                 </div>
               </div>
