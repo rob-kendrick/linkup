@@ -41,6 +41,8 @@ function App() {
   const [fetchStatus, setFetchStatus] = useState('idle');
   const [backendNotification, setBackendNotification] = useState(false);
   socket.on('changeNotification', () => {
+    console.log('SOCKER TRIGGERING API CALL');
+
     setBackendNotification(!backendNotification);
   });
 
