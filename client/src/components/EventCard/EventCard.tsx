@@ -1,8 +1,7 @@
 // @ts-nocheck
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import ButtonEventsMenu from '../Form/ButtonEventsMenu/ButtonEventsMenu';
 import ProfilePicture from '../ProfilePicture/ProfilePicture';
 import TagList from '../TagList/TagList';
 import marker from '../../assets/IoLocationSharp.svg';
@@ -12,12 +11,15 @@ import { LuEvent } from '../../utilities/types/Event';
 import Icon from '../Icon/Icon';
 import ButtonSmall from '../Form/ButtonSmall/ButtonSmall';
 import '../Form/ButtonSmall/ButtonSmall.css';
+import PopUp from '../PopUp/PopUp';
 
 interface Events {
   event: LuEvent
 }
 
 function EventCard({ event }: Events) {
+  const [showPopup, setShowPopup] = useState(false);
+
   const userId = localStorage.getItem('id_user');
   return (
     <Link
@@ -65,7 +67,7 @@ function EventCard({ event }: Events) {
 
         <div className="ec__button-container">
 
-          {/* LINK-UP and Going */}
+          {/* neither hosting nor participating */}
           {(userId in event.participants === false) && (userId !== event.creator_id.toString())
             ? (
               <div className="ec__button-container">
@@ -79,10 +81,11 @@ function EventCard({ event }: Events) {
                   value={`${event.participants.length} are going`}
                   type="button"
                 />
+                {showPopup ? <PopUp currentEvent={currentEvent} useCase="signup" setShowPopup={setShowPopup} /> : null}
               </div>
             ) : (false)}
 
-          {/* Hosting */}
+          {/* hosting */}
           {userId === event.creator_id.toString()
             && (
               <div className="ec__button-container">
@@ -99,7 +102,7 @@ function EventCard({ event }: Events) {
               </div>
 
             )}
-          {/* Creator participating */}
+          {/* participating */}
           {(userId !== event.creator_id.toString()) && (userId in event.participants)
             && (
               <div className="ec__button-container">
