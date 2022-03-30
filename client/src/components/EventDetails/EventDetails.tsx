@@ -33,7 +33,7 @@ function EventDetails() {
 
   if (currentEvent) {
 
-    const date = useDate(currentEvent.date);
+    const date = useDateLong(currentEvent.date);
     const participating = currentEvent.participants.some(
 
       (participant) => participant.id_user === Number(userId),
