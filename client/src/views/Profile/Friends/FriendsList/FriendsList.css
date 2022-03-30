@@ -1,11 +1,11 @@
 .fl_friends-list-container {
-  /* height: 100vh;
-  width: 100vw; */
+  height: fit-content;
+  width: 100vw;
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  height: 100vh
 }
 
 .fl_search-container {
@@ -14,14 +14,8 @@
   align-items: center;
 }
 
-.fl_main-content {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(255, 255, 255);
-  flex-grow: 1;
-  overflow: scroll
-}
 
 .fl_results-container {
-  margin-top: 1vh
+  margin-top: 1vh;
+  overflow: scroll;
 }

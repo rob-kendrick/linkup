@@ -49,20 +49,18 @@ function FriendsList() {
         <InputTextField onChange={handleInput} type="text" label="Search..." />
       </div>
 
-      <div className="fl_main-content">
-
-        <div className="fl_results-container">
-          {finalSearchResult.map((user) => {
-            if (user.id_user === Number(currentUser)) return null;
-            return (
-              <UserListItem
-                key={user.id_user}
-                user={user}
-              />
-            );
-          })}
-        </div>
+      <div className="fl_results-container">
+        {finalSearchResult.map((user) => {
+          if (user.id_user === Number(currentUser)) return null;
+          return (
+            <UserListItem
+              key={user.id_user}
+              user={user}
+            />
+          );
+        })}
       </div>
+
     </div>
 
   );
