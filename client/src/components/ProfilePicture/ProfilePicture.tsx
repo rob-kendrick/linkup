@@ -6,7 +6,7 @@ interface UserPicture {
   userPicture? : string;
   userName?: string;
   size?: number;
-  alt?: string;
+  alt?: string; 
 }
 
 function ProfilePicture({

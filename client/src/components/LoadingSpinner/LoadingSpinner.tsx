@@ -3,7 +3,9 @@ import './LoadingSpinner.css';
 
 function LoadingSpinner() {
   return (
-    <div className="loading-spinner" />
+    <div className="lsp__main-container">
+      <div className="lsp__spinner" />
+    </div>
   );
 }
 
