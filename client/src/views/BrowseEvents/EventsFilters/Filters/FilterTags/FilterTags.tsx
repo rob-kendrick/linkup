@@ -7,52 +7,42 @@ import './FilterTags.css';
 const tagsMock = [{
   id_tag: 1,
   name: 'Sport',
-  color: '#ABDEE6',
 },
 {
   id_tag: 2,
   name: 'Game',
-  color: '#CBAACB',
 },
 {
   id_tag: 3,
   name: 'Leisure',
-  color: '#FFFFB5',
 },
 {
   id_tag: 4,
   name: 'Excercise',
-  color: '#FFCCB6',
 },
 {
   id_tag: 5,
   name: 'Running',
-  color: '#D4F0F0',
 },
 {
   id_tag: 6,
   name: 'Learning',
-  color: '#FEE1E8',
 },
 {
   id_tag: 7,
   name: 'Relaxing',
-  color: '#FFD8BE',
 },
 {
   id_tag: 8,
   name: 'Outdoor',
-  color: '#A2E1DB',
 },
 {
   id_tag: 9,
   name: 'Indoor',
-  color: '#ECD5E3',
 },
 {
   id_tag: 10,
   name: 'Culture',
-  color: '#DCD3FF',
 }];
 
 interface myProps {
@@ -67,12 +57,8 @@ function FilterTags({ filterByTag }: myProps) {
     setTagList(tagsMock);
   }, []);
 
-  useEffect(() => {
-    console.log('TAGLIST >>>', tagList);
-  }, [tagList]);
 
   useEffect(() => {
-    console.log('SELECTED TAGS >>>', selectedTags);
     filterByTag(selectedTags);
   }, [selectedTags]);
 

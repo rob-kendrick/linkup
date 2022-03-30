@@ -18,7 +18,6 @@ interface eventProps {
 
 export default function MapLarge({ filteredEvents } : eventProps) {
   const [position, setPosition] = useState<number[]>([52.520008, 13.404954]);
-  const [eventArray, setEventArray] = useState(filteredEvents);
 
   const myIcon = L.divIcon({
     iconSize: [35, 35],
