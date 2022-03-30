@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import EventsList from '../../components/EventsList/EventsList';
-import HeaderMain from '../../components/HeaderMain/HeaderMain';
 import MyEventsMenu from './MyEventsMenu/MyEventsMenu';
-import mockEventsData from '../../utilities/mocks/db-data/events-db-data.json';
 import LuEvent from '../../utilities/types/Event';
 import './MyEvents.css';
 
@@ -37,15 +35,14 @@ function MyEvents() {
   };
 
   return (
-    <div className="mev__main-container">
-      <HeaderMain
-        title="My Events"
-      />
+    <div className="be__container">
       <MyEventsMenu
         filterHosted={filterHosted}
         filterAttending={filterAttending}
       />
+      <div className="be__container-inner" />
       <EventsList filteredEvents={filteredEvents} />
+      <div />
     </div>
   );
 }

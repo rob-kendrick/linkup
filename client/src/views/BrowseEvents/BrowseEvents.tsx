@@ -34,7 +34,7 @@ function BrowseEvents() {
     (state: RootState) => state.eventReducer.allEvents,
   );
 
-  const [mapView, setMapView] = useState(true);
+  const [mapView, setMapView] = useState(false);
   const [allEvents, setAllEvents] = useState<LuEvent[]>([]);
   const [dateFilter, setDateFilter] = useState<LuEvent[]>([]);
   const [titleFilter, setTitleFilter] = useState<LuEvent[]>([]);
