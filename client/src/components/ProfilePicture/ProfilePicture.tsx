@@ -3,10 +3,10 @@ import Avatar from 'boring-avatars';
 import './ProfilePicture.css';
 
 interface UserPicture {
-  userPicture? : string;
+  userPicture: string;
   userName?: string;
-  size?: number;
-  alt?: string;
+  size: number;
+  alt: string;
 }
 
 function ProfilePicture({
