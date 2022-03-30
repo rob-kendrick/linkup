@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import EventCard from '../EventCard/EventCard';
 import type { LuEvent } from '../../utilities/types/Event';
 import './EventsList.css';
@@ -9,7 +9,7 @@ interface eventProps {
 }
 
 function EventList({ filteredEvents } : eventProps) {
-  const eventCardList = filteredEvents.map((thisEvent) => (<EventCard event={thisEvent} />));
+  const eventCardList = filteredEvents.map((thisEvent) => (<EventCard cardEvent={thisEvent} />));
 
   return (
     <div className="evl__container">
