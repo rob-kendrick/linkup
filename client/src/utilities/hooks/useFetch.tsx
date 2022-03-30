@@ -14,8 +14,7 @@ export default function useFetch() {
   const [fetchStatus, setFetchStatus] = useState('idle');
 
   const callbacVariable = useCallback(() => {
-    socket.once('changeNotification', (status) => {
-      console.log('SOCKER TRIGGERING API CALL', status);
+    socket.once('changeNotification', () => {
       setBackendNotification(!backendNotification);
     });
   }, [backendNotification]);

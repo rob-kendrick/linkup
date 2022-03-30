@@ -1,8 +1,5 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { Dispatch } from 'redux';
+import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { io, Socket } from 'socket.io-client';
 // import debounce from 'lodash.debounce';
 import BrowseEvents from './views/BrowseEvents/BrowseEvents';
 import MyEvents from './views/MyEvents/MyEvents';
@@ -26,18 +23,14 @@ import './App.css';
 import SignUp from './views/Authentication/SignUp/SignUp';
 import Login from './views/Authentication/Login/Login';
 import StartPage from './views/Authentication/StartPage/StartPage';
-import eventApi from './utilities/api/event.api';
-import eventActions from './utilities/redux/actions/event.actions';
 import LandingPage from './views/Authentication/LandingPage/LandingPage';
 import ProtectedRoute from './views/Authentication/ProtectedRoute';
 import PublicRoute from './views/Authentication/PublicRoute';
 import Logout from './views/Authentication/Logout';
-import type { ServerToClientEvents } from './utilities/types/SocketTypes';
 import useFetch from './utilities/hooks/useFetch';
 
 function App() {
   const { pathname } = useLocation();
-
   const { fetchStatus } = useFetch();
 
   if (fetchStatus === 'idle' || fetchStatus === 'loading') {
