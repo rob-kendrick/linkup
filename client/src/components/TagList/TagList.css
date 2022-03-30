@@ -1,5 +1,5 @@
 .tg_inner-container{
-  display:flex; 
+  display:flex;
   flex-direction:row;
   flex-wrap: wrap;
   align-items:center;
@@ -7,12 +7,12 @@
 
 #tg_individual-tag {
   background-color: var(--color5-grey2);
-  margin: 10px 5px !important;
-  padding: 5px 12px;
-  border-radius: 3px;   
+  margin: 0 0.6em 0 0;
+  padding: 0.3em 0.5em;
+  border-radius: 3px;
 }
 
 .tg__header-text{
-  margin:0px; 
-  font-size: 0.6rem;
+  margin: 0;
+  font-size: 0.65em !important;
 }

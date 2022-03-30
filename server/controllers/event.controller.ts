@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import prisma from '../db';
+import io from '../index';
 
 interface Event {
   title: string
@@ -136,7 +137,7 @@ const createEvent = async (req: Request, res: Response) => {
         },
       },
     });
-
+    io.emit('changeNotification', true);
     return res.status(201).send({ data: newEvent });
   } catch (err) {
     return res.status(500).send({ error: err });
@@ -176,6 +177,7 @@ const joinEvent = async (req: Request, res: Response) => {
         },
       },
     });
+    io.emit('changeNotification', true);
     res.status(200).send({ data: addParticipant });
   } catch (err) {
     res.status(500).send({ error: err });
@@ -214,7 +216,7 @@ const leaveEvent = async (req: Request, res: Response) => {
         },
       },
     });
-
+    io.emit('changeNotification', true);
     res.status(200).send({ data: removeParticipant });
   } catch (err) {
     res.status(500).send({ error: err });
@@ -253,6 +255,7 @@ const editEvent = async (req: Request, res: Response) => {
       },
 
     });
+    io.emit('changeNotification', true);
     res.status(200).send({ data: updateEvent });
   } catch (err) {
     res.status(500).send({ error: err });
@@ -284,6 +287,7 @@ const deleteEventById = async (req: Request, res: Response) => {
         },
       },
     });
+    io.emit('changeNotification', true);
     res.status(200).send({ data: deleteEvent });
   } catch (err) {
     res.status(500).send({ error: err });
@@ -294,6 +298,7 @@ const deleteEventById = async (req: Request, res: Response) => {
 const deleteAllEvents = async (req: Request, res: Response) => {
   try {
     const deleteEvents = await prisma.event.deleteMany({});
+    io.emit('changeNotification', true);
     res.status(200).send({ data: deleteEvents });
   } catch (err) {
     res.status(500).send({ error: err });
