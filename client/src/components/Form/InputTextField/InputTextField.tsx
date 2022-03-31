@@ -3,6 +3,7 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 import './InputTextField.css';
 
 type Props = Partial<UseFormRegisterReturn> & {
+  id?: string;
   value?: string;
   type?: string;
   label?: string;
@@ -39,11 +40,12 @@ const InputTextField = React.forwardRef<HTMLInputElement, Props>(
 
 const InputTextArea = React.forwardRef<HTMLTextAreaElement, InputTextAreaProps>(
   ({
-    className, errorMessage, label, rows, type, name, ...props
+    className, id, errorMessage, label, rows, type, name, ...props
   }, ref) => (
     <div className={`${className} itf__wrap`}>
       <textarea
         className="itf__input itf__textarea"
+        id={id}
         {...props}
         ref={ref as unknown as React.LegacyRef<HTMLTextAreaElement>}
         rows={rows}

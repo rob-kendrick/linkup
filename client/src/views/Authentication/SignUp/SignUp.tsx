@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { InputTextField, InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
@@ -15,10 +15,6 @@ function SignUp() {
   const [imageUrl, setImageUrl] = useState('');
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log(imageUrl);
-  }, [imageUrl]);
 
   const {
     register,
@@ -38,7 +34,6 @@ function SignUp() {
   async function onSubmit(formData: User) {
     const userData = formData;
     userData.profile_picture = imageUrl;
-    console.log(userData);
     const response = await authApi.register(userData);
     if (response.ok === false) {
       if (response.status === 400) setErrorMessage('Data validation failed on server');
@@ -140,7 +135,7 @@ function SignUp() {
             style="fill"
           />
           {(errorMessage !== '')
-          && <text>{errorMessage}</text>}
+          && <p>{errorMessage}</p>}
         </form>
       </div>
     </div>

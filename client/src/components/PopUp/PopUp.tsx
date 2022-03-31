@@ -83,7 +83,6 @@ function PopUp({
     };
 
     const cancelEvent = () => {
-      console.log('delete event');
       eventApi.deleteEvent(eventWithAddedParticipant.id_event).then(() => navigate('/myevents'));
     };
 

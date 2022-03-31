@@ -19,7 +19,7 @@ function Navbar() {
           <div className="n__icon-container">
             <HiSearch className="n__icon" />
           </div>
-          <text>Browse</text>
+          <p>Browse</p>
         </button>
       </Link>
 
@@ -31,7 +31,7 @@ function Navbar() {
           <div className="n__icon-container">
             <BiCalendarHeart className="n__icon" />
           </div>
-          <text>My Activities</text>
+          <p>My Activities</p>
         </button>
       </Link>
 
@@ -43,7 +43,7 @@ function Navbar() {
           <div className="n__icon-container">
             <HiChat className="n__icon" />
           </div>
-          <text>Chat</text>
+          <p>Chat</p>
         </button>
       </Link>
 
@@ -55,7 +55,7 @@ function Navbar() {
           <div className="n__icon-container">
             <FaUser className="n__icon" />
           </div>
-          <text>Profile</text>
+          <p>Profile</p>
         </button>
       </Link>
 

@@ -6,12 +6,12 @@ import moment from 'moment';
 import { ReactComponent as MdFormatListBulleted } from '../../../assets/MdFormatListBulleted.svg';
 import { ReactComponent as FaRegMap } from '../../../assets/FaRegMap.svg';
 import { ReactComponent as BiFilter } from '../../../assets/BiFilter.svg';
-
 import './BrowseEventsMenu.css';
 import HeaderMain from '../../../components/HeaderMain/HeaderMain';
 import { InputTextField } from '../../../components/Form/InputTextField/InputTextField';
 
 import DropDown from './DropDown/DropDown';
+import FilterTags from '../EventsFilters/Filters/FilterTags/FilterTags';
 
 interface myProps {
   props : {
@@ -29,7 +29,7 @@ function BrowseEventsMenu({
   const [titleSearchValue, setTitleSearchValue] = useState<string>('');
   const [datesNextMonth, setDatesNextMonth] = useState<Date[]>([]);
   const inputField = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const [currentFilter, setCurrentFilter] = useState<string>('Date');
+  const [currentFilter, setCurrentFilter] = useState<string>('Tags');
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
 
   // on first run render all dates for next month
@@ -45,7 +45,7 @@ function BrowseEventsMenu({
 
   // when filter is changes, auto focus the search field
   useEffect(() => {
-    if (currentFilter !== 'Date') inputField.current.focus();
+    if (currentFilter === 'Title') inputField.current.focus();
   }, [currentFilter]);
 
   // handle date filter and pass trigger function on parent
@@ -76,80 +76,88 @@ function BrowseEventsMenu({
 
   // render date list
   const dateList = datesNextMonth.map((el:any) => (
-    <button
-      onClick={() => handleClickDate(el)}
+    <div
+      className="bem__fitlerbar-dates-item-container"
       key={el.toString()}
-      className={`bem__selectors-dates-item ${dateSelected === el ? 'bem__selector-active' : ''}`}
-      type="button"
     >
-      <p className="bem__selectors-dates-item-details">{moment(el).format('ddd')}</p>
-      <p className="bem__selectors-dates-item-details">{moment(el).format('DD')}</p>
-    </button>
+      <button
+        onClick={() => handleClickDate(el)}
+        className={`bem__fitlerbar-dates-item-btn ${dateSelected === el ? 'bem__selector-active' : ''}`}
+        type="button"
+      >
+        <span className="bem__fitlerbar-dates-item-details">{moment(el).format('ddd')}</span>
+        <span className="bem__fitlerbar-dates-item-details">{moment(el).format('DD')}</span>
+      </button>
+      <span className="bem__fitlerbar-dates-item-spacer" />
+    </div>
   ));
 
   return (
     <div className="bem__container">
-      <HeaderMain title="Browse Activities" />
-      <div className="bem-selectors-toggle">
 
+      <HeaderMain title="Browse Activities" />
+
+      <div className="bem__filterbar-container">
         {currentFilter === 'Date' && (
-          <div className="bem__selectors-dates">
+          <div className="bem__fitlerbar-dates">
             {dateList}
           </div>
         )}
 
-        {currentFilter !== 'Date' && (
+        {currentFilter === 'Title' && (
           <InputTextField
             ref={inputField}
             onChange={handleTitleSearchChange}
-            className="bem__selectors-searchbar"
             type="text"
             label={`Search ${currentFilter}`}
             value={titleSearchValue}
           />
         )}
 
+        {currentFilter === 'Tags' && (
+          <FilterTags filterByTag={props.filterByTag} />
+        )}
       </div>
 
-      <div className="bem__selectors-btns">
+      <div className="bem__btns-container">
+        <div className="bem_btns-listmap">
+          <button
+            type="button"
+            onClick={props.toggleMapList}
+            className={`bem__btns-btn ${!props.mapView ? 'bem__selector-active' : ''}`}
+          >
+            <MdFormatListBulleted />
+            <span>List</span>
+          </button>
 
-        <button
-          type="button"
-          onClick={props.toggleMapList}
-          className={`bem__selectors-btns-btn ${!props.mapView ? 'bem__selector-active' : ''}`}
-        >
-          <MdFormatListBulleted />
-          <p>List</p>
-        </button>
+          <button
+            type="button"
+            onClick={props.toggleMapList}
+            className={`bem__btns-btn  ${props.mapView ? 'bem__selector-active' : ''}`}
+          >
+            <FaRegMap />
+            <span>Map</span>
+          </button>
+        </div>
 
-        <button
-          type="button"
-          onClick={props.toggleMapList}
-          className={`bem__selectors-btns-btn ${props.mapView ? 'bem__selector-active' : ''}`}
-        >
-          <FaRegMap />
-          <p>Map</p>
-        </button>
-
-        <div className="bem__selectors-fitlers bem__selectors-btns-btn-right">
+        <div>
           <button
             type="button"
             onClick={handleClickFilter}
-            className={`bem__selectors-fitlers bem__selectors-btns-btn ${showDropDown ? 'bem__selector-active' : ''}`}
+            className={`bem__btns-btn ${showDropDown ? 'bem__selector-active' : ''}`}
           >
             <BiFilter />
-            <p>Filter</p>
+            Filter
           </button>
           {showDropDown && (
-            <DropDown
-              currentFilter={currentFilter}
-              handleSelectDropDown={handleSelectDropDown}
-            />
+          <DropDown
+            currentFilter={currentFilter}
+            handleSelectDropDown={handleSelectDropDown}
+          />
           )}
         </div>
-
-        <div />
       </div>
+
     </div>
 
   );

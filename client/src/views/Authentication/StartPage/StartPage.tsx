@@ -12,7 +12,7 @@ function StartPage() {
       </div>
       <div className="sp__text">
         <h1>Let's get started</h1>
-        <text>You are just a few steps away from joining the LinkUp community.</text>
+        <p>You are just a few steps away from joining the LinkUp community.</p>
       </div>
       <div className="sp__signup">
         <Link to="/register">
@@ -28,9 +28,9 @@ function StartPage() {
           style="black"
         />
       </div>
-      <text className="sp__text">
+      <p className="sp__text">
         Already have an account?
-      </text>
+      </p>
       <Link to="/login">
         <ButtonLarge
           type="submit"

@@ -7,7 +7,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { RootState } from '../../utilities/redux/store';
 import HeaderReturn from '../HeaderReturn/HeaderReturn';
 import MapSmall from '../MapSmall/MapSmall';
-// import ProfilePicture from '../ProfilePicture/ProfilePicture';
 import TagList from '../TagList/TagList';
 import ParticipantList from './ParticipantList/ParticipantList';
 import PopUp from '../PopUp/PopUp';
@@ -15,7 +14,6 @@ import { useDateLong } from '../../utilities/helper/useDate';
 import EventField from '../EventField/EventField';
 import './eventDetails.css';
 import ButtonLarge from '../Form/ButtonLarge/ButtonLarge';
-import useFetch from '../../utilities/hooks/useFetch';
 
 function EventDetails() {
   const navigate = useNavigate();

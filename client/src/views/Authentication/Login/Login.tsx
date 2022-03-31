@@ -64,7 +64,6 @@ function Login() {
               },
             })}
           />
-
           <InputTextField
             type="password"
             label="Password"
@@ -82,7 +81,7 @@ function Login() {
             style="fill"
           />
           {(errorMessage !== '')
-          && <text>{errorMessage}</text>}
+          && <p>{errorMessage}</p>}
         </form>
       </div>
     </div>

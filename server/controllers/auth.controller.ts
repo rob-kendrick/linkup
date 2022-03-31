@@ -107,15 +107,6 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
-// const logout = async (req: Request, res: Response) => {
-//   try {
-
-//   } catch (err) {
-//     console.log(' : : : ERROR STORING USER IN DATBASE : : : ', err);
-//     res.status(500).send(err);
-//   }
-// }
-
 export default {
   createUser,
   login,

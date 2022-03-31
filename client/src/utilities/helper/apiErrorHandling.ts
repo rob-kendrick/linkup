@@ -1,4 +1,4 @@
 export default function handleError(e: any) {
-  console.log(e);
+  console.error(e);
   return { error: true, message: e.message, code: e.code };
 }

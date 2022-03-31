@@ -23,7 +23,7 @@
 
 .bs__button-stroke {
   font-weight: normal;
-  z-index: 999;
+  z-index: 2;
   border: 0;
   margin: 0;
   background-image: var(--color2-fg-select);

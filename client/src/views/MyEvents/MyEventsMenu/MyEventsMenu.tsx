@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as HiPencilAlt } from '../../../assets/HiPencilAlt.svg';
+import HeaderMain from '../../../components/HeaderMain/HeaderMain';
 import './MyEventsMenu.css';
 
 interface Functions {
@@ -24,7 +25,9 @@ function MyEventsMenu({ filterHosted, filterAttending } : Functions) {
 
   return (
     <div>
-
+      <HeaderMain
+        title="My Activities"
+      />
       <div className="mem__main-container">
         {/* all buttons should be /src/components/Form/ButtonEventsMenu components */}
 

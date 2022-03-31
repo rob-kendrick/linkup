@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import React, {
   useEffect, useState, MouseEventHandler,
 } from 'react';
@@ -9,7 +8,7 @@ import EventsList from '../../components/EventsList/EventsList';
 import MapLarge from '../../components/MapLarge/MapLarge';
 import './BrowseEvents.css';
 import { LuEvent } from '../../utilities/types/Event';
-import useFetch from '../../utilities/hooks/useFetch';
+
 // helper functions
 // return true if two dates are on the same day
 const checkDatesSameDay = (date1: string, date2: string) => {
@@ -28,22 +27,20 @@ const checkDatesSameDay = (date1: string, date2: string) => {
 const getArraysIntersection = (a1, a2) => a1.filter((el) => a2.includes(el));
 // return true if date is in the future
 const checDateInFuture = (date: string) => (new Date(date) >= new Date());
-// sory by date, newest first
 
 function BrowseEvents() {
   const events = useSelector(
     (state: RootState) => state.eventReducer.allEvents,
   );
 
-  const [mapView, setMapView] = useState(true);
+  const [mapView, setMapView] = useState(false);
   const [allEvents, setAllEvents] = useState<LuEvent[]>([]);
   const [dateFilter, setDateFilter] = useState<LuEvent[]>([]);
   const [titleFilter, setTitleFilter] = useState<LuEvent[]>([]);
+  const [tagFilter, setTagFilter] = useState<LuEvent[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<LuEvent[]>([]);
 
-  // on first load, filter events from redux store,
-  // dipslay events NOT created by user and only in the future
-
+  // on first load, filter events from redux store removing past events
   useEffect(() => {
     const fe = events
       .filter((el) => checDateInFuture(el.date))
@@ -51,13 +48,8 @@ function BrowseEvents() {
     setAllEvents(fe);
     setDateFilter(fe);
     setTitleFilter(fe);
+    setTagFilter(fe);
   }, []);
-
-  // merge all filtered lists
-  useEffect(() => {
-    const tempFilter = getArraysIntersection(dateFilter, titleFilter);
-    setFilteredEvents(tempFilter);
-  }, [dateFilter, titleFilter]);
 
   // list/map toggle
   const toggleMapList: MouseEventHandler = () => {
@@ -76,6 +68,7 @@ function BrowseEvents() {
     return setDateFilter(newEvents);
   };
 
+  // filter events by title
   const filterByTitle = (input) => {
     if (!input) return setTitleFilter(allEvents);
     const newEvents = allEvents.filter(
@@ -84,17 +77,37 @@ function BrowseEvents() {
         return null;
       },
     );
-
     return setTitleFilter(newEvents);
   };
 
+  // filter events by tags
+  const filterByTag = (tags) => {
+    if (tags.length === 0) return setTagFilter(allEvents);
+    const newEvents = allEvents.filter((event) => event.tags.some((el) => tags.includes(el)));
+    return setTagFilter(newEvents);
+  };
+
+  // merge all filtered lists everytime a filter is applied
+  useEffect(() => {
+    const tempFilter1 = getArraysIntersection(dateFilter, titleFilter);
+    const tempFilter2 = getArraysIntersection(tempFilter1, tagFilter);
+    setFilteredEvents(tempFilter2);
+  }, [dateFilter, titleFilter, tagFilter]);
+
+  // // for testing purposes
+  // useEffect(() => {
+  //   console.log('eventsHaveBeenFitlered', filteredEvents);
+  // }, [filteredEvents]);
+
   return (
+
     <div className="be__container">
       <BrowseEventsMenu props={{
         mapView,
         filterByTitle,
         toggleMapList,
         filterByDate,
+        filterByTag,
       }}
       />
       <div className="be__container-inner">
