@@ -44,6 +44,8 @@ function CreateEvent() {
       setNotification('Set a location fo your activity.');
     } else {
       const newEvent = formData;
+      newEvent.tags = tags;
+      console.log(newEvent);
       newEvent.creator_id = Number(localStorage.getItem('id_user'));
       newEvent.participants_to_add = participantsToAdd;
       Object.assign(newEvent, location);
@@ -63,7 +65,8 @@ function CreateEvent() {
           text="Create Activity"
         />
         <div className="ce__container">
-          <form className='ce__form-container'
+          <form
+            className="ce__form-container"
             onSubmit={handleSubmit(onSubmit)}
           >
             <InputTextField
