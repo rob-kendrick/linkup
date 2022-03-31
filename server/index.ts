@@ -9,7 +9,9 @@ import router from './routes/index';
 // import prisma from './db';
 import type { ServerToClientEvents, ClientToServerEvents } from './SocketTypes';
 
-const { SOCKET_PORT, SERVER_PORT } = process.env;
+const {
+  SOCKET_PORT, SERVER_URL, SERVER_PORT, SOCKET_URL,
+} = process.env;
 
 // const corsConfig = {
 //   // REMOVE-START
@@ -25,7 +27,7 @@ app.use(express.json());
 const httpServer = createServer(app);
 const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer, {
   cors: {
-    origin: `http://localhost:${SOCKET_PORT}`,
+    origin: SOCKET_URL,
     methods: ['GET', 'POST'],
   },
 });
@@ -46,7 +48,7 @@ io.on('connection', (socket) => {
 app.use('/', router);
 
 httpServer.listen(SERVER_PORT, () => {
-  console.log(`🚀🚀🚀 Server up and listening on http://localhost:${SERVER_PORT} ! 🚀🚀🚀`); // eslint-disable-line
+  console.log(`🚀🚀🚀 Server up and listening on ${SERVER_URL} ! 🚀🚀🚀`); // eslint-disable-line
 });
 
 export default io;
