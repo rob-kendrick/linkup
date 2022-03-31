@@ -60,8 +60,8 @@
       "min_participants": 8,
       "max_participants": 22,
       "date": "2022-04-03T09:00:00.511Z",
-      "lat": 52.523181,
-      "lng": 13.403492,
+      "lat": 52.513181,
+      "lng": 13.413492,
       "street": "Gipsstraße 18A",
       "postcode": "10119",
       "city": "Berlin",
@@ -199,6 +199,24 @@
          "Indoor",
          "Leisure",
          "Culture"
+      ]
+   },
+   {
+      "title": "Swimming in the Spree",
+      "description": "Join me if you're brave enough",
+      "creator_id": 2,
+      "min_participants": null,
+      "max_participants": null,
+      "date": "2022-04-01T11:26:00.000Z",
+      "lat": 52.52038416955146,
+      "lng": 13.39996474689892,
+      "street": "Friedrichsbrücke",
+      "postcode": "10178",
+      "city": "Berlin",
+      "country": "DEU",
+      "tags": [
+         "Excercise",
+         "Outdoor"
       ]
    }
 ]
