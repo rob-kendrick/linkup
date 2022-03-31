@@ -13,7 +13,8 @@ interface MyEvents {
 function MyEvents() {
   const events = useSelector(
     (state: RootState) => state.eventReducer.allEvents,
-  );
+  )
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
   const [filteredEvents, setFilteredEvents] = useState<LuEvent[]>([]);
 
   const userId = Number(localStorage.getItem('id_user'));
@@ -28,7 +29,9 @@ function MyEvents() {
   };
 
   const filterAttending = () => {
-    const userAttending = events.filter((event) => event.participants.some((user) => user.id_user === userId));
+    const userAttending = events
+      .filter((event) => event.participants
+        .some((user) => user.id_user === userId));
     setFilteredEvents(userAttending);
   };
 
