@@ -2,7 +2,7 @@
 .ft__container {
   display: flex;
   flex-direction: row;
-  overflow: scroll;
+  overflow-x: scroll;
   padding: 15px;
 
 }
