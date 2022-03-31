@@ -31,7 +31,8 @@
   justify-content: center;
 }
 
-.login__container text {
+.login__container p {
   color: var(--color6-grad-mean);
   font-size: small;
 }
+

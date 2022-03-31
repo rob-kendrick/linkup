@@ -36,11 +36,7 @@ function App() {
   if (fetchStatus === 'idle' || fetchStatus === 'loading') {
     return (
       <div>
-        {' '}
         Loading
-        {' '}
-        {console.log('loading')}
-        {' '}
       </div>
     );
   }
@@ -63,8 +59,6 @@ function App() {
             <Route path="events/:eventid" element={<EventDetails />} />
             <Route path="events/:eventid/chat" element={<ChatGroup />} />
             <Route path="events/filters" element={<BrowseEventsFilters />} />
-            <Route path="events/filters/title" element={<FilterTitle />} />
-            <Route path="events/filters/tags" element={<FilterTags />} />
             <Route path="events/filters/hosts" element={<FilterHosts />} />
             <Route path="events/filters/participants" element={<FilterParticipants />} />
             <Route path="myevents" element={<MyEvents />} />

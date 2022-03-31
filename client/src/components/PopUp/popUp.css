@@ -13,11 +13,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10000;
 }
 
-.pu__fieldContainer {
-  margin: 0rem 1rem;
-}
+
+  .pu__fieldContainer {
+    margin: 0rem 1rem;
+  }
 
 .pu__cardContainer {
   display: flex;
@@ -28,7 +30,6 @@
   background-color: white;
   min-width: 320px;
   max-width: 90vw;
-  z-index: 1;
 }
 
 .pu__mainContainer {
@@ -36,12 +37,16 @@
 }
 
 .pubtn__btn{
-  z-index: 999;
+  z-index: 11;
+}
+.pu__single_btnContainer {
+  display: flex;
+  z-index: 998;
+  width: 100%;
 }
 
 .pu__btnContainer {
   display: flex;
-  z-index: 998;
   flex-direction: row-reverse;
   width: 100%;
 }

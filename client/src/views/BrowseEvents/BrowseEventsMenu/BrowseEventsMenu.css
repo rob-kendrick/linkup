@@ -24,8 +24,13 @@
   display: none;
 }
 
-.bem__fitlerbar-dates-item {
-  cursor: pointer;
+.bem__fitlerbar-dates-item-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.bem__fitlerbar-dates-item-btn {
+  cursor: grab;
   color: black;
   display: flex;
   flex-direction: column;
@@ -34,12 +39,12 @@
   border-radius: 5px;
   max-width: 3rem;
   max-height: 3rem;
-  padding:1.35rem;
+  padding: 1.35rem;
   border: 1px solid var(--color5-grey2);
 }
 
 .bem__fitlerbar-dates-item-spacer {
-  min-width:0.4rem;
+  min-width:10px;
 }
 
 .bem__fitlerbar-dates-item-details{
@@ -47,7 +52,7 @@
 }
 
 .bem__btns-container {
-  padding: 1rem 1rem 1.3rem 1rem;
+  padding: 1.2rem 1rem 1.5rem 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

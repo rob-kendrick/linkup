@@ -1,14 +1,12 @@
 .be__container{
   width: 100%;
-  flex-grow:1;
+  flex-grow: 1;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
 .be__container-inner{
-  width: 100%;
   flex-grow: 1;
   overflow: hidden;
-
 }

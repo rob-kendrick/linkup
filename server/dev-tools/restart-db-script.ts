@@ -40,6 +40,7 @@ const resetDb = async (req:Request, res:Response) => {
       [7, 6], [7, 7], [7, 9],
       [8, 1], [8, 3], [8, 2],
       [9, 6], [10, 7], [10, 9],
+      [12, 4], [12, 6], [12, 8], [12, 1],
     ];
 
     const addFriendsList = [
@@ -113,7 +114,7 @@ const resetDb = async (req:Request, res:Response) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return res.status(500).send({ error: err });
   }
 };

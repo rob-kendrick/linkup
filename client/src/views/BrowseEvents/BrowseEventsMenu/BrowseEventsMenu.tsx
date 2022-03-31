@@ -11,6 +11,7 @@ import HeaderMain from '../../../components/HeaderMain/HeaderMain';
 import { InputTextField } from '../../../components/Form/InputTextField/InputTextField';
 
 import DropDown from './DropDown/DropDown';
+import FilterTags from '../EventsFilters/Filters/FilterTags/FilterTags';
 
 interface myProps {
   props : {
@@ -44,7 +45,7 @@ function BrowseEventsMenu({
 
   // when filter is changes, auto focus the search field
   useEffect(() => {
-    if (currentFilter !== 'Date') inputField.current.focus();
+    if (currentFilter === 'Title') inputField.current.focus();
   }, [currentFilter]);
 
   // handle date filter and pass trigger function on parent
@@ -75,18 +76,20 @@ function BrowseEventsMenu({
 
   // render date list
   const dateList = datesNextMonth.map((el:any) => (
-    <>
+    <div
+      className="bem__fitlerbar-dates-item-container"
+      key={el.toString()}
+    >
       <button
         onClick={() => handleClickDate(el)}
-        key={el.toString()}
-        className={`bem__fitlerbar-dates-item ${dateSelected === el ? 'bem__selector-active' : ''}`}
+        className={`bem__fitlerbar-dates-item-btn ${dateSelected === el ? 'bem__selector-active' : ''}`}
         type="button"
       >
         <span className="bem__fitlerbar-dates-item-details">{moment(el).format('ddd')}</span>
         <span className="bem__fitlerbar-dates-item-details">{moment(el).format('DD')}</span>
       </button>
       <span className="bem__fitlerbar-dates-item-spacer" />
-    </>
+    </div>
   ));
 
   return (
@@ -101,7 +104,7 @@ function BrowseEventsMenu({
           </div>
         )}
 
-        {currentFilter !== 'Date' && (
+        {currentFilter === 'Title' && (
           <InputTextField
             ref={inputField}
             onChange={handleTitleSearchChange}
@@ -109,6 +112,10 @@ function BrowseEventsMenu({
             label={`Search ${currentFilter}`}
             value={titleSearchValue}
           />
+        )}
+
+        {currentFilter === 'Tags' && (
+          <FilterTags filterByTag={props.filterByTag} />
         )}
       </div>
 

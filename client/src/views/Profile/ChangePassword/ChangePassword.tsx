@@ -34,7 +34,6 @@ function ChangePassword() {
   const onSubmit = async (formData: PasswordChange) => {
     const passwordData = formData;
     delete passwordData.password_confirm;
-    console.log(passwordData);
     const response = await userApi.editUserPassword(Number(localStorage.getItem('id_user')), passwordData);
     if (response.ok === false) {
       if (response.status === 400) setErrorMessage('Wrong Password');
@@ -95,7 +94,7 @@ function ChangePassword() {
             style="fill"
           />
           {(errorMessage !== '')
-          && <text>{errorMessage}</text>}
+          && <p>{errorMessage}</p>}
         </form>
       </div>
     </div>

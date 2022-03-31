@@ -1,0 +1,82 @@
+
+.ft__container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  padding: 0 15px;
+
+}
+
+.ft__tag-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.ft__container::-webkit-scrollbar{
+  display: none;
+}
+
+.ft__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border:none;
+  padding:15px;
+  height:40px;
+  border-radius: 5px;
+}
+
+.ft__btn-selected {
+  background-color: white;
+  border: 2px solid transparent;
+}
+
+.ft__btn-unselected {
+  background-color: white;
+  border: 2px solid var(--color5-grey2);
+}
+
+.ft__btn-space {
+  padding: 7px;
+}
+
+
+.color0 {
+  background-color: var(--color7-tag01)
+}
+
+.color1 {
+  background-color: var(--color7-tag02);
+}
+
+.color2 {
+  background-color: var(--color7-tag03);
+}
+
+.color3 {
+  background-color: var(--color7-tag04);
+}
+
+.color4 {
+  background-color: var(--color7-tag05);
+}
+
+.color5 {
+  background-color: var(--color7-tag06);
+}
+
+.color6 {
+  background-color: var(--color7-tag07);
+}
+
+.color7 {
+  background-color: var(--color7-tag08);
+}
+
+.color8 {
+  background-color: var(--color7-tag09);
+}
+
+.color9 {
+  background-color: var(--color7-tag10);
+}

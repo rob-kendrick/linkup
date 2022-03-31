@@ -88,6 +88,7 @@ function UserList({ toggleParticipants, setParticipantsToAdd }: props) {
           })}
         </div>
       </div>
+
       <div className="ul_submitter" onClick={addParticipants}>
         <ButtonLarge type="submit" style="fill" value="Add Participants" />
       </div>

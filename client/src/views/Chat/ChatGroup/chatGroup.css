@@ -2,33 +2,68 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow: hidden;
 }
 
-.cG__mainContainer {
+.cG__main-container {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cG__messages-container {
+  overflow: scroll;
+  flex-grow: 1;
+  width: 100%;
+  background-color: var(
+    --color5-grey2
+  );
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+}
+
+.cG__input-container {
+  padding: 10px
+    20px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.cG__input-textarea {
+  flex-grow: 1;
+}
+
+.cG__button {
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: 89%;
+  margin: 4px
+    10px;
+  background-image: var(
+    --color1-bg
+  );
+  border: none;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.cG__icon {
+  color: white;
+  height: 1.4rem;
+  width: 1.4rem;
+}
+
+.cG__chatMsgsContainer {
+  overflow: scroll;
   background-color: rgb(
     242,
     242,
     242
   );
-}
-.cG__chatMsgsContainer {
   height: 100%;
-  width: 100%;
-}
-
-.cG__inputContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 1rem;
-  margin-top: auto;
-  background-color: white;
-  height: 11%;
   width: 100%;
 }

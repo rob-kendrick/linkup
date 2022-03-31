@@ -5,7 +5,8 @@
   align-items: center;
 }
 
-.pe__container text {
+.pe__container p {
   color: var(--color6-grad-mean);
   font-size: small;
+  margin: 0;
 }
