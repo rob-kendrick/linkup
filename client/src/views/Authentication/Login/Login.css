@@ -31,19 +31,7 @@
   justify-content: center;
 }
 
-
-.login__button{
-  display: flex; 
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
 .login__container text {
   color: var(--color6-grad-mean);
   font-size: small;
-}
-
-.login__button{
-  display: flex; 
-  align-self: end;
 }
