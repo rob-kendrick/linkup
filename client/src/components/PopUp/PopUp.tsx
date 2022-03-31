@@ -119,6 +119,21 @@ function PopUp({ useCase, setShowPopup, currentEvent }: props) {
         </div>
       );
     }
+    if (useCase === 'confirm') {
+      return (
+        <div className="pu__container">
+          <div className="pu__cardContainer">
+            <div className="pu__btnTxtContainer">
+              <h3 className="pu__hMed">Sucess!</h3>
+              <p className="pu__pMed">Click below to redirect</p>
+            </div>
+            <div className="pu__btnContainer">
+              <PopUpBtn text="Ok" setShowPopup={setShowPopup} />
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
   return (<div />);
 }
