@@ -9,7 +9,8 @@ interface eventProps {
 }
 
 function EventList({ filteredEvents } : eventProps) {
-  const eventCardList = filteredEvents.map((thisEvent) => (<EventCard cardEvent={thisEvent} />));
+  const eventCardList = filteredEvents
+    .map((thisEvent) => (<EventCard key={thisEvent.id_event} cardEvent={thisEvent} />));
 
   return (
     <div className="evl__container">

@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import React, { useState, useRef, useEffect } from 'react';
-import ReactTags from 'react-tag-autocomplete';
+import React, { useState, useEffect } from 'react';
 import './FilterTags.css';
 
 interface myProps {
