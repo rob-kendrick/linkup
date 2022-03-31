@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +10,7 @@ import eventApi from '../../../utilities/api/event.api';
 import './CreateEvent.css';
 import UserList from '../../../components/SelectUsers/UserList/UserList';
 import MapCreate from '../../../components/MapCreate/MapCreate';
+import PopUp from '../../../components/PopUp/PopUp';
 
 function CreateEvent() {
   const navigate = useNavigate();
@@ -16,6 +18,7 @@ function CreateEvent() {
   const [participantsOverlay, setParticipantsOverlay] = useState(false);
   const [participantsToAdd, setParticipantsToAdd] = useState([]);
   const [location, setLocation] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
 
   const {
     register,
@@ -39,6 +42,7 @@ function CreateEvent() {
       Object.assign(newEvent, location);
       const response = await eventApi.postEvent(newEvent);
       if (response.data) {
+        setShowPopup(true);
         setTimeout(() => { navigate('/myevents'); }, 2000);
       }
       if (response.error) setNotification('Server error');
@@ -90,6 +94,9 @@ function CreateEvent() {
                 },
               })}
             />
+            <div className="ce__popup-container">
+              {showPopup ? <PopUp useCase="confirm" setShowPopup={setShowPopup} navigation="/myevents" /> : null}
+            </div>
             <div className="ce__map-container">
               <MapCreate setLocation={setLocation} />
               {/* Rendering text based on participants added */}
@@ -109,6 +116,7 @@ function CreateEvent() {
               {(notification !== '')
             && <text>{notification}</text>}
             </div>
+
             <div onClick={() => setParticipantsOverlay(!participantsOverlay)}>
               <ButtonLarge
                 type="button"
