@@ -13,6 +13,7 @@ import Icon from '../Icon/Icon';
 import PopUp from '../PopUp/PopUp';
 import './EventCard.css';
 import { LuEvent } from '../../utilities/types/Event';
+import { useDateLong } from '../../utilities/helper/useDate';
 
 function EventCard({ cardEvent } : LuEvent) {
   const navigate = useNavigate();
@@ -67,7 +68,7 @@ function EventCard({ cardEvent } : LuEvent) {
                 icon={time}
                 alt={time}
               />
-              <p>{moment(currentEvent.date).format('h:mm A')}</p>
+              <p>{useDateLong(currentEvent.date)}</p>
             </div>
           </div>
         </div>
