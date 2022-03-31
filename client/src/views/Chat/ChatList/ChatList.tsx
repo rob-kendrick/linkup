@@ -35,13 +35,19 @@ function ChatList() {
   };
 
   return (
-    <div className="s">
+    <div className="cl__container">
       <HeaderMain
         title="Chat"
       />
       <div className="cl_itemContainer">
         {events && events!.map((luEvent) => (
-          <div key={luEvent.id_event} role="button" onClick={() => handleClick(luEvent)} onKeyDown={(e) => (e.key === 'Enter' ? handleClick(luEvent) : null)} tabIndex={0}>
+          <div
+            key={luEvent.id_event}
+            role="button"
+            onClick={() => handleClick(luEvent)}
+            onKeyDown={(e) => (e.key === 'Enter' ? handleClick(luEvent) : null)}
+            tabIndex={0}
+          >
             <UserProfile
               key={luEvent.id_event}
               event={luEvent}

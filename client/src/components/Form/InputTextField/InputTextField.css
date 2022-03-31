@@ -10,8 +10,9 @@
   padding-right: 20px;
   min-height: 3.5em;
   max-width: 400px;
-  width: 100%;
+  width: 90vw;
   line-height: 150%;
+  margin-bottom: 15px;
 }
 
 .itf__textarea {

@@ -1,5 +1,17 @@
-.cl_itemContainer
-  > * {
+.cl__container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.cl_itemContainer {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.cl_itemContainer > * {
   border-bottom: 1px
     solid
     rgb(
@@ -9,8 +21,8 @@
     );
 }
 
-.cl_itemContainer
+/* .cl_itemContainer
   > *
   + * {
   padding-top: 1rem;
-}
+} */

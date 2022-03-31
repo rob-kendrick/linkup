@@ -1,0 +1,16 @@
+.up__container h4{
+  margin: 10px 0 0 0;
+}
+
+.up__container p{
+  margin: 10px 0 0 0;
+}
+
+.up__profile-inner-container {
+  display: flex;
+  align-items: center;
+}
+
+.up__profile-picture-container {
+  padding: 20px;
+}
