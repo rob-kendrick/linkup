@@ -41,7 +41,7 @@ function FilterTags({ filterByTag }: myProps) {
       classNames += 'ft__btn-unselected';
     }
     return (
-      <>
+      <div key={tag.id_tag} className="ft__tag-item">
         <button
           type="button"
           className={classNames}
@@ -52,7 +52,7 @@ function FilterTags({ filterByTag }: myProps) {
 
         </button>
         <span className="ft__btn-space" />
-      </>
+      </div>
     );
   });
 
