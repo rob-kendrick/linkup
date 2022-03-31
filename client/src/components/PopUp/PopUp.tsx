@@ -14,10 +14,13 @@ import { User } from '../../utilities/types/User';
 type props = {
   useCase: string;
   setShowPopup: Function;
-  currentEvent: LuEvent
+  currentEvent: LuEvent;
+  navigation?: any;
 };
 
-function PopUp({ useCase, setShowPopup, currentEvent }: props) {
+function PopUp({
+  useCase, setShowPopup, currentEvent, navigation,
+}: props) {
   const navigate = useNavigate();
 
   const dispatch: Dispatch<any> = useDispatch();
@@ -29,7 +32,28 @@ function PopUp({ useCase, setShowPopup, currentEvent }: props) {
       .catch();
   }, []);
 
-  if (currentUser) {
+  const navigator = () => {
+    console.log(navigation);
+    navigate(navigation);
+  };
+
+  if (useCase === 'confirm') {
+    return (
+      <div className="pu__container">
+        <div className="pu__cardContainer">
+          <div className="pu__btnTxtContainer">
+            <h3 className="pu__hMed">Activity successfully created!</h3>
+            <p className="pu__pMed">Return to My Activities</p>
+          </div>
+          <div className="pu__single_btnContainer">
+            <PopUpBtn text="Ok" setShowPopup={setShowPopup} onClick={navigator} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (currentUser && currentEvent) {
     const eventWithAddedParticipant = {
       ...currentEvent,
       participants: [...currentEvent!.participants, {

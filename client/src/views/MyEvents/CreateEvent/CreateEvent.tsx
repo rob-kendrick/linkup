@@ -1,4 +1,8 @@
+
+// @ts-nocheck
+
 import React, { useState, useEffect } from 'react';
+
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
@@ -9,7 +13,11 @@ import eventApi from '../../../utilities/api/event.api';
 import './CreateEvent.css';
 import UserList from '../../../components/SelectUsers/UserList/UserList';
 import MapCreate from '../../../components/MapCreate/MapCreate';
+
+import PopUp from '../../../components/PopUp/PopUp';
+
 import FilterTags from '../../BrowseEvents/EventsFilters/Filters/FilterTags/FilterTags';
+
 
 function CreateEvent() {
   const navigate = useNavigate();
@@ -17,7 +25,11 @@ function CreateEvent() {
   const [participantsOverlay, setParticipantsOverlay] = useState(false);
   const [participantsToAdd, setParticipantsToAdd] = useState([]);
   const [location, setLocation] = useState(null);
+
+  const [showPopup, setShowPopup] = useState(false);
+
   const [tags, setTags] = useState([]);
+
 
   const {
     register,
@@ -51,6 +63,7 @@ function CreateEvent() {
       Object.assign(newEvent, location);
       const response = await eventApi.postEvent(newEvent);
       if (response.data) {
+        setShowPopup(true);
         setTimeout(() => { navigate('/myevents'); }, 2000);
       }
       if (response.error) setNotification('Server error');
@@ -107,8 +120,13 @@ function CreateEvent() {
                 },
               })}
             />
+
+            <div className="ce__popup-container">
+              {showPopup ? <PopUp useCase="confirm" setShowPopup={setShowPopup} navigation="/myevents" /> : null}
+
             <div className="ce__tags-container">
               <FilterTags filterByTag={handleSelectTag} />
+
             </div>
             <div className="ce__map-container">
               <MapCreate setLocation={setLocation} />
@@ -129,6 +147,7 @@ function CreateEvent() {
               {(notification !== '')
             && <p>{notification}</p>}
             </div>
+
             <div onClick={() => setParticipantsOverlay(!participantsOverlay)}>
               <ButtonLarge
                 type="button"

@@ -9,12 +9,13 @@
     48,
     86,
     0.5
-    );
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-  }
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
 
   .pu__fieldContainer {
     margin: 0rem 1rem;
@@ -37,6 +38,11 @@
 
 .pubtn__btn{
   z-index: 11;
+}
+.pu__single_btnContainer {
+  display: flex;
+  z-index: 998;
+  width: 100%;
 }
 
 .pu__btnContainer {
