@@ -1,8 +1,3 @@
-
-.ce__wrapper {
-
-}
-
 .ce__container {
   display: flex;
   flex-grow: 1;
@@ -23,13 +18,11 @@
 .ce__container p {
   color: var(--color6-grad-mean);
   font-size: small;
-
 }
 
 .ce__wrapper_hidden {
   display: none;
 }
-
 
 .ce__tags-container{
   margin:0;
@@ -43,7 +36,7 @@
   justify-content: center;
   display: flex;
   flex-direction: column;
-  height: 300px;
+  height: 32vh;
   width: 400px;
   background-color:aquamarine;
 
