@@ -17,14 +17,17 @@
   overflow: scroll;
   flex-grow: 1;
   width: 100%;
-  background-color: var(--color5-grey2);
+  background-color: var(
+    --color5-grey2
+  );
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 
 .cG__input-container {
-  padding: 10px 20px;
+  padding: 10px
+    20px;
   display: flex;
   align-items: flex-end;
 }
@@ -37,8 +40,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 4px 10px;
-  background-image: var(--color1-bg);
+  margin: 4px
+    10px;
+  background-image: var(
+    --color1-bg
+  );
   border: none;
   height: 50px;
   width: 50px;
@@ -51,3 +57,13 @@
   width: 1.4rem;
 }
 
+.cG__chatMsgsContainer {
+  overflow: scroll;
+  background-color: rgb(
+    242,
+    242,
+    242
+  );
+  height: 100%;
+  width: 100%;
+}
