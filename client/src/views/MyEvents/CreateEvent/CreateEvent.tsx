@@ -1,4 +1,3 @@
-
 // @ts-nocheck
 
 import React, { useState, useEffect } from 'react';
@@ -18,7 +17,6 @@ import PopUp from '../../../components/PopUp/PopUp';
 
 import FilterTags from '../../BrowseEvents/EventsFilters/Filters/FilterTags/FilterTags';
 
-
 function CreateEvent() {
   const navigate = useNavigate();
   const [notification, setNotification] = useState('');
@@ -29,7 +27,6 @@ function CreateEvent() {
   const [showPopup, setShowPopup] = useState(false);
 
   const [tags, setTags] = useState([]);
-
 
   const {
     register,
@@ -123,7 +120,7 @@ function CreateEvent() {
 
             <div className="ce__popup-container">
               {showPopup ? <PopUp useCase="confirm" setShowPopup={setShowPopup} navigation="/myevents" /> : null}
-
+            </div>
             <div className="ce__tags-container">
               <FilterTags filterByTag={handleSelectTag} />
 
