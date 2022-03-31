@@ -24,7 +24,12 @@
   display: none;
 }
 
-.bem__fitlerbar-dates-item {
+.bem__fitlerbar-dates-item-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.bem__fitlerbar-dates-item-btn {
   cursor: grab;
   color: black;
   display: flex;
@@ -34,7 +39,7 @@
   border-radius: 5px;
   max-width: 3rem;
   max-height: 3rem;
-  padding:1.35rem;
+  padding: 1.35rem;
   border: 1px solid var(--color5-grey2);
 }
 

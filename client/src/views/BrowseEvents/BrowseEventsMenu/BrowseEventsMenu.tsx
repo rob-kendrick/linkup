@@ -76,18 +76,20 @@ function BrowseEventsMenu({
 
   // render date list
   const dateList = datesNextMonth.map((el:any) => (
-    <>
+    <div
+      className="bem__fitlerbar-dates-item-container"
+      key={el.toString()}
+    >
       <button
         onClick={() => handleClickDate(el)}
-        key={el.toString()}
-        className={`bem__fitlerbar-dates-item ${dateSelected === el ? 'bem__selector-active' : ''}`}
+        className={`bem__fitlerbar-dates-item-btn ${dateSelected === el ? 'bem__selector-active' : ''}`}
         type="button"
       >
         <span className="bem__fitlerbar-dates-item-details">{moment(el).format('ddd')}</span>
         <span className="bem__fitlerbar-dates-item-details">{moment(el).format('DD')}</span>
       </button>
       <span className="bem__fitlerbar-dates-item-spacer" />
-    </>
+    </div>
   ));
 
   return (
