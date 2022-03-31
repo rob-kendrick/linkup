@@ -29,7 +29,7 @@ function BrowseEventsMenu({
   const [titleSearchValue, setTitleSearchValue] = useState<string>('');
   const [datesNextMonth, setDatesNextMonth] = useState<Date[]>([]);
   const inputField = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const [currentFilter, setCurrentFilter] = useState<string>('Date');
+  const [currentFilter, setCurrentFilter] = useState<string>('Tags');
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
 
   // on first run render all dates for next month

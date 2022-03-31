@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import ButtonLarge from '../../../components/Form/ButtonLarge/ButtonLarge';
@@ -9,6 +9,7 @@ import eventApi from '../../../utilities/api/event.api';
 import './CreateEvent.css';
 import UserList from '../../../components/SelectUsers/UserList/UserList';
 import MapCreate from '../../../components/MapCreate/MapCreate';
+import FilterTags from '../../BrowseEvents/EventsFilters/Filters/FilterTags/FilterTags';
 
 function CreateEvent() {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ function CreateEvent() {
   const [participantsOverlay, setParticipantsOverlay] = useState(false);
   const [participantsToAdd, setParticipantsToAdd] = useState([]);
   const [location, setLocation] = useState(null);
+  const [tags, setTags] = useState([]);
 
   const {
     register,
@@ -29,11 +31,21 @@ function CreateEvent() {
     },
   });
 
+  const handleSelectTag = (input:any) => {
+    setTags(input);
+  };
+
+  useEffect(() => {
+    console.log(tags);
+  }, [tags]);
+
   const onSubmit = async (formData: LuEvent) => {
     if (location === null) {
       setNotification('Set a location fo your activity.');
     } else {
       const newEvent = formData;
+      newEvent.tags = tags;
+      console.log(newEvent);
       newEvent.creator_id = Number(localStorage.getItem('id_user'));
       newEvent.participants_to_add = participantsToAdd;
       Object.assign(newEvent, location);
@@ -54,6 +66,7 @@ function CreateEvent() {
         />
         <div className="ce__container">
           <form
+            className="ce__form-container"
             onSubmit={handleSubmit(onSubmit)}
           >
             <InputTextField
@@ -94,6 +107,9 @@ function CreateEvent() {
                 },
               })}
             />
+            <div className="ce__tags-container">
+              <FilterTags filterByTag={handleSelectTag} />
+            </div>
             <div className="ce__map-container">
               <MapCreate setLocation={setLocation} />
               {/* Rendering text based on participants added */}

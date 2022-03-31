@@ -2,9 +2,14 @@
 .ft__container {
   display: flex;
   flex-direction: row;
-  overflow: scroll;
+  overflow-x: scroll;
   padding: 15px;
 
+}
+
+.ft__tag-item {
+  display: flex;
+  flex-direction: row;
 }
 
 .ft__container::-webkit-scrollbar{
@@ -35,46 +40,43 @@
   padding: 7px;
 }
 
+
 .color0 {
-  background-color: #DCD3FF;
+  background-color: var(--color7-tag01)
 }
 
 .color1 {
-  background-color: #A2E1DB;
+  background-color: var(--color7-tag02);
 }
 
 .color2 {
-  background-color: #ECD5E3;
+  background-color: var(--color7-tag03);
 }
 
 .color3 {
-  background-color: #FFFFB5;
+  background-color: var(--color7-tag04);
 }
 
 .color4 {
-  background-color: #FFCCB6;
+  background-color: var(--color7-tag05);
 }
 
 .color5 {
-  background-color: #D4F0F0;
+  background-color: var(--color7-tag06);
 }
 
 .color6 {
-  background-color: #FEE1E8;
+  background-color: var(--color7-tag07);
 }
 
 .color7 {
-  background-color: #FFD8BE;
+  background-color: var(--color7-tag08);
 }
 
 .color8 {
-  background-color: #CBAACB;
+  background-color: var(--color7-tag09);
 }
 
 .color9 {
-  background-color: #ABDEE6;
+  background-color: var(--color7-tag10);
 }
-
-
-
-
