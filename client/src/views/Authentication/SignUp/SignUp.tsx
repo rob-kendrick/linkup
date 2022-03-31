@@ -52,24 +52,24 @@ function SignUp() {
   }
 
   return (
-    <div>
+    <div className="su__main-container">
       <HeaderReturn
         text="Signup with E-mail"
       />
-      <div className="su__main-container">
 
-        <div className="su__container">
+      <div className="su__container">
 
-          <form
-            className="su__test"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <InputPhoto
-              imageUrl={imageUrl}
-              setImageUrl={setImageUrl}
-              setErrorMessage={setErrorMessage}
-              avatarName={avatarName}
-            />
+        <form
+          className="su__form-container"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <InputPhoto
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+            setErrorMessage={setErrorMessage}
+            avatarName={avatarName}
+          />
+          <div className="su__input-container">
             <InputTextField
               type="text"
               label="First Name"
@@ -138,19 +138,18 @@ function SignUp() {
                 },
               })}
             />
-
-            <div id="login__button">
-              <ButtonLarge
-                type="submit"
-                value="Sign up"
-                style="fill"
-              />
-              {(errorMessage !== '')
+          </div>
+          <div id="login__button">
+            <ButtonLarge
+              type="submit"
+              value="Sign up"
+              style="fill"
+            />
+            {(errorMessage !== '')
           && <text>{errorMessage}</text>}
-            </div>
-          </form>
+          </div>
+        </form>
 
-        </div>
       </div>
     </div>
   );

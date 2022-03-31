@@ -1,24 +1,29 @@
 .su__main-container{
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 }
 
 .su__container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
 
-.su__test{
-  height: 80vh;
-}
-
-#login__button{
+.su__form-container{
+  height: 100%; 
   display: flex;
-  align-items:flex-end; 
-  height: 15vh;
+  flex-direction: column;
+  justify-content:space-between;
 }
+
+.su__input-container{
+  flex-grow: 1; 
+  display: flex;
+  flex-direction: column;
+}
+
 
 .login__button text {
   color: var(--color6-grad-mean);
