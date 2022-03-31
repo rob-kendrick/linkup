@@ -33,7 +33,10 @@ const dropDownData = [
 
 function DropDown({ handleSelectDropDown, currentFilter }:any) {
   const dropDown = dropDownData.map((el) => (
-    <div className="dd__item-wrapper">
+    <div
+      key={el.text}
+      className="dd__item-wrapper"
+    >
       <div
         className={`dd__item ${currentFilter === el.text ? 'dd__item-active' : ''}`}
         onClick={() => handleSelectDropDown(el.text)}

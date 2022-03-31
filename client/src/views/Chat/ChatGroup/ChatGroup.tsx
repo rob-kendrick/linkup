@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { io, Socket } from 'socket.io-client';
+import { useForm } from 'react-hook-form';
+import { InputTextArea } from '../../../components/Form/InputTextField/InputTextField';
 import HeaderReturn from '../../../components/HeaderReturn/HeaderReturn';
 import userApi from '../../../utilities/api/user.api';
 import { LuEvent } from '../../../utilities/types/Event';
+import { ReactComponent as IoPaperPlane } from '../../../assets/IoPaperPlane.svg';
+
 import './chatGroup.css';
 import { User } from '../../../utilities/types/User';
 import './msg.css';
@@ -31,10 +35,17 @@ interface ClientToServerEvents {
 
 export default function ChatGroup() {
   const [messagesState, setMessagesState] = useState<Message[] | null>(null);
+  const [textareaheight, setTextareaheight] = useState(1);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const userId = localStorage.getItem('id_user');
   const location = useLocation();
   const { state } = location as LocationState;
   const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:4000');
+
+  const scrollToBottom = () => {
+    console.log('scrolling');
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   useEffect(() => {
     socket.emit('joinRoom', Number(userId), state.currentEvent.id_event);
@@ -71,6 +82,8 @@ export default function ChatGroup() {
     msgContentEl.appendChild(document.createTextNode(message));
     userNameEl.appendChild(document.createTextNode(`${userName} `));
     document.getElementById('msgArea')!.appendChild(containerMain);
+    const element = document.getElementById('msgArea');
+    element!.scrollTop = element!.scrollHeight;
   };
 
   const fetchUser = (id: number) => userApi.getUserById(id).then((result) => result.data).catch();
@@ -92,25 +105,54 @@ export default function ChatGroup() {
     createPost(message);
   });
 
-  const submitHandler = (e: any) => {
-    e.preventDefault();
-    const msg = e.target.elements.chat.value;
-    socket.emit('emitMsgFromClient', Number(userId), state.currentEvent.id_event, msg);
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const sendMessage = (input: any) => {
+    setTextareaheight(1);
+    reset();
+    socket.emit('emitMsgFromClient', Number(userId), state.currentEvent.id_event, input.message);
   };
 
+  function changeTextAreaHeight(event: any) {
+    const height = event.target.scrollHeight;
+    const rowHeight = 23;
+    const trows = Math.ceil(height / rowHeight) - 2;
+    if (textareaheight < 5) {
+      setTextareaheight(trows);
+    }
+  }
+
   return (
-    <article className="cG">
+    <div className="cG">
       <HeaderReturn text={state.currentEvent.title} luEvent={state.currentEvent} socket={socket} />
-      <div className="cG__mainContainer">
+      <div className="cG__main-container">
         <div id="msgArea" className="cG__chatMsgsContainer" />
-        <div className="cG__inputContainer">
-          <form onSubmit={(e) => submitHandler(e)}>
-            <label htmlFor="chat" />
-            <input id="chat" name="chat" type="text" />
-            <button type="submit">Send</button>
-          </form>
-        </div>
+        <form onSubmit={handleSubmit(sendMessage)}>
+          <div className="cG__input-container">
+            <div className="cG__input-textarea">
+              <InputTextArea
+                type="text"
+                errorMessage={errors.description?.message}
+                rows={textareaheight}
+                id="itf__chat"
+                className="itf__chat-container"
+                {...register('message', {
+                  required: 'This field is required',
+                  onChange: (e) => changeTextAreaHeight(e),
+                })}
+              />
+            </div>
+            <button className="cG__button" type="submit">
+              <IoPaperPlane className="cG__icon" />
+            </button>
+          </div>
+        </form>
       </div>
-    </article>
+    </div>
   );
 }
