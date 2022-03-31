@@ -10,14 +10,13 @@
   padding-right: 20px;
   min-height: 3.5em;
   max-width: 400px;
-  width: 90vw;
-  margin-bottom: 10px;
+  width: 100%;
   line-height: 150%;
 }
 
 .itf__textarea {
   resize: none;
-  padding: 10px 15px;
+  padding: 15px 15px;
 }
 
 .itf__label {
@@ -64,4 +63,14 @@
   right: 10px;
   background: white;
   padding: 0px 5px 0px 5px;
+}
+
+.itf__chat-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#itf__chat {
+  background-color: var(--color5-grey2);
+  border: none
 }
