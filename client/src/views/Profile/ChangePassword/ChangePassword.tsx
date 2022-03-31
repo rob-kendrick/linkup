@@ -46,42 +46,48 @@ function ChangePassword() {
   };
 
   return (
-    <div>
+    <div className="cp__main-container">
       <HeaderReturn
         text="Change Password"
       />
       <div className="cp__container">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <InputTextField
-            type="password"
-            label="Current password"
-            errorMessage={errors.password_old?.message}
-            {...register('password_old', {
-              required: 'This field is required',
-            })}
-          />
-          <br />
-          <br />
-          <InputTextField
-            type="password"
-            label="New password"
-            errorMessage={errors.password_new?.message}
-            {...register('password_new', {
-              required: 'This field is required',
-              minLength: {
-                value: 8,
-                message: 'Minimun length 8 characters',
-              },
-            })}
-          />
-          <InputTextField
-            type="password"
-            label="Confirm new password"
-            errorMessage={errors.password_confirm?.message}
-            {...register('password_confirm', {
-              validate: (value) => value === password.current || 'Passwords do not match',
-            })}
-          />
+        <form
+          className="cp__form-container"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+
+          <div className="cp__input-cotainer">
+            <InputTextField
+              type="password"
+              label="Current password"
+              errorMessage={errors.password_old?.message}
+              {...register('password_old', {
+                required: 'This field is required',
+              })}
+            />
+            <br />
+            <br />
+            <InputTextField
+              type="password"
+              label="New password"
+              errorMessage={errors.password_new?.message}
+              {...register('password_new', {
+                required: 'This field is required',
+                minLength: {
+                  value: 8,
+                  message: 'Minimun length 8 characters',
+                },
+              })}
+            />
+            <InputTextField
+              type="password"
+              label="Confirm new password"
+              errorMessage={errors.password_confirm?.message}
+              {...register('password_confirm', {
+                validate: (value) => value === password.current || 'Passwords do not match',
+              })}
+            />
+          </div>
           <ButtonLarge
             type="submit"
             value="Save Changes"

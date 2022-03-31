@@ -47,12 +47,15 @@ function SignUp() {
   }
 
   return (
-    <div>
+    <div className="su__main-container">
       <HeaderReturn
         text="Signup with E-mail"
       />
+
       <div className="su__container">
+
         <form
+          className="su__form-container"
           onSubmit={handleSubmit(onSubmit)}
         >
           <InputPhoto
@@ -61,82 +64,86 @@ function SignUp() {
             setErrorMessage={setErrorMessage}
             avatarName={avatarName}
           />
-          <InputTextField
-            type="text"
-            label="First Name"
-            errorMessage={errors.first_name?.message}
-            {...register('first_name', {
-              required: 'This field is required',
-              onChange: (e) => {
-                setErrorMessage('');
-                setAvatarName(e.target.value);
-              },
-            })}
-          />
-          <InputTextField
-            type="text"
-            label="Last Name"
-            errorMessage={errors.last_name?.message}
-            {...register('last_name', {
-              required: 'This field is required',
-              onChange: () => {
-                setErrorMessage('');
-              },
-            })}
-          />
+          <div className="su__input-container">
+            <InputTextField
+              type="text"
+              label="First Name"
+              errorMessage={errors.first_name?.message}
+              {...register('first_name', {
+                required: 'This field is required',
+                onChange: (e) => {
+                  setErrorMessage('');
+                  setAvatarName(e.target.value);
+                },
+              })}
+            />
+            <InputTextField
+              type="text"
+              label="Last Name"
+              errorMessage={errors.last_name?.message}
+              {...register('last_name', {
+                required: 'This field is required',
+                onChange: () => {
+                  setErrorMessage('');
+                },
+              })}
+            />
 
-          <InputTextArea
-            type="text"
-            label="Bio"
-            errorMessage={errors.bio?.message}
-            rows={3}
-            {...register('bio', {
-              required: 'This field is required',
-              onChange: () => {
-                setErrorMessage('');
-              },
-            })}
-          />
+            <InputTextArea
+              type="text"
+              label="Bio"
+              errorMessage={errors.bio?.message}
+              rows={3}
+              {...register('bio', {
+                required: 'This field is required',
+                onChange: () => {
+                  setErrorMessage('');
+                },
+              })}
+            />
 
-          <InputTextField
-            type="text"
-            label="Email"
-            errorMessage={errors.email?.message}
-            {...register('email', {
-              required: 'This field is required',
-              pattern: {
-                value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                message: 'Please enter valid E-mail',
-              },
-              onChange: () => {
-                setErrorMessage('');
-              },
-            })}
-          />
-
-          <InputTextField
-            type="password"
-            label="Password"
-            errorMessage={errors.password?.message}
-            {...register('password', {
-              required: 'This field is required',
-              minLength: {
-                value: 8,
-                message: 'Minimun length 8 characters',
-              },
-              onChange: () => {
-                setErrorMessage('');
-              },
-            })}
-          />
-          <ButtonLarge
-            type="submit"
-            value="Sign up"
-            style="fill"
-          />
-          {(errorMessage !== '')
-          && <p>{errorMessage}</p>}
+            <InputTextField
+              type="text"
+              label="Email"
+              errorMessage={errors.email?.message}
+              {...register('email', {
+                required: 'This field is required',
+                pattern: {
+                  value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                  message: 'Please enter valid E-mail',
+                },
+                onChange: () => {
+                  setErrorMessage('');
+                },
+              })}
+            />
+            <InputTextField
+              type="password"
+              label="Password"
+              errorMessage={errors.password?.message}
+              {...register('password', {
+                required: 'This field is required',
+                minLength: {
+                  value: 8,
+                  message: 'Minimun length 8 characters',
+                },
+                onChange: () => {
+                  setErrorMessage('');
+                },
+              })}
+            />
+          </div>
+          <div id="login__button">
+            <ButtonLarge
+              type="submit"
+              value="Sign up"
+              style="fill"
+            />
+            {(errorMessage !== '')
+          && <text>{errorMessage}</text>}
+          </div>
         </form>
+
       </div>
     </div>
   );
