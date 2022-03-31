@@ -45,44 +45,55 @@ function Login() {
       <HeaderReturn
         text="Log in"
       />
-      <div className="login__container">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <InputTextField
-            type="text"
-            label="Email"
-            errorMessage={errors.email?.message}
-            {...register('email', {
-              required: 'This field is required',
-              pattern: {
-                value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                message: 'Please enter valid E-mail',
-              },
-              onChange: () => {
-                setErrorMessage('');
-              },
-            })}
-          />
-          <InputTextField
-            type="password"
-            label="Password"
-            errorMessage={errors.password?.message}
-            {...register('password', {
-              required: 'This field is required',
-              onChange: () => {
-                setErrorMessage('');
-              },
-            })}
-          />
-          <ButtonLarge
-            type="submit"
-            value="Log in"
-            style="fill"
-          />
-          {(errorMessage !== '')
+
+      <div>
+        <div className="login__container">
+          <form
+            className="login__form-container"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+
+            <div className="login__input-container">
+              <InputTextField
+                type="text"
+                label="Email"
+                errorMessage={errors.email?.message}
+                {...register('email', {
+                  required: 'This field is required',
+                  pattern: {
+                    value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                    message: 'Please enter valid E-mail',
+                  },
+                  onChange: () => {
+                    setErrorMessage('');
+                  },
+                })}
+              />
+              <InputTextField
+                type="password"
+                label="Password"
+                errorMessage={errors.password?.message}
+                {...register('password', {
+                  required: 'This field is required',
+                  onChange: () => {
+                    setErrorMessage('');
+                  },
+                })}
+              />
+            </div>
+
+            <div className="login__button">
+              <ButtonLarge
+                type="submit"
+                value="Log in"
+                style="fill"
+              />
+              {(errorMessage !== '')
           && <text>{errorMessage}</text>}
-        </form>
+            </div>
+
+          </form>
+        </div>
       </div>
     </div>
   );

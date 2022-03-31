@@ -1,12 +1,26 @@
+.su__main-container{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .su__container {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
-.su__container text {
+.su__test{
+  height: 80vh;
+}
+
+#login__button{
+  display: flex;
+  align-items:flex-end; 
+  height: 15vh;
+}
+
+.login__button text {
   color: var(--color6-grad-mean);
   font-size: small;
 }
