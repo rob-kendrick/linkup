@@ -35,8 +35,7 @@ function FilterTags({ filterByTag }: myProps) {
     let classNames = 'ft__btn ';
     if (selectedTags.includes(tag.name)) {
       // if id_tag is 10 or greater, get units only as only 10 colors are available
-      const colorNumb = String(tag.id_tag - 1).split('').reverse()[0];
-      classNames += `ft__btn-selected color${colorNumb}`;
+      classNames += `ft__btn-selected color${tag.id_tag}`;
     } else {
       classNames += 'ft__btn-unselected';
     }

@@ -5,14 +5,59 @@
   align-items:center;
 }
 
-#tg_individual-tag {
-  background-color: var(--color5-grey2);
+.tg_individual-tag {
   margin: 0 0.6em 0 0;
   padding: 0.3em 0.5em;
   border-radius: 3px;
+
 }
 
 .tg__header-text{
   margin: 0;
   font-size: 0.65em !important;
+}
+
+
+.color1 {
+  background-color: var(--color7-tag1)
+}
+
+.color2 {
+  background-color: var(--color7-tag2);
+}
+
+.color3 {
+  background-color: var(--color7-tag3);
+}
+
+.color4 {
+  background-color: var(--color7-tag4);
+}
+
+.color5 {
+  background-color: var(--color7-tag5);
+}
+
+.color6 {
+  background-color: var(--color7-tag6);
+}
+
+.color7 {
+  background-color: var(--color7-tag7);
+}
+
+.color8 {
+  background-color: var(--color7-tag8);
+}
+
+.color9 {
+  background-color: var(--color7-tag9);
+}
+
+.color10 {
+  background-color: var(--color7-tag10);
+}
+
+.color11 {
+  background-color: var(--color7-tag11);
 }
