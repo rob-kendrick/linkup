@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import './FilterTags.css';
 
 interface myProps {
-  filterByTag : any
+  filterByTag: any
 }
 
 function FilterTags({ filterByTag }: myProps) {
@@ -12,7 +12,7 @@ function FilterTags({ filterByTag }: myProps) {
   const [selectedTags, setSelectedTags] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/tags')
+    fetch(`${process.env.REACT_APP_BASE_URL}/tags`)
       .then((response) => response.json())
       .then((result) => setTagList(result.data))
       .catch((error) => console.log('error', error));

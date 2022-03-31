@@ -9,14 +9,17 @@ import router from './routes/index';
 // import prisma from './db';
 import type { ServerToClientEvents, ClientToServerEvents } from './SocketTypes';
 
-const corsConfig = {
-  // REMOVE-START
-  origin: 'http://localhost:3000',
-  credentials: true,
-  // REMOVE-END
-};
+const {
+  SOCKET_PORT, SERVER_URL, SERVER_PORT, SOCKET_URL,
+} = process.env;
 
-const PORT = 4000;
+// const corsConfig = {
+//   // REMOVE-START
+//   origin: `http://localhost:${SERVER_PORT}`,
+//   credentials: true,
+//   // REMOVE-END
+// };
+
 const app = express();
 app.use(cors());
 app.use(morgan('short'));
@@ -24,7 +27,7 @@ app.use(express.json());
 const httpServer = createServer(app);
 const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: SOCKET_URL,
     methods: ['GET', 'POST'],
   },
 });
@@ -44,8 +47,8 @@ io.on('connection', (socket) => {
 
 app.use('/', router);
 
-httpServer.listen(PORT, () => {
-  console.log(`🚀🚀🚀 Server up and listening on http://localhost:${PORT} ! 🚀🚀🚀`); // eslint-disable-line
+httpServer.listen(SERVER_PORT, () => {
+  console.log(`🚀🚀🚀 Server up and listening on ${SERVER_URL} ! 🚀🚀🚀`); // eslint-disable-line
 });
 
 export default io;
