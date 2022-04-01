@@ -13,21 +13,23 @@ const {
   SOCKET_PORT, SERVER_URL, SERVER_PORT, SOCKET_URL,
 } = process.env;
 
-// const corsConfig = {
-//   // REMOVE-START
-//   origin: `http://localhost:${SERVER_PORT}`,
-//   credentials: true,
-//   // REMOVE-END
-// };
+const corsConfig = {
+  // REMOVE-START
+  origin: SERVER_URL,
+  credentials: true,
+  // REMOVE-END
+};
 
 const app = express();
+// app.use(cors(corsConfig));
 app.use(cors());
 app.use(morgan('short'));
 app.use(express.json());
 const httpServer = createServer(app);
 const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer, {
   cors: {
-    origin: SOCKET_URL,
+    // origin: SOCKET_URL,
+    origin: '*',
     methods: ['GET', 'POST'],
   },
 });

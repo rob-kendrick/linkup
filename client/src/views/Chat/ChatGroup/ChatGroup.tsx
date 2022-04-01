@@ -40,7 +40,7 @@ export default function ChatGroup() {
   const userId = localStorage.getItem('id_user');
   const location = useLocation();
   const { state } = location as LocationState;
-  const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:4000');
+  const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(process.env.REACT_APP_BASE_URL!);
 
   const scrollToBottom = () => {
     console.log('scrolling');
@@ -142,7 +142,6 @@ export default function ChatGroup() {
                 id="itf__chat"
                 className="itf__chat-container"
                 {...register('message', {
-                  required: 'This field is required',
                   onChange: (e) => changeTextAreaHeight(e),
                 })}
               />
