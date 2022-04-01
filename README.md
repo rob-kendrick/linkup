@@ -1,10 +1,8 @@
 # LinkUp
 
 <p align="center">
-  <img src="client/src/assets/luLogo.png" />
+  <img src="client/src/assets/luLogo.png" width="200"/>
 </p>
-
-
 
 LinkUp is an app for creating and joining events based on shared interests. The App will enable people to meet existing friends and make new friends through activities such as sports, games, excursions. Users are able to communicate via a group chat, based on event participants. The mission of the app is to enable people who want to make new friends to do so via their shared interests. Furthermore, established friend groups will have a forum to create and organize their activities.
 
@@ -14,59 +12,83 @@ LinkUp is an app for creating and joining events based on shared interests. The 
   <img src="images/LinkUp_Screenshots_iPhone.png" />
 </p>
 
-
-
 ## Getting started
 
-Except for the regular suspects; git, Node, npm, you need these things to work on the Trash Walk app. Follow the instructions supplied below them or on their links to get them up and running before you continue with *Installation*.
+1. Clone this repo.
 
-* Xcode (latest version, at least >9.3). Install from App Store.
-* [Cocoapods](https://cocoapods.org) - a dependency manager for Swift and Objective-C Cocoa projects.
-  ```sudo gem install cocoapods```
-* [Expo XDE](https://www.expo.io) - the Expo development environment.
-  ```npm install -g exp```
+    ```bash
+    git clone https://github.com/rbrtrfl/linkup
+    ```
 
-**Recommended!**
+2. Install dependencies in root, server and client folder.
 
-* The [Trash Walk backend](https://github.com/cherlin/trash-walk-backend) is highly recommended as well, if you want any sort of useful interaction with the app.
-* [React Native Debugger](https://github.com/jhen0409/react-native-debugger) - a debugger built on the Chrome debugger, including React and Redux Dev Tools.
+    ```bash
+    npm install
+    ```
 
-## Installation
+3. Create .env file in client folder
 
-1. Clone this repo and enter!
+    ```bash
+    REACT_APP_BASE_URL=
+    REACT_APP_ESRI_API_KEY=
+    REACT_APP_SOCKET_URL=
+    REACT_APP_CLOUDINARY_UPLOAD_PRESET=
+    REACT_APP_CLOUDINARY_CLOUD_NAME=
+    ```
 
-   ```bash
-   git clone https://github.com/cherlin/trash-walk-frontend.git
-   cd trash-walk-frontend
-   ```
+4. Create .env file in server folder
 
-2. Install dependencies.
+    ```bash
+    DATABASE_URL=
+    SOCKET_URL=
+    SERVER_URL=
+    SERVER_PORT=
+    ```
 
-   ```bash
-   npm install
-   cd ios			# ! Change into the ios folder !
-   pod install
-   ```
+5. Install [PostgreSQL](https://wiki.postgresql.org/wiki/Homebrew) on your machine
 
-3. While in the ios folder, run ````exp start```` to start the Expo development environment that will build the JS bundle for your app.
+6. Run `psql postgres` to start psql CLI and create database by running
 
-4. Run the **_trash-walk.xcworkspace_** file in Xcode (**NOT** the *trash-walk.xcodeproj*).
+    ```bash
+    create database linkup_db;
+    quit
+    ```
 
-5. Set up an **Identity** for the app under *General* in Xcode. You will need to pick a bundle name that will be unique to the particular certificate that you then have to generate under **Signing**
+7. Generate artifacts (e.g. Prisma Client) and sync database schema with prisma schema
 
-6. Build the app! (click the Play-button in the top left corner when you have picked your target in the drop-down to the right of it.)
+    ```bash
+    npx prisma generate
+    npx prisma db push
+    ```
+
+For further information check out the [readme](https://github.com/rbrtrfl/linkup/tree/dev/server) of the server
+
+5. Start the server. From the server folder, run
+
+    ```bash
+    npx nodemon ./index.ts
+    ```
+
+6. Start the client. From the client folder, run
+
+    ```bash
+    npm start
+    ```
 
 ## Tech Stack
 
-* [React Native](https://facebook.github.io/react-native/) (ejected from Expo)
-* [Redux](https://redux.js.org/)
-* Other dependencies:
-  * [React Native Background Geolocation](https://github.com/transistorsoft/react-native-background-geolocation)
-  * [React Native Maps](https://github.com/react-community/react-native-maps)
+* [React](https://reactjs.org/)
+* [Leaflet](https://leafletjs.com/)
+* [Node.js](https://nodejs.org/)
+* [Express](https://expressjs.com/)
+* [PostgreSQL](https://www.postgresql.org/)
+* [Prisma](https://www.prisma.io/)
+* [Socket.io](https://socket.io/)
 
 ## Developers
 
-* Christofer Herlin - [GitHub](https://github.com/cherlin) - [LinkedIn](https://www.linkedin.com/in/cherl/)
-* Juliane Nagao - [GitHub](https://github.com/junagao) - [LinkedIn](https://www.linkedin.com/in/junagao/)
-* Necati Özmen - [GitHub](https://github.com/necatiozmen) - [LinkedIn](https://www.linkedin.com/in/necatiozmen/)
-* Marco Antonio Ghiani - [GitHub](https://github.com/marcoantonioghiani01) - [LinkedIn](https://www.linkedin.com/in/marcoantonioghiani/)
+* Daniel Sandoval - [GitHub](https://github.com/Dansando8) - [LinkedIn](https://www.linkedin.com/in/cherl/)
+* Łukasz Tylke - [GitHub](https://github.com/lthemis) - [LinkedIn](https://www.linkedin.com/in/lukasztt/)
+* Peter Hirsch-Parker - [GitHub](https://github.com/pshp) - [LinkedIn](https://www.linkedin.com/in/peter-hirsch-parker-b96176106/)
+* Rafael Falk - [GitHub](https://github.com/rbrtrfl) - [LinkedIn](www.linkedin.com/in/rbrtrflflk)
+* Rob Kendrick - [GitHub](https://github.com/rob-kendrick) - [LinkedIn](https://www.linkedin.com/in/rob-kendrick-107268203/)
