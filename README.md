@@ -12,7 +12,7 @@ LinkUp is an app for creating and joining events based on shared interests. The 
   <img src="images/LinkUp_Screenshots_iPhone.png" />
 </p>
 
-## Getting started
+## Getting Started
 
 1. Clone this repo.
 
@@ -47,21 +47,21 @@ LinkUp is an app for creating and joining events based on shared interests. The 
 
 5. Install [PostgreSQL](https://wiki.postgresql.org/wiki/Homebrew) on your machine
 
-6. Run `psql postgres` to start psql CLI and create database by running
+6. Run `psql postgres` to start psql CLI. Inside psql CLI run the following commands to create the database
 
     ```bash
     create database linkup_db;
     quit
     ```
 
-7. Generate artifacts (e.g. Prisma Client) and sync database schema with prisma schema
+7. Generate Prisma artifacts (e.g. Prisma Client) and sync database schema with prisma schema
 
     ```bash
     npx prisma generate
     npx prisma db push
     ```
 
-For further information check out the [readme](https://github.com/rbrtrfl/linkup/tree/dev/server) of the server
+    For further information on server and database, check out the [readme](https://github.com/rbrtrfl/linkup/tree/dev/server) of the server
 
 5. Start the server. From the server folder, run
 
@@ -85,7 +85,7 @@ For further information check out the [readme](https://github.com/rbrtrfl/linkup
 * [Prisma](https://www.prisma.io/)
 * [Socket.io](https://socket.io/)
 
-## Developers
+## Contributors
 
 * Daniel Sandoval - [GitHub](https://github.com/Dansando8) - [LinkedIn](https://www.linkedin.com/in/cherl/)
 * Łukasz Tylke - [GitHub](https://github.com/lthemis) - [LinkedIn](https://www.linkedin.com/in/lukasztt/)
